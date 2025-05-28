@@ -11,12 +11,6 @@ Design UI kits tend to be overcomplicated. They want to support everything and i
 
 This leads to a weird conundrum where the people who need the kits the most, can’t use them.
 
-In a recent project, a colleague of mine used a commercial shadcn kit that was overcomplicated and had 5,000 or more tokens. It took more than 5 minutes to publish and was cumbersome to use, even on an M3 Mac.
-
-It frustrated me - why would you do that? The kit promised customizability but it was not customizable at all.
-
-Even with my profile, being a Figma expert, giving Figma classes, knowing every deep feature of Figma, I could not properly customize it without destroying the kit itself.
-
-If I would try to change something, something would go horribly wrong.
-
 I decided the balance had to be found between replicating the source framework (in this case [shadcn/ui](https://v4.shadcn.com/)) and customizability.
+
+I aim that this project provides a kit that was made in the philosophy of shadcn: a way to build your own design library.
