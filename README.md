@@ -2,6 +2,8 @@
 
 This repository solely exists to discuss issues within GitHub issues. 
 
+If you are interested in contributing, please read the issues at https://github.com/Obra-Studio/shadcn-ui-kit/issues .
+
 To ask for access to our shadcn/ui kit, which will be released soon but is right now in alpha, please contact me: johan@obra.studio
 
 We are currently building out the kit with a private team to come out with an opinionated kit at the right point in time.
