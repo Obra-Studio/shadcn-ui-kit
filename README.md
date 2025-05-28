@@ -31,3 +31,7 @@ We are currently building out the kit with a private team to come out with an op
 But we would love some feedback on what we're doing. First in a little private community and later in public.
 
 Want to chat about it? You can book a call via https://cal.com/wolfr/30min
+
+## About Obra Studio
+
+[Obra Studio](https://obra.studio/) is a design studio that helps software companies get to the next design level. 
