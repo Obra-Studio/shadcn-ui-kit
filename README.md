@@ -6,13 +6,15 @@ This is a design library file that implements https://v4.shadcn.com/.
 
 This library will evolve over time as it tracks the evolutions in shadcn. 
 
+[Download the community file here](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui)
+
 Every layer was drawn for scratch, based on the v4 docs. nothing was copy/pasted from another file or kit.
 
 The tailwind colours were sourced from [Yusuf Matra’s kit](https://www.figma.com/community/file/1371714528425686824/tailwindcss-colors-v4-1-latest-update-2025) which was deemed accurate with the official website.
 
 The only part that was not made from scratch are the icons by [Lucide Icons](https://lucide.dev/) for which you can find the license [here](https://lucide.dev/license).
 
-## Why a repo?
+## Why a repo here?
 
 This repository solely exists to discuss issues within GitHub issues. 
 
