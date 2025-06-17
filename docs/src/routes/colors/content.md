@@ -1,8 +1,8 @@
 # Colors
 
-# Note about colors
+## Note about colors
 
-![colors.png](/colors.png)
+![the colors we included](/colors.png)
 _Figure: the colors we included_
 
 Many shadcn/ui kits include all gray-tone colors from Tailwind v4 (Neutral, Stone, Zinc, Gray, Slate, Scaled). On purpose, we only include the “neutral” palette for now as well as blue and red.
@@ -10,6 +10,10 @@ Many shadcn/ui kits include all gray-tone colors from Tailwind v4 (Neutral, Ston
 We recommend designers to add to the system, not remove, so that’s why we are providing a starting point that is much more bare than other UI kits.
 
 If you want to add more colors, you can use the [Obra shadcn/ui Tailwind colors add-on](https://www.figma.com/community/file/1514809184957991954/obra-shadcn-ui-tailwind-colors-add-on) which contains all other official Tailwind v4 colors.
+
+
+![contents of the color kit](/contents-of-color-kit.png)
+_Figure: contents of the color kit_
 
 Note: Figma does not support OKCLH, so we are using hex variables.
 
