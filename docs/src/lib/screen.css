@@ -1,0 +1,70 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Svelte thing to have an extra div */
+body > div {
+    height: 100%;
+}
+
+body {
+    font-family: "Geist", "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5;
+    background: #EEE;
+    color: #333;
+}
+
+body > div > .main-flex-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+img, video {
+    max-width: 100%;
+}
+
+img {
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    border: 1px solid #DDD;
+}
+
+
+h1, h2, h3, h4 {
+    color: #000;
+}
+
+a {
+    color: oklch(62.3% 0.214 259.815);
+}
+
+a:hover {
+    color: oklch(62.3% 0.214 259.815 / 0.8);
+}
+
+pre {
+    background: #EEE;
+    padding: 1em;
+    overflow: auto;
+}
+
+pre > code {
+    font-size: 85%;
+}
+
+p > code {
+    background: #EEE;
+    padding: 0.25rem;
+    border-radius: 2px;
+}
