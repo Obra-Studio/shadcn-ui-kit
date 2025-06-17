@@ -1,0 +1,34 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Svelte thing to have an extra div */
+body > div {
+    height: 100%;
+}
+
+body > div > .main-flex-container {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+img, video {
+    max-width: 100%;
+}
+
+main img {
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    border: 1px solid #DDD;
+}
