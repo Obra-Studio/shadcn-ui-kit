@@ -1,8 +1,11 @@
 <script>
 </script>
 <header>
-    <img src="logo-obra.svg" alt="Obra" width="50" />
-    <h1><a href="/"> shadcn/ui docs</a></h1>
+
+    <a href="/">
+        <img src="logo-obra.svg" alt="Obra" width="50" />
+        <span>shadcn/ui docs</span>
+    </a>
 </header>
 
 <style>
@@ -15,7 +18,6 @@
         background: #FFF;
         border: 0;
         border-bottom: 1px solid #CCC;
-        gap: .5rem
     }
 
     @media (min-width: 960px) {
@@ -24,13 +26,15 @@
         }
     }
 
-    header h1 {
+    header a {
         font-size: 1.5rem;
-    }
-
-    header h1 a {
         text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        font-weight: 600;
+        gap: .5rem;
         color: #000;
     }
+
 
 </style>

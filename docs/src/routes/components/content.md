@@ -1,6 +1,8 @@
 # Components
 
-The following components are available as Figma components:
+## Available components 
+
+The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are available as Figma components:
 
 <div style="columns: 15rem">
 
@@ -56,13 +58,13 @@ The following components are available as Figma components:
 
 </div>
 
-# Deprecated
+## Deprecated
 
 The following components are not available, since they are deprecated.
 
 * Toast
 
-# Styles
+## Styles
 
 The following components are available as Figma styles
 

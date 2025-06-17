@@ -18,7 +18,7 @@ For more info, see the [docs](https://shadcn.obra.studio/).
 This repository exists for 2 reasons:
 
 1. To host the docs
-2. To discuss any issues with the kit within GitHub issues.
+2. To discuss any issues with the kit within [GitHub issues](https://github.com/Obra-Studio/shadcn-ui-kit/issues).
 
 ## Contributing
 

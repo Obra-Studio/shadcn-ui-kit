@@ -3,6 +3,7 @@
 	import '$lib/screen.css'
 	import Header from "$lib/components/Header.svelte";
 	import Nav from "$lib/components/Nav.svelte";
+	import Footer from "$lib/components/Footer.svelte";
 </script>
 
 <div class="main-flex-container">
@@ -15,8 +16,10 @@
 		<main>
 			<slot />
 		</main>
+
 	</div>
 
+	<Footer />
 
 </div>
 
