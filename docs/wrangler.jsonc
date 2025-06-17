@@ -6,5 +6,11 @@
   "assets": {
     "directory": ".svelte-kit/cloudflare",
     "binding": "ASSETS"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "shadcn.obra.studio",
+      "custom_domain": true,
+    }
+  ]
 }
