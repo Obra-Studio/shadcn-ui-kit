@@ -6,9 +6,9 @@ import { mdsvex } from 'mdsvex';
 const config = {
 	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: [mdsvex({ extensions: ['.md'] }), vitePreprocess()],
+	preprocess: [mdsvex({ extensions: ['.md', '.svx'] }), vitePreprocess()],
 
-	extensions: ['.md', '.svelte'],
+	extensions: ['.md', '.svelte', '.svx'],
 
 	kit: {
 		// adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
