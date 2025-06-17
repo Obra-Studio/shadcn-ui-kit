@@ -1,11 +1,11 @@
 <script>
-	export let href;
 	import { IconArrowRight } from 'obra-icons-svelte';
+	let { href, children } = $props();
 </script>
 
 
 	<a class="button" {href}>
-		<slot />
+		{@render children?.()}
 		<IconArrowRight />
 	</a>
 
