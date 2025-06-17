@@ -25,16 +25,13 @@
 
 <style>
 
-
-
-		.container {
+	.container {
         max-width: 1280px;
-				margin: 0 auto;
-        width: 100%;
-				flex-grow: 1;
-		}
-
-
+		margin: 0 auto;
+		width: 100%;
+		flex-grow: 1;
+	}
+	
     @media (min-width: 960px) {
 
         .container {
@@ -43,9 +40,9 @@
     }
 
     main {
-				padding: 1.5rem;
+		padding: 1.5rem;
         background: #FFF;
-		}
+	}
 
     @media (min-width: 960px) {
 
@@ -54,8 +51,5 @@
             padding: 1.5rem 4rem 4rem;
         }
     }
-
-
-
 
 </style>
