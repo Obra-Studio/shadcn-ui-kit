@@ -57,9 +57,6 @@ importers:
       mdsvex:
         specifier: ^0.12.6
         version: 0.12.6(svelte@5.34.4)
-      obra-icons-svelte:
-        specifier: ^1.23.1
-        version: 1.23.1(svelte@5.34.4)
       prettier:
         specifier: ^3.4.2
         version: 3.5.3
@@ -1400,11 +1397,6 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
-
-  obra-icons-svelte@1.23.1:
-    resolution: {integrity: sha512-9qmfgy4RXi6BzUfyJ7VofUfiY2Pd1cfh4MvzFQpNZ4eGDZlI+/OSQwpdKHwMO4GsY9ZE9vd6N9Tm//9mkaKbeQ==}
-    peerDependencies:
-      svelte: ^3.55.0 || ^4.0.0 || ^5.0.0
 
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
@@ -2880,10 +2872,6 @@ snapshots:
   nanoid@3.3.11: {}
 
   natural-compare@1.4.0: {}
-
-  obra-icons-svelte@1.23.1(svelte@5.34.4):
-    dependencies:
-      svelte: 5.34.4
 
   ohash@2.0.11: {}
 
