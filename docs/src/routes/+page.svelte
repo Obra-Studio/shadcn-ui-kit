@@ -1,6 +1,6 @@
 <script>
 	import Button from '$lib/Button.svelte'
-	import IntroContent from './intro-content.md'
+	import IntroContent from './intro-content.svx'
 </script>
 
 <svelte:head>
@@ -9,6 +9,3 @@
 
 <IntroContent />
 
-<p>
-	<Button href="https://www.figma.com/@obrastudio">View on Figma community</Button>
-</p>
