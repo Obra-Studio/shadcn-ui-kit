@@ -1,6 +1,6 @@
 <script module>
 	import { cn } from "$lib/utils.js";
-	import { IconAcademicCap, IconCopy } from "obra-icons-svelte";
+	import { Figma as IconFigma }  from "@lucide/svelte"
 	import { tv } from "tailwind-variants";
 
 	export const buttonVariants = tv({
@@ -56,7 +56,7 @@
 		tabindex={disabled ? -1 : undefined}
 		{...restProps}
 	>
-		<IconCopy />
+		<IconFigma />
 		{@render children?.()}
 	</a>
 {:else}

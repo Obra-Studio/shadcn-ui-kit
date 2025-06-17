@@ -1,5 +1,4 @@
 <script>
-	import Button from '$lib/Button.svelte'
 	import IntroContent from './intro-content.svx'
 </script>
 

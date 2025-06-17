@@ -10,7 +10,6 @@ These are the docs for a design library file that recreates the components of [S
 
 <Button href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui">Duplicate on Figma community</Button>
 
-
 ![zoomed-out-view.png](/zoomed-out-view.png)
 _Figure: zoomed out view of the components_
 
