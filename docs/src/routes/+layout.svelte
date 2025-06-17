@@ -11,11 +11,11 @@
 	<Header />
 	<div class="container">
 
-		<Nav/>
-
 		<main>
 			<slot />
 		</main>
+
+		<Nav/>
 
 	</div>
 

@@ -48,7 +48,7 @@
 
     .nav-container {
         padding: 1.5rem;
-        border-right: 1px solid #CCC;
+        border-left: 1px solid #CCC;
         background: #FFF;
     }
 
@@ -59,7 +59,7 @@
             width: auto;
             flex-shrink: 0;
             flex-basis: 16rem;
-            border-width: 0 1px 0 0;
+            border-width: 0 0 0 1px;
         }
     }
 
