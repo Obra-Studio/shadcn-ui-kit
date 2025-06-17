@@ -2,10 +2,27 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<link
+				href="%sveltekit.assets%/favicon-i.ico"
+				id="dark-scheme-icon"
+				media="(prefers-color-scheme:dark)"
+				rel="icon"
+				type="image/x-icon"
+		/>
+		<link
+				href="%sveltekit.assets%/favicon.ico"
+				id="light-scheme-icon"
+				media="(prefers-color-scheme:light)"
+				rel="icon"
+				type="image/x-icon"
+		/>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<meta content="Obra shadcn/ui docs" property="og:title" />
+		<meta
+				content="Documentation for Obra Studio's shadcn/ui kit."
+				property="og:description"
+		/>
+		<meta content="%sveltekit.assets%/og-image.png" property="og:image" />
 
 		%sveltekit.head%
 	</head>

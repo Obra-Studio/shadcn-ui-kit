@@ -35,7 +35,7 @@ img, video {
     max-width: 100%;
 }
 
-img {
+main img {
     box-shadow: 0 0 10px rgba(0,0,0,0.05);
     border: 1px solid #DDD;
 }
