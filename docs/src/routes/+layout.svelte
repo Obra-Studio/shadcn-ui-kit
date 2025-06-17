@@ -97,15 +97,11 @@
         }
     }
 
-		.nav-container {
-				padding: 1.5rem;
+	.nav-container {
+		padding: 1.5rem;
         border-right: 1px solid #CCC;
         background: #FFF;
     }
-
-		.nav-container h2 {
-				font-size: 1rem;
-		}
 
     @media (min-width: 960px) {
         .nav-container nav {
