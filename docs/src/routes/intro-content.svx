@@ -7,7 +7,7 @@
 
 Hi! Welcome to the documentation for Obra shadcn/ui.
 
-These are the docs for a design library file that recreates the components of [Shadcn/ui](https://ui.shadcn.com/) inside of Figma. This library will evolve over time as it tracks the evolutions in shadcn.
+These are the docs for a design library file that recreates the components of [shadcn/ui](https://ui.shadcn.com/) inside of Figma. This library will evolve over time as it tracks the evolutions in shadcn.
 
 <ButtonGroup>
     <Button icon="figma" href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui">Duplicate on Figma community</Button>

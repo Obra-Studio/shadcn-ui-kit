@@ -41,6 +41,7 @@
 		href = undefined,
 		type = "button",
 		disabled,
+		icon,
 		children,
 		...restProps
 	} = $props();
@@ -57,7 +58,8 @@
 		tabindex={disabled ? -1 : undefined}
 		{...restProps}
 	>
-		<IconFigma />
+		{#if icon == "figma"}<IconFigma />{/if}
+		{#if icon == "github"}<IconGithub />{/if}
 		{@render children?.()}
 	</a>
 {:else}

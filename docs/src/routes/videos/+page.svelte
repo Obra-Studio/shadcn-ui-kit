@@ -1,6 +1,7 @@
 <script>
     import Video from './Video.svelte'
     import HeadingWithBadge from './HeadingWithBadge.svelte';
+    import Content from '../changelog/content.md';
 
     let videos = [
         {
@@ -22,14 +23,23 @@
     <title>Videos - Obra shadcn/ui docs</title>
 </svelte:head>
 
+<div class="prose">
 <h1>Videos</h1>
 
-<p>Here's the available videos about our Obra shadcn/ui Figma library project. We're hoping to release some more videos soon.</p>
+    <p>Here's the available videos about our Obra shadcn/ui Figma library project. We're hoping to release some more videos soon.</p>
 
-<p>Have a video request? Question? <a href="https://github.com/Obra-Studio/shadcn-ui-kit/issues">Log a Github issue</a>!</p>
+    <p>Have a video request? Question? <a href="https://github.com/Obra-Studio/shadcn-ui-kit/issues">Log a Github issue</a>!</p>
 
-{#each videos as video}
-    <HeadingWithBadge date={video.date}>{video.title}</HeadingWithBadge>
-    <Video id={video.id} />
-    <p>{video.description}</p>
-{/each}
+</div>
+
+<div class="py-4">
+    {#each videos as video}
+        <div class="pb-4">
+            <HeadingWithBadge date={video.date}>{video.title}</HeadingWithBadge>
+            <div class="pb-4">
+                <Video id={video.id} />
+            </div>
+            <p>{video.description}</p>
+        </div>
+    {/each}
+</div>

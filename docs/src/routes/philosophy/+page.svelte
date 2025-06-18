@@ -6,4 +6,6 @@
     <title>Philosophy - Obra shadcn/ui docs</title>
 </svelte:head>
 
-<Content />
+<div class="prose">
+    <Content />
+</div>

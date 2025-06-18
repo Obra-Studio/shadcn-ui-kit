@@ -6,4 +6,6 @@
 	<title>Obra shadcn/ui Figma kit docs - Home</title>
 </svelte:head>
 
-<IntroContent />
+<div class="prose">
+	<IntroContent />
+</div>

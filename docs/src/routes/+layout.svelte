@@ -11,9 +11,7 @@
 	<Header />
 	<div class="container">
 		<main>
-			<div class="prose">
-				{@render children()}
-			</div>
+			{@render children()}
 		</main>
 
 		<Nav />
