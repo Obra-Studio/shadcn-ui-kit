@@ -1,6 +1,7 @@
+
 <script module>
 	import { cn } from "$lib/utils.js";
-	import { Figma as IconFigma }  from "@lucide/svelte"
+	import { Figma as IconFigma, Github as IconGithub }  from "@lucide/svelte"
 	import { tv } from "tailwind-variants";
 
 	export const buttonVariants = tv({
