@@ -21,7 +21,7 @@
     };
 </script>
 
-<nav class="p-6 border-l border-gray-300 bg-white lg:sticky lg:top-4 lg:w-auto lg:flex-shrink-0 lg:basis-64">
+<nav id="nav" class="p-6 border-l border-gray-300 bg-white lg:sticky lg:top-4 lg:w-auto lg:flex-shrink-0 lg:basis-64">
     {#each Object.entries(navItems) as [category, items]}
         <h2 class="text-base font-medium my-4">{category}</h2>
         <ul class="p-0 m-0">
