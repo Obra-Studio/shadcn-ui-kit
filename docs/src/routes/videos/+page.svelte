@@ -6,6 +6,12 @@
     let videos = [
         {
             id: "5vzBZj3vck4",
+            title: "Friday update",
+            date: "June 20",
+            description: "Just a small update"
+        },
+        {
+            id: "5vzBZj3vck4",
             title: "Release video",
             date: "June 12",
             description: "Introducing the kit & the public beta."
