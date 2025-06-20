@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.4
+
+### June 20, 2025
+
+* Component properties fixed inside of the Select Field. The decoration did not have the right variance, this got changed inadvertently during the cleanup phase of our kit. . Thanks Jorre Vandenbusche for the report.
+* Added more date -and time picker examples from the ShadCN calendar drop. Thanks for designing these, Jorre Vandenbusche.
+
+## 0.1.3
+
+### June 19, 2025
+
+* Rename a missing component property name in Field > Horizontal Field (Slider)
+* Fix auto layout for vertical variant of separator component
+
 ## 0.1.2
 
 ### June 17, 2025
