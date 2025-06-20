@@ -5,7 +5,7 @@
 
     let videos = [
         {
-            id: "5vzBZj3vck4",
+            id: "ticGL4n1uMs",
             title: "Friday update",
             date: "June 20",
             description: "Just a small update"
