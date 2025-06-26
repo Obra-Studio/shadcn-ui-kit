@@ -6,7 +6,7 @@ export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
 	build: {
 		rollupOptions: {
-			external: ['sharp','fs','set-cookie-parser'],
+			external: ['sharp','fs','cookie','set-cookie-parser'],
 		},
 	},
 });
