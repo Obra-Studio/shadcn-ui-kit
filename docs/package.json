@@ -20,6 +20,7 @@
 		"@sveltejs/kit": "^2.22.2",
 		"@sveltejs/vite-plugin-svelte": "^5.1.0",
 		"@tailwindcss/vite": "^4.1.11",
+		"clsx": "^2.1.1",
 		"date-fns": "^4.1.0",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
