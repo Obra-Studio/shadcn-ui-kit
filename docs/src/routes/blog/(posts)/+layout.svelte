@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/blog/utils.js';
 
-	let { data } = $props();
+	let { data, children } = $props();
 </script>
 
 <svelte:head>
@@ -13,6 +13,8 @@
 	/>
 	<title>{data.title} - Blog - Obra shadcn/ui</title>
 </svelte:head>
+
+{@render children()}
 
 <div>
 	<p class="mb-4">
