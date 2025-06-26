@@ -12,5 +12,8 @@
       "pattern": "shadcn.obra.studio",
       "custom_domain": true,
     }
-  ]
+  ],
+  "vars": {
+    "PNPM_VERSION": "9"
+  }
 }
