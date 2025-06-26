@@ -1,5 +1,5 @@
 <script>
-    import { Menu } from '@lucide/svelte'
+    import { IconMenu } from 'obra-icons-svelte'
 </script>
 
 <header class="flex justify-between items-center mx-auto p-4 md:p-8 w-full bg-white border-0 border-b border-gray-300">
@@ -10,7 +10,7 @@
 
     <!-- @todo sort out the custom breakpoint or use standard breakpoints -->
     <a href="#nav" class="md:hidden">
-        <Menu />
+        <IconMenu />
     </a>
 </header>
 

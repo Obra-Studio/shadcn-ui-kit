@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { formatDate } from '$lib/blog/utils.js';
 
-	import { Rss } from '@lucide/svelte'
+	import { IconRss } from 'obra-icons-svelte'
 	let { data } = $props();
 </script>
 
@@ -19,7 +19,7 @@
 <div class="flex justify-between mb-8">
 	<h1 class="text-2xl font-semibold">Blog</h1>
 	<a aria-label="RSS Feed" class="flex gap-1" href="/rss.xml">
-		<Rss size={20} />
+		<IconRss size={20} />
 		RSS feed
 	</a>
 </div>
