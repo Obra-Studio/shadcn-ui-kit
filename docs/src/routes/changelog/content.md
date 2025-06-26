@@ -5,7 +5,7 @@
 ### June 20, 2025
 
 * Component properties fixed inside of the Select Field. The decoration did not have the right variance, this got changed inadvertently during the cleanup phase of our kit. . Thanks Jorre Vandenbusche for the report.
-* Added more date -and time picker examples from the ShadCN calendar drop. Thanks for designing these, Jorre Vandenbusche.
+* Added more date- and time picker examples from the ShadCN calendar drop. Thanks for designing these, Jorre Vandenbusche.
 
 ## 0.1.3
 
