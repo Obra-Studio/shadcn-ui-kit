@@ -13,4 +13,8 @@
       "custom_domain": true,
     }
   ],
+  "vars": {
+    "PNPM_VERSION": "9",
+    "NODE_VERSION": "22",
+  }
 }
