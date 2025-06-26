@@ -2,7 +2,7 @@
 
 ## What am I looking at?
 
-This is the reposistory for the documentation website at [shadcn.obra.studio](https://shadcn.obra.studio/). 
+This is the repository for the documentation website at [shadcn.obra.studio](https://shadcn.obra.studio/). 
 
 ## What is Obra-Studio/shadcn-ui-kit?
 
@@ -11,7 +11,6 @@ This is a design library file that implements https://ui.shadcn.com/.
 [Download the community file here](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui)
 
 For more info, see the [docs](https://shadcn.obra.studio/).
-
 
 ## Why a repo here?
 
