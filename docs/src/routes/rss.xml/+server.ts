@@ -4,19 +4,19 @@ import { isPostPublished } from '$lib/blog/utils';
 
 export async function GET() {
 	const feed = new Feed({
-		title: 'Obra Icons Blog',
-		description: 'Updates and news about Obra Icons',
-		id: 'https://icons.obra.studio/',
-		link: 'https://icons.obra.studio/',
+		title: 'Obra shadcn/ui blog',
+		description: 'Updates and news about Obra shadcn/ui.',
+		id: 'https://shadcn.obra.studio/',
+		link: 'https://shadcn.obra.studio/',
 		language: 'en',
-		image: 'https://icons.obra.studio/favicon.png',
-		favicon: 'https://icons.obra.studio/favicon.ico',
-		copyright: `All rights reserved ${new Date().getFullYear()}, Obra Icons`,
+		image: 'https://shadcn.obra.studio/favicon.png',
+		favicon: 'https://shadcn.obra.studio/favicon.ico',
+		copyright: `All rights reserved ${new Date().getFullYear()}, Obra Studio`,
 		updated: new Date(
 			Math.max(...posts.map((post) => post.date.getTime())),
 		),
 		feedLinks: {
-			rss: 'https://icons.obra.studio/rss.xml',
+			rss: 'https://shadcn.obra.studio/rss.xml',
 		},
 	});
 
@@ -25,12 +25,12 @@ export async function GET() {
 	for (const post of publishedPosts) {
 		feed.addItem({
 			title: post.title,
-			id: `https://icons.obra.studio/blog/${post.slug}`,
-			link: `https://icons.obra.studio/blog/${post.slug}`,
+			id: `https://shadcn.obra.studio/blog/${post.slug}`,
+			link: `https://shadcn.obra.studio/blog/${post.slug}`,
 			description: post.content, // Use the full content here
 			content: post.content, // Include the full content here as well
 			date: post.date,
-			author: [{ name: 'Obra Icons' }],
+			author: [{ name: 'Obra Studio' }],
 		});
 	}
 

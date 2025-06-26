@@ -3,9 +3,12 @@
     import NavItem from './NavItem.svelte';
 
     const navItems = {
+        'Updates': [
+            { href: '/blog', label: 'Blog' },
+            { href: '/changelog', label: 'Changelog' },
+        ],
         'Basics': [
             { href: '/', label: 'Intro' },
-            { href: '/changelog', label: 'Changelog' },
             { href: '/videos', label: 'Videos' },
             { href: '/components', label: 'Components' }
         ],
