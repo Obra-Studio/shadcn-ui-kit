@@ -4,9 +4,4 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
-	build: {
-		rollupOptions: {
-			external: ['sharp','fs','cookie','devalue','clsx','set-cookie-parser'],
-		},
-	},
 });
