@@ -1,98 +1,35 @@
 <script>
-    import { page } from '$app/state';
+    import { page } from '$app/stores';
+    import NavItem from './NavItem.svelte';
+
+    const navItems = {
+        'Basics': [
+            { href: '/', label: 'Intro' },
+            { href: '/changelog', label: 'Changelog' },
+            { href: '/videos', label: 'Videos' },
+            { href: '/components', label: 'Components' }
+        ],
+        'Getting started': [
+            { href: '/colors', label: 'Colors' },
+            { href: '/typography', label: 'Typography' },
+            { href: '/icons', label: 'Icons' }
+        ],
+        'Other': [
+            { href: '/technical-comments', label: 'Technical comments' },
+            { href: '/license', label: 'License' }
+        ]
+    };
 </script>
 
-<nav class="nav-container">
-    <h2>Basics</h2>
-    <ul>
-        <li>
-            <a href="/" class:selected={page.url.pathname === '/'}>Intro</a>
-        </li>
-        <li>
-            <a href="/changelog" class:selected={page.url.pathname === '/changelog'}>Changelog</a>
-        </li>
-        <li>
-            <a href="/videos" class:selected={page.url.pathname === '/videos'}>Videos</a>
-        </li>
-        <li>
-            <a href="/components" class:selected={page.url.pathname === '/components'}>Components</a>
-        </li>
-    </ul>
-
-    <h2>Getting started</h2>
-    <ul>
-        <li>
-            <a href="/colors" class:selected={page.url.pathname === '/colors'}>Colors</a>
-        </li>
-        <li>
-            <a href="/typography" class:selected={page.url.pathname === '/typography'}>Typography</a>
-        </li>
-        <li>
-            <a href="/icons" class:selected={page.url.pathname === '/icons'}>Icons</a>
-        </li>
-    </ul>
-
-    <h2>Other</h2>
-    <ul>
-        <li>
-            <a href="/technical-comments" class:selected={page.url.pathname === '/technical-comments'}>Technical comments</a>
-        </li>
-        <li>
-            <a href="/license" class:selected={page.url.pathname === '/license'}>License</a>
-        </li>
-    </ul>
-
+<nav id="nav" class="p-6 border-l border-gray-300 bg-white lg:sticky lg:top-4 lg:w-auto lg:flex-shrink-0 lg:basis-64">
+    {#each Object.entries(navItems) as [category, items]}
+        <h2 class="text-base font-medium my-4">{category}</h2>
+        <ul class="p-0 m-0">
+            {#each items as {href, label}}
+                <NavItem {href} selected={$page.url.pathname === href}>
+                    {label}
+                </NavItem>
+            {/each}
+        </ul>
+    {/each}
 </nav>
-
-<style>
-
-    .nav-container {
-        padding: 1.5rem;
-        border-right: 1px solid #CCC;
-        background: #FFF;
-    }
-
-    @media (min-width: 960px) {
-        .nav-container {
-            position: sticky;
-            top: 1rem;
-            width: auto;
-            flex-shrink: 0;
-            flex-basis: 16rem;
-            border-width: 0 1px 0 0;
-        }
-    }
-
-    nav a {
-        text-decoration: none;
-    }
-
-    ul {
-        padding: 0;
-        margin: 0;
-    }
-
-    h2 {
-        font-size: 1rem;
-    }
-
-    li {
-        list-style: none;
-    }
-
-    nav a {
-        display: block;
-        padding: 10px;
-        color: #333;
-        border-radius: 4px;
-    }
-
-    nav a:focus {
-        background-color: #f5f5f5;
-    }
-
-    nav a.selected {
-        background-color: #eee;
-        color: #000;
-    }
-</style>

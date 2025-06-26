@@ -6,9 +6,9 @@ First of all I’ve always found UI kits a bit weird: if you have the ability to
 
 Over time, I realised a few things:
 
-* I realised that not everybody has the ability to design a UI kit themselves, so for them, it can be handy to put together a quick interface.
-* It really does save you time if you don’t have to create a complex kit yourself
-* The closeness to a dev framework has a lot of benefits when actually developing apps.
+- I realised that not everybody has the ability to design a UI kit themselves, so for them, it can be handy to put together a quick interface.
+- It really does save you time if you don’t have to create a complex kit yourself
+- The closeness to a dev framework has a lot of benefits when actually developing apps.
 
 Design UI kits tend to be overcomplicated. They want to support everything and in the process they sometimes make it harder for a non-designer to actually put things together.
 
@@ -18,6 +18,6 @@ You might also find it lacks some features you might expect such as theming vari
 
 ## Design changes to shadcn
 
-* We try to be 100% accurate with shadcn/ui. If you find any error, please let us know.
-* Color-wise we specifically reference the Tailwind colors in shadcn, not the theming colors (see technical comments)
-* When a change to shadcn is made, we try to follow it, see the changelog for updates.
+- We try to be 100% accurate with shadcn/ui. If you find any error, please let us know.
+- Color-wise we specifically reference the Tailwind colors in shadcn, not the theming colors (see technical comments)
+- When a change to shadcn is made, we try to follow it, see the changelog for updates.
