@@ -14,8 +14,6 @@
 	<title>{data.title} - Blog - Obra shadcn/ui</title>
 </svelte:head>
 
-{@render children()}
-
 <div>
 	<p class="mb-4">
 		<a href="/blog">&larr; Back to overview</a>
@@ -41,7 +39,7 @@
 				{/if}
 			</ul>
 		</header>
-		<div>
+		<div class="prose">
 			<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 			{@html data.content}
 		</div>
