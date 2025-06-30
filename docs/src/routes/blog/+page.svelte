@@ -26,7 +26,7 @@
 
 <ul>
 	{#each data.posts as post (post.slug)}
-		<li>
+		<li class="mb-8">
 			<article>
 				<header class="mb-4">
 					<h2 class="text-2xl font-semibold">
