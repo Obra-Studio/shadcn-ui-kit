@@ -1,10 +1,16 @@
 # Changelog
 
+## 0.1.5
+
+### July 2, 2025
+
+* Bugfix: Decoration left and Decoration right did not provide an overridable icon. This component is used inside of Inputs, Select and Comboboxes to provide a way to set up an icon on the left or right side.
+
 ## 0.1.4
 
 ### June 20, 2025
 
-* Component properties fixed inside of the Select Field. The decoration did not have the right variance, this got changed inadvertently during the cleanup phase of our kit. . Thanks Jorre Vandenbusche for the report.
+* Component properties fixed inside the Select Field. The decoration did not have the right variance, this got changed inadvertently during the cleanup phase of our kit. . Thanks Jorre Vandenbusche for the report.
 * Added more date- and time picker examples from the ShadCN calendar drop. Thanks for designing these, Jorre Vandenbusche.
 
 ## 0.1.3
