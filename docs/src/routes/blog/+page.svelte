@@ -17,7 +17,7 @@
 
 
 <div class="flex justify-between mb-8">
-	<h1 class="text-2xl font-semibold">Blog</h1>
+	<h1 class="text-3xl font-semibold">Blog</h1>
 	<a aria-label="RSS Feed" class="flex gap-1" href="/rss.xml">
 		<IconRss size={20} />
 		RSS feed
@@ -26,7 +26,7 @@
 
 <ul>
 	{#each data.posts as post (post.slug)}
-		<li class="mb-8">
+		<li class="mb-8 pb-8 border-b-neutral-200 last:mb-0 last:pb-0 last:border-0 border-b-1">
 			<article>
 				<header class="mb-4">
 					<h2 class="text-2xl font-semibold">
