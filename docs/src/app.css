@@ -135,7 +135,7 @@ main img {
 .prose ul,
 .prose ol {
     list-style: none;
-    margin: 0 0 2rem 1.25rem;
+    margin: 0 0 1.5rem 2rem;
 }
 
 .prose ul li {

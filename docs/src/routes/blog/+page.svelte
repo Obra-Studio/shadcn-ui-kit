@@ -32,8 +32,9 @@
 					<h2 class="text-2xl font-semibold">
 						<a href="/blog/{post.slug}">{post.title}</a>
 					</h2>
-					<ul>
+					<ul class="flex gap-2">
 						<li class="text-muted-foreground">{formatDate(post.date)}</li>
+						<li class="text-muted-foreground">By {post.author}</li>
 						{#if post.tags}
 							<li>
 								<ul>
@@ -47,7 +48,7 @@
 						{/if}
 					</ul>
 				</header>
-				<div>
+				<div class="prose">
 					<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 					{@html post.content}
 				</div>

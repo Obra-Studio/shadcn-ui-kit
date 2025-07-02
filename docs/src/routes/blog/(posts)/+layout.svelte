@@ -24,8 +24,9 @@
 			<h1 class="text-2xl font-semibold">
 				{data.title}
 			</h1>
-			<ul>
-				<li>{formatDate(data.date)}</li>
+			<ul class="flex gap-2">
+				<li class="text-muted-foreground">{formatDate(data.date)}</li>
+				<li class="text-muted-foreground">By {data.author}</li>
 				{#if data.tags.length}
 					<li>
 						<ul>

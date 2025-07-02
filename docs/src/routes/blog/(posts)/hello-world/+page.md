@@ -4,6 +4,7 @@
     export const metadata: BlogFrontmatter = {
         title: 'Hello world',
         date: '2025-06-26',
+        author: 'Johan Ronsse'
     }
 </script>
 

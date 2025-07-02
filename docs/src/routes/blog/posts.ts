@@ -12,6 +12,7 @@ export const posts: BlogMetadata[] = Object.entries(blogFiles)
 		slug: path.replace('./(posts)/', '').slice(0, -'/+page.md'.length),
 		...file.metadata,
 		tags: file.metadata.tags ?? [],
+		author: file.metadata.author ?? 'Unknown',
 		date: new Date(file.metadata.date),
 		content: render(file.default).body,
 	}))
