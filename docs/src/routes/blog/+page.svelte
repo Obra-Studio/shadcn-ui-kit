@@ -33,8 +33,7 @@
 						<a href="/blog/{post.slug}">{post.title}</a>
 					</h2>
 					<ul class="flex gap-2">
-						<li class="text-muted-foreground">{formatDate(post.date)}</li>
-						<li class="text-muted-foreground">By {post.author}</li>
+						<li class="text-muted-foreground">{formatDate(post.date)} by {post.author}</li>
 						{#if post.tags}
 							<li>
 								<ul>

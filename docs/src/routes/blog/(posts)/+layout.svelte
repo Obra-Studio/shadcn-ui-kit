@@ -25,8 +25,7 @@
 				{data.title}
 			</h1>
 			<ul class="flex gap-2">
-				<li class="text-muted-foreground">{formatDate(data.date)}</li>
-				<li class="text-muted-foreground">By {data.author}</li>
+				<li class="text-muted-foreground">{formatDate(data.date)} by {data.author}</li>
 				{#if data.tags.length}
 					<li>
 						<ul>
