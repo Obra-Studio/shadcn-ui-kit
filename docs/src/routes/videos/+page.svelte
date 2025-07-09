@@ -1,25 +1,30 @@
 <script>
     import Video from './Video.svelte'
     import HeadingWithBadge from './HeadingWithBadge.svelte';
-    import Content from '../changelog/content.md';
 
     let videos = [
         {
+            id: "yQ3BbcF0rWg",
+            title: "The Obra shadcn/ui kit in practice: making a start in our planner project",
+            date: "July 8, 2025",
+            description: "In this video, we create a team member management screen using the Obra shadcn/ui kit in Figma. This video serves as an example of how to use our Figma community kit in practice."
+        },
+        {
             id: "ticGL4n1uMs",
             title: "Friday update",
-            date: "June 20",
+            date: "June 20, 2025",
             description: "Just a small update"
         },
         {
             id: "5vzBZj3vck4",
             title: "Release video",
-            date: "June 12",
+            date: "June 12, 2025",
             description: "Introducing the kit & the public beta."
         },
         {
             id: "bVqYV1G6IOA",
             title: "Getting started with your design system in Figma using the Obra shadcn/ui kit",
-            date: "June 12",
+            date: "June 12, 2025",
             description: "A video that shows how easy it is to customize the kit."
         }
     ];
