@@ -4,6 +4,12 @@
 
     let videos = [
         {
+            id: "j5nzQ5YONd4",
+            title: "Obra shadcn/ui - Pick and choose components, then customize",
+            date: "July 9, 2025",
+            description: "We show you a design, where we picked two components from our shadcn/ui kit and customized one of them. The kit is just handy to nearby, to quickly drop a component in when you're designing and stay in your flow."
+        },
+        {
             id: "yQ3BbcF0rWg",
             title: "The Obra shadcn/ui kit in practice: making a start in our planner project",
             date: "July 8, 2025",
@@ -37,7 +43,7 @@
 <div class="prose">
 <h1>Videos</h1>
 
-    <p>Here's the available videos about our Obra shadcn/ui Figma library project. We're hoping to release some more videos soon.</p>
+    <p>Here's the available videos about our Obra shadcn/ui Figma library project.</p>
 
     <p>Have a video request? Question? <a href="https://github.com/Obra-Studio/shadcn-ui-kit/issues">Log a Github issue</a>!</p>
 
