@@ -1,8 +1,8 @@
-# Obra shadcn ui docs
+# Obra shadcn ui docs {#obra-shadcn-ui-docs}
 
 Using sveltekit.
 
-## Creating a project
+## Creating a project {#creating-a-project}
 
 If you're seeing this, you've probably already done this step. Congrats!
 
@@ -14,7 +14,7 @@ npx sv create
 npx sv create my-app
 ```
 
-## Developing
+## Developing {#developing}
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
@@ -25,7 +25,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+## Building {#building}
 
 To create a production version of your app:
 

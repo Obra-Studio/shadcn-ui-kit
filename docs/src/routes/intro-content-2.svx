@@ -6,7 +6,7 @@
 ![zoomed-out-view.png](/zoomed-out-view.png)
 _Figure: zoomed out view of the components_
 
-## Credits
+## Credits {#credits}
 
 Every layer and component was designed from scratch by the [Obra Studio](https://obra.studio) team, referencing the official v4 documentation. Nothing was copied or pasted from existing files or UI kits.
 
@@ -14,7 +14,7 @@ The tailwind colours were sourced from [Yusuf Matra’s kit](https://www.figma.c
 
 The only external assets used are icons from Lucide Icons. You can view their license [here](https://lucide.dev/license). (Note that the license is ISC not MIT for the Feather part of Lucide icons)
 
-## How to use this kit
+## How to use this kit {#how-to-use-this-kit}
 
 This kit is meant to be customised further. It’s the start of your own system. Just like shadcn/ui, this is not a component library. It’s how you start building your component library.
 
@@ -26,12 +26,12 @@ To make the kit your own, we recommend to:
 
 Then, consume the library from another file. You can use the bookmark icon in the assets panel to find the controls to do so.
 
-## Comments? Issues with this kit?
+## Comments? Issues with this kit? {#comments-issues-with-this-kit}
 
 [Please log any issues on GitHub](https://github.com/Obra-Studio/shadcn-ui-kit/issues). We welcome any feedback.
 
 (🇲🇽 Si deseas poner tus comentarios en español, simplemente hazlo!)
 
-## About Obra Studio
+## About Obra Studio {#about-obra-studio}
 
 [Obra Studio](https://obra.studio) is a design studio that helps software companies get to the next design level.

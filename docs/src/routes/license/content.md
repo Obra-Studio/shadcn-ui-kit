@@ -1,4 +1,4 @@
-# License (MIT)
+# License (MIT) {#license-mit}
 
 Copyright 2025 Obra Studio BV
 

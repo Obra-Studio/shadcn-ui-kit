@@ -1,4 +1,4 @@
-# Intro
+# Intro {#intro}
 
 Hi! Welcome to the documentation for Obra shadcn/ui.
 

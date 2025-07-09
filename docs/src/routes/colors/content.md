@@ -1,6 +1,6 @@
-# Colors
+# Colors {#colors}
 
-## Note about colors
+## Note about colors {#note-about-colors}
 
 ![the colors we included](/colors.png)
 _Figure: the colors we included_

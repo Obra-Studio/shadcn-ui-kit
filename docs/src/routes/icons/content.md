@@ -1,6 +1,6 @@
-# Icons
+# Icons {#icons}
 
-## Included icons
+## Included icons {#included-icons}
 
 ![the icons we included](/icons.png)
 _Figure: the icons we included_
@@ -28,7 +28,7 @@ However there is an extra benefit to using the icons from our add-ons file: all 
 ![Example of an air vent icon and its keywords_](/keywords.png)
 _Figure: example of an air vent icon and its keywords_
 
-## List of included icons
+## List of included icons {#list-of-included-icons}
 
 <div style="columns: 15rem">
 
