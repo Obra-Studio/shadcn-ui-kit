@@ -1,6 +1,6 @@
-# The philosophy
+# The philosophy {#philosophy}
 
-# A stance on UI kits
+# A stance on UI kits {#a-stance-on-ui-kits}
 
 First of all I’ve always found UI kits a bit weird: if you have the ability to design, why don’t you design the kit yourself?
 
@@ -16,7 +16,7 @@ As Obra, we decided the balance had to be found between replicating the source f
 
 You might also find it lacks some features you might expect such as theming variables and dark mode. This was done on purpose to keep things editable (Read more in the technical comments)
 
-## Design changes to shadcn
+## Design changes to shadcn {#design-changes-to-shadcn}
 
 - We try to be 100% accurate with shadcn/ui. If you find any error, please let us know.
 - Color-wise we specifically reference the Tailwind colors in shadcn, not the theming colors (see technical comments)
