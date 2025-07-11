@@ -68,22 +68,24 @@
     * {
         @apply border-border outline-ring/50;
     }
+
     body {
         @apply bg-background text-foreground;
     }
 }
 
-html, body {
+html,
+body {
     height: 100%;
     background: var(--color-gray-50);
 }
 
 /* Svelte thing to have an extra div */
-body > div {
+body>div {
     height: 100%;
 }
 
-body > div > .main-flex-container {
+body>div>.main-flex-container {
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -91,7 +93,8 @@ body > div > .main-flex-container {
     margin: 0 auto;
 }
 
-img, video {
+img,
+video {
     max-width: 100%;
 }
 
@@ -100,7 +103,7 @@ main {
 }
 
 main img {
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
     border: 1px solid var(--color-gray-200);
     margin-bottom: .5rem;
 }
@@ -144,4 +147,24 @@ main img {
 
 .prose ol li {
     list-style: decimal;
+}
+
+.prose blockquote {
+    margin: 1.5rem 0;
+    padding: 0 1.5rem;
+    border-left: 4px solid var(--color-gray-200);
+    font-style: italic;
+    color: var(--color-muted-foreground);
+}
+
+.prose blockquote p {
+    margin-block: 1rem;
+}
+
+.prose blockquote p:first-child {
+    margin-top: 0;
+}
+
+.prose blockquote p:last-child {
+    margin-bottom: 0;
 }
