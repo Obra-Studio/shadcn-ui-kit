@@ -1,6 +1,6 @@
-# Typography
+# Typography {#typography}
 
-## Note about type styles
+## Note about type styles {#note-about-type-styles}
 
 ![typography.png](/typography.png)
 _Figure: the typographic styles we included_

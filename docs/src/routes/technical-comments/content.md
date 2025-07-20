@@ -1,6 +1,6 @@
-# Technical comments
+# Technical comments {#technical-comments}
 
-## Guidelines on components
+## Guidelines on components {#guidelines-on-comments}
 
 * Prefer composability.
 * Use the raw tailwind colours, do not introduce a semantic layer (e.g. “primary-foreground”) in this file.
@@ -9,13 +9,13 @@
 * Use a generic text like “Label” or “Value” in components.
 * Use straight up Tailwind spacing numbers for components (1, 2, 4, 6, 8, 12, 16, 20, 24, 32, 36, 40). Using variables for numbers is cumbersome when editing them later. The same counts for border radii.
 
-## Wrapper components
+## Wrapper components {#wrapper-components}
 
 * Wrapper components such as cards, dialogs, sheets etc. present an interesting problem: we want to be consistent in our styling, but we also want to customise the content.
 * We are not a big fan of slot components, but also not a big fan of detaching. We’re hoping Figma takes note and finds some form of solution for this in the future, some kind of “native” slots?
 * To promote consistency, we went for slot components but this might take some time to wrap your head around. This video can help you to understand the concept.
   
-## Spacing and number variables
+## Spacing and number variables {#spacing-and-number-variables}
 
 The user interface for setting up number variables in Figma leads to too much clicking.
 
@@ -27,7 +27,7 @@ Spacings in this file will be linted with an external tool to be consistent and 
 
 (Todo: we did not get to actually lint everything - does anyone know a good tool? See [#12](https://github.com/Obra-Studio/shadcn-ui-kit/issues/12))
 
-## Notes on multi-tiered systems
+## Notes on multi-tiered systems {#notes-on-multi-tiered-systems}
 
 shadcn contains a semantic layer that contains, for example, a default background and foreground for cards, text etc.
 
