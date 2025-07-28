@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.8
+
+### July 28, 2025
+
+* Fix constraints in Progress component
+
+## 0.1.7
+
+### July 27, 2025
+
+* Added slight commercial message
+* Improved constraints in graphs
+
+## 0.1.6
+
+### July 10, 2025
+
+* Bugfix: improve auto layout in sheet
+* Add slot component override in Drawer
+
 ## 0.1.5
 
 ### July 2, 2025
