@@ -14,4 +14,4 @@ I initially thought I would make the kit as lean as possible, but I find myself 
 
 This decision would make the kit heavier on initial publish — the icon components lead to a slow initial publish time — but also easier to start designing with.
 
-Any thoughts from the community? [Please give your opinion here](https://github.com/shadcn-ui/ui/discussions/7901).
+Any thoughts from the community? [Please give your opinion here](https://github.com/Obra-Studio/shadcn-ui-kit/discussions/45).
