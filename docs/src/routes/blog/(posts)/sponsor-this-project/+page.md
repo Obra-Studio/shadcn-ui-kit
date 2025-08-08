@@ -20,5 +20,7 @@ Heavy sponsorship ($1000) can lead to benefits such as:
 
 Currently, we are setting up our Github profile to be ready for sponsorship. The ideas are around this are early.
 
+[Update: the Github sponsor profile is live here.](https://github.com/sponsors/Obra-Studio)
+
 If you are interested to talk, shoot me an e-mail: [johan@obra.studio](mailto:johan@obra.studio) .
 
