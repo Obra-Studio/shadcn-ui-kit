@@ -4,6 +4,6 @@
 	} = $props();
 </script>
 
-<div class="flex gap-2 pb-4 items-center">
+<div class="flex flex-wrap gap-2 pb-4 items-center">
 	{@render children()}
 </div>
