@@ -4,6 +4,12 @@
 
     let videos = [
         {
+            id: "WxItXWrCnV0",
+            title: "Figma Obra shadcn/ui 0.2.0 update: icons and colors now bundled",
+            date: "August 18, 2025",
+            description: "We listened to the community and bundled all Tailwind colors and all Lucide icons inside of the kit. The add-on files are thus deprecated. This makes the kit heavier on initial publish, but provides more options to design with by default."
+        },
+        {
             id: "j5nzQ5YONd4",
             title: "Obra shadcn/ui - Pick and choose components, then customize",
             date: "July 9, 2025",

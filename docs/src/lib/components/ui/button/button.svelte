@@ -1,7 +1,7 @@
 
 <script module>
 	import { cn } from "$lib/utils.js";
-	import { Figma as IconFigma, Github as IconGithub }  from "@lucide/svelte"
+	import { Figma as IconFigma, Github as IconGithub, CircleDollarSign as IconCircleDollarSign }  from "@lucide/svelte"
 	import { tv } from "tailwind-variants";
 
 	export const buttonVariants = tv({
@@ -33,6 +33,7 @@
 </script>
 
 <script>
+
 	let {
 		class: className,
 		variant = "default",
@@ -60,6 +61,7 @@
 	>
 		{#if icon == "figma"}<IconFigma />{/if}
 		{#if icon == "github"}<IconGithub />{/if}
+		{#if icon == "dollar"}<IconCircleDollarSign />{/if}
 		{@render children?.()}
 	</a>
 {:else}
