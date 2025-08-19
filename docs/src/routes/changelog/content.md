@@ -1,5 +1,21 @@
 # Changelog
 
+We use [semantic versioning](https://semver.org/).
+
+## 0.2.0
+
+### August 18, 2025
+
+* Add all Lucide Icons to set, and remove note about more focused design system. Decision as per community discussion: see [this Github discussion](https://github.com/Obra-Studio/shadcn-ui-kit/discussions/45).
+* Add all Tailwind colors as per community decision. See [the same Github discussion](https://github.com/Obra-Studio/shadcn-ui-kit/discussions/45) for more info.
+* Hide hidden Navigation Menu example component for users
+
+## 0.1.9
+
+### August 14, 2025
+
+* Remove white background in separator component
+
 ## 0.1.8
 
 ### July 28, 2025
