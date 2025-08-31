@@ -16,6 +16,7 @@
 <ButtonGroup>
 	<Button icon="figma" href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui">Duplicate on Figma community</Button>
 	<Button icon="github" variant="secondary" href="https://github.com/Obra-Studio/shadcn-ui-kit/issues">Discuss on Github</Button>
+	<Button icon="dollar" variant="secondary" href="https://github.com/sponsors/Obra-Studio">Sponsor this project</Button>
 </ButtonGroup>
 
 <div class="prose">

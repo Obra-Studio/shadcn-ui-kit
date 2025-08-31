@@ -168,3 +168,10 @@ main img {
 .prose blockquote p:last-child {
     margin-bottom: 0;
 }
+
+iframe {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+}

@@ -13,13 +13,3 @@
 	allowfullscreen
 >
 </iframe>
-
-<style>
-
-	iframe {
-        display: block;
-        width: 100%;
-        height: auto;
-		aspect-ratio: 16/9;
-	}
-</style>
