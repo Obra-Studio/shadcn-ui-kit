@@ -8,7 +8,7 @@
     }
 </script>
 
-We created a plugin called Obra shadcn/ui tools that aims to provide tools that make it easier to work with the shadcn/ui kit.
+We created a plugin called Obra shadcn/ui tools that aims to provide tools that makes it easier to work with the shadcn/ui kit.
 
 As a first functionality for this plugin, we provided utilities to make it easier to work with the kit in combination with the [Propstar](https://www.figma.com/community/plugin/1116018586739867857/propstar) plugin.
 
