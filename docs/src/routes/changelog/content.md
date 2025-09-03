@@ -2,6 +2,19 @@
 
 We use [semantic versioning](https://semver.org/).
 
+## 0.3.0
+
+* Automate all component documentation using the [Propstar](https://www.figma.com/community/plugin/1116018586739867857/propstar) plugin.
+* Fix rotation related bug in Resizable component 
+
+## 0.2.2
+
+* Fixed a bug related to duplicate color variables
+
+## 0.2.1
+
+* Update Avatar, Alert, Badge, Button to have docs created with Propstar (see [plugin](https://www.figma.com/community/plugin/1116018586739867857/propstar) page)
+
 ## 0.2.0
 
 ### August 18, 2025
