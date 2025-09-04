@@ -14,7 +14,7 @@ In this release we added border radii and spacing variables. We're inching close
 
 We also released 2 plugins to help retain consistency in the kit.
 
-1. [Obra Border radius variable Fixer](https://www.figma.com/community/plugin/1545127635062919814/obra-border-radius-variable-fixer)
+1. [Obra Border Radius Variable Fixer](https://www.figma.com/community/plugin/1545127635062919814/obra-border-radius-variable-fixer)
 2. [Obra Spacing Variable Fixer](https://www.figma.com/community/plugin/1545126955319474817/obra-spacing-variable-fixer)
 
 These are released as general-purpose plugins, which can be used with any design file.
