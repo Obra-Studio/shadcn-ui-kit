@@ -8,7 +8,6 @@ We use [semantic versioning](https://semver.org/).
 * Apply spacing where appropriate matches exist (see technical comments)
 * Added border radius variable collection
 * Apply border radius variables where appropriate matches exist
-* Add theme variable collection with shadcn theme variables - but do not apply to layers yet
 * Removed documentation guideline telling not to use spacing variables in favor of documentation telling to use spacing variables (same for border radii)
 * Fixed inconsistency with shadcn for dialog and alert dialog: roundness is only 10, not 16
 * Fixed inconsistency with shadcn for rich radio groups and rich checkbox groups: roundness is 10, not 9
