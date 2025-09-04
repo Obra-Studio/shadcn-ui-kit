@@ -19,3 +19,6 @@ We also released 2 plugins to help retain consistency in the kit.
 
 These are released as general-purpose plugins, which can be used with any design file.
 
+Check out the video for more details:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pEBHW6JZ7YY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
