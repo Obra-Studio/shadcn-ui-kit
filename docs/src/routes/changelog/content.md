@@ -2,6 +2,22 @@
 
 We use [semantic versioning](https://semver.org/).
 
+## 0.4.0
+
+* Added spacing variable collection
+* Apply spacing where appropriate matches exist (see technical comments)
+* Added border radius variable collection
+* Apply border radius variables where appropriate matches exist
+* Add theme variable collection with shadcn theme variables - but do not apply to layers yet
+* Removed documentation guideline telling not to use spacing variables in favor of documentation telling to use spacing variables (same for border radii)
+* Fixed inconsistency with shadcn for dialog and alert dialog: roundness is only 10, not 16
+* Fixed inconsistency with shadcn for rich radio groups and rich checkbox groups: roundness is 10, not 9
+* Fixed inconsistency with shadcn for tabs: outer tabs have 10px roundness, not 11
+* Fixed inconsistency in border radius for roundrect avatar
+* Fixed inconsistent layer names in Colors frame
+* Fixed inconsistency vs shadcn in border radius for checkboxes: changed from 3px to 4px
+* Treat autolayout of component sections more consistently by filling out all the container
+
 ## 0.3.0
 
 * Automate all component documentation using the [Propstar](https://www.figma.com/community/plugin/1116018586739867857/propstar) plugin.
