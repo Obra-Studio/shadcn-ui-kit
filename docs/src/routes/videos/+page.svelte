@@ -4,6 +4,18 @@
 
     let videos = [
         {
+            id: "pEBHW6JZ7YY",
+            title: "0.4.0 version of the Obra shadcn/ui kit: border radii & spacing variables",
+            date: "September 4, 2025",
+            description: "We released a new minor version of our kit, containing border radii and spacing variables. We also explain how two new plugins help you stay consistent."
+        },
+        {
+            id: "5KZFwtLvZ6Q",
+            title: "Obra Shadcn/ui tools plugin",
+            date: "September 2, 2025",
+            description: "We created a plugin that makes it easier to work with the kit in combination with the Propstar plugin."
+        },
+        {
             id: "WxItXWrCnV0",
             title: "Figma Obra shadcn/ui 0.2.0 update: icons and colors now bundled",
             date: "August 18, 2025",
