@@ -10,19 +10,20 @@ _Figure: zoomed out view of the components_
 
 Every layer and component was designed from scratch by the [Obra Studio](https://obra.studio) team, referencing the official v4 documentation. Nothing was copied or pasted from existing files or UI kits.
 
-The tailwind colours were sourced from [Yusuf Matra’s kit](https://www.figma.com/community/file/1371714528425686824/tailwindcss-colors-v4-1-latest-update-2025) which was deemed accurate with the official website.
-
 The only external assets used are icons from Lucide Icons. You can view their license [here](https://lucide.dev/license). (Note that the license is ISC not MIT for the Feather part of Lucide icons)
 
 ## How to use this kit
 
-This kit is meant to be customised further. It’s the start of your own system. Just like shadcn/ui, this is not a component library. It’s how you start building your component library.
+This kit is meant to be customised further. It’s the start of your own system.
+
+Just like shadcn/ui, this is not meant to be a final component library. It’s how you start building your component library.
 
 To make the kit your own, we recommend to:
 
  1. Remove all blue frames. They are meant as documentation.
  2. Customise the thumbnail to your liking. Give it the name of your design system.
- 3. Now publish the library to your Figma account (this requires at least a professional account).
+ 3. Customize the theme to your brand
+ 4. Now publish the library to your Figma account (this requires at least a professional account).
 
 Then, consume the library from another file. You can use the bookmark icon in the assets panel to find the controls to do so.
 
@@ -30,8 +31,8 @@ Then, consume the library from another file. You can use the bookmark icon in th
 
 [Please log any issues on GitHub](https://github.com/Obra-Studio/shadcn-ui-kit/issues). We welcome any feedback.
 
-(🇲🇽 Si deseas poner tus comentarios en español, simplemente hazlo!)
-
 ## About Obra Studio
 
 [Obra Studio](https://obra.studio) is a design studio that helps software companies get to the next design level.
+
+Need UI/UX help? Check out our [design services](https://obra.studio/design-services/).
