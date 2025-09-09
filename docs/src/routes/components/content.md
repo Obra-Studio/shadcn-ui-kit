@@ -19,7 +19,6 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Carousel
 * Chart
 * Checkbox
-* Collapsible
 * Combobox
 * Command
 * Context Menu
@@ -28,7 +27,6 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Dialog
 * Drawer
 * Dropdown Menu
-* React Hook Form
 * Hover Card
 * Input
 * Input OTP
@@ -57,6 +55,13 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Tooltip
 
 </div>
+
+## Not available
+
+The following components are not available in the kit since they are purely code-technical components with no user interface:
+
+* Collapsible
+* React Hook Form
 
 ## Deprecated
 

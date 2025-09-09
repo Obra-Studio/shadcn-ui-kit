@@ -3,6 +3,8 @@
 	import IntroContent2 from './intro-content-2.svx'
 	import {ButtonGroup} from "$lib/components/ui/button-group/index.js";
 	import {Button} from "$lib/components/ui/button/index.js";
+
+	export let data;
 </script>
 
 <svelte:head>
@@ -11,6 +13,27 @@
 
 <div class="prose">
 	<IntroContent1 />
+</div>
+
+<div class="mb-6">
+	<ul class="list-none p-0 space-y-2">
+		<li class="flex items-center">
+			<span class="text-green-600 mr-2">✓</span>
+			Completely free to use
+		</li>
+		<li class="flex items-center">
+			<span class="text-green-600 mr-2">✓</span>
+			Recreates 50+ shadcn/ui v4 components accurately
+		</li>
+		<li class="flex items-center">
+			<span class="text-green-600 mr-2">✓</span>
+			Light & dark mode with theming support
+		</li>
+		<li class="flex items-center">
+			<span class="text-green-600 mr-2">✓</span>
+			No complex licensing: MIT Licensed
+		</li>
+	</ul>
 </div>
 
 <div class="pb-4">
@@ -23,4 +46,46 @@
 
 <div class="prose">
 	<IntroContent2 />
+</div>
+
+<div class="prose mt-8">
+	<h2>Recent Blog Posts</h2>
+	<ul>
+		{#each data.recentPosts as post}
+			<li>
+				<a href="/blog/{post.slug}" class="text-foreground hover:text-primary transition-colors">
+					{post.title}
+				</a>
+				<span class="text-muted-foreground ml-2">
+					({post.date.toLocaleDateString('en-US', { 
+						year: 'numeric', 
+						month: 'short', 
+						day: 'numeric' 
+					})})
+				</span>
+			</li>
+		{/each}
+	</ul>
+	<div class="mt-4">
+		<a href="/blog" class="text-primary hover:underline">View all blog posts →</a>
+	</div>
+</div>
+
+<div class="prose mt-8">
+	<h2>Recent Videos</h2>
+	<ul>
+		{#each data.recentVideos as video}
+			<li>
+				<a href="/videos" class="text-foreground hover:text-primary transition-colors">
+					{video.title}
+				</a>
+				<span class="text-muted-foreground ml-2">
+					({video.date})
+				</span>
+			</li>
+		{/each}
+	</ul>
+	<div class="mt-4">
+		<a href="/videos" class="text-primary hover:underline">View all videos →</a>
+	</div>
 </div>

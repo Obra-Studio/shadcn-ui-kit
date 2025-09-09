@@ -11,16 +11,16 @@
             { href: '/', label: 'Intro' },
             { href: '/videos', label: 'Videos' },
             { href: '/components', label: 'Components' },
-            { href: '/credits', label: 'Credits' }
+            { href: '/credits', label: 'Credits & Licensing' }
         ],
         'Getting started': [
+            { href: '/how-to-use', label: 'How to use this kit' },
             { href: '/colors', label: 'Colors' },
             { href: '/typography', label: 'Typography' },
             { href: '/icons', label: 'Icons' }
         ],
         'Other': [
-            { href: '/technical-comments', label: 'Technical comments' },
-            { href: '/license', label: 'License' }
+            { href: '/technical-comments', label: 'Technical comments' }
         ]
     };
 </script>

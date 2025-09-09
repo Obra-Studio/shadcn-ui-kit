@@ -22,7 +22,7 @@ Based on the feedback of the community, we realised that it’s better to be mor
 
 * August 18, 2025 - 0.2.0 - We learned from the community that they would like all Lucide icons and all Tailwind colors straight-up in the library file instead of dealing with the add-ons.
 * September 2, 2025 - 0.3.0 - Added Propstar based docs for all components.
-* September 4, 2025 - 0.4.0 - We added variables for border radii and spacing. Check out our community profile @obrastudio to find all new plugins to help you keep your border radii and spacing consistent (as well as a general shadcn/ui tools plugin, see our blog post).
+* September 4, 2025 - 0.4.0 - We added variables for border radii and spacing. Check out our community profile [@obrastudio](https://www.figma.com/@obrastudio) to find all new plugins to help you keep your border radii and spacing consistent (as well as a general shadcn/ui tools plugin, see our blog post).
 * September 8, 2025 - 0.5.0 - The Obra shadcn/ui kit now supports dark mode and theming. We've added variables for light/dark mode (and subsequently, themes) to all components.
 
 [Read the full changelog](/changelog)
