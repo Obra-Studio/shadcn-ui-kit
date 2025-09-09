@@ -2,6 +2,29 @@
 
 We use [semantic versioning](https://semver.org/).
 
+## 0.5.0
+
+* Corrected Neutral 950 color value
+* Added theming layer, with default logic having a light and dark mode
+* Added several variables on top of shadcn for full control over skins in Figma (see theming docs)
+* Applied variables to all layers of the components
+* Add documentation for theming layer (replacing earlier docs about being opinionated to not have theming layer)
+* Bugfix: Improve counter in tabs add-ons to support larger numbers
+* Bugfix: Apply correct focus style to accordion with focus
+* Consistency correction: Changed font weight in select to regular to accord to how it’s now in shadcn/ui
+* Change in select & combobox component: provide placeholder type, provide easy way to change right side decoration to either look like combobox (with icon chevrons-up-down) or select (with single icon chevron-down)
+* Change in switch component: remove blue-colored switch in favor of new shadcn logic that shows a white switch in dark mode
+* Added more themed charts examples.
+  * Added examples of area charts and variables for orange, blue, green, rose, teal, purple and amber charts
+  * Added variables for newer chart themes (called “static” chart in variable names)
+* Added screen examples page, showing several examples (subject to change or removal from the library, these are mostly there to test out specific situations)
+  * a products table
+  * a web app example
+  * a controls size test
+  * another app example
+  * an example of a mobile screen with a drawer in use
+  * an example dialog
+
 ## 0.4.0
 
 * Added spacing variable collection
