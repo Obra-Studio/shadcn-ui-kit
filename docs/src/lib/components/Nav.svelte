@@ -10,7 +10,8 @@
         'Basics': [
             { href: '/', label: 'Intro' },
             { href: '/videos', label: 'Videos' },
-            { href: '/components', label: 'Components' }
+            { href: '/components', label: 'Components' },
+            { href: '/credits', label: 'Credits' }
         ],
         'Getting started': [
             { href: '/colors', label: 'Colors' },

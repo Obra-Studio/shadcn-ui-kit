@@ -14,7 +14,18 @@ Design UI kits tend to be overcomplicated. They want to support everything and i
 
 As Obra, we decided the balance had to be found between replicating the source framework (in this case shadcn/ui) and customisability. You will find that, within the philosophy of this kit, it is rather easy to customize.
 
-You might also find it lacks some features you might expect such as theming variables and dark mode. This was done on purpose to keep things editable (Read more in the technical comments)
+## How our stance evolved during this project
+
+When we designed this kit, we initially had a philosophy of “do more with less”: we only shipped the colors that were used, we only had 20 or so icons in the kit (the ones actually used) and no dark mode on purpose.
+
+Based on the feedback of the community, we realised that it’s better to be more feature complete. Over the 0.2.0-0.5.0 releases we gradually added features:
+
+* August 18, 2025 - 0.2.0 - We learned from the community that they would like all Lucide icons and all Tailwind colors straight-up in the library file instead of dealing with the add-ons.
+* September 2, 2025 - 0.3.0 - Added Propstar based docs for all components.
+* September 4, 2025 - 0.4.0 - We added variables for border radii and spacing. Check out our community profile @obrastudio to find all new plugins to help you keep your border radii and spacing consistent (as well as a general shadcn/ui tools plugin, see our blog post).
+* September 8, 2025 - 0.5.0 - The Obra shadcn/ui kit now supports dark mode and theming. We've added variables for light/dark mode (and subsequently, themes) to all components.
+
+[Read the full changelog](/changelog)
 
 ## Design changes to shadcn
 
