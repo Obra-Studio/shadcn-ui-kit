@@ -8,6 +8,12 @@ export interface Video {
 
 const videoData = [
     {
+        id: "as93OVoqwfw",
+        title: "Obra shadcn/ui 0.5.0: Light/dark mode, theming support and example screens",
+        date: "September 11, 2025",
+        description: "We've reached a nice milestone with 10,000 duplicates for our kit. In the latest 0.5.0 version we added light and dark mode, theming support and example screens."
+    },
+    {
         id: "pEBHW6JZ7YY",
         title: "0.4.0 version of the Obra shadcn/ui kit: border radii & spacing variables",
         date: "September 4, 2025",
