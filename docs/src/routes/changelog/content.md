@@ -2,6 +2,17 @@
 
 We use [semantic versioning](https://semver.org/).
 
+## 0.6.0
+
+* Added links to the shadcn/ui docs in every applicable component
+* Fix some minor color-related bugs that crept in the 0.5.0 release (colors on checkbox, colors on resizable)
+* Removed “mode” color variable as it only had a single use
+
+## 0.5.1
+
+* Reworded several docs in the file that were outdated because of the theming change in 0.5.0
+* Lowercased the two default modes light/dark (just like the variables, everything is lowercased)
+
 ## 0.5.0
 
 * Corrected Neutral 950 color value
