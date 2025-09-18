@@ -2,6 +2,11 @@
 
 We use [semantic versioning](https://semver.org/).
 
+
+## 1.0.0
+
+* Released 1.0.0! Thanks to the team for your contributions, and thanks to all the users of our kit for your enthusiasm about our project.
+
 ## 0.6.0
 
 * Added links to the shadcn/ui docs in every applicable component
