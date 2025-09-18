@@ -10,7 +10,7 @@
 
 We just released the formal 1.0 version of our kit 🎉! After three months of being in public beta and several changes along the way, we hit 1.0.
 
-We take that number seriously as a stable point: since we accord to [semantic versioning](http://semver.org/) (as much as that's possible for a design file) we will not be releasing any breaking changes.
+We take that number seriously as a stable point: since we adhere to [semantic versioning](http://semver.org/) (as much as that's possible for a design file) we will not be releasing any breaking changes.
 
 The file will stay stable with the variables that we have now, the components that exist. If shadcn/ui itself releases further changes, we will check their nature (addition, deletion, change...) and see how we will update the kit. As always we will ask for your community feedback before making any major changes.
 
@@ -21,9 +21,9 @@ When we designed this kit, we initially had a philosophy of “do more with less
 Based on the feedback of the community, we realised that it’s better to be more feature complete. Over the public beta releases we gradually added features:
 
 * August 18, 2025 - 0.2.0 - We learned from the community that they would like all Lucide icons and all Tailwind colors straight-up in the library file instead of dealing with the add-ons.
-* September 2, 2025 - 0.3.0 - Added [Propstar](https://www.figma.com/community/plugin/1116018586739867857/propstar) based docs for all components.
+* September 2, 2025 - 0.3.0 - Added [Propstar](https://www.figma.com/community/plugin/1116018586739867857/propstar)-based docs for all components.
 * September 4, 2025 - 0.4.0 - We added variables for border radii and spacing.
 * September 8, 2025 - 0.5.0 - The Obra shadcn/ui kit now supports dark mode and theming. We've added variables for light/dark mode (and subsequently, themes) to all components.
-* September 15, 2025 - 0.6.0 - We link to the official shadcn docs in every component
+* September 15, 2025 - 0.6.0 - We linked to the official [shadcn/ui](https://ui.shadcn.com/) docs in every component
 
 As we added more features, but in a way still like a simpler kit, we’d love to hear your thoughts. Perhaps different versions of the kit can be offered for different needs. If you have any thoughts on this, please [contribute in this discussion](https://github.com/Obra-Studio/shadcn-ui-kit/discussions/68).
