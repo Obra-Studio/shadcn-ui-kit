@@ -10,6 +10,8 @@
 
 We just released the formal 1.0 version of our kit 🎉! After three months of being in public beta and several changes along the way, we hit 1.0.
 
+[You can find the design file here, on Figma community](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui).
+
 We take that number seriously as a stable point: since we adhere to [semantic versioning](http://semver.org/) (as much as that's possible for a design file) we will not be releasing any breaking changes.
 
 The file will stay stable with the variables that we have now, the components that exist. If shadcn/ui itself releases further changes, we will check their nature (addition, deletion, change...) and see how we will update the kit. As always we will ask for your community feedback before making any major changes.
