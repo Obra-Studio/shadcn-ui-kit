@@ -8,6 +8,12 @@ export interface Video {
 
 const videoData = [
     {
+        id: "AFIQXSJiv1U",
+        title: "Obra shadcn/ui - Tips for editing rather complex components in Figma",
+        date: "September 26, 2025",
+        description: "I use our Obra shadcn/ui kit and show an example of editing an already complex component, to demonstrate how to make an addition to the kit."
+    },
+    {
         id: "as93OVoqwfw",
         title: "Obra shadcn/ui 0.5.0: Light/dark mode, theming support and example screens",
         date: "September 11, 2025",
