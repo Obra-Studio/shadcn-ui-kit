@@ -14,6 +14,7 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Badge
 * Breadcrumb
 * Button
+* Button Group
 * Calendar
 * Card
 * Carousel
@@ -27,9 +28,13 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Dialog
 * Drawer
 * Dropdown Menu
+* Empty
+* Field
 * Hover Card
 * Input
+* Input Group (as part of Input, WIP)
 * Input OTP
+* Kbd
 * Label
 * Menubar
 * Navigation Menu
@@ -38,7 +43,7 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Progress
 * Radio Group
 * Resizable
-* Scroll-area
+* Scroll area
 * Select
 * Separator
 * Sheet
