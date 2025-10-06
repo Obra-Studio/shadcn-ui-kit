@@ -4,29 +4,43 @@ We use [semantic versioning](https://semver.org/).
 
 ## 1.1.0
 
-October 2, 2025
+October 5, 2025
 
-* Released 1.0.0! Thanks to the team for your contributions, and thanks to all the users of our kit for your enthusiasm about our project.
-* Theme change: Set muted foreground to neutral 400 in dark mode
-* Fix bug with icon overrides: icon overrides in combination with the pixel override hack led to unpredictable sizes or icon alignments when using certain icons. We solved this by adding a wrapper frame around every icon using the pixel override hack
-* Added pixel override hack to Toggle Group (both to Toggle Group Button and Single Toggle)
-* Fixed wrong values in the border radii of focus and error focus states of the Input OTP component
-* Add missing right positioned variants to Data Table component
-* Fix auto layout fill bugs in Data Table > Text (1 Line)
-* Reordered collections to prioritize Raw Colors in search results
-* Added rounded-infinite variable for border radius
-* Added round variant for several button-like components: Icon Button, Button, Toggle Group, Link Button, Loading Button
-* Added mirrored spinner to loading button
-* Added round variant for several input-like components: Input, Input file, Textarea
-* Added boolean switch to show resizable to Textarea component
-* Added round variant for Badge component
-* Added Ghost Muted variant for Icon Button component
-* Added tiny variant for Avatar component
-* Improve rich radio, rich checkbox and rich switch by adding a boolean property for the 2nd line that is off by default
-* Improve rich radio, rich checkbox and rich switch by adding a flipped variant (which would help with RTL languages)
-* Add example of narrow and wide to multi range slider
-* Shadcn sonner component: fix issue that icon can’t be changed - thanks for the bug report, Jorre Vandenbussche
-* Bugfix: changed a wrong theme color on the foreground of Buttons inside one of the buttons - thanks for the bug report, Jorre Vandenbussche
+* Features (related to shadcn October drop)
+  * Promote Spinner from a hidden component to an actual component, now that’s in an official shadcn/ui component in the October release
+  * Added kbd (keyboard) component
+  * Added Empty component for empty states
+  * Added button group component
+  * Removed note that Field is a convenience component that exists in the Figma version only, since this landed in shadcn
+  * Round variants
+    * Added round variant for several button-like components: Icon Button, Button, Toggle Group, Link Button, Loading Button
+    * Added round variant for several input-like components: Input, Input file, Textarea
+    * Added round variant for Badge component
+* Other features
+  * Add example of narrow and wide to multi range slider
+  * Added boolean switch to show resizable to Textarea component
+  * Added Ghost Muted variant for Icon Button component
+  * Add missing right positioned variants to Data Table component
+  * Improve rich radio, rich checkbox and rich switch by adding a boolean property for the 2nd line that is off by default
+  * Improve rich radio, rich checkbox and rich switch by adding a flipped variant (which would help with RTL languages)
+  * Added mirrored spinner to loading button
+* Bug fixes
+  * Fix missing variants in Datepicker day component and fix some missing references in the examples
+  * Fix bug with icon overrides: icon overrides in combination with the pixel override hack led to unpredictable sizes or icon alignments when using certain icons. We solved this by adding a wrapper frame around every icon using the pixel override hack
+  * Added pixel override hack to Toggle Group (both to Toggle Group Button and Single Toggle)
+  * Fixed wrong values in the border radii of focus and error focus states of the Input OTP component
+  * Bugfix: changed a wrong theme color on the foreground of Buttons inside one of the buttons - thanks for the bug report, Jorre Vandenbussche
+  * Shadcn sonner component: fix issue that icon can’t be changed - thanks for the bug report, Jorre Vandenbussche
+  * Fix auto layout fill bugs in Data Table > Text (1 Line)
+* Theme changes
+  * Set muted foreground to neutral 400 in dark mode
+  * Change hover colors for light mode ghost and outline buttons
+  * Added rounded-infinite variable for border radius
+* General changes
+  * Reordered collections to prioritize Raw Colors in search results
+* Visual improvements
+  * Added tiny and extra tiny variant for Avatar component
+  * Improve look of avatars in select (people) dropdown example
 
 ## 1.0.0
 
