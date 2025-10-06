@@ -18,7 +18,7 @@ October 5, 2025
     * Added round variant for Badge component
 * Other features
   * Add example of narrow and wide to multi range slider
-  * Added boolean switch to show resizable to Textarea component
+  * Added boolean switch to show resizable control in Textarea component
   * Added Ghost Muted variant for Icon Button component
   * Add missing right positioned variants to Data Table component
   * Improve rich radio, rich checkbox and rich switch by adding a boolean property for the 2nd line that is off by default
