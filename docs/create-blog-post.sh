@@ -46,7 +46,7 @@ else
     AUTHOR="${2:-Johan Ronsse}"  # Default author if not provided
 fi
 CURRENT_DATE=$(date +%Y-%m-%d)
-SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-\+\|-\+$//g')
+SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | sed 's/^-*//' | sed 's/-*$//')
 BLOG_DIR="src/routes/blog/(posts)"
 POST_DIR="$BLOG_DIR/$SLUG"
 POST_FILE="$POST_DIR/+page.md"
