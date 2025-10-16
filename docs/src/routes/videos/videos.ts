@@ -8,6 +8,12 @@ export interface Video {
 
 const videoData = [
     {
+        id: "R2sW2iKpCxY",
+        title: "Upgrading the Obra shadcn/ui kit",
+        date: "October 15, 2025",
+        description: "Upgrading Figma libraries is not for the faint of heart. In this video, we point out a few strategies that we use to try and make it happen. There is a manual way which involves deprecating components as well as swapping them out manually, and there is a more automatic way which involves the swap library function in Figma. "
+    },
+    {
         id: "AFIQXSJiv1U",
         title: "Obra shadcn/ui - Tips for editing rather complex components in Figma",
         date: "September 26, 2025",
