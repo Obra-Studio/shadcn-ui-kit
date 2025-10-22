@@ -10,7 +10,7 @@ This kit was meticulously crafted by the design team at Obra Studio.
 
 Obra Studio is a design studio that helps software companies get to the next design level.
 
-[Visit our website](http://obra.studio/)
+[Visit our website](https://obra.studio/)
 
 ## Don't want to design yourself?
 
@@ -25,7 +25,7 @@ It's the quickest path from idea to a polished Ul — without the hassle of hiri
 * Fixed pricing, no surprises!
 * Focus on your business, product or roadmap. We'll handle the design.
 
-[→ Explore our service offering](http://obra.studio/design-services)
+[→ Explore our service offering](https://obra.studio/design-services)
 
 ## License
 
