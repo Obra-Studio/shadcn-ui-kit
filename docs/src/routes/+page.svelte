@@ -16,7 +16,7 @@
 </div>
 
 <div class="mb-6">
-	<ul class="list-none p-0 space-y-2">
+	<ul class="list-none p-0 space-y-2 md:columns-2">
 		<li class="flex items-center">
 			<span class="text-green-600 mr-2">✓</span>
 			Completely free to use
@@ -32,6 +32,14 @@
 		<li class="flex items-center">
 			<span class="text-green-600 mr-2">✓</span>
 			No complex licensing: MIT Licensed
+		</li>
+		<li class="flex items-center">
+			<span class="text-green-600 mr-2">✓</span>
+			Already used by 17 500+ designers
+		</li>
+		<li class="flex items-center">
+			<span class="text-green-600 mr-2">✓</span>
+			1000+ likes on Figma Community
 		</li>
 	</ul>
 </div>
