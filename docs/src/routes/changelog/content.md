@@ -2,6 +2,34 @@
 
 We use [semantic versioning](https://semver.org/).
 
+## 1.1.4
+
+November 13, 2025
+
+* Change loading button to use the outlined button style, since the shadcn/ui documentation also uses this style.
+* Marked “mid” color variable as deprecated. This variable will (likely) be removed in the future to make skinning easier.
+* Move some stray chart colors (meant for skinning charts in similar colors like in the [shadcn/ui chart docs](https://ui.shadcn.com/charts/)) that lived at the top level of variables accidentally to charts/static
+* Apply pixel override hack to sidebar mini button (Fixes #75)
+* Update Input OTP component to not rely on background layer but have styles attached to parent layer
+
+## 1.1.3
+
+November 13, 2025
+
+* Fix issue with Menu Item: the large menu items Left and Right decoration defaulted to a large icon, but this caused visual issues.
+
+## 1.1.2
+
+November 12, 2025
+
+* Fix issue with Toggle Group icons not working correctly. Find a breakdown of the issue and a fix on our [blog](https://shadcn.obra.studio/blog/toggle-group-fix-explanation).
+
+## 1.1.1
+
+October 27, 2025
+
+* Fix issue with sidebar icons jumping due to not having wrapper frames. Thanks for the catch, Alex.
+
 ## 1.1.0
 
 October 5, 2025
