@@ -3,21 +3,19 @@
     import NavItem from './NavItem.svelte';
 
     const navItems = {
-        'Updates': [
+        'Main': [
+            { href: '/', label: 'Intro' },
             { href: '/blog', label: 'Blog' },
             { href: '/changelog', label: 'Changelog' },
         ],
-        'Basics': [
-            { href: '/', label: 'Intro' },
-            { href: '/videos', label: 'Videos' },
-            { href: '/components', label: 'Components' },
-            { href: '/credits', label: 'Credits & Licensing' }
-        ],
-        'Getting started': [
+        'Documentation': [
             { href: '/how-to-use', label: 'How to use this kit' },
             { href: '/colors', label: 'Colors' },
             { href: '/typography', label: 'Typography' },
-            { href: '/icons', label: 'Icons' }
+            { href: '/icons', label: 'Icons' },
+            { href: '/videos', label: 'Videos' },
+            { href: '/components', label: 'Components' },
+            { href: '/credits', label: 'Credits & Licensing' }
         ],
         'Other': [
             { href: '/technical-comments', label: 'Technical comments' }

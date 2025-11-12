@@ -15,8 +15,8 @@
 
     <div class="hidden md:block">
         <ButtonGroup>
-            <Button icon="figma" variant="ghost" href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui">Get design file</Button>
             <Button icon="github" variant="ghost" href="https://github.com/Obra-Studio/shadcn-ui-kit/issues">Give feedback</Button>
+            <Button icon="figma" variant="outline" href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui">Get design file</Button>
         </ButtonGroup>
     </div>
 
