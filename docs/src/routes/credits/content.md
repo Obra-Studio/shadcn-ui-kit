@@ -2,28 +2,29 @@
 
 ## How this kit came to be
 
-Every layer and component was designed from scratch by the [Obra Studio](https://obra.studio) team, referencing the official v4 documentation. Nothing was copied or pasted from existing files or UI kits.
+To create the initial version of this kit, every layer and component was designed from scratch by the [Obra Studio](https://obra.studio) team, referencing the official [shadcn/ui](https://ui.shadcn.com/) documentation.
+
+Nothing was copied or pasted from existing files or UI kits.
+
+We track the changes in shadcn/ui and keep updating the kit to be up to date with the latest version of shadcn/ui.
 
 ## About Obra Studio
 
 This kit was meticulously crafted by the design team at Obra Studio.
 
-Obra Studio is a design studio that helps software companies get to the next design level.
-
-[Visit our website](https://obra.studio/)
+Obra Studio is a boutique design & development studio with roots in Belgium and Mexico. [Visit our website to learn more](https://obra.studio/)
 
 ## Don't want to design yourself?
 
-We can craft a fully customized version of this shadcn/ui kit, applying best-in-class design system practices and adapting everything to your brand, product flows, and strategy.
+We can craft a fully customized version of this shadcn/ui kit, applying best-in-class design system practices and adapting the kit to your brand.
 
-Since we built this kit ourselves, we move fast — and know exactly how to get the most out of it. Your dev team (or your vibe coder) will hit the ground running with clean, production-ready UI.
+Next to this, we offer to use the customized kit to design product features and flows.
 
-It's the quickest path from idea to a polished Ul — without the hassle of hiring, briefing, or spending hours in Figma yourself.
+Since we built this kit ourselves, we move fast — and know exactly how to get the most out of the kit.
 
-* Custom UI/UX design as a "done-for-you" service
-* Delivered in ~ 2 weeks, ready for dev
-* Fixed pricing, no surprises!
-* Focus on your business, product or roadmap. We'll handle the design.
+Your dev team will hit the ground running with clean, production-ready UI.
+
+It's the quickest path from idea to a polished UI — without the hassle of hiring, briefing, or spending hours in Figma yourself.
 
 [→ Explore our service offering](https://obra.studio/design-services)
 
