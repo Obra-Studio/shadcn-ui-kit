@@ -2,9 +2,15 @@
 
 We use [semantic versioning](https://semver.org/).
 
-## 1.1.4
+## 1.1.5
 
 November 13, 2025
+
+* Fixed a bug with the “Icon Muted” property in Menu item not reacting when overriding the default icon.
+
+## 1.1.4
+
+November 12, 2025
 
 * Change loading button to use the outlined button style, since the shadcn/ui documentation also uses this style.
 * Marked “mid” color variable as deprecated. This variable will (likely) be removed in the future to make skinning easier.
@@ -14,7 +20,7 @@ November 13, 2025
 
 ## 1.1.3
 
-November 13, 2025
+November 12, 2025
 
 * Fix issue with Menu Item: the large menu items Left and Right decoration defaulted to a large icon, but this caused visual issues.
 
