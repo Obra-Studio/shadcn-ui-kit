@@ -26,7 +26,7 @@ Your dev team will hit the ground running with clean, production-ready UI.
 
 It's the quickest path from idea to a polished UI — without the hassle of hiring, briefing, or spending hours in Figma yourself.
 
-[→ Explore our service offering](https://obra.studio/design-services)
+[Find out more →](https://obra.studio/shadcn-ui-kit-customization/)
 
 ## License
 

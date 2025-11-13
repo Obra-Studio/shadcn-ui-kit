@@ -24,7 +24,7 @@ Change the theme globally by changing the variable mode of the page to dark.
 
 To create your own theme, we recommend adding a new mode in Figma and start customizing the colors.
 
-Need help creating your own theme? We offer design services around this with [Obra Studio](http://obra.studio/). Please contact us for more details.
+Need help creating your own theme? We offer design services around this. [Check out this page for more details](https://obra.studio/shadcn-ui-kit-customization/).
 
 We added several variables on top of shadcn/ui’s theming to allow designers to have more control in Figma.
 
