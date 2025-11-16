@@ -23,7 +23,7 @@
 		</li>
 		<li class="flex items-center">
 			<span class="text-green-600 mr-2">✓</span>
-			Recreates 50+ shadcn/ui v4 components accurately
+			Recreates 50+ shadcn/ui components accurately
 		</li>
 		<li class="flex items-center">
 			<span class="text-green-600 mr-2">✓</span>
@@ -64,10 +64,10 @@
 					{post.title}
 				</a>
 				<span class="text-muted-foreground ml-2">
-					({post.date.toLocaleDateString('en-US', { 
-						year: 'numeric', 
-						month: 'short', 
-						day: 'numeric' 
+					({post.date.toLocaleDateString('en-US', {
+						year: 'numeric',
+						month: 'short',
+						day: 'numeric'
 					})})
 				</span>
 			</li>
