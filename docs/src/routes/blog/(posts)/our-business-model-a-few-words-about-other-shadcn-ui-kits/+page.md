@@ -84,7 +84,7 @@ However, the backbone of using any Figma library is mostly general Figma knowled
 
 Our business model is selling consulting, design and development projects as an agency.
 
-Promoting our free kit leads to client work for our studio, [Obra Studio](http://obra.studio/).
+Promoting our free kit leads to client work for our studio, [Obra Studio](https://obra.studio/).
 
 Currently the kit leads to people being interested in our design services and to actual design projects. We can already attribute a sizable amount of revenue to our kit that we expect to grow.
 
