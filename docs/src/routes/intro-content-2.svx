@@ -1,7 +1,0 @@
-<script lang="ts">
-	import { Button } from "$lib/components/ui/button/index.js";
-	import { ButtonGroup } from "$lib/components/ui/button-group";
-</script>
-
-![zoomed-out-view.png](/zoomed-out-view.png)
-_Figure: zoomed out view of the components_

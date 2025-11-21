@@ -85,7 +85,7 @@ body>div {
     height: 100%;
 }
 
-body>div>.main-flex-container {
+body> div > .main-flex-container {
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -120,6 +120,8 @@ main img {
     margin-bottom: 2rem;
     font-size: 2rem;
     font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -.025em;
 }
 
 .prose h2 {
@@ -189,4 +191,16 @@ iframe {
     width: 100%;
     height: auto;
     aspect-ratio: 16/9;
+}
+
+ .container {
+     max-width: 1000px;
+ }
+
+.container--small {
+    max-width: 700px;
+}
+
+.container--centered {
+    margin: 0 auto;
 }

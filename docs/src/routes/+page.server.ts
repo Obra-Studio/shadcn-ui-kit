@@ -1,5 +1,5 @@
 import { posts } from './blog/posts';
-import { videos } from './videos/videos';
+import { videos } from './documentation/videos/videos';
 import { isPostPublished } from '$lib/blog/utils';
 import { dev } from '$app/environment';
 

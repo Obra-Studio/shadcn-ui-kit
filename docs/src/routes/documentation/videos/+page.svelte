@@ -1,7 +1,7 @@
 <script>
     import Video from './Video.svelte'
     import HeadingWithBadge from './HeadingWithBadge.svelte';
-    import { videos } from './videos';
+    import { videos } from './videos.js';
 </script>
 
 <svelte:head>

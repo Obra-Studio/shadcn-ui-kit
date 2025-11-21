@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
-	import Nav from '$lib/components/Nav.svelte';
+	import Nav from './documentation/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
 	let { children } = $props();
@@ -13,10 +13,7 @@
 		<main>
 			{@render children()}
 		</main>
-
-		<Nav />
 	</div>
-
 	<Footer />
 </div>
 
