@@ -8,7 +8,7 @@ To make the kit your own, we recommend to:
 
 1. Remove all blue frames. They are meant as documentation.
 2. Customize the thumbnail to your liking. Give it the name of your design system.
-3. Customize the theme to your brand (need help with this? We offer consulting services around this with [Obra Studio](http://obra.studio/))
+3. Customize the theme to your brand (need help with this? We offer consulting services around this with [Obra Studio](https://obra.studio/))
 4. Now publish the library to your Figma account (this requires at least a professional account).
 
 Then, consume the library from another file and create your designs.
