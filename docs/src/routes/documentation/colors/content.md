@@ -2,7 +2,7 @@
 
 We include all [Tailwind 4 colors](https://tailwindcss.com/docs/colors) as Figma variables inside the “Raw colors” collection.
 
-<img src="/colors.png" />
+<img src="/colors.png" alt="Tailwind 4 colors included in the Obra shadcn/ui kit" />
 
 _Tailwind colors_
 

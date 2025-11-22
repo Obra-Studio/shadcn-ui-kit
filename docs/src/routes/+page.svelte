@@ -104,7 +104,7 @@
 		</ul>
 		<div class="mt-4">
 			<ButtonGroup>
-				<Button href="/videos" variant="outline">View all videos</Button>
+				<Button href="/documentation/videos" variant="outline">View all videos</Button>
 			</ButtonGroup>
 		</div>
 	</div>

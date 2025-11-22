@@ -13,7 +13,7 @@
 </div>
 
 <style>
-    .prose h2 + p {
+    .prose :global(h2 + p) {
         color: var(--color-muted-foreground);
         font-size: 0.875rem;
     }
