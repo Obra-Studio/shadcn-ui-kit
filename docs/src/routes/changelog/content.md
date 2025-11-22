@@ -2,6 +2,44 @@
 
 Find the latest changes in our kit here. This changelog is repeated inside of the file in the blue frames, so you know which version is in use. We use [semantic versioning](https://semver.org/).
 
+## 1.2.0
+
+November 22, 2025
+
+* File organisation
+  * Moved components and styles to separate pages as per popular request. We reorganized the file to show 1 frame per page..
+  * Added version number to title
+* General marketing
+  * Adjusted thumbnail - renamed project Obra shadcn/ui kit
+  * Adjusted description to “A meticously crafted Figma component library based on shadcn/ui to provide the start of your design system.”
+  * Added an example thumbnail and instructions to customize
+* Documentation
+  * Remove guideline to “remove the blue frames” as it’s less relevant because of the new pages organisation
+  * Remove “the philosophy” section from Figma documentation - As we grow, the kit is less about personal opinion from initial creator but more about a starting point that works for most teams
+  * Collapse design changes to shadcn docs into the basic docs and rename “the basics” to “about this kit”
+* Marked Card, Drawer, Dialog, Empty, Hover Card and Sheet components to be changed to slot components soon when Figma releases the slots feature for components.
+* Theming changes
+  * Renamed collection “theme” to “semantic color”
+  * Reordered collections (4 first collections are meant to be customized, then there is a divider, the other sections are meant to be left alone for most users)
+  * Reordered modes - first mode is the mode meant to be customized, second mode is the way shadcn is styled as a reference
+  * Introduced a semantic layer for border radius variables
+  * Applied semantic layer for border radii to all components, in order to be able to create modes (like a square mode) that changes overall roundness of elements
+  * Introduced typographic variables, and applied these to the existing type styles (h1-h4, monospaced text, body regular/small/mini) so typography can be changed (insofar Figma supports it) with modes, giving users a starting point to maintain multiple brands within the same design library
+* Components
+  * Alert - Bugfix: fixed pixel override hack not being present in Alert component. Thanks for the report, Josh Rubinstein!
+  * Checkbox: fix visual clipping issue with indeterminate checkbox
+  * Drawer - Bugfix - Fix issue in Drawer component where drawer had a set bottom left and bottom right corner radius
+  * Dialog: Rename Dialog variant Mobile Scrollable to Mobile Full Screen Scrollable to denote use case, and set border radius to 0
+  * Progress - Bugfix: correct 25% not showing up correctly
+  * Progress - Bugfix: add more intermediate values to have more progress options by default (0, 33, 66, 90)
+  * Label: adjust autolayout construction for block variant. Outer width is 320, inner is determined by the label contents (hugs contents).
+  * Table: Renamed Basic Table to Table to accord to shadcn
+  * Table: adjust styling to accord to latest version of shadcn
+  * Toggle & Toggle Group: make it clearer that these components, that are separated in shadcn/ui, are bundled together for usability reasons in the kit.
+  * Sidebar: localized sidebar (counter) badge so it works together with sidebar themes instead of depending on the badge component
+  * Spinner: added similar example recreating shadcn/ui docs
+  * Sonner: add more examples recreating shadcn/ui docs
+
 ## 1.1.5
 
 November 13, 2025
