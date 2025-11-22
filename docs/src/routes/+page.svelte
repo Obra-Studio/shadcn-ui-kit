@@ -34,7 +34,7 @@
 	<div class="max-w-4xl mx-auto mb-4 flex flex-col gap-6">
 		<p>Duplicated over 20,000 times on Figma Community • 1200 ❤️</p>
 		<H1>Obra Shadn/ui kit: A free, high quality Figma library to design and theme shadcn/ui projects</H1>
-	<!--		<HeroImage />-->
+		<HeroImage />
 		<AdvantageList columns>
 			<AdvantageListItem>Completely free to use</AdvantageListItem>
 			<AdvantageListItem>Recreates all 56 shadcn/ui components accurately</AdvantageListItem>

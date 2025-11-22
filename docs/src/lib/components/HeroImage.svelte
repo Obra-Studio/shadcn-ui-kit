@@ -1,7 +1,12 @@
-<div class="w-full max-w-2xl mx-auto">
+<script>
+</script>
+
+<figure class="w-full max-w-2xl mx-auto">
 	<img
-		src="https://placehold.co/600x400/e2e8f0/64748b"
-		alt="Hero"
+		src="/ui-drop-october.png"
+		alt="UI drop october"
 		class="w-full h-auto rounded-lg shadow-lg"
 	/>
-</div>
+	<figcaption class="text-sm text-muted-foreground">Recreation of the October '25 drop. All new components available in Figma.</figcaption>
+</figure>
+
