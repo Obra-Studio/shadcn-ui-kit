@@ -20,8 +20,6 @@ If you are interested in contributing, please read the issues at https://github.
 
 We'd like to have a healthy discourse about the kit and how to use it. Feel free to post any comment you have!
 
-_Currently, the kit is in public beta until September 2025, after which we will release a final 1.0 version of the kit_
-
 ## About Obra Studio
 
-[Obra Studio](https://obra.studio/) is a design studio that helps software companies get to the next design level. 
+[Obra Studio](https://obra.studio/) is a small design and development studio with roots in Belgium and Mexico. 
