@@ -23,6 +23,7 @@
         </a>
 
         <nav class="flex">
+            <HeaderNavItem hiddenUntilMd href="/" active={isActive('/')}>Home</HeaderNavItem>
             <HeaderNavItem href="/documentation" active={isActive('/documentation')}>
                 <span class="md:hidden">Docs</span>
                 <span class="hidden md:inline">Documentation</span>
