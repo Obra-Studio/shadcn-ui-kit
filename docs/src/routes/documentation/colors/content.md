@@ -1,5 +1,3 @@
-# Colors
-
 ## Raw colors
 
 We include all [Tailwind 4 colors](https://tailwindcss.com/docs/colors) as Figma variables inside the “Raw colors” collection.

@@ -1,5 +1,3 @@
-# Typography
-
 ## Note about type styles
 
 ![typography.png](/typography.png)

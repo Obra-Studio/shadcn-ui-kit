@@ -1,5 +1,3 @@
-# Components
-
 ## Available components 
 
 The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are available as Figma components:

@@ -21,14 +21,6 @@
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
     --ring: oklch(0.708 0 0);
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
 }
 
 @theme inline {
@@ -54,14 +46,6 @@
     --color-border: var(--border);
     --color-input: var(--input);
     --color-ring: var(--ring);
-    --color-sidebar: var(--sidebar);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-ring: var(--sidebar-ring);
 }
 
 @layer base {
@@ -203,4 +187,78 @@ iframe {
 
 .container--centered {
     margin: 0 auto;
+}
+
+.intro {
+    font-size: 120%;
+}
+
+/* Testimonial Slider */
+.testimonial-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.testimonial-track {
+    width: 100%;
+}
+
+.testimonial-track input[type="radio"] {
+    display: none;
+}
+
+.testimonial-slides {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+    width: 100%;
+}
+
+.testimonial-slide {
+    min-width: 100%;
+    max-width: 100%;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* Slide transitions */
+#testimonial-1:checked ~ .testimonial-slides {
+    transform: translateX(0%);
+}
+
+#testimonial-2:checked ~ .testimonial-slides {
+    transform: translateX(-100%);
+}
+
+#testimonial-3:checked ~ .testimonial-slides {
+    transform: translateX(-200%);
+}
+
+/* iOS-style dots */
+.testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+}
+
+.testimonial-dots label {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-gray-300);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.testimonial-dots label:hover {
+    background-color: var(--color-gray-400);
+}
+
+/* Active dot indicators */
+#testimonial-1:checked ~ .testimonial-dots label:nth-child(1),
+#testimonial-2:checked ~ .testimonial-dots label:nth-child(2),
+#testimonial-3:checked ~ .testimonial-dots label:nth-child(3) {
+    background-color: var(--color-gray-700);
+    width: 8px;
 }

@@ -2,6 +2,8 @@
 	import { formatDate } from '$lib/blog/utils.js';
 
 	import { IconRss } from 'obra-icons-svelte'
+	import H1 from "$lib/components/H1.svelte";
+	import H2 from "$lib/components/H2.svelte";
 	let { data } = $props();
 </script>
 
@@ -12,12 +14,12 @@
 		title="RSS Feed for Obra shadcn/ui blog"
 		type="application/rss+xml"
 	/>
-	<title>Blog - Obra shadcn/ui</title>
+	<title>Blog - Obra shadcn/ui Figma kit</title>
 </svelte:head>
 
 <div class="container container--small container--centered">
 	<div class="flex justify-between mb-8">
-		<h1 class="text-3xl font-semibold">Blog</h1>
+		<H1>Blog</H1>
 		<a aria-label="RSS Feed" class="flex gap-1" href="/rss.xml">
 			<IconRss size={20}/>
 			RSS feed
@@ -29,11 +31,11 @@
 			<li class="mb-8 pb-8 border-b-neutral-200 last:mb-0 last:pb-0 last:border-0 border-b-1">
 				<article>
 					<header class="mb-4">
-						<h2 class="text-2xl font-semibold">
+						<H2>
 							<a href="/blog/{post.slug}">{post.title}</a>
-						</h2>
-						<ul class="flex gap-2">
-							<li class="text-muted-foreground">{formatDate(post.date)} by {post.author}</li>
+						</H2>
+						<ul class="flex gap-2 pt-2">
+							<li class="text-muted-foreground">{formatDate(post.date)} by <a href="/authors/johan-ronsse">{post.author}</a></li>
 							{#if post.tags}
 								<li>
 									<ul>

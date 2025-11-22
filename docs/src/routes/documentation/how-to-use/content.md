@@ -1,4 +1,4 @@
-# How to use this kit
+
 
 This kit is meant to be customised further. It's the start of your own system.
 

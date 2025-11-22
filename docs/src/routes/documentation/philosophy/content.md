@@ -1,5 +1,3 @@
-# The philosophy
-
 # A stance on UI kits
 
 First of all I’ve always found UI kits a bit weird: if you have the ability to design, why don’t you design the kit yourself?

@@ -1,5 +1,3 @@
-# Icons
-
 In this file, you'll find all 1500+ [Lucide](https://lucide.dev/) icons.
 
 We tagged the icons with keywords to make it easy to find them.

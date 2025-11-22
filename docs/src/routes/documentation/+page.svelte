@@ -1,6 +1,13 @@
+
 <script>
+    import DocsIntro from './docs-intro.md'
 </script>
 
-<p>These are the docs for a design library file that recreates the components of shadcn/ui inside of Figma.</p>
+<svelte:head>
+    <title>Documentation - Obra shadcn/ui kit</title>
+</svelte:head>
 
-<p>This library will evolve over time as it tracks the evolutions in shadcn.</p>
+<div class="prose">
+    <DocsIntro />
+</div>
+

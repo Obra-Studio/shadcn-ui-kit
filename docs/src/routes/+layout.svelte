@@ -1,7 +1,6 @@
 <script>
 	import '../app.css';
 	import Header from '$lib/components/Header.svelte';
-	import Nav from './documentation/Nav.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 
 	let { children } = $props();
@@ -38,7 +37,6 @@
 	@media (min-width: 960px) {
 		main {
 			flex-grow: 1;
-			padding: 1.5rem 4rem 4rem;
 		}
 	}
 </style>

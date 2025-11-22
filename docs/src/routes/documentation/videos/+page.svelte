@@ -2,19 +2,19 @@
     import Video from './Video.svelte'
     import HeadingWithBadge from './HeadingWithBadge.svelte';
     import { videos } from './videos.js';
+    import HeaderWithBack from "$lib/components/HeaderWithBack.svelte";
+    let title = 'Videos'
 </script>
 
 <svelte:head>
-    <title>Videos - Obra shadcn/ui docs</title>
+    <title>{title} - Documentation - Obra shadcn/ui kit</title>
 </svelte:head>
 
+<HeaderWithBack {title} />
+
 <div class="prose">
-<h1>Videos</h1>
-
     <p>Here's the available videos about our Obra shadcn/ui Figma library project.</p>
-
     <p>Have a video request? Question? <a href="https://github.com/Obra-Studio/shadcn-ui-kit/issues">Log a Github issue</a>!</p>
-
 </div>
 
 <div class="py-4">

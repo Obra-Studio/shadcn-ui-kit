@@ -1,5 +1,3 @@
-# Technical comments
-
 ## Guidelines on components
 
 * Prefer composability.

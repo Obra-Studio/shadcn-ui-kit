@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-    <title>Credits - Obra shadcn/ui docs</title>
+    <title>Credits - Obra shadcn/ui Figma kit</title>
 </svelte:head>
 
 <div class="prose">

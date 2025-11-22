@@ -1,10 +1,14 @@
 <script>
     import Content from './content.md'
+    import HeaderWithBack from "$lib/components/HeaderWithBack.svelte";
+    let title = 'Icons'
 </script>
 
 <svelte:head>
-    <title>Icons - Obra shadcn/ui docs</title>
+    <title>{title} - Documentation - Obra shadcn/ui kit</title>
 </svelte:head>
+
+<HeaderWithBack {title} />
 
 <div class="prose">
     <Content />

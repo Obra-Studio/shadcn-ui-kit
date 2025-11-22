@@ -1,6 +1,6 @@
 # Changelog
 
-We use [semantic versioning](https://semver.org/).
+Find the latest changes in our kit here. This changelog is repeated inside of the file in the blue frames, so you know which version is in use. We use [semantic versioning](https://semver.org/).
 
 ## 1.1.5
 
