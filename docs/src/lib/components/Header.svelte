@@ -14,7 +14,7 @@
 
 <header class="flex justify-between items-center mx-auto p-4 md:p-8 w-full bg-white border-0 border-b border-gray-300">
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-4 md:gap-8">
         <a href="/" class="text-2xl no-underline inline-flex items-center font-semibold gap-3 text-black" aria-label="Obra Shadcn/ui">
             <span class="gap-0.5 flex">
                 <img src="/logo-obra.svg" alt="" width="50" />
