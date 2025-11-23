@@ -8,6 +8,12 @@ export interface Video {
 
 const videoData = [
     {
+        id: "XDbVf96rR68",
+        title: "Obra shadcn/ui kit: 1.2.0 updates - New organisation + Theming updates",
+        date: "November 22, 2025",
+        description: "In this video, we go through the organizational and theme-related changes in the 1.2.0 version of the Obra shadcn/ui kit for Figma. You can find duplicate the kit for free via Figma community. "
+    },
+    {
         id: "R2sW2iKpCxY",
         title: "Upgrading the Obra shadcn/ui kit",
         date: "October 15, 2025",
