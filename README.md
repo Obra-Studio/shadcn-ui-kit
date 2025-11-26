@@ -1,12 +1,5 @@
 # Obra-Studio/shadcn-ui-kit
 
-## What is this repo for?
-
-This is the repository for
-
-* the documentation website at [shadcn.obra.studio](https://shadcn.obra.studio/). 
-* to discuss any issues with the kit within [GitHub issues](https://github.com/Obra-Studio/shadcn-ui-kit/issues).
-
 ## What is the Obra-Studio/shadcn-ui-kit?
 
 This is a design library file that implements https://ui.shadcn.com/.
@@ -14,6 +7,14 @@ This is a design library file that implements https://ui.shadcn.com/.
 [Download the community file here](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui)
 
 For more info, see the [docs](https://shadcn.obra.studio/).
+
+## What is this repo for?
+
+This is the repository for
+
+* the documentation website at [shadcn.obra.studio](https://shadcn.obra.studio/). 
+* to discuss any issues with the kit within [GitHub issues](https://github.com/Obra-Studio/shadcn-ui-kit/issues) (the issues are used to organize the work around the kit. Some discussion is public, some discussion is internal to Obra.)
+* to [discuss](https://github.com/Obra-Studio/shadcn-ui-kit/discussions) ideas around the kit. Your voice helps influence the overall direction!
 
 ## Contributing
 
