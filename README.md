@@ -30,5 +30,5 @@ However, we'd like to have a healthy discourse about the kit and how to use it. 
 
 We focus on 2 types of work:
 
-1. Helping software companies get to the next design level
-2. Website design & development for high-end websites
+1. Help software companies get to the next design level
+2. Build and design high-end websites
