@@ -1,6 +1,27 @@
 # Changelog
 
-Find the latest changes in our kit here. This changelog is repeated inside of the file in the blue frames, so you know which version is in use. We use [semantic versioning](https://semver.org/).
+Find the latest changes in our kit here. This changelog is repeated [inside of the file](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui) on the changelog page, so you know which version is in use. We use [semantic versioning](https://semver.org/).
+
+## 1.3.0
+
+November 27, 2025
+
+* Bugfixes around incomplete theming features
+  * Create a subgroup for each of the paragraph variables
+  * Simplify paragraph variable names
+  * Add monospaced variables
+* Default type styles
+  * Add differentiation between medium and bold
+* Bugfix: remove extraneous frame in Alert component (removed double pixel override hack frame)
+* Adjusted dialog border radius to semantic variable rounded-xl - related [#95](https://github.com/Obra-Studio/shadcn-ui-kit/issues/95)
+* Theming scoping changes (related [#96](https://github.com/Obra-Studio/shadcn-ui-kit/issues/96))
+  * Scope typography variables to their appropriate properties
+  * Scope semantic color variables to their appropriate properties
+  * Scope shadow variables to their appropriate properties
+* Add semantic layer to spacing collection: it’s possible to customize spacings in the kit much more easily
+* Apply semantic spacing layer to all components (related [#90](https://github.com/Obra-Studio/shadcn-ui-kit/issues/90))
+* Adjust checkboxes, radio buttons, sliders and switches to use the primary (background) variable. If you change your primary variable color for example to blue, these elements will change color as well.
+* Renamed shadcn-light color mode to shadcn, so the mode name for shadcn is the same across all 5 customizable collections (semantic colors, border radii, typography, spacing and shadows). This will help with grouping when automatically processing the tokens from export files.
 
 ## 1.2.0
 
