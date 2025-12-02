@@ -10,7 +10,7 @@ We tagged the colors in use visually.
 
 If you don't need them, you can safely delete the colors not in use. All neutral values are used, as well as 5 red values.
 
-Note: Figma does not support OKCLH, so we are using hex variables.
+Note: Figma does not support OKCLH, so we are using hex-based variables.
 
 ## Theming
 
