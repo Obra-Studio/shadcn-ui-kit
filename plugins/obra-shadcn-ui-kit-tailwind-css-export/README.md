@@ -1,13 +1,13 @@
-# Variables to Tailwind/shadcn CSS
+# Obra shadcn/ui kit CSS export
 
-A Figma plugin that exports your Figma variable collections to Tailwind CSS v4 / shadcn/ui compatible stylesheets.
+A Figma plugin that exports the [Obra shadcn/ui](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui) variable collections to Tailwind CSS v4 / shadcn/ui compatible stylesheets.
 
 ## Features
 
-- **Read Figma Variables**: Automatically detects all local variable collections in your Figma file
-- **Mode Selection**: Choose which mode (theme variant) to export
-- **OKLCH Color Format**: Converts colors to modern OKLCH format for better color manipulation
-- **shadcn/ui Compatible**: Generates CSS that works directly with shadcn/ui components
+- **Read Figma Variables**: Automatically detect relevant local variable collections in your Figma file
+- **Mode Selection**: Choose which modes to export: create a combination of modes in a file that contains multiple modes
+- **Dark mode**: For semantic colors and chart colors, modes suffixed with `-dark` are picked up as dark-compatible themes 
+- **shadcn/ui compatible**: Generates CSS that works directly with shadcn/ui components
 - **Tailwind v4 Ready**: Includes `@theme inline` block for Tailwind CSS v4 compatibility
 - **Copy or Download**: Easily copy the generated CSS or download as a file
 
@@ -72,7 +72,7 @@ The plugin generates CSS in the following format:
 }
 ```
 
-For dark mode, use the checkbox to generate:
+For dark mode, add a theme suffixed with `-dark` to generate:
 
 ```css
 .dark {
@@ -85,7 +85,7 @@ For dark mode, use the checkbox to generate:
 ## Requirements
 
 - Figma Desktop or Browser
-- A Figma file with Variable Collections defined
+- A design file based on [Obra shadcn/ui](https://www.figma.com/community/file/1514746685758799870) (from version 1.4.0 on) with variable Collections defined
 
 ## Files
 

@@ -1,5 +1,5 @@
 {
-  "name": "Obra shadcn/ui to shadcn + tailwind CSS export v2",
+  "name": "Obra shadcn/ui kit CSS export",
   "id": "obra-shadcn-ui-figma-variables-to-tailwind-shadcn-2",
   "api": "1.0.0",
   "main": "code.js",
@@ -7,6 +7,7 @@
   "enableProposedApi": false,
   "editorType": ["figma"],
   "ui": "ui.html",
+  "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": ["none"]
   }

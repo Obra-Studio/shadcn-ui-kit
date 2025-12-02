@@ -537,7 +537,6 @@ async function generateTypographyCSS(collection, modeId) {
 
   // Text style definitions: name -> { size, lineHeight, letterSpacing, weight }
   const styleNames = [
-    'display 1', 'display 2',
     'heading 1', 'heading 2', 'heading 3', 'heading 4',
     'paragraph xl', 'paragraph large', 'paragraph regular', 'paragraph small', 'paragraph mini'
   ];
