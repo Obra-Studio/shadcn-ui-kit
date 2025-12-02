@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --bg-tertiary: #ebebeb;
+      --bg-code: #1e1e1e;
+      --text-primary: #1a1a1a;
+      --text-secondary: #666666;
+      --text-tertiary: #999999;
+      --text-code: #d4d4d4;
+      --border-color: #e0e0e0;
+      --accent: #0d99ff;
+      --accent-hover: #0b85e0;
+      --success: #14ae5c;
+      --link-color: #0066cc;
+    }
+
+    .figma-dark {
+      --bg-primary: #2c2c2c;
+      --bg-secondary: #383838;
+      --bg-tertiary: #444444;
+      --bg-code: #1a1a1a;
+      --text-primary: #ffffff;
+      --text-secondary: #b3b3b3;
+      --text-tertiary: #808080;
+      --text-code: #d4d4d4;
+      --border-color: #444444;
+      --accent: #0d99ff;
+      --accent-hover: #3dacff;
+      --link-color: #0D99FF;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Two-column layout */
+    .layout {
+      display: flex;
+      height: 100vh;
+    }
+
+    .left-panel {
+      width: 380px;
+      min-width: 380px;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .right-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+
+    .panel-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-primary);
+    }
+
+    .panel-header h1 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .panel-header p {
+      color: var(--text-secondary);
+      font-size: 11px;
+    }
+
+    .version-notice {
+      margin-top: 8px;
+      padding: 6px 10px;
+      font-size: 10px;
+      color: #b45309;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 4px;
+    }
+
+    .figma-dark .version-notice {
+      color: #fcd34d;
+      background: rgba(252, 211, 77, 0.1);
+      border-color: rgba(252, 211, 77, 0.3);
+    }
+
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    /* Main tabs (Export/Settings) */
+    .main-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-primary);
+    }
+
+    .main-tab {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: inherit;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .main-tab:hover {
+      color: var(--text-primary);
+    }
+
+    .main-tab.active {
+      color: var(--text-primary);
+      border-bottom-color: var(--text-primary);
+    }
+
+    .main-tab-content {
+      display: none;
+    }
+
+    .main-tab-content.active {
+      display: block;
+    }
+
+    /* Collection list */
+    .collection-list {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+    }
+
+    .collection-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      margin: 2px 0;
+      border-radius: 6px;
+      background: var(--bg-primary);
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .collection-row:hover {
+      background: var(--bg-secondary);
+    }
+
+    .collection-row.dragging {
+      opacity: 0.5;
+      background: var(--bg-tertiary);
+      border-color: var(--accent);
+    }
+
+    .collection-row.drag-over {
+      border-color: var(--accent);
+      background: var(--bg-secondary);
+    }
+
+    .drag-handle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      cursor: grab;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+    }
+
+    .drag-handle:active {
+      cursor: grabbing;
+    }
+
+    .drag-handle svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .collection-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin: 0;
+      cursor: pointer;
+      flex-shrink: 0;
+      appearance: none;
+      -webkit-appearance: none;
+      background: var(--bg-secondary);
+      border: 1.5px solid var(--border-color);
+      border-radius: 4px;
+      position: relative;
+      transition: all 0.15s;
+    }
+
+    .collection-row input[type="checkbox"]:checked {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .collection-row input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 1px;
+      width: 5px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+
+    .collection-row input[type="checkbox"]:hover {
+      border-color: var(--accent);
+    }
+
+    .collection-name {
+      flex: 0 0 120px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .collection-mode {
+      flex: 1;
+    }
+
+    .select-wrapper {
+      position: relative;
+    }
+
+    .select-wrapper::after {
+      content: '';
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 5px solid var(--text-secondary);
+      pointer-events: none;
+    }
+
+    select {
+      width: 100%;
+      height: 32px;
+      padding: 0 32px 0 12px;
+      font-size: 12px;
+      font-family: inherit;
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      appearance: none;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    select:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn {
+      width: 100%;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 0 16px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: inherit;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn:hover:not(:disabled) {
+      background: var(--accent-hover);
+    }
+
+    .icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Output tabs */
+    .output-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-primary);
+    }
+
+    .output-tab {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      font-family: inherit;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .output-tab:hover {
+      color: var(--text-primary);
+    }
+
+    .output-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .output-content {
+      display: none;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .output-content.active {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Code panel */
+    .code-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-code);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .code-filename {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-code);
+      opacity: 0.7;
+    }
+
+    .code-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .code-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 24px;
+      padding: 0 8px;
+      font-size: 10px;
+      font-weight: 500;
+      font-family: inherit;
+      color: var(--text-code);
+      background: rgba(255, 255, 255, 0.08);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .code-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .code-btn.copied {
+      background: var(--success);
+      color: white;
+    }
+
+    .code-preview {
+      flex: 1;
+      overflow: auto;
+      padding: 12px;
+    }
+
+    .code-preview pre {
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--text-code);
+      white-space: pre;
+      margin: 0;
+    }
+
+    .code-preview .selector { color: #c586c0; }
+    .code-preview .property { color: #9cdcfe; }
+    .code-preview .value { color: #ce9178; }
+    .code-preview .comment { color: #6a9955; }
+
+    /* Preview panel */
+    .preview-container {
+      flex: 1;
+      background: white;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+    }
+
+    .preview-container.active {
+      display: flex;
+    }
+
+    .preview-frame {
+      width: 100%;
+      flex: 1;
+      border: none;
+    }
+
+    /* Preview sub-tabs */
+    .preview-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-primary);
+      padding: 0 12px;
+    }
+
+    .preview-tab {
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: inherit;
+      color: var(--text-secondary);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .preview-tab:hover {
+      color: var(--text-primary);
+    }
+
+    .preview-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Empty state */
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-tertiary);
+    }
+
+    .empty-state svg {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 12px;
+      opacity: 0.4;
+    }
+
+    .empty-state p {
+      font-size: 12px;
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 12px 24px;
+      background: var(--bg-code);
+      color: white;
+      border-radius: 6px;
+      font-size: 12px;
+      opacity: 0;
+      transition: all 0.2s;
+      z-index: 100;
+    }
+
+    .notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Settings panel */
+    .settings-section {
+      margin-bottom: 20px;
+    }
+
+    .settings-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .settings-help {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .excluded-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .excluded-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .excluded-name {
+      flex: 1;
+      height: 32px;
+      padding: 0 12px;
+      font-size: 12px;
+      line-height: 32px;
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .delete-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .delete-btn:hover {
+      background: rgba(231, 76, 60, 0.1);
+      border-color: #e74c3c;
+      color: #e74c3c;
+    }
+
+    .delete-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .add-collection-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .add-collection-row .select-wrapper {
+      flex: 1;
+    }
+
+    .add-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .add-btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .add-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .add-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .empty-exclusions {
+      padding: 20px;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 12px;
+      border: 1px dashed var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    .settings-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    .settings-toggle-label {
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-switch.active {
+      background: var(--accent);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+
+    .toggle-switch.active::after {
+      transform: translateX(16px);
+    }
+
+    .loading-state {
+      padding: 20px;
+      text-align: center;
+      color: var(--text-tertiary);
+      font-size: 12px;
+    }
+
+    /* Dark mode indicator in preview */
+    .preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--bg-primary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .preview-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .dark-mode-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 500;
+      background: var(--bg-tertiary);
+      border-radius: 4px;
+      color: var(--text-secondary);
+    }
+
+    .dark-mode-badge::before {
+      content: '◐';
+      font-size: 12px;
+    }
+
+    .preview-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-toggle label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 36px;
+      height: 20px;
+      background: var(--bg-tertiary);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-switch.active {
+      background: var(--accent);
+    }
+
+    .toggle-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .toggle-switch.active::after {
+      transform: translateX(16px);
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Left Panel: Controls -->
+    <div class="left-panel">
+      <div class="panel-header">
+        <h1>Obra shadcn/ui figma Variables → Tailwind CSS</h1>
+        <p>Export Figma variables to Tailwind v4 / shadcn format (specifically using the <a href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui">Obra shadcn/ui Figma kit</a>)</p>
+        <div class="version-notice">Requires Obra shadcn/ui Figma kit v1.4.0 or higher</div>
+      </div>
+
+      <!-- Main Tabs -->
+      <div class="main-tabs">
+        <button class="main-tab active" data-main-tab="export">Export</button>
+        <button class="main-tab" data-main-tab="settings">Settings</button>
+      </div>
+
+      <div class="panel-content">
+        <!-- Export Tab Content -->
+        <div id="export-panel" class="main-tab-content active">
+          <div id="collection-list" class="collection-list">
+            <div class="loading-state">Loading collections...</div>
+          </div>
+        </div>
+
+        <!-- Settings Tab Content -->
+        <div id="settings-panel" class="main-tab-content">
+          <div class="settings-section">
+            <div class="settings-title">Mark collections to exclude</div>
+            <div class="settings-help">Typically you would exclude raw colors, spacing (absolute) and border radii (absolute)</div>
+
+            <div id="excluded-list" class="excluded-list">
+              <!-- Excluded collections will be rendered here -->
+            </div>
+
+            <div id="empty-exclusions" class="empty-exclusions" style="display: none;">
+              No collections excluded
+            </div>
+
+            <div class="add-collection-row">
+              <div class="select-wrapper">
+                <select id="add-collection-select">
+                  <option value="">Choose collection...</option>
+                </select>
+              </div>
+              <button class="add-btn" id="add-exclusion-btn" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="settings-title">Output options</div>
+            <div class="settings-toggle">
+              <span class="settings-toggle-label">Exclude unofficial variables</span>
+              <div class="toggle-switch active" id="exclude-unofficial-toggle"></div>
+            </div>
+            <div class="settings-help">Removes accent-0/2/3, border-0/1/3/4/5, outline, ghost variants</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel: Preview -->
+    <div class="right-panel">
+      <div class="output-tabs">
+        <button class="output-tab active" data-output-tab="preview">Preview</button>
+        <button class="output-tab" data-output-tab="code">Code</button>
+      </div>
+
+      <div id="preview-output" class="output-content active">
+        <div class="preview-tabs">
+          <button class="preview-tab active" data-preview-tab="colors">Colors</button>
+          <button class="preview-tab" data-preview-tab="typography">Typography</button>
+          <button class="preview-tab" data-preview-tab="spacing">Spacing</button>
+          <button class="preview-tab" data-preview-tab="radius">Radius</button>
+          <button class="preview-tab" data-preview-tab="shadows">Shadows</button>
+        </div>
+        <div id="colors-preview" class="preview-container active">
+          <div id="dark-mode-toggle-bar" class="preview-header" style="display: none;">
+            <div class="preview-info">
+              <span class="dark-mode-badge">Light/Dark supported</span>
+            </div>
+            <div class="preview-toggle">
+              <label for="dark-mode-toggle">Dark mode</label>
+              <div id="dark-mode-toggle" class="toggle-switch"></div>
+            </div>
+          </div>
+          <iframe id="colors-preview-frame" class="preview-frame"></iframe>
+        </div>
+        <div id="typography-preview" class="preview-container">
+          <iframe id="typography-preview-frame" class="preview-frame"></iframe>
+        </div>
+        <div id="spacing-preview" class="preview-container">
+          <iframe id="spacing-preview-frame" class="preview-frame"></iframe>
+        </div>
+        <div id="radius-preview" class="preview-container">
+          <iframe id="radius-preview-frame" class="preview-frame"></iframe>
+        </div>
+        <div id="shadows-preview" class="preview-container">
+          <iframe id="shadows-preview-frame" class="preview-frame"></iframe>
+        </div>
+      </div>
+
+      <div id="code-output" class="output-content">
+        <div class="code-container">
+          <div class="code-header">
+            <span class="code-filename" id="code-filename">theme.css</span>
+            <div class="code-actions">
+              <button class="code-btn" id="copy-btn">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2"/>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                </svg>
+                Copy
+              </button>
+              <button class="code-btn" id="download-btn">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7,10 12,15 17,10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download
+              </button>
+            </div>
+          </div>
+          <div class="code-preview">
+            <pre id="code-content"></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notification" id="notification"></div>
+
+  <script>
+    let allCollections = [];  // All collections from Figma
+    let collections = [];      // Filtered collections (excluding excluded ones)
+    let collectionOrder = [];  // Track display order of collection IDs
+    let excludedCollections = [];  // Array of {id, name} objects
+    let collectionStates = {};  // Track checkbox and mode selection per collection {id: {enabled, modeId}}
+    let currentStylesheet = '';
+    let draggedItem = null;  // Track dragged collection row
+    let excludeUnofficialVars = true;  // Toggle for excluding unofficial variables
+    let colorsAccordionStates = {};  // Track open/close state of colors preview accordions
+    let typographyAccordionStates = {};  // Track open/close state of typography preview accordions
+    let spacingAccordionStates = {};  // Track open/close state of spacing preview accordions
+    let radiusAccordionStates = {};  // Track open/close state of radius preview accordions
+    let shadowsAccordionStates = {};  // Track open/close state of shadows preview accordions
+    let colorsScrollTop = 0;  // Track scroll position for colors preview
+    let typographyScrollTop = 0;  // Track scroll position for typography preview
+    let spacingScrollTop = 0;  // Track scroll position for spacing preview
+    let radiusScrollTop = 0;  // Track scroll position for radius preview
+    let shadowsScrollTop = 0;  // Track scroll position for shadows preview
+    let previewDarkMode = false;  // Track dark mode state for preview
+    let hasDarkModeStyles = false;  // Track if current CSS has .dark styles
+
+    // DOM elements
+    const collectionListEl = document.getElementById('collection-list');
+    const codeContent = document.getElementById('code-content');
+    const codeFilename = document.getElementById('code-filename');
+    const copyBtn = document.getElementById('copy-btn');
+    const downloadBtn = document.getElementById('download-btn');
+    const notification = document.getElementById('notification');
+    const colorsPreviewFrame = document.getElementById('colors-preview-frame');
+    const typographyPreviewFrame = document.getElementById('typography-preview-frame');
+    const spacingPreviewFrame = document.getElementById('spacing-preview-frame');
+    const radiusPreviewFrame = document.getElementById('radius-preview-frame');
+    const shadowsPreviewFrame = document.getElementById('shadows-preview-frame');
+    const previewTabs = document.querySelectorAll('.preview-tab');
+    const previewContainers = document.querySelectorAll('.preview-container');
+    const darkModeToggleBar = document.getElementById('dark-mode-toggle-bar');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+    // Settings panel elements
+    const mainTabs = document.querySelectorAll('.main-tab');
+    const outputTabs = document.querySelectorAll('.output-tab');
+    const excludedList = document.getElementById('excluded-list');
+    const emptyExclusions = document.getElementById('empty-exclusions');
+    const addCollectionSelect = document.getElementById('add-collection-select');
+    const addExclusionBtn = document.getElementById('add-exclusion-btn');
+
+    // Dark mode detection
+    if (document.body.dataset.theme === 'dark' ||
+        window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.body.classList.add('figma-dark');
+    }
+
+    // Main tab switching (Export/Settings)
+    mainTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        mainTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.main-tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(tab.dataset.mainTab + '-panel').classList.add('active');
+      });
+    });
+
+    // Output tab switching (Preview/Code)
+    outputTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        outputTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        document.querySelectorAll('.output-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(tab.dataset.outputTab + '-output').classList.add('active');
+      });
+    });
+
+    // Preview sub-tab switching (Colors & Shadows / Typography)
+    previewTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        previewTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        previewContainers.forEach(c => c.classList.remove('active'));
+        document.getElementById(tab.dataset.previewTab + '-preview').classList.add('active');
+      });
+    });
+
+    // Dark mode toggle for colors preview
+    darkModeToggle.addEventListener('click', () => {
+      previewDarkMode = !previewDarkMode;
+      darkModeToggle.classList.toggle('active', previewDarkMode);
+      updateColorsPreviewDarkMode();
+    });
+
+    function updateColorsPreviewDarkMode() {
+      try {
+        const iframeDoc = colorsPreviewFrame.contentDocument || colorsPreviewFrame.contentWindow.document;
+        if (iframeDoc && iframeDoc.body) {
+          if (previewDarkMode) {
+            iframeDoc.body.classList.add('dark');
+          } else {
+            iframeDoc.body.classList.remove('dark');
+          }
+        }
+      } catch (e) {
+        // Iframe not ready yet
+      }
+    }
+
+    copyBtn.addEventListener('click', onCopy);
+    downloadBtn.addEventListener('click', onDownload);
+
+    // Settings panel event listeners
+    addCollectionSelect.addEventListener('change', () => {
+      addExclusionBtn.disabled = !addCollectionSelect.value;
+    });
+
+    addExclusionBtn.addEventListener('click', onAddExclusion);
+
+    // Toggle for excluding unofficial variables
+    const excludeUnofficialToggle = document.getElementById('exclude-unofficial-toggle');
+    excludeUnofficialToggle.addEventListener('click', () => {
+      excludeUnofficialVars = !excludeUnofficialVars;
+      excludeUnofficialToggle.classList.toggle('active', excludeUnofficialVars);
+      onGenerate();  // Regenerate CSS with new setting
+    });
+
+    // Check if collection is semantic colors
+    function isSemanticColorsCollection(collectionName) {
+      const name = collectionName.toLowerCase();
+      return name.includes('semantic') && name.includes('color');
+    }
+
+    // Check if collection is chart colors
+    function isChartColorsCollection(collectionName) {
+      const name = collectionName.toLowerCase();
+      return name.includes('chart') && name.includes('color');
+    }
+
+    // Check if collection supports dark mode pairing
+    function supportsDarkModePairing(collectionName) {
+      return isSemanticColorsCollection(collectionName) || isChartColorsCollection(collectionName);
+    }
+
+    // For semantic/chart colors, find dark mode pairs for each mode
+    // e.g., "shadcn" has pair "shadcn-dark", "client1" has no pair
+    function findDarkModePairs(collection) {
+      const modes = collection.modes;
+      const pairs = new Map(); // modeId -> darkModeId (or null if no pair)
+
+      for (const mode of modes) {
+        const modeName = mode.name.toLowerCase().trim();
+
+        // Skip modes that are themselves dark modes
+        if (modeName.endsWith('-dark') || modeName.endsWith(' dark') || modeName === 'dark') {
+          continue;
+        }
+
+        // Look for a matching dark mode
+        const darkMode = modes.find(m => {
+          const darkName = m.name.toLowerCase().trim();
+          return darkName === modeName + '-dark' ||
+                 darkName === modeName + ' dark' ||
+                 (modeName === 'light' && darkName === 'dark');
+        });
+
+        pairs.set(mode.modeId, darkMode ? darkMode.modeId : null);
+      }
+
+      return pairs;
+    }
+
+    // Get selectable modes for a collection (excludes dark variants)
+    function getSelectableModes(collection) {
+      if (!supportsDarkModePairing(collection.name)) {
+        return collection.modes;
+      }
+
+      // For semantic/chart colors, filter out dark mode variants
+      return collection.modes.filter(mode => {
+        const modeName = mode.name.toLowerCase().trim();
+        return !(modeName.endsWith('-dark') || modeName.endsWith(' dark') || modeName === 'dark');
+      });
+    }
+
+    function renderCollectionList() {
+      collectionListEl.innerHTML = '';
+
+      if (collections.length === 0) {
+        collectionListEl.innerHTML = '<div class="loading-state">No collections available</div>';
+        return;
+      }
+
+      // Initialize collection order if empty or has different collections
+      if (collectionOrder.length === 0 || !collectionOrder.every(id => collections.some(c => c.id === id))) {
+        collectionOrder = collections.map(c => c.id);
+      }
+
+      // Render in order
+      const orderedCollections = collectionOrder
+        .map(id => collections.find(c => c.id === id))
+        .filter(Boolean);
+
+      // Add any new collections not in order yet
+      collections.forEach(c => {
+        if (!collectionOrder.includes(c.id)) {
+          orderedCollections.push(c);
+          collectionOrder.push(c.id);
+        }
+      });
+
+      orderedCollections.forEach(collection => {
+        const hasDarkModePairing = supportsDarkModePairing(collection.name);
+        const darkModePairs = hasDarkModePairing ? findDarkModePairs(collection) : null;
+        const selectableModes = getSelectableModes(collection);
+
+        // Initialize state if not exists
+        if (!collectionStates[collection.id]) {
+          const firstModeId = selectableModes[0]?.modeId || collection.modes[0]?.modeId || '';
+          const darkModeId = darkModePairs ? darkModePairs.get(firstModeId) : null;
+
+          collectionStates[collection.id] = {
+            enabled: true,
+            modeId: firstModeId,
+            darkModeId: darkModeId,
+            darkModePairs: darkModePairs
+          };
+        }
+
+        const state = collectionStates[collection.id];
+        const row = document.createElement('div');
+        row.className = 'collection-row';
+        row.draggable = true;
+        row.dataset.collectionId = collection.id;
+
+        // Drag handle
+        const dragHandle = document.createElement('div');
+        dragHandle.className = 'drag-handle';
+        dragHandle.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="9" cy="6" r="1.5"/>
+          <circle cx="15" cy="6" r="1.5"/>
+          <circle cx="9" cy="12" r="1.5"/>
+          <circle cx="15" cy="12" r="1.5"/>
+          <circle cx="9" cy="18" r="1.5"/>
+          <circle cx="15" cy="18" r="1.5"/>
+        </svg>`;
+
+        // Checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = state.enabled;
+        checkbox.id = `collection-${collection.id}`;
+        checkbox.addEventListener('change', (e) => {
+          collectionStates[collection.id].enabled = e.target.checked;
+          triggerAutoGenerate();
+        });
+
+        // Label
+        const label = document.createElement('label');
+        label.className = 'collection-name';
+        label.htmlFor = `collection-${collection.id}`;
+        label.textContent = collection.name;
+
+        // Mode dropdown
+        const modeWrapper = document.createElement('div');
+        modeWrapper.className = 'collection-mode select-wrapper';
+        const modeSelect = document.createElement('select');
+
+        selectableModes.forEach(mode => {
+          const option = document.createElement('option');
+          option.value = mode.modeId;
+
+          // Add indicator if this mode has a dark variant
+          const hasDarkVariant = darkModePairs && darkModePairs.get(mode.modeId);
+          option.textContent = mode.name + (hasDarkVariant ? ' ◐' : '');
+
+          if (mode.modeId === state.modeId) {
+            option.selected = true;
+          }
+          modeSelect.appendChild(option);
+        });
+
+        modeSelect.addEventListener('change', (e) => {
+          const selectedModeId = e.target.value;
+          collectionStates[collection.id].modeId = selectedModeId;
+          // Update dark mode ID based on selection
+          if (darkModePairs) {
+            collectionStates[collection.id].darkModeId = darkModePairs.get(selectedModeId) || null;
+          }
+          triggerAutoGenerate();
+        });
+
+        modeWrapper.appendChild(modeSelect);
+
+        // Drag events
+        row.addEventListener('dragstart', handleDragStart);
+        row.addEventListener('dragend', handleDragEnd);
+        row.addEventListener('dragover', handleDragOver);
+        row.addEventListener('dragenter', handleDragEnter);
+        row.addEventListener('dragleave', handleDragLeave);
+        row.addEventListener('drop', handleDrop);
+
+        row.appendChild(dragHandle);
+        row.appendChild(checkbox);
+        row.appendChild(label);
+        row.appendChild(modeWrapper);
+        collectionListEl.appendChild(row);
+      });
+
+      // Auto-generate on initial load
+      triggerAutoGenerate();
+    }
+
+    // Drag and drop handlers
+    function handleDragStart(e) {
+      draggedItem = this;
+      this.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', this.dataset.collectionId);
+    }
+
+    function handleDragEnd(e) {
+      this.classList.remove('dragging');
+      document.querySelectorAll('.collection-row').forEach(row => {
+        row.classList.remove('drag-over');
+      });
+      draggedItem = null;
+    }
+
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    }
+
+    function handleDragEnter(e) {
+      e.preventDefault();
+      if (this !== draggedItem) {
+        this.classList.add('drag-over');
+      }
+    }
+
+    function handleDragLeave(e) {
+      this.classList.remove('drag-over');
+    }
+
+    function handleDrop(e) {
+      e.preventDefault();
+      this.classList.remove('drag-over');
+
+      if (draggedItem && this !== draggedItem) {
+        const draggedId = draggedItem.dataset.collectionId;
+        const targetId = this.dataset.collectionId;
+
+        const draggedIndex = collectionOrder.indexOf(draggedId);
+        const targetIndex = collectionOrder.indexOf(targetId);
+
+        if (draggedIndex !== -1 && targetIndex !== -1) {
+          // Remove from old position and insert at new position
+          collectionOrder.splice(draggedIndex, 1);
+          collectionOrder.splice(targetIndex, 0, draggedId);
+
+          // Re-render and regenerate
+          renderCollectionList();
+        }
+      }
+    }
+
+    // Debounced auto-generate
+    let autoGenerateTimeout = null;
+    function triggerAutoGenerate() {
+      if (autoGenerateTimeout) {
+        clearTimeout(autoGenerateTimeout);
+      }
+      autoGenerateTimeout = setTimeout(() => {
+        onGenerate();
+      }, 100);
+    }
+
+    function onGenerate() {
+      // Gather all enabled collections with their selected modes, respecting order
+      const selectedCollections = collectionOrder
+        .map(id => collections.find(c => c.id === id))
+        .filter(c => c && collectionStates[c.id]?.enabled)
+        .map(c => {
+          const state = collectionStates[c.id];
+          const result = {
+            collectionId: c.id,
+            collectionName: c.name,
+            modeId: state.modeId
+          };
+          // Include dark mode ID if this mode has a dark variant
+          if (state.darkModeId) {
+            result.darkModeId = state.darkModeId;
+          }
+          return result;
+        });
+
+      if (selectedCollections.length === 0) {
+        updatePreview('');
+        return;
+      }
+
+      parent.postMessage({
+        pluginMessage: {
+          type: 'generate-stylesheet',
+          collections: selectedCollections,
+          excludeUnofficialVars: excludeUnofficialVars
+        }
+      }, '*');
+    }
+
+    function onCopy() {
+      const textarea = document.createElement('textarea');
+      textarea.value = currentStylesheet;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        document.execCommand('copy');
+        copyBtn.classList.add('copied');
+        copyBtn.innerHTML = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Copied!`;
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyBtn.innerHTML = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy`;
+        }, 2000);
+      } catch (err) {
+        console.error('Copy failed:', err);
+      }
+
+      document.body.removeChild(textarea);
+    }
+
+    function onDownload() {
+      const blob = new Blob([currentStylesheet], { type: 'text/css' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'theme.css';
+      a.click();
+      URL.revokeObjectURL(url);
+      showNotification('Downloaded theme.css');
+    }
+
+    function showNotification(message) {
+      notification.textContent = message;
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3000);
+    }
+
+    function highlightCSS(css) {
+      return css
+        .replace(/(:root|\.dark)/g, '<span class="selector">$1</span>')
+        .replace(/(@theme inline|@theme)/g, '<span class="selector">$1</span>')
+        .replace(/(--[\w-]+):/g, '<span class="property">$1</span>:')
+        .replace(/: ([^;]+);/g, ': <span class="value">$1</span>;');
+    }
+
+    function savePreviewState(frame, accordionStates, scrollTopVar) {
+      try {
+        const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+        if (iframeDoc && iframeDoc.body) {
+          const scrollTop = iframeDoc.documentElement.scrollTop || iframeDoc.body.scrollTop;
+          iframeDoc.querySelectorAll('[data-accordion]').forEach(accordion => {
+            const title = accordion.querySelector('.accordion-title')?.textContent;
+            if (title) {
+              accordionStates[title] = accordion.classList.contains('open');
+            }
+          });
+          return scrollTop;
+        }
+      } catch (e) {
+        // Iframe not ready yet, ignore
+      }
+      return scrollTopVar;
+    }
+
+    function restorePreviewState(frame, accordionStates, scrollTop) {
+      frame.onload = function() {
+        try {
+          const iframeDoc = frame.contentDocument || frame.contentWindow.document;
+          if (iframeDoc) {
+            iframeDoc.querySelectorAll('[data-accordion]').forEach(accordion => {
+              const title = accordion.querySelector('.accordion-title')?.textContent;
+              if (title && accordionStates.hasOwnProperty(title)) {
+                if (accordionStates[title]) {
+                  accordion.classList.add('open');
+                } else {
+                  accordion.classList.remove('open');
+                }
+              }
+            });
+            if (scrollTop > 0) {
+              iframeDoc.documentElement.scrollTop = scrollTop;
+              iframeDoc.body.scrollTop = scrollTop;
+            }
+          }
+        } catch (e) {
+          // Iframe access error, ignore
+        }
+      };
+    }
+
+    function getPreviewCSS(css) {
+      let previewCSS = css;
+      const themeMatches = css.matchAll(/@theme(?:\s+inline)?\s*\{([\s\S]*?)\n\}/g);
+      for (const match of themeMatches) {
+        const themeVars = match[1];
+        previewCSS = previewCSS.replace(/(:root \{[\s\S]*?)(\n\})/, (m, rootContent, closing) => {
+          return rootContent + '\n' + themeVars + closing;
+        });
+      }
+      previewCSS = previewCSS.replace(/@theme(?:\s+inline)?\s*\{[\s\S]*?\n\}/g, '');
+      return previewCSS;
+    }
+
+    function getBaseStyles(previewCSS) {
+      return `
+    ${previewCSS}
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans, system-ui, sans-serif);
+      font-size: 11px;
+      padding: 12px;
+      background: var(--background, #fff);
+      color: var(--foreground, #000);
+    }
+    .accordion { margin-bottom: 8px; border: 1px solid var(--border, #eee); border-radius: 8px; overflow: hidden; }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--muted, #f5f5f5);
+      cursor: pointer;
+      user-select: none;
+    }
+    .accordion-header:hover { background: var(--accent, #f0f0f0); }
+    .accordion-title {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted-foreground, #666);
+    }
+    .accordion-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--muted-foreground, #666);
+      transition: transform 0.2s;
+    }
+    .accordion.open .accordion-icon { transform: rotate(180deg); }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .accordion.open .accordion-content { max-height: 2000px; }
+    .accordion-inner { padding: 12px; }
+    .color-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+    .color-box {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-end;
+      padding: 4px;
+      font-size: 8px;
+      font-weight: 500;
+    }
+    .btn-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+    }
+    .radius-row { display: flex; gap: 6px; align-items: center; }
+    .shadow-row { display: flex; gap: 8px; }
+    .shadow-box {
+      flex: 1;
+      height: 40px;
+      background: var(--card, #fff);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: var(--muted-foreground, #666);
+    }`;
+    }
+
+    function getAccordionScript() {
+      return `<script>
+    document.querySelectorAll('[data-accordion]').forEach(accordion => {
+      accordion.querySelector('.accordion-header').addEventListener('click', () => {
+        accordion.classList.toggle('open');
+      });
+    });
+  </` + `script>`;
+    }
+
+    function updatePreview(css) {
+      // Save states for all previews
+      colorsScrollTop = savePreviewState(colorsPreviewFrame, colorsAccordionStates, colorsScrollTop);
+      typographyScrollTop = savePreviewState(typographyPreviewFrame, typographyAccordionStates, typographyScrollTop);
+      spacingScrollTop = savePreviewState(spacingPreviewFrame, spacingAccordionStates, spacingScrollTop);
+      radiusScrollTop = savePreviewState(radiusPreviewFrame, radiusAccordionStates, radiusScrollTop);
+      shadowsScrollTop = savePreviewState(shadowsPreviewFrame, shadowsAccordionStates, shadowsScrollTop);
+
+      // Detect if CSS has .dark styles
+      hasDarkModeStyles = /\.dark\s*\{/.test(css);
+
+      // Show/hide dark mode toggle bar
+      darkModeToggleBar.style.display = hasDarkModeStyles ? 'flex' : 'none';
+
+      // Reset dark mode state if no dark styles available
+      if (!hasDarkModeStyles && previewDarkMode) {
+        previewDarkMode = false;
+        darkModeToggle.classList.remove('active');
+      }
+
+      const previewCSS = getPreviewCSS(css);
+      const baseStyles = getBaseStyles(previewCSS);
+
+      // Colors & Shadows Preview
+      const darkClass = previewDarkMode ? ' class="dark"' : '';
+      const colorsHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <style>${baseStyles}</style>
+</head>
+<body${darkClass}>
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Colors</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div class="color-grid">
+          <div class="color-box" style="background: var(--primary, #39ff14);">
+            <span style="color: var(--primary-foreground, #000);">Primary</span>
+          </div>
+          <div class="color-box" style="background: var(--secondary, #39ff14); border: 1px solid var(--border, #39ff14);">
+            <span style="color: var(--secondary-foreground, #000);">Secondary</span>
+          </div>
+          <div class="color-box" style="background: var(--accent, #39ff14); border: 1px solid var(--border, #39ff14);">
+            <span style="color: var(--accent-foreground, #000);">Accent</span>
+          </div>
+          <div class="color-box" style="background: var(--muted, #39ff14);">
+            <span style="color: var(--muted-foreground, #000);">Muted</span>
+          </div>
+          <div class="color-box" style="background: var(--destructive, #39ff14);">
+            <span style="color: var(--destructive-foreground, #000);">Destructive</span>
+          </div>
+        </div>
+        <div style="margin-top: 12px; display: flex; gap: 8px;">
+          <div style="width: 80px; background: var(--sidebar, #39ff14); border: 1px solid var(--sidebar-border, #39ff14); border-radius: 6px; padding: 8px; display: flex; flex-direction: column; gap: 4px;">
+            <div style="font-size: 7px; font-weight: 600; color: var(--sidebar-foreground, #000); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Sidebar</div>
+            <div style="background: var(--sidebar-primary, #39ff14); color: var(--sidebar-primary-foreground, #000); font-size: 8px; padding: 4px 6px; border-radius: 4px;">Primary</div>
+            <div style="background: var(--sidebar-accent, #39ff14); color: var(--sidebar-accent-foreground, #000); font-size: 8px; padding: 4px 6px; border-radius: 4px;">Accent</div>
+            <div style="color: var(--sidebar-foreground, #000); font-size: 8px; padding: 4px 6px;">Item</div>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+            <div class="color-box" style="background: var(--card, #39ff14); border: 1px solid var(--border, #39ff14); flex: 1; aspect-ratio: auto;">
+              <span style="color: var(--card-foreground, #000);">Card</span>
+            </div>
+            <div class="color-box" style="background: var(--popover, #39ff14); border: 1px solid var(--border, #39ff14); flex: 1; aspect-ratio: auto;">
+              <span style="color: var(--popover-foreground, #000);">Popover</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Charts</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div class="color-grid">
+          <div class="color-box" style="background: var(--chart-1, #39ff14);"><span style="color: #000;">1</span></div>
+          <div class="color-box" style="background: var(--chart-2, #39ff14);"><span style="color: #000;">2</span></div>
+          <div class="color-box" style="background: var(--chart-3, #39ff14);"><span style="color: #000;">3</span></div>
+          <div class="color-box" style="background: var(--chart-4, #39ff14);"><span style="color: #000;">4</span></div>
+          <div class="color-box" style="background: var(--chart-5, #39ff14);"><span style="color: #000;">5</span></div>
+        </div>
+        <div class="btn-row" style="margin-top: 8px; gap: 12px;">
+          <div style="background: var(--muted, #39ff14); border-radius: 8px; padding: 12px 16px; flex: 1;">
+            <div style="font-size: 11px; color: var(--muted-foreground, #000); margin-bottom: 4px;">Positive</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--positive-foreground, #39ff14);">+12.5%</div>
+          </div>
+          <div style="background: var(--muted, #39ff14); border-radius: 8px; padding: 12px 16px; flex: 1;">
+            <div style="font-size: 11px; color: var(--muted-foreground, #000); margin-bottom: 4px;">Negative</div>
+            <div style="font-size: 18px; font-weight: 600; color: var(--negative-foreground, #39ff14);">-8.3%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Buttons</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="btn-row">
+            <button class="btn" style="background: var(--primary, #39ff14); color: var(--primary-foreground, #000);">Primary</button>
+            <button class="btn" style="background: var(--secondary, #39ff14); color: var(--secondary-foreground, #000);">Secondary</button>
+            <button class="btn" style="background: var(--destructive, #39ff14); color: var(--destructive-foreground, #000);">Destructive</button>
+          </div>
+          <div style="font-size: 9px; color: var(--muted-foreground, #666); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px;">Outline</div>
+          <div class="btn-row">
+            <button class="btn" style="background: var(--outline, transparent); border: 1px solid var(--border, #39ff14); color: var(--foreground, #000);">Default</button>
+            <button class="btn" style="background: var(--outline-hover, #f5f5f5); border: 1px solid var(--border, #39ff14); color: var(--foreground, #000);">Hover</button>
+            <button class="btn" style="background: var(--outline-active, #e5e5e5); border: 1px solid var(--border, #39ff14); color: var(--foreground, #000);">Active</button>
+          </div>
+          <div style="font-size: 9px; color: var(--muted-foreground, #666); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px;">Ghost</div>
+          <div class="btn-row">
+            <button class="btn" style="background: var(--ghost, transparent); border: none; color: var(--foreground, #000);">Default</button>
+            <button class="btn" style="background: var(--ghost-hover, #f5f5f5); border: none; color: var(--foreground, #000);">Hover</button>
+            <button class="btn" style="background: var(--ghost-active, #e5e5e5); border: none; color: var(--foreground, #000);">Active</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Inputs</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <input type="text" placeholder="Default input" style="width: 100%; height: 36px; padding: 0 12px; font-size: 11px; font-family: inherit; background: var(--input, transparent); color: var(--foreground, #000); border: 1px solid var(--border, #39ff14); border-radius: 6px; outline: none;" />
+          <input type="text" placeholder="Focused input (ring)" style="width: 100%; height: 36px; padding: 0 12px; font-size: 11px; font-family: inherit; background: var(--input, transparent); color: var(--foreground, #000); border: 1px solid var(--border, #39ff14); border-radius: 6px; outline: none; box-shadow: 0 0 0 2px var(--ring, #39ff14);" />
+          <input type="text" placeholder="Error input (ring-error)" style="width: 100%; height: 36px; padding: 0 12px; font-size: 11px; font-family: inherit; background: var(--input, transparent); color: var(--foreground, #000); border: 1px solid var(--destructive, #ff0000); border-radius: 6px; outline: none; box-shadow: 0 0 0 2px var(--ring-error, #39ff1433);" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Accent Scale (unofficial)</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div class="color-grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="color-box" style="background: var(--accent-0, #39ff14);">
+            <span style="color: var(--accent-foreground, #000);">0</span>
+          </div>
+          <div class="color-box" style="background: var(--accent, #39ff14);">
+            <span style="color: var(--accent-foreground, #000);">accent</span>
+          </div>
+          <div class="color-box" style="background: var(--accent-2, #39ff14);">
+            <span style="color: var(--accent-foreground, #000);">2</span>
+          </div>
+          <div class="color-box" style="background: var(--accent-3, #39ff14);">
+            <span style="color: var(--accent-foreground, #000);">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Border Scale (unofficial)</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 50px; font-size: 9px; color: var(--muted-foreground, #666);">border-0</span>
+            <div style="flex: 1; height: 1px; background: var(--border-0, #39ff14);"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 50px; font-size: 9px; color: var(--muted-foreground, #666);">border-1</span>
+            <div style="flex: 1; height: 1px; background: var(--border-1, #39ff14);"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 50px; font-size: 9px; color: var(--muted-foreground, #666);">border</span>
+            <div style="flex: 1; height: 1px; background: var(--border, #39ff14);"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 50px; font-size: 9px; color: var(--muted-foreground, #666);">border-3</span>
+            <div style="flex: 1; height: 1px; background: var(--border-3, #39ff14);"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 50px; font-size: 9px; color: var(--muted-foreground, #666);">border-4</span>
+            <div style="flex: 1; height: 1px; background: var(--border-4, #39ff14);"></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="width: 50px; font-size: 9px; color: var(--muted-foreground, #666);">border-5</span>
+            <div style="flex: 1; height: 1px; background: var(--border-5, #39ff14);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  ${getAccordionScript()}
+</body>
+</html>`;
+
+      // Check which typography variables exist in the CSS
+      const hasDisplayStyles = css.includes('--text-display-1-size') || css.includes('--text-display-2-size');
+      const hasHeadingStyles = css.includes('--text-heading-1-size') || css.includes('--text-heading-2-size') || css.includes('--text-heading-3-size') || css.includes('--text-heading-4-size');
+      const hasParagraphXL = css.includes('--text-paragraph-xl-size');
+      const hasParagraphLarge = css.includes('--text-paragraph-large-size');
+      const hasParagraphRegular = css.includes('--text-paragraph-regular-size');
+      const hasParagraphSmall = css.includes('--text-paragraph-small-size');
+      const hasParagraphMini = css.includes('--text-paragraph-mini-size');
+      const hasAnyParagraph = hasParagraphXL || hasParagraphLarge || hasParagraphRegular || hasParagraphSmall || hasParagraphMini;
+      const hasFontFamily = css.includes('--font-sans') || css.includes('--font-heading') || css.includes('--font-mono');
+      const hasAnyTypography = hasDisplayStyles || hasHeadingStyles || hasAnyParagraph || hasFontFamily;
+
+      // Typography Preview
+      const displaySection = hasDisplayStyles ? `
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Display</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: var(--font-heading, sans-serif); font-size: var(--text-display-1-size, 6rem); line-height: 1; font-weight: var(--text-display-1-weight, 400); color: var(--foreground); letter-spacing: -0.02em;">Display 1</div>
+          <div style="font-family: var(--font-heading, sans-serif); font-size: var(--text-display-2-size, 4.5rem); line-height: 1; font-weight: var(--text-display-2-weight, 400); color: var(--foreground); letter-spacing: -0.02em;">Display 2</div>
+        </div>
+      </div>
+    </div>
+  </div>
+` : '';
+
+      // Build paragraph sections conditionally
+      const paragraphXLSection = hasParagraphXL ? `
+          <div style="font-family: var(--font-sans, sans-serif); font-size: var(--text-paragraph-xl-size, 1.25rem); line-height: 1.5; color: var(--foreground);">
+            <div style="font-weight: var(--font-weight-regular, 400); margin-bottom: 4px;">Paragraph XL Regular</div>
+            <div style="font-weight: var(--font-weight-medium, 500); margin-bottom: 4px;">Paragraph XL Medium</div>
+            <div style="font-weight: var(--font-weight-bold, 600);">Paragraph XL Bold</div>
+          </div>` : '';
+
+      const paragraphLargeSection = hasParagraphLarge ? `
+          <div style="font-family: var(--font-sans, sans-serif); font-size: var(--text-paragraph-large-size, 1.125rem); line-height: 1.5; color: var(--foreground);">
+            <div style="font-weight: var(--font-weight-regular, 400); margin-bottom: 4px;">Paragraph Large Regular</div>
+            <div style="font-weight: var(--font-weight-medium, 500); margin-bottom: 4px;">Paragraph Large Medium</div>
+            <div style="font-weight: var(--font-weight-bold, 600);">Paragraph Large Bold</div>
+          </div>` : '';
+
+      const paragraphRegularSection = hasParagraphRegular ? `
+          <div style="font-family: var(--font-sans, sans-serif); font-size: var(--text-paragraph-regular-size, 1rem); line-height: 1.5; color: var(--foreground);">
+            <div style="font-weight: var(--font-weight-regular, 400); margin-bottom: 4px;">Paragraph Regular</div>
+            <div style="font-weight: var(--font-weight-medium, 500); margin-bottom: 4px;">Paragraph Medium</div>
+            <div style="font-weight: var(--font-weight-bold, 600);">Paragraph Bold</div>
+          </div>` : '';
+
+      const paragraphSmallSection = hasParagraphSmall ? `
+          <div style="font-family: var(--font-sans, sans-serif); font-size: var(--text-paragraph-small-size, 0.875rem); line-height: 1.5; color: var(--muted-foreground);">
+            <div style="font-weight: var(--font-weight-regular, 400); margin-bottom: 4px;">Paragraph Small Regular</div>
+            <div style="font-weight: var(--font-weight-medium, 500); margin-bottom: 4px;">Paragraph Small Medium</div>
+            <div style="font-weight: var(--font-weight-bold, 600);">Paragraph Small Bold</div>
+          </div>` : '';
+
+      const paragraphMiniSection = hasParagraphMini ? `
+          <div style="font-family: var(--font-sans, sans-serif); font-size: var(--text-paragraph-mini-size, 0.75rem); line-height: 1.33; color: var(--muted-foreground);">
+            <div style="font-weight: var(--font-weight-regular, 400); margin-bottom: 4px;">Paragraph Mini Regular</div>
+            <div style="font-weight: var(--font-weight-medium, 500); margin-bottom: 4px;">Paragraph Mini Medium</div>
+            <div style="font-weight: var(--font-weight-bold, 600);">Paragraph Mini Bold</div>
+          </div>` : '';
+
+      const paragraphsSection = hasAnyParagraph ? `
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Paragraphs</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div style="display: flex; flex-direction: column; gap: 12px;">${paragraphXLSection}${paragraphLargeSection}${paragraphRegularSection}${paragraphSmallSection}${paragraphMiniSection}
+        </div>
+      </div>
+    </div>
+  </div>` : '';
+
+      const headingsSection = hasHeadingStyles ? `
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Headings</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div style="font-family: var(--font-heading, sans-serif); font-size: var(--text-heading-1-size, 3rem); line-height: 1; font-weight: var(--text-heading-1-weight, 400); color: var(--foreground);">Heading 1</div>
+          <div style="font-family: var(--font-heading, sans-serif); font-size: var(--text-heading-2-size, 1.875rem); line-height: 1; font-weight: var(--text-heading-2-weight, 400); color: var(--foreground);">Heading 2</div>
+          <div style="font-family: var(--font-heading, sans-serif); font-size: var(--text-heading-3-size, 1.5rem); line-height: 1.2; font-weight: var(--text-heading-3-weight, 400); color: var(--foreground);">Heading 3</div>
+          <div style="font-family: var(--font-heading, sans-serif); font-size: var(--text-heading-4-size, 1.25rem); line-height: 1.2; font-weight: var(--text-heading-4-weight, 500); color: var(--foreground);">Heading 4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+` : '';
+
+      const monospaceSection = hasFontFamily ? `
+  <div class="accordion" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Monospace</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div style="font-family: var(--font-mono, monospace); font-size: var(--text-paragraph-regular-size, 1rem); color: var(--muted-foreground); background: var(--muted); padding: 12px; border-radius: 6px;">
+          <div>const theme = {</div>
+          <div style="padding-left: 16px;">fontFamily: "var(--font-mono)",</div>
+          <div style="padding-left: 16px;">fontSize: "1rem",</div>
+          <div>};</div>
+        </div>
+      </div>
+    </div>
+  </div>
+` : '';
+
+      const typographyHTML = hasAnyTypography ? `<!DOCTYPE html>
+<html>
+<head>
+  <style>${baseStyles}</style>
+</head>
+<body>
+  <div style="margin-bottom: 16px; padding: 8px 12px; font-size: 11px; color: var(--muted-foreground, #888); background: var(--muted, rgba(128,128,128,0.1)); border-radius: 6px;">Custom fonts may not render in preview if not installed on your system</div>
+  ${displaySection}
+  ${headingsSection}
+  ${paragraphsSection}
+  ${monospaceSection}
+  ${getAccordionScript()}
+</body>
+</html>` : `<!DOCTYPE html>
+<html>
+<head>
+  <style>${baseStyles}</style>
+</head>
+<body>
+  <div style="padding: 20px; text-align: center; color: #999;">No typography variables found</div>
+</body>
+</html>`;
+
+      // Check which spacing variables exist in the CSS and extract their values
+      const namedSpacingSizes = ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'];
+      const spacingValues = {};
+      for (const size of namedSpacingSizes) {
+        const match = css.match(new RegExp(`--spacing-${size}:\\s*([^;]+);`));
+        if (match) {
+          const remValue = match[1].trim();
+          // Convert rem to px (assuming 16px base)
+          const pxValue = remValue.endsWith('rem')
+            ? Math.round(parseFloat(remValue) * 16) + 'px'
+            : remValue;
+          spacingValues[size] = { rem: remValue, px: pxValue };
+        }
+      }
+      const hasNamedSpacing = Object.keys(spacingValues).length > 0;
+
+      // Build spacing boxes conditionally
+      let spacingBoxes = '';
+      if (hasNamedSpacing) {
+        for (const size of namedSpacingSizes) {
+          if (spacingValues[size]) {
+            spacingBoxes += `
+          <div class="spacing-item">
+            <div class="spacing-label">${size}</div>
+            <div class="spacing-bar" style="width: var(--spacing-${size}, 1rem);"></div>
+            <div class="spacing-values">
+              <span class="spacing-px">${spacingValues[size].px}</span>
+              <span class="spacing-rem">${spacingValues[size].rem}</span>
+            </div>
+          </div>`;
+          }
+        }
+      }
+
+      const spacingSection = hasNamedSpacing ? `
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Spacing Scale</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div class="spacing-scale">${spacingBoxes}
+        </div>
+      </div>
+    </div>
+  </div>` : '';
+
+      const spacingStyles = `
+    .spacing-scale { display: flex; flex-direction: column; gap: 8px; }
+    .spacing-item { display: flex; align-items: center; gap: 12px; }
+    .spacing-label { width: 32px; font-size: 10px; font-weight: 600; color: var(--muted-foreground, #666); text-align: right; }
+    .spacing-bar { height: 24px; background: var(--primary, #39ff14); border-radius: 4px; min-width: 4px; }
+    .spacing-values { display: flex; gap: 8px; font-family: monospace; }
+    .spacing-px { font-size: 11px; font-weight: 600; color: var(--foreground, #000); min-width: 40px; }
+    .spacing-rem { font-size: 10px; color: var(--muted-foreground, #666); }`;
+
+      const spacingHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <style>${baseStyles}${spacingStyles}</style>
+</head>
+<body>
+  ${spacingSection || '<div style="padding: 20px; text-align: center; color: #999;">No spacing variables found</div>'}
+
+  ${getAccordionScript()}
+</body>
+</html>`;
+
+      // Check which radius variables exist in the CSS and extract their values
+      const radiusSizes = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'];
+      const radiusValues = {};
+      for (const size of radiusSizes) {
+        const match = css.match(new RegExp(`--radius-${size}:\\s*([^;]+);`));
+        if (match) {
+          radiusValues[size] = match[1].trim();
+        }
+      }
+      const hasRadiusVariables = Object.keys(radiusValues).length > 0;
+
+      // Build radius boxes conditionally
+      let radiusBoxes = '';
+      if (hasRadiusVariables) {
+        for (const size of radiusSizes) {
+          if (radiusValues[size]) {
+            radiusBoxes += `
+          <div class="radius-item">
+            <div class="radius-label">${size}</div>
+            <div class="radius-box" style="border-radius: var(--radius-${size}, 0.25rem);"></div>
+            <div class="radius-value">${radiusValues[size]}</div>
+          </div>`;
+          }
+        }
+      }
+
+      const radiusSection = hasRadiusVariables ? `
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Border Radius Scale</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div class="radius-scale">${radiusBoxes}
+        </div>
+      </div>
+    </div>
+  </div>` : '';
+
+      const radiusStyles = `
+    .radius-scale { display: flex; flex-direction: column; gap: 8px; }
+    .radius-item { display: flex; align-items: center; gap: 12px; }
+    .radius-label { width: 32px; font-size: 10px; font-weight: 600; color: var(--muted-foreground, #666); text-align: right; }
+    .radius-box { width: 48px; height: 48px; background: var(--primary, #39ff14); }
+    .radius-value { font-size: 11px; font-family: monospace; color: var(--foreground, #000); }`;
+
+      const radiusHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <style>${baseStyles}${radiusStyles}</style>
+</head>
+<body>
+  ${radiusSection || '<div style="padding: 20px; text-align: center; color: #999;">No border radius variables found</div>'}
+
+  ${getAccordionScript()}
+</body>
+</html>`;
+
+      // Check which shadow variables exist in the CSS and extract their values
+      // Shadow values are in :root blocks, not in @theme block (which uses var() references)
+      const shadowSizes = ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+      const shadowValues = {};
+
+      // Extract all :root blocks and combine them
+      const rootMatches = css.matchAll(/:root\s*\{([^}]+)\}/gs);
+      let allRootContent = '';
+      for (const match of rootMatches) {
+        allRootContent += match[1] + '\n';
+      }
+
+      for (const size of shadowSizes) {
+        // Match the shadow value from the combined :root blocks
+        const match = allRootContent.match(new RegExp(`--shadow-${size}:\\s*([^;]+);`));
+        if (match) {
+          const value = match[1].trim();
+          // Skip if it's just a var() reference
+          if (!value.startsWith('var(--shadow-')) {
+            shadowValues[size] = value;
+          }
+        }
+      }
+      const hasShadowVariables = Object.keys(shadowValues).length > 0;
+
+      // Build shadow boxes conditionally
+      let shadowBoxes = '';
+      if (hasShadowVariables) {
+        for (const size of shadowSizes) {
+          if (shadowValues[size]) {
+            shadowBoxes += `
+          <div class="shadow-item">
+            <div class="shadow-label">${size}</div>
+            <div class="shadow-preview" style="box-shadow: var(--shadow-${size}, 0 1px 3px rgba(0,0,0,0.1));"></div>
+            <div class="shadow-value">${shadowValues[size]}</div>
+          </div>`;
+          }
+        }
+      }
+
+      const shadowsSection = hasShadowVariables ? `
+  <div class="accordion open" data-accordion>
+    <div class="accordion-header">
+      <span class="accordion-title">Shadow Scale</span>
+      <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="accordion-content">
+      <div class="accordion-inner">
+        <div class="shadows-scale">${shadowBoxes}
+        </div>
+      </div>
+    </div>
+  </div>` : '';
+
+      const shadowsStyles = `
+    .shadows-scale { display: flex; flex-direction: column; gap: 12px; }
+    .shadow-item { display: flex; align-items: center; gap: 12px; }
+    .shadow-label { width: 32px; font-size: 10px; font-weight: 600; color: var(--muted-foreground, #666); text-align: right; }
+    .shadow-preview { width: 64px; height: 40px; background: var(--card, #fff); border-radius: 6px; }
+    .shadow-value { flex: 1; font-size: 10px; font-family: monospace; color: var(--muted-foreground, #666); word-break: break-all; }`;
+
+      const shadowsHTML = `<!DOCTYPE html>
+<html>
+<head>
+  <style>${baseStyles}${shadowsStyles}</style>
+</head>
+<body>
+  ${shadowsSection || '<div style="padding: 20px; text-align: center; color: #999;">No shadow variables found</div>'}
+
+  ${getAccordionScript()}
+</body>
+</html>`;
+
+      colorsPreviewFrame.srcdoc = colorsHTML;
+      typographyPreviewFrame.srcdoc = typographyHTML;
+      spacingPreviewFrame.srcdoc = spacingHTML;
+      radiusPreviewFrame.srcdoc = radiusHTML;
+      shadowsPreviewFrame.srcdoc = shadowsHTML;
+
+      // Restore states
+      restorePreviewState(colorsPreviewFrame, colorsAccordionStates, colorsScrollTop);
+      restorePreviewState(typographyPreviewFrame, typographyAccordionStates, typographyScrollTop);
+      restorePreviewState(spacingPreviewFrame, spacingAccordionStates, spacingScrollTop);
+      restorePreviewState(radiusPreviewFrame, radiusAccordionStates, radiusScrollTop);
+      restorePreviewState(shadowsPreviewFrame, shadowsAccordionStates, shadowsScrollTop);
+    }
+
+    // Settings panel functions
+    function onAddExclusion() {
+      const selectedId = addCollectionSelect.value;
+      if (!selectedId) return;
+
+      const collection = allCollections.find(c => c.id === selectedId);
+      if (!collection) return;
+
+      excludedCollections.push({ id: collection.id, name: collection.name });
+
+      parent.postMessage({
+        pluginMessage: {
+          type: 'save-exclusions',
+          exclusions: excludedCollections
+        }
+      }, '*');
+
+      updateExclusionsList();
+      updateCollections();
+
+      addCollectionSelect.value = '';
+      addExclusionBtn.disabled = true;
+    }
+
+    function onRemoveExclusion(collectionId) {
+      excludedCollections = excludedCollections.filter(c => c.id !== collectionId);
+
+      parent.postMessage({
+        pluginMessage: {
+          type: 'save-exclusions',
+          exclusions: excludedCollections
+        }
+      }, '*');
+
+      updateExclusionsList();
+      updateCollections();
+    }
+
+    function updateExclusionsList() {
+      excludedList.innerHTML = '';
+
+      if (excludedCollections.length === 0) {
+        emptyExclusions.style.display = 'block';
+      } else {
+        emptyExclusions.style.display = 'none';
+
+        excludedCollections.forEach(collection => {
+          const item = document.createElement('div');
+          item.className = 'excluded-item';
+          item.innerHTML = `
+            <div class="excluded-name">${collection.name}</div>
+            <button class="delete-btn" data-id="${collection.id}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+          `;
+          excludedList.appendChild(item);
+
+          item.querySelector('.delete-btn').addEventListener('click', () => {
+            onRemoveExclusion(collection.id);
+          });
+        });
+      }
+    }
+
+    function updateCollections() {
+      const excludedIds = new Set(excludedCollections.map(c => c.id));
+      collections = allCollections.filter(c => !excludedIds.has(c.id));
+
+      // Update settings add-collection dropdown
+      addCollectionSelect.innerHTML = '<option value="">Choose collection...</option>';
+      allCollections.forEach(c => {
+        if (!excludedIds.has(c.id)) {
+          const opt = document.createElement('option');
+          opt.value = c.id;
+          opt.textContent = c.name;
+          addCollectionSelect.appendChild(opt);
+        }
+      });
+
+      renderCollectionList();
+    }
+
+    // Message handling
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+
+      if (msg.type === 'collections-loaded') {
+        allCollections = msg.collections;
+        updateCollections();
+        updateExclusionsList();
+      }
+
+      if (msg.type === 'exclusions-loaded') {
+        excludedCollections = msg.exclusions || [];
+        updateCollections();
+        updateExclusionsList();
+      }
+
+      if (msg.type === 'stylesheet-generated') {
+        currentStylesheet = msg.stylesheet;
+
+        codeFilename.textContent = 'theme.css';
+        codeContent.innerHTML = highlightCSS(currentStylesheet);
+        updatePreview(currentStylesheet);
+      }
+    };
+
+    // Request saved exclusions on load
+    parent.postMessage({ pluginMessage: { type: 'load-exclusions' } }, '*');
+  </script>
+</body>
+</html>

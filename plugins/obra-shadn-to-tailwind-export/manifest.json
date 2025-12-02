@@ -1,0 +1,13 @@
+{
+  "name": "Obra shadcn/ui to shadcn + tailwind CSS export v2",
+  "id": "obra-shadcn-ui-figma-variables-to-tailwind-shadcn-2",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "ui": "ui.html",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
+}

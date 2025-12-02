@@ -1,0 +1,36 @@
+{
+  "name": "Obra shadcn/ui tools",
+  "id": "1544866255228781486",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "documentAccess": "dynamic-page",
+  "editorType": [
+    "figma"
+  ],
+  "menu": [
+    {
+      "name": "Show UI",
+      "command": "show-ui"
+    },
+    {
+      "name": "Post-Prop Star Treatment",
+      "command": "post-propstar-treatment"
+    },
+    {
+      "name": "De-Propstar",
+      "command": "prop-star-cleanup"
+    },
+    {
+      "name": "Reset Component Set Style",
+      "command": "reset-component-set-style"
+    }
+  ],
+  "ui": "ui.html",
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ]
+  }
+}
