@@ -1,8 +1,8 @@
 # Obra-Studio/shadcn-ui-kit
 
-## What is the Obra-Studio/shadcn-ui-kit?
+## What is the Obra Studio shadcn-ui-kit?
 
-This is a design library file that implements https://ui.shadcn.com/.
+This is a design library file that contains all components from https://ui.shadcn.com/. You can use this file to start your design system.
 
 [Download the community file here](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui)
 
