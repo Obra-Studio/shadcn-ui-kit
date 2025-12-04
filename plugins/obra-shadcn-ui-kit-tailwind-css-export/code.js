@@ -48,8 +48,99 @@ function formatOklch(oklch) {
   return `oklch(${oklch.l} ${chroma} ${hue})`;
 }
 
-function pxToRem(px) {
+// Convert RGBA (0-1 range) to HSL
+function rgbaToHsl(r, g, b, a) {
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h, s;
+  const l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0; // achromatic
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }
+  }
+
+  return {
+    h: Math.round(h * 360),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100),
+    a: a
+  };
+}
+
+function formatHsl(hsl) {
+  if (hsl.a < 1) {
+    return `hsl(${hsl.h} ${hsl.s}% ${hsl.l}% / ${Math.round(hsl.a * 100)}%)`;
+  }
+  return `hsl(${hsl.h} ${hsl.s}% ${hsl.l}%)`;
+}
+
+// Convert RGBA (0-1 range) to RGB (0-255 range)
+function rgbaToRgb(r, g, b, a) {
+  return {
+    r: Math.round(r * 255),
+    g: Math.round(g * 255),
+    b: Math.round(b * 255),
+    a: a
+  };
+}
+
+function formatRgb(rgb) {
+  if (rgb.a < 1) {
+    return `rgb(${rgb.r} ${rgb.g} ${rgb.b} / ${Math.round(rgb.a * 100)}%)`;
+  }
+  return `rgb(${rgb.r} ${rgb.g} ${rgb.b})`;
+}
+
+// Convert RGBA (0-1 range) to Hex
+function rgbaToHex(r, g, b, a) {
+  const toHex = (n) => {
+    const hex = Math.round(n * 255).toString(16).toUpperCase();
+    return hex.length === 1 ? '0' + hex : hex;
+  };
+  return {
+    r: toHex(r),
+    g: toHex(g),
+    b: toHex(b),
+    a: a
+  };
+}
+
+function formatHex(hex) {
+  if (hex.a < 1) {
+    const alphaHex = Math.round(hex.a * 255).toString(16).toUpperCase().padStart(2, '0');
+    return `#${hex.r}${hex.g}${hex.b}${alphaHex}`;
+  }
+  return `#${hex.r}${hex.g}${hex.b}`;
+}
+
+// Format color based on selected mode
+function formatColor(r, g, b, a, colorMode) {
+  switch (colorMode) {
+    case 'hsl':
+      return formatHsl(rgbaToHsl(r, g, b, a));
+    case 'rgb':
+      return formatRgb(rgbaToRgb(r, g, b, a));
+    case 'hex':
+      return formatHex(rgbaToHex(r, g, b, a));
+    case 'oklch':
+    default:
+      return formatOklch(rgbaToOklch(r, g, b, a));
+  }
+}
+
+function formatSize(px, sizeUnit = 'rem') {
   if (px === 0) return '0';
+  if (sizeUnit === 'px') {
+    return px + 'px';
+  }
   const rem = px / 16;
   // Round to 4 decimal places to avoid floating point precision issues
   const rounded = Math.round(rem * 10000) / 10000;
@@ -166,16 +257,22 @@ async function resolveVariableValue(variableValue, modeId, visited = new Set()) 
       return null;
     }
 
+    // Get the referenced variable's collection to determine the correct mode
+    const referencedCollection = await figma.variables.getVariableCollectionByIdAsync(referencedVariable.variableCollectionId);
+
+    // First try using the same modeId (works when alias is within same collection)
     let value = referencedVariable.valuesByMode[modeId];
 
-    if (value === undefined) {
-      const collection = await figma.variables.getVariableCollectionByIdAsync(referencedVariable.variableCollectionId);
-      if (collection) {
-        value = referencedVariable.valuesByMode[collection.defaultModeId];
-      }
+    // If value not found with current modeId, use the referenced collection's default mode
+    // This is needed when alias crosses collection boundaries (e.g., semantic -> raw colors)
+    if (value === undefined && referencedCollection) {
+      value = referencedVariable.valuesByMode[referencedCollection.defaultModeId];
     }
 
-    return await resolveVariableValue(value, modeId, visited);
+    // When recursing, use the referenced variable's collection's mode context
+    const nextModeId = referencedCollection ? referencedCollection.defaultModeId : modeId;
+
+    return await resolveVariableValue(value, nextModeId, visited);
   }
 
   return variableValue;
@@ -279,7 +376,7 @@ const SEMANTIC_COLOR_ORDER = [
   'sidebar-border', 'sidebar-ring'
 ];
 
-async function collectSemanticColors(collection, modeId) {
+async function collectSemanticColors(collection, modeId, colorMode = 'oklch') {
   const variables = new Map();
 
   for (const variable of collection.variables) {
@@ -291,25 +388,26 @@ async function collectSemanticColors(collection, modeId) {
     const resolvedValue = await resolveVariableValue(rawValue, modeId);
     if (!resolvedValue || typeof resolvedValue !== 'object' || !('r' in resolvedValue)) continue;
 
-    const oklch = rgbaToOklch(
+    const colorStr = formatColor(
       resolvedValue.r,
       resolvedValue.g,
       resolvedValue.b,
-      resolvedValue.a !== undefined ? resolvedValue.a : 1
+      resolvedValue.a !== undefined ? resolvedValue.a : 1,
+      colorMode
     );
 
     const cssName = mapSemanticColorName(variable.name);
     if (cssName) {
-      variables.set(cssName, formatOklch(oklch));
+      variables.set(cssName, colorStr);
     }
   }
 
   return variables;
 }
 
-async function generateSemanticColorsCSS(collection, modeId, darkModeId = null) {
-  const lightVariables = await collectSemanticColors(collection, modeId);
-  const darkVariables = darkModeId ? await collectSemanticColors(collection, darkModeId) : null;
+async function generateSemanticColorsCSS(collection, modeId, darkModeId = null, colorMode = 'oklch') {
+  const lightVariables = await collectSemanticColors(collection, modeId, colorMode);
+  const darkVariables = darkModeId ? await collectSemanticColors(collection, darkModeId, colorMode) : null;
 
   // Build :root section (light mode)
   let css = ':root {\n';
@@ -411,7 +509,7 @@ function mapSemanticColorName(figmaName) {
 // Template: Chart Colors
 // ============================================
 
-async function collectChartColors(collection, modeId) {
+async function collectChartColors(collection, modeId, colorMode = 'oklch') {
   const chartColors = new Map();
   const sentimentColors = new Map();
 
@@ -424,11 +522,12 @@ async function collectChartColors(collection, modeId) {
     const resolvedValue = await resolveVariableValue(rawValue, modeId);
     if (!resolvedValue || typeof resolvedValue !== 'object' || !('r' in resolvedValue)) continue;
 
-    const oklch = rgbaToOklch(
+    const colorStr = formatColor(
       resolvedValue.r,
       resolvedValue.g,
       resolvedValue.b,
-      resolvedValue.a !== undefined ? resolvedValue.a : 1
+      resolvedValue.a !== undefined ? resolvedValue.a : 1,
+      colorMode
     );
 
     const name = variable.name.toLowerCase();
@@ -441,16 +540,16 @@ async function collectChartColors(collection, modeId) {
       // Match patterns like "chart 1", "chart-1", "chart1", or just "1"
       const chartMatch = lastPart.match(/^(?:chart\s*)?([1-5])$/);
       if (chartMatch) {
-        chartColors.set(chartMatch[1], formatOklch(oklch));
+        chartColors.set(chartMatch[1], colorStr);
       }
     }
 
     // Extract from "sentiment" group: "sentiment/positive-foreground" -> "positive-foreground"
     if (name.includes('sentiment')) {
       if (lastPart.includes('positive')) {
-        sentimentColors.set('positive-foreground', formatOklch(oklch));
+        sentimentColors.set('positive-foreground', colorStr);
       } else if (lastPart.includes('negative')) {
-        sentimentColors.set('negative-foreground', formatOklch(oklch));
+        sentimentColors.set('negative-foreground', colorStr);
       }
     }
   }
@@ -458,9 +557,9 @@ async function collectChartColors(collection, modeId) {
   return { chartColors, sentimentColors };
 }
 
-async function generateChartColorsCSS(collection, modeId, darkModeId = null) {
-  const lightData = await collectChartColors(collection, modeId);
-  const darkData = darkModeId ? await collectChartColors(collection, darkModeId) : null;
+async function generateChartColorsCSS(collection, modeId, darkModeId = null, colorMode = 'oklch') {
+  const lightData = await collectChartColors(collection, modeId, colorMode);
+  const darkData = darkModeId ? await collectChartColors(collection, darkModeId, colorMode) : null;
 
   const lightChartColors = lightData.chartColors;
   const lightSentimentColors = lightData.sentimentColors;
@@ -530,7 +629,7 @@ async function generateChartColorsCSS(collection, modeId, darkModeId = null) {
 // Template: Typography
 // ============================================
 
-async function generateTypographyCSS(collection, modeId) {
+async function generateTypographyCSS(collection, modeId, sizeUnit = 'rem') {
   const fontFamilies = new Map();
   const fontWeights = new Map();
   const textStyles = new Map();
@@ -647,11 +746,11 @@ async function generateTypographyCSS(collection, modeId) {
       const varName = styleName.replace(/ /g, '-');
 
       if (style.size) {
-        css += `  --text-${varName}-size: ${pxToRem(style.size)};\n`;
+        css += `  --text-${varName}-size: ${formatSize(style.size, sizeUnit)};\n`;
       }
       if (style.lineHeight) {
         // Line height can be absolute (px) or relative
-        const lh = style.lineHeight > 10 ? pxToRem(style.lineHeight) : style.lineHeight;
+        const lh = style.lineHeight > 10 ? formatSize(style.lineHeight, sizeUnit) : style.lineHeight;
         css += `  --text-${varName}-leading: ${lh};\n`;
       }
       if (style.letterSpacing) {
@@ -725,7 +824,7 @@ function formatFontStack(fontName, type) {
 // Template: Border Radii
 // ============================================
 
-async function generateBorderRadiiCSS(collection, modeId) {
+async function generateBorderRadiiCSS(collection, modeId, sizeUnit = 'rem') {
   const radiusValues = new Map();
 
   // Map Figma variable names to CSS variable names
@@ -766,7 +865,7 @@ async function generateBorderRadiiCSS(collection, modeId) {
 
   // Build CSS
   let css = ':root {\n';
-  css += `  --radius: ${pxToRem(baseRadius)};\n`;
+  css += `  --radius: ${formatSize(baseRadius, sizeUnit)};\n`;
   css += '}\n';
 
   css += '\n@theme {\n';
@@ -785,7 +884,7 @@ async function generateBorderRadiiCSS(collection, modeId) {
         // Full radius is special - use 9999px
         css += `  --${cssName}: 9999px;\n`;
       } else {
-        css += `  --${cssName}: ${pxToRem(value)};\n`;
+        css += `  --${cssName}: ${formatSize(value, sizeUnit)};\n`;
       }
     }
   }
@@ -972,7 +1071,7 @@ function formatShadowColor(color) {
 // Template: Spacing
 // ============================================
 
-async function generateSpacingCSS(collection, modeId) {
+async function generateSpacingCSS(collection, modeId, sizeUnit = 'rem') {
   const spacingValues = new Map();
 
   // Named spacing scale order (like border radii)
@@ -1041,7 +1140,7 @@ async function generateSpacingCSS(collection, modeId) {
 
   // Build CSS
   let css = ':root {\n';
-  css += `  --spacing: ${pxToRem(baseSpacing)};\n`;
+  css += `  --spacing: ${formatSize(baseSpacing, sizeUnit)};\n`;
   css += '}\n';
 
   css += '\n@theme {\n';
@@ -1049,7 +1148,7 @@ async function generateSpacingCSS(collection, modeId) {
   for (const key of spacingOrder) {
     if (spacingValues.has(key)) {
       const value = spacingValues.get(key);
-      css += `  --spacing-${key}: ${pxToRem(value)};\n`;
+      css += `  --spacing-${key}: ${formatSize(value, sizeUnit)};\n`;
     }
   }
 
@@ -1062,7 +1161,7 @@ async function generateSpacingCSS(collection, modeId) {
 // Main Generation Function
 // ============================================
 
-async function generateCombinedStylesheet(selectedCollections) {
+async function generateCombinedStylesheet(selectedCollections, colorMode = 'oklch', sizeUnit = 'rem') {
   const allCollections = await collectVariableData();
   const cssBlocks = [];
 
@@ -1078,23 +1177,23 @@ async function generateCombinedStylesheet(selectedCollections) {
     switch (template) {
       case 'semantic-colors':
         // Pass dark mode ID if available for light/dark pair generation
-        css = await generateSemanticColorsCSS(collection, selected.modeId, selected.darkModeId || null);
+        css = await generateSemanticColorsCSS(collection, selected.modeId, selected.darkModeId || null, colorMode);
         break;
       case 'chart-colors':
         // Pass dark mode ID if available for light/dark pair generation
-        css = await generateChartColorsCSS(collection, selected.modeId, selected.darkModeId || null);
+        css = await generateChartColorsCSS(collection, selected.modeId, selected.darkModeId || null, colorMode);
         break;
       case 'typography':
-        css = await generateTypographyCSS(collection, selected.modeId);
+        css = await generateTypographyCSS(collection, selected.modeId, sizeUnit);
         break;
       case 'border-radii':
-        css = await generateBorderRadiiCSS(collection, selected.modeId);
+        css = await generateBorderRadiiCSS(collection, selected.modeId, sizeUnit);
         break;
       case 'shadows':
         css = await generateShadowsCSS(collection, selected.modeId);
         break;
       case 'spacing':
-        css = await generateSpacingCSS(collection, selected.modeId);
+        css = await generateSpacingCSS(collection, selected.modeId, sizeUnit);
         break;
     }
 
@@ -1171,10 +1270,10 @@ figma.ui.onmessage = async (msg) => {
   }
 
   if (msg.type === 'generate-stylesheet') {
-    const { collections: selectedCollections, excludeUnofficialVars } = msg;
+    const { collections: selectedCollections, excludeUnofficialVars, colorMode, sizeUnit } = msg;
 
     try {
-      let stylesheet = await generateCombinedStylesheet(selectedCollections);
+      let stylesheet = await generateCombinedStylesheet(selectedCollections, colorMode || 'oklch', sizeUnit || 'rem');
 
       // Filter out unofficial variables if setting is enabled
       if (excludeUnofficialVars) {

@@ -141,6 +141,8 @@
       border-bottom: 2px solid transparent;
       cursor: pointer;
       transition: all 0.15s;
+      position: relative;
+      top: 1px;
     }
 
     .main-tab:hover {
@@ -158,6 +160,75 @@
 
     .main-tab-content.active {
       display: block;
+    }
+
+    .main-tab-icon {
+      flex: 0;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .main-tab-icon svg {
+      opacity: 0.6;
+      transition: opacity 0.15s;
+    }
+
+    .main-tab-icon:hover svg,
+    .main-tab-icon.active svg {
+      opacity: 1;
+    }
+
+    /* About panel styles */
+    .about-content {
+      max-width: 480px;
+    }
+
+    .about-content h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      color: var(--text-primary);
+    }
+
+    .about-content h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      color: var(--text-primary);
+    }
+
+    .about-section {
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .about-section ol {
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .about-section li {
+      margin-bottom: 6px;
+    }
+
+    .about-section a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    .about-section a:hover {
+      text-decoration: underline;
     }
 
     /* Collection list */
@@ -348,6 +419,8 @@
       font-weight: 500;
       font-family: inherit;
       color: var(--text-secondary);
+      position: relative;
+      top: 1px;
       background: transparent;
       border: none;
       border-bottom: 2px solid transparent;
@@ -486,6 +559,8 @@
       color: var(--text-secondary);
       background: transparent;
       border: none;
+      position: relative;
+      top: 1px;
       border-bottom: 2px solid transparent;
       cursor: pointer;
       transition: all 0.15s;
@@ -709,6 +784,48 @@
       transform: translateX(16px);
     }
 
+    /* Color mode radio buttons */
+    .color-mode-options {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .color-mode-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .color-mode-option:hover {
+      border-color: var(--accent);
+    }
+
+    .color-mode-option:has(input:checked) {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .color-mode-option:has(input:checked) .color-mode-label {
+      color: white;
+    }
+
+    .color-mode-option input[type="radio"] {
+      display: none;
+    }
+
+    .color-mode-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
     .loading-state {
       padding: 20px;
       text-align: center;
@@ -808,6 +925,11 @@
       <div class="main-tabs">
         <button class="main-tab active" data-main-tab="export">Export</button>
         <button class="main-tab" data-main-tab="settings">Settings</button>
+        <button class="main-tab main-tab-icon" data-main-tab="about" title="About">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M1 8C1 4.13401 4.13401 1 8 1C11.866 1 15 4.13401 15 8C15 11.866 11.866 15 8 15C4.13401 15 1 11.866 1 8ZM8 16C3.58172 16 0 12.4183 0 8C0 3.58172 3.58172 0 8 0C12.4183 0 16 3.58172 16 8C16 12.4183 12.4183 16 8 16ZM7.5 11.5V11V8V7.5H8.5V8V11V11.5H7.5ZM8.75 5.00009C8.75 5.4143 8.41421 5.75009 8 5.75009C7.58579 5.75009 7.25 5.4143 7.25 5.00009V4.93153C7.25 4.51732 7.58579 4.18153 8 4.18153C8.41421 4.18153 8.75 4.51732 8.75 4.93153V5.00009Z" fill="currentColor"></path>
+          </svg>
+        </button>
       </div>
 
       <div class="panel-content">
@@ -820,6 +942,44 @@
 
         <!-- Settings Tab Content -->
         <div id="settings-panel" class="main-tab-content">
+          <div class="settings-section">
+            <div class="settings-title">Color Mode</div>
+            <div class="color-mode-options">
+              <label class="color-mode-option">
+                <input type="radio" name="color-mode" value="oklch" checked>
+                <span class="color-mode-label">OKLCH</span>
+              </label>
+              <label class="color-mode-option">
+                <input type="radio" name="color-mode" value="hsl">
+                <span class="color-mode-label">HSL</span>
+              </label>
+              <label class="color-mode-option">
+                <input type="radio" name="color-mode" value="rgb">
+                <span class="color-mode-label">RGB</span>
+              </label>
+              <label class="color-mode-option">
+                <input type="radio" name="color-mode" value="hex">
+                <span class="color-mode-label">Hex</span>
+              </label>
+            </div>
+            <div class="settings-help">Choose the color format for CSS output</div>
+          </div>
+
+          <div class="settings-section">
+            <div class="settings-title">Size Unit</div>
+            <div class="color-mode-options">
+              <label class="color-mode-option">
+                <input type="radio" name="size-unit" value="rem" checked>
+                <span class="color-mode-label">rem</span>
+              </label>
+              <label class="color-mode-option">
+                <input type="radio" name="size-unit" value="px">
+                <span class="color-mode-label">px</span>
+              </label>
+            </div>
+            <div class="settings-help">Choose the unit for sizing values (spacing, radius, typography)</div>
+          </div>
+
           <div class="settings-section">
             <div class="settings-title">Mark collections to exclude</div>
             <div class="settings-help">Typically you would exclude raw colors, spacing (absolute) and border radii (absolute)</div>
@@ -854,6 +1014,38 @@
               <div class="toggle-switch active" id="exclude-unofficial-toggle"></div>
             </div>
             <div class="settings-help">Removes accent-0/2/3, border-0/1/3/4/5, outline, ghost variants</div>
+          </div>
+        </div>
+
+        <!-- About Tab Content -->
+        <div id="about-panel" class="main-tab-content">
+          <div class="about-content">
+            <h2>Obra shadcn/ui Tailwind CSS Export</h2>
+
+            <div class="about-section">
+              <h3>What this plugin does</h3>
+              <p>This plugin exports Figma variables from the <a href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui" target="_blank">Obra shadcn/ui Figma kit</a> to CSS custom properties compatible with Tailwind CSS v4 and shadcn/ui.</p>
+            </div>
+
+            <div class="about-section">
+              <h3>How to use</h3>
+              <ol>
+                <li><strong>Export tab:</strong> Select the variable collections you want to export. Toggle collections on/off and choose which mode to use for each.</li>
+                <li><strong>Settings tab:</strong> Configure output format (color mode, size units) and exclude collections you don't need.</li>
+                <li><strong>Preview:</strong> See a live preview of your exported variables organized by category.</li>
+                <li><strong>Copy or Download:</strong> Use the buttons in the Code tab to copy or download the generated CSS.</li>
+              </ol>
+            </div>
+
+            <div class="about-section">
+              <h3>Requirements</h3>
+              <p>This plugin requires the Obra shadcn/ui Figma kit v1.4.0 or higher. The kit provides a complete design system with semantic color tokens, typography scales, spacing, and more.</p>
+            </div>
+
+            <div class="about-section">
+              <h3>Support</h3>
+              <p>For questions, feedback, or bug reports, please visit the <a href="https://github.com/Obra-Studio/shadcn-ui-kit" target="_blank">GitHub repository</a>.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -941,6 +1133,8 @@
     let currentStylesheet = '';
     let draggedItem = null;  // Track dragged collection row
     let excludeUnofficialVars = true;  // Toggle for excluding unofficial variables
+    let colorMode = 'oklch';  // Color format: 'oklch', 'hsl', 'rgb', or 'hex'
+    let sizeUnit = 'rem';  // Size unit: 'rem' or 'px'
     let colorsAccordionStates = {};  // Track open/close state of colors preview accordions
     let typographyAccordionStates = {};  // Track open/close state of typography preview accordions
     let spacingAccordionStates = {};  // Track open/close state of spacing preview accordions
@@ -1053,6 +1247,24 @@
       excludeUnofficialVars = !excludeUnofficialVars;
       excludeUnofficialToggle.classList.toggle('active', excludeUnofficialVars);
       onGenerate();  // Regenerate CSS with new setting
+    });
+
+    // Color mode radio buttons
+    const colorModeRadios = document.querySelectorAll('input[name="color-mode"]');
+    colorModeRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        colorMode = e.target.value;
+        onGenerate();  // Regenerate CSS with new color mode
+      });
+    });
+
+    // Size unit radio buttons
+    const sizeUnitRadios = document.querySelectorAll('input[name="size-unit"]');
+    sizeUnitRadios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        sizeUnit = e.target.value;
+        onGenerate();  // Regenerate CSS with new size unit
+      });
     });
 
     // Check if collection is semantic colors
@@ -1334,7 +1546,9 @@
         pluginMessage: {
           type: 'generate-stylesheet',
           collections: selectedCollections,
-          excludeUnofficialVars: excludeUnofficialVars
+          excludeUnofficialVars: excludeUnofficialVars,
+          colorMode: colorMode,
+          sizeUnit: sizeUnit
         }
       }, '*');
     }
