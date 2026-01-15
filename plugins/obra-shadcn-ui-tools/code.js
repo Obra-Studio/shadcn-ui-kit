@@ -12,7 +12,7 @@ if (figma.command === 'post-propstar-treatment') {
   figma.closePlugin();
 } else {
   // Default: show UI if no specific command
-  figma.showUI(__html__, { width: 280, height: 240 });
+  figma.showUI(__html__, { width: 280, height: 420 });
 }
 
 // Handle messages from the UI
@@ -24,6 +24,26 @@ figma.ui.onmessage = msg => {
     handlePropStarCleanup();
   } else if (msg.type === 'reset-component-set-style') {
     handleResetComponentSetStyle();
+  } else if (msg.type === 'move-up') {
+    moveUp();
+  } else if (msg.type === 'move-down') {
+    moveDown();
+  } else if (msg.type === 'move-left') {
+    moveLeft();
+  } else if (msg.type === 'move-right') {
+    moveRight();
+  } else if (msg.type === 'select-row') {
+    selectRow();
+  } else if (msg.type === 'select-column') {
+    selectColumn();
+  } else if (msg.type === 'add-next-row') {
+    addNextRow();
+  } else if (msg.type === 'add-next-column') {
+    addNextColumn();
+  } else if (msg.type === 'add-prev-row') {
+    addPrevRow();
+  } else if (msg.type === 'add-prev-column') {
+    addPrevColumn();
   }
 };
 
@@ -397,6 +417,541 @@ function handlePropStarCleanup(isDirectCommand = false) {
       figma.notify(`De-Propstarred ${cleanedCount} ${frameText}`);
     }
   }
+}
+
+// Row/Column Selection Functions
+// Tolerance for matching positions (in pixels)
+const TOLERANCE = 5;
+
+// Move selection to adjacent sibling in a direction
+// If multiple items are selected in a row, move the entire row selection up/down
+// If multiple items are selected in a column, move the entire column selection left/right
+function moveUp() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  // Check if selection is a row (all same center Y) or column (all same X)
+  const centerYPositions = [...new Set(selection.map(n => n.y + n.height / 2))];
+  const isRow = centerYPositions.length === 1 && selection.length > 1;
+
+  const minCenterY = Math.min(...selection.map(n => n.y + n.height / 2));
+
+  // Find the next row above (by center Y)
+  const aboveCenterYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && (child.y + child.height / 2) < minCenterY - TOLERANCE)
+      .map(child => child.y + child.height / 2)
+  )].sort((a, b) => b - a);
+
+  if (aboveCenterYPositions.length === 0) {
+    figma.notify('No elements above');
+    return;
+  }
+
+  const nextCenterY = aboveCenterYPositions[0];
+
+  if (isRow) {
+    // Select entire row above
+    const nextRowNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterY = child.y + child.height / 2;
+      return Math.abs(childCenterY - nextCenterY) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextRowNodes;
+    figma.notify(`Selected ${nextRowNodes.length} items in row above`);
+  } else {
+    // Single item or column - find closest X match
+    const targetCenterX = selection[0].x + selection[0].width / 2;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterY = child.y + child.height / 2;
+      return Math.abs(childCenterY - nextCenterY) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs((candidates[0].x + candidates[0].width / 2) - targetCenterX);
+    for (const c of candidates) {
+      const childCenterX = c.x + c.width / 2;
+      const dist = Math.abs(childCenterX - targetCenterX);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function moveDown() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  // Check if selection is a row (all same center Y)
+  const centerYPositions = [...new Set(selection.map(n => n.y + n.height / 2))];
+  const isRow = centerYPositions.length === 1 && selection.length > 1;
+
+  const maxCenterY = Math.max(...selection.map(n => n.y + n.height / 2));
+
+  // Find the next row below (by center Y)
+  const belowCenterYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && (child.y + child.height / 2) > maxCenterY + TOLERANCE)
+      .map(child => child.y + child.height / 2)
+  )].sort((a, b) => a - b);
+
+  if (belowCenterYPositions.length === 0) {
+    figma.notify('No elements below');
+    return;
+  }
+
+  const nextCenterY = belowCenterYPositions[0];
+
+  if (isRow) {
+    // Select entire row below
+    const nextRowNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterY = child.y + child.height / 2;
+      return Math.abs(childCenterY - nextCenterY) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextRowNodes;
+    figma.notify(`Selected ${nextRowNodes.length} items in row below`);
+  } else {
+    // Single item or column - find closest X match
+    const targetCenterX = selection[0].x + selection[0].width / 2;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterY = child.y + child.height / 2;
+      return Math.abs(childCenterY - nextCenterY) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs((candidates[0].x + candidates[0].width / 2) - targetCenterX);
+    for (const c of candidates) {
+      const childCenterX = c.x + c.width / 2;
+      const dist = Math.abs(childCenterX - targetCenterX);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function moveLeft() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  // Check if selection is a column (all same center X)
+  const centerXPositions = [...new Set(selection.map(n => n.x + n.width / 2))];
+  const isColumn = centerXPositions.length === 1 && selection.length > 1;
+
+  const minCenterX = Math.min(...selection.map(n => n.x + n.width / 2));
+
+  // Find the next column to the left (by center X)
+  const leftCenterXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && (child.x + child.width / 2) < minCenterX - TOLERANCE)
+      .map(child => child.x + child.width / 2)
+  )].sort((a, b) => b - a);
+
+  if (leftCenterXPositions.length === 0) {
+    figma.notify('No elements to the left');
+    return;
+  }
+
+  const nextCenterX = leftCenterXPositions[0];
+
+  if (isColumn) {
+    // Select entire column to the left
+    const nextColNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterX = child.x + child.width / 2;
+      return Math.abs(childCenterX - nextCenterX) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextColNodes;
+    figma.notify(`Selected ${nextColNodes.length} items in column to the left`);
+  } else {
+    // Single item or row - find closest Y match
+    const targetCenterY = selection[0].y + selection[0].height / 2;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterX = child.x + child.width / 2;
+      return Math.abs(childCenterX - nextCenterX) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs((candidates[0].y + candidates[0].height / 2) - targetCenterY);
+    for (const c of candidates) {
+      const childCenterY = c.y + c.height / 2;
+      const dist = Math.abs(childCenterY - targetCenterY);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function moveRight() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  // Check if selection is a column (all same center X)
+  const centerXPositions = [...new Set(selection.map(n => n.x + n.width / 2))];
+  const isColumn = centerXPositions.length === 1 && selection.length > 1;
+
+  const maxCenterX = Math.max(...selection.map(n => n.x + n.width / 2));
+
+  // Find the next column to the right (by center X)
+  const rightCenterXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && (child.x + child.width / 2) > maxCenterX + TOLERANCE)
+      .map(child => child.x + child.width / 2)
+  )].sort((a, b) => a - b);
+
+  if (rightCenterXPositions.length === 0) {
+    figma.notify('No elements to the right');
+    return;
+  }
+
+  const nextCenterX = rightCenterXPositions[0];
+
+  if (isColumn) {
+    // Select entire column to the right
+    const nextColNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterX = child.x + child.width / 2;
+      return Math.abs(childCenterX - nextCenterX) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextColNodes;
+    figma.notify(`Selected ${nextColNodes.length} items in column to the right`);
+  } else {
+    // Single item or row - find closest Y match
+    const targetCenterY = selection[0].y + selection[0].height / 2;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      const childCenterX = child.x + child.width / 2;
+      return Math.abs(childCenterX - nextCenterX) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs((candidates[0].y + candidates[0].height / 2) - targetCenterY);
+    for (const c of candidates) {
+      const childCenterY = c.y + c.height / 2;
+      const dist = Math.abs(childCenterY - targetCenterY);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function selectRow() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const selected = selection[0];
+  const parent = selected.parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  // Get the center Y position of the selected element
+  const targetCenterY = selected.y + selected.height / 2;
+
+  // Find all siblings at the same center Y position (same row)
+  const rowNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    const childCenterY = child.y + child.height / 2;
+    return Math.abs(childCenterY - targetCenterY) <= TOLERANCE;
+  });
+
+  figma.currentPage.selection = rowNodes;
+  figma.notify(`Selected ${rowNodes.length} items in row`);
+}
+
+function selectColumn() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const selected = selection[0];
+  const parent = selected.parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  // Get the center X position of the selected element
+  const targetCenterX = selected.x + selected.width / 2;
+
+  // Find all siblings at the same center X position (same column)
+  const columnNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    const childCenterX = child.x + child.width / 2;
+    return Math.abs(childCenterX - targetCenterX) <= TOLERANCE;
+  });
+
+  figma.currentPage.selection = columnNodes;
+  figma.notify(`Selected ${columnNodes.length} items in column`);
+}
+
+function addNextRow() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  // Get all unique center Y positions in current selection
+  const currentCenterYPositions = [...new Set(selection.map(node => node.y + node.height / 2))];
+  const maxCenterY = Math.max(...currentCenterYPositions);
+
+  // Find the parent (assume all selected items share a parent)
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  // Find all unique center Y positions in the parent
+  const allCenterYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.y + child.height / 2)
+  )].sort((a, b) => a - b);
+
+  // Find the next center Y position after the current max
+  const nextCenterY = allCenterYPositions.find(y => y > maxCenterY + TOLERANCE);
+
+  if (nextCenterY === undefined) {
+    figma.notify('No more rows below');
+    return;
+  }
+
+  // Get all nodes at the next center Y position
+  const nextRowNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    const childCenterY = child.y + child.height / 2;
+    return Math.abs(childCenterY - nextCenterY) <= TOLERANCE;
+  });
+
+  // Combine current selection with next row
+  const newSelection = [...selection, ...nextRowNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${nextRowNodes.length} items from next row`);
+}
+
+function addNextColumn() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  // Get all unique center X positions in current selection
+  const currentCenterXPositions = [...new Set(selection.map(node => node.x + node.width / 2))];
+  const maxCenterX = Math.max(...currentCenterXPositions);
+
+  // Find the parent (assume all selected items share a parent)
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  // Find all unique center X positions in the parent
+  const allCenterXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.x + child.width / 2)
+  )].sort((a, b) => a - b);
+
+  // Find the next center X position after the current max
+  const nextCenterX = allCenterXPositions.find(x => x > maxCenterX + TOLERANCE);
+
+  if (nextCenterX === undefined) {
+    figma.notify('No more columns to the right');
+    return;
+  }
+
+  // Get all nodes at the next center X position
+  const nextColumnNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    const childCenterX = child.x + child.width / 2;
+    return Math.abs(childCenterX - nextCenterX) <= TOLERANCE;
+  });
+
+  // Combine current selection with next column
+  const newSelection = [...selection, ...nextColumnNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${nextColumnNodes.length} items from next column`);
+}
+
+function addPrevRow() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  // Get all unique center Y positions in current selection
+  const currentCenterYPositions = [...new Set(selection.map(node => node.y + node.height / 2))];
+  const minCenterY = Math.min(...currentCenterYPositions);
+
+  // Find the parent (assume all selected items share a parent)
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  // Find all unique center Y positions in the parent
+  const allCenterYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.y + child.height / 2)
+  )].sort((a, b) => b - a); // Sort descending to find previous
+
+  // Find the previous center Y position before the current min
+  const prevCenterY = allCenterYPositions.find(y => y < minCenterY - TOLERANCE);
+
+  if (prevCenterY === undefined) {
+    figma.notify('No more rows above');
+    return;
+  }
+
+  // Get all nodes at the previous center Y position
+  const prevRowNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    const childCenterY = child.y + child.height / 2;
+    return Math.abs(childCenterY - prevCenterY) <= TOLERANCE;
+  });
+
+  // Combine current selection with previous row
+  const newSelection = [...selection, ...prevRowNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${prevRowNodes.length} items from previous row`);
+}
+
+function addPrevColumn() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  // Get all unique center X positions in current selection
+  const currentCenterXPositions = [...new Set(selection.map(node => node.x + node.width / 2))];
+  const minCenterX = Math.min(...currentCenterXPositions);
+
+  // Find the parent (assume all selected items share a parent)
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  // Find all unique center X positions in the parent
+  const allCenterXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.x + child.width / 2)
+  )].sort((a, b) => b - a); // Sort descending to find previous
+
+  // Find the previous center X position before the current min
+  const prevCenterX = allCenterXPositions.find(x => x < minCenterX - TOLERANCE);
+
+  if (prevCenterX === undefined) {
+    figma.notify('No more columns to the left');
+    return;
+  }
+
+  // Get all nodes at the previous center X position
+  const prevColumnNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    const childCenterX = child.x + child.width / 2;
+    return Math.abs(childCenterX - prevCenterX) <= TOLERANCE;
+  });
+
+  // Combine current selection with previous column
+  const newSelection = [...selection, ...prevColumnNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${prevColumnNodes.length} items from previous column`);
 }
 
 function handleResetComponentSetStyle(isDirectCommand = false) {
