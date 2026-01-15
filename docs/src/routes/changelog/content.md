@@ -2,6 +2,54 @@
 
 Find the latest changes in our kit here. This changelog is repeated [inside of the file](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui) on the changelog page, so you know which version is in use. We use [semantic versioning](https://semver.org/).
 
+## 1.4.0
+
+January 16, 2025
+
+* **Improve variable organisation for better development export** New: the variables in this file are organized in a way that works with our [Figma shadcn/ui kit CSS export plugin](https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export). Having separated collections was already the case in 1.3.0, but now we are doubling down on this. We moved absolute definitions for border radii and spacing to separated collections that do not get published. Users have the ability to set up different modes (check out our [batch mode switcher](https://www.figma.com/community/plugin/1577759675602026369/obra-batch-mode-switcher) plugin) and use those modes to help with theming for multi-brand and white-labelling situations.
+* **Improve typography to better serve theming and white-labelled contexts**
+  * Provide medium and bold versions of all paragraph styles by default
+  * Headings (h1, h2, h3, h4) now have their own variable references and can be individually styled via the variables. They default to font-family-headings which defaults to font-family-sans.
+* Shadows
+  * Tweaked blur value of xl/shadow 2 from -6 to 6 so shadow shows up correctly
+* Colors
+  * Adjust all foreground variable scopes to also support strokes, since these are used for icon colors
+  * Bugfixes destructive foreground
+    * Moved destructive foreground to semantic colors/general (as it's an official variable)
+    * Bugfix: changed destructive foreground to white, it was red, erroneously.
+    * Correct scope of destructive foreground to shape and text
+    * Add unofficial destructive-text variable (to serve as the variable for red text in general)
+    * Apply destructive text to alert error component
+* **Reworked several components to be more flexible and feature-complete: Item, Breadcrumb, Input Group**. Thanks, Jovi Verheyen for your great contributions.
+  * Added the Item component with support for itemMedia, itemContent and itemActions as per shadcn specifications.
+  * Improved the Empty component
+  * Added more examples to Input Group (under Input) component
+  * Removed the Ghost Muted button variant from the default and icon button since it's not part of the official shadcn button component
+  * Breadcrumb component optimized for ease of use
+  * Rename Input page to Input & Input group
+    * Added more Input Group examples to Input. We decided to leave this component alone for now, hoping to provide more flexibility when Figma releases slots. We don't like to write this, but for some variations of the input group component we recommend to detach your component to tweak the layout.
+* **Added extra examples**
+  * Added the Authentication example page (based on official shadcn example)
+  * Added the Tasks example page (based on official shadcn example)
+* **Added prototype links**: Added prototype links to the button and icon button component so the hover state actually shows in your prototypes
+* **Improve charts component to reflect real-world usage of charts**
+  * Removed chart/area and chart/static color ranges. We only retained the blue variant of the chart/area colors, now called chart/shades in blue. This generic approach will allow users to set up the shades as modes, which aligns nicely with how the plugin works. Ask us about our experimental plugin to quickly change the chart colors!
+  * Moved chart/legacy to chart colors/categorical
+  * Renamed "legacy colors" to "categorical".
+  * Marked examples like the non-blue area charts and the static colors pie chart as deprecated while we decide what to do with the charts (see [#93](https://github.com/Obra-Studio/shadcn-ui-kit/issues/93))
+  * Organize colors in a slightly cleaner way
+  * Remove mention that one of the blues is used once, this is not the case anymore
+* **Bugfixes** on existing components
+  * Fixed incorrect avatar size
+  * kbd component update
+    * Allow 3 keys
+    * Replaced hardcoded values with variables
+  * Corrected the line-height for small paragraph from 21 to 20
+  * Bugfix: fix visual issue with progress bar rounded corners ([#88](https://github.com/Obra-Studio/shadcn-ui-kit/issues/88))
+  * Fix: Rebuild round avatar construction in Avatar component ([#87](https://github.com/Obra-Studio/shadcn-ui-kit/issues/87))
+  * Renamed Date Picker component to Date Picker & Calendar
+    * Changed names of components inside of Date picker components: the input element is the date picker, and the resulting popup content is the calendar
+
 ## 1.3.0
 
 November 27, 2025
