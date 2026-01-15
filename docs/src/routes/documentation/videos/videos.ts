@@ -8,6 +8,18 @@ export interface Video {
 
 const videoData = [
     {
+        id: "VS3eoq4gcz8",
+        title: "Obra shadcn/ui for Figma - 1.4.0 release - kit to tailwind/shadcn/ui code plugin demo",
+        date: "January 14, 2026",
+        description: "This video shows how the CSS export plugin for the Figma shadcn/ui kit works. This plugin allows you to export CSS code for use in your shadcn/ui development projects."
+    },
+    {
+        id: "orcE5swmoEg",
+        title: "Obra shadcn/ui kit for Figma: multi theme improvements / demo of Obra Batch Mode Switcher",
+        date: "January 14, 2026",
+        description: "This video shows a theme being created, and the Obra batch mode switcher plugin being used to quickly change the look and feel of an existing screen in a non-destructive manner."
+    },
+    {
         id: "XDbVf96rR68",
         title: "Obra shadcn/ui kit: 1.2.0 updates - New organisation + Theming updates",
         date: "November 22, 2025",

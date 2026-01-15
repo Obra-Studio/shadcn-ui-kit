@@ -67,6 +67,10 @@ Working with so many modes might feel awkward at first, but it enables a word of
 
 (Check out our [batch mode switcher plugin](https://www.figma.com/community/plugin/1577759675602026369) to apply several modes at once)
 
+**Watch the demo video for this feature:**
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/orcE5swmoEg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Improved design to development workflow
 
 As a team, we pinned our hopes on Figma's export to JSON features, but when that feature released, it felt inadequate for our needs.
@@ -78,6 +82,10 @@ This output now requires further processing. It might be OK for some teams to bu
 What we did instead to solve design to development is build a plugin that takes your variables and directly translates it to a shadcn theme, as well as Tailwind theme code. You can find our [Obra shadcn/ui kit CSS export plugin on Figma community](https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export).
 
 This plugin is fully open source to teams can customize it to their needs. Do you have a specific set of variables that need to land in code? Fork away! The plugin, just like our shadcn/ui kit, is released under a very permissive MIT license. [You can find the code in our shadcn/ui-kit repository here](https://github.com/Obra-Studio/shadcn-ui-kit/tree/main/plugins/obra-shadcn-ui-kit-tailwind-css-export).    
+
+**Watch the demo video for this feature:**
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/VS3eoq4gcz8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 ## Final words

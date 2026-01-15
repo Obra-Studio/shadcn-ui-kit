@@ -32,7 +32,7 @@
 
 <div class="gap gap-y-4 flex flex-col text-center py-12">
 	<div class="max-w-4xl mx-auto mb-4 flex flex-col gap-6">
-		<p>Duplicated over 20,000 times on Figma Community • 1200 ❤️</p>
+		<p>Duplicated over 29,000 times on Figma Community • 1500+ ❤️</p>
 		<H1>Obra Shadn/ui kit: A free, high quality Figma library to design and theme shadcn/ui projects</H1>
 		<HeroImage />
 		<AdvantageList columns>
@@ -55,7 +55,7 @@
 		<H3>What the community says</H3>
 
 		<div class="prose mb-4">
-			<p>With over 1200 likes on Figma Community, here are some kind words from our community members:</p>
+			<p>With over 1500 likes on Figma Community, here are some kind words from our community members:</p>
 		</div>
 
 		<TestimonialSlider {testimonials} />
