@@ -114,6 +114,11 @@ main img {
     font-weight: 600;
 }
 
+.prose .box {
+    background: #EEE;
+    padding: .5rem 1rem;
+}
+
 .prose ul,
 .prose ol {
     list-style: none;
