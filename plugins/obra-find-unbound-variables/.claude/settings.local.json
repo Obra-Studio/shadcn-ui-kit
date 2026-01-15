@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__figma-desktop__get_design_context",
+      "mcp__figma-desktop__get_metadata",
+      "mcp__figma-desktop__get_screenshot",
+      "mcp__figma-desktop__get_variable_defs"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

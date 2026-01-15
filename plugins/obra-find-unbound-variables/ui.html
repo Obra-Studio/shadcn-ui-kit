@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 12px;
+      color: #333;
+      background: #fff;
+      padding: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #1a1a1a;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    button.primary {
+      background: #0d99ff;
+      color: white;
+    }
+
+    button.primary:hover {
+      background: #0b85e0;
+    }
+
+    button.secondary {
+      background: #f5f5f5;
+      color: #333;
+      border: 1px solid #e0e0e0;
+    }
+
+    button.secondary:hover {
+      background: #e8e8e8;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .status {
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      display: none;
+    }
+
+    .status.visible {
+      display: block;
+    }
+
+    .status.info {
+      background: #e8f4fd;
+      color: #0b5394;
+      border: 1px solid #b4d7f0;
+    }
+
+    .status.success {
+      background: #e6f4ea;
+      color: #1e7e34;
+      border: 1px solid #b7e1c4;
+    }
+
+    .status.error {
+      background: #fce8e6;
+      color: #c5221f;
+      border: 1px solid #f5c6c4;
+    }
+
+    .status.warning {
+      background: #fef7e0;
+      color: #9a6700;
+      border: 1px solid #f5d791;
+    }
+
+    .progress {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 12px;
+      display: none;
+    }
+
+    .progress.visible {
+      display: block;
+    }
+
+    .results-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .results-header h2 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #666;
+    }
+
+    .results-count {
+      font-size: 11px;
+      color: #999;
+      background: #f5f5f5;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .results-list {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 280px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .result-item {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
+      transition: background 0.1s ease;
+    }
+
+    .result-item:last-child {
+      border-bottom: none;
+    }
+
+    .result-item:hover {
+      background: #f8f9fa;
+    }
+
+    .result-item-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .node-name {
+      font-weight: 500;
+      color: #1a1a1a;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .node-type {
+      font-size: 10px;
+      color: #888;
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .property-info {
+      font-size: 11px;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    .property-label {
+      color: #999;
+    }
+
+    .property-value {
+      color: #c5221f;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 10px;
+      background: #fef7f6;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .variable-name {
+      color: #0b5394;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 10px;
+      background: #e8f4fd;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .reason-tag {
+      font-size: 9px;
+      color: #9a6700;
+      background: #fef7e0;
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-left: auto;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #888;
+    }
+
+    .empty-state-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .empty-state p {
+      margin-bottom: 4px;
+    }
+
+    .empty-state .hint {
+      font-size: 11px;
+      color: #aaa;
+    }
+
+    .zoom-icon {
+      width: 14px;
+      height: 14px;
+      opacity: 0;
+      transition: opacity 0.1s;
+      flex-shrink: 0;
+    }
+
+    .result-item:hover .zoom-icon {
+      opacity: 0.6;
+    }
+
+    .footer {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-info {
+      font-size: 10px;
+      color: #999;
+    }
+
+    .selection-tools {
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+
+    .selection-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    .selection-tools-content {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .dpad-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .dpad {
+      display: grid;
+      grid-template-columns: 28px 28px 28px;
+      grid-template-rows: 28px 28px 28px;
+      gap: 2px;
+    }
+
+    .dpad-btn {
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      font-size: 10px;
+      color: #555;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .dpad-btn:hover {
+      background: #0d99ff;
+      border-color: #0d99ff;
+      color: white;
+    }
+
+    .dpad-btn:active {
+      background: #0b85e0;
+      transform: scale(0.95);
+    }
+
+    .dpad-up { grid-column: 2; grid-row: 1; }
+    .dpad-left { grid-column: 1; grid-row: 2; }
+    .dpad-center { grid-column: 2; grid-row: 2; background: #e8e8e8; border-radius: 4px; }
+    .dpad-right { grid-column: 3; grid-row: 2; }
+    .dpad-down { grid-column: 2; grid-row: 3; }
+
+    .dpad-label {
+      font-size: 9px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .expand-controls {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .selection-group {
+      flex: 1;
+    }
+
+    .group-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: #666;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .selection-buttons {
+      display: flex;
+      gap: 4px;
+    }
+
+    .tool-btn {
+      flex: 1;
+      padding: 5px 4px;
+      font-size: 10px;
+      background: #fff;
+      border: 1px solid #d0d0d0;
+      color: #333;
+    }
+
+    .tool-btn:hover {
+      background: #f0f0f0;
+      border-color: #bbb;
+    }
+
+    .tool-btn.primary-tool {
+      background: #0d99ff;
+      color: white;
+      border-color: #0d99ff;
+    }
+
+    .tool-btn.primary-tool:hover {
+      background: #0b85e0;
+      border-color: #0b85e0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Find Unbound Variables</h1>
+
+  <div class="button-group">
+    <button class="primary" id="scan-current">Scan Current Page</button>
+    <button class="secondary" id="scan-selection">Scan Selection</button>
+    <button class="secondary" id="scan-all">Scan All Pages</button>
+  </div>
+
+  <div class="selection-tools">
+    <div class="selection-label">Selection Tools</div>
+    <div class="selection-tools-content">
+      <div class="dpad-container">
+        <div class="dpad">
+          <button class="dpad-btn dpad-up" id="move-up" title="Move selection up">&#9650;</button>
+          <button class="dpad-btn dpad-left" id="move-left" title="Move selection left">&#9664;</button>
+          <div class="dpad-center"></div>
+          <button class="dpad-btn dpad-right" id="move-right" title="Move selection right">&#9654;</button>
+          <button class="dpad-btn dpad-down" id="move-down" title="Move selection down">&#9660;</button>
+        </div>
+        <span class="dpad-label">Move</span>
+      </div>
+      <div class="expand-controls">
+        <div class="selection-group">
+          <span class="group-label">Expand Rows</span>
+          <div class="selection-buttons">
+            <button class="tool-btn" id="add-prev-row" title="Add previous row">+ Up</button>
+            <button class="tool-btn primary-tool" id="select-row" title="Select entire row">All</button>
+            <button class="tool-btn" id="add-next-row" title="Add next row">+ Down</button>
+          </div>
+        </div>
+        <div class="selection-group">
+          <span class="group-label">Expand Columns</span>
+          <div class="selection-buttons">
+            <button class="tool-btn" id="add-prev-column" title="Add previous column">+ Left</button>
+            <button class="tool-btn primary-tool" id="select-column" title="Select entire column">All</button>
+            <button class="tool-btn" id="add-next-column" title="Add next column">+ Right</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status" id="status"></div>
+  <div class="progress" id="progress"></div>
+
+  <div id="results-container" style="display: none;">
+    <div class="results-header">
+      <h2>Unbound Variables</h2>
+      <span class="results-count" id="results-count">0</span>
+    </div>
+    <div class="results-list" id="results-list"></div>
+  </div>
+
+  <div id="empty-state" class="empty-state" style="display: none;">
+    <div class="empty-state-icon">&#10003;</div>
+    <p>No unbound variables found</p>
+    <p class="hint">All variable references are valid</p>
+  </div>
+
+  <div id="initial-state" class="empty-state">
+    <div class="empty-state-icon">&#128269;</div>
+    <p>Scan to find unbound variables</p>
+    <p class="hint">Variables with missing references will be listed here</p>
+  </div>
+
+  <div class="footer">
+    <span class="footer-info">Click a result to zoom to the layer</span>
+  </div>
+
+  <script>
+    const scanCurrentBtn = document.getElementById('scan-current');
+    const scanSelectionBtn = document.getElementById('scan-selection');
+    const scanAllBtn = document.getElementById('scan-all');
+    const statusEl = document.getElementById('status');
+    const progressEl = document.getElementById('progress');
+    const resultsContainer = document.getElementById('results-container');
+    const resultsList = document.getElementById('results-list');
+    const resultsCount = document.getElementById('results-count');
+    const emptyState = document.getElementById('empty-state');
+    const initialState = document.getElementById('initial-state');
+
+    let isScanning = false;
+    let currentResults = [];
+
+    function setButtonsEnabled(enabled) {
+      scanCurrentBtn.disabled = !enabled;
+      scanSelectionBtn.disabled = !enabled;
+      scanAllBtn.disabled = !enabled;
+      isScanning = !enabled;
+    }
+
+    // D-pad move handlers
+    document.getElementById('move-up').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'move-up' } }, '*');
+    };
+
+    document.getElementById('move-down').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'move-down' } }, '*');
+    };
+
+    document.getElementById('move-left').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'move-left' } }, '*');
+    };
+
+    document.getElementById('move-right').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'move-right' } }, '*');
+    };
+
+    // Expand selection handlers
+    document.getElementById('select-row').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'select-row' } }, '*');
+    };
+
+    document.getElementById('select-column').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'select-column' } }, '*');
+    };
+
+    document.getElementById('add-next-row').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'add-next-row' } }, '*');
+    };
+
+    document.getElementById('add-next-column').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'add-next-column' } }, '*');
+    };
+
+    document.getElementById('add-prev-row').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'add-prev-row' } }, '*');
+    };
+
+    document.getElementById('add-prev-column').onclick = () => {
+      parent.postMessage({ pluginMessage: { type: 'add-prev-column' } }, '*');
+    };
+
+    function showStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = 'status visible ' + type;
+    }
+
+    function hideStatus() {
+      statusEl.className = 'status';
+    }
+
+    function showProgress(message) {
+      progressEl.textContent = message;
+      progressEl.className = 'progress visible';
+    }
+
+    function hideProgress() {
+      progressEl.className = 'progress';
+    }
+
+    function renderResults(results) {
+      initialState.style.display = 'none';
+      currentResults = results;
+
+      if (results.length === 0) {
+        resultsContainer.style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      resultsContainer.style.display = 'block';
+      resultsCount.textContent = results.length;
+
+      resultsList.innerHTML = results.map((result, index) => `
+        <div class="result-item" data-index="${index}" data-node-id="${result.nodeId}">
+          <div class="result-item-header">
+            <span class="node-name">${escapeHtml(result.nodeName)}</span>
+            <span class="node-type">${result.nodeType}</span>
+          </div>
+          <div class="property-info">
+            <span class="property-label">Property:</span>
+            <span class="property-value">${escapeHtml(result.property)}</span>
+            ${result.reason ? `<span class="reason-tag">${escapeHtml(result.reason)}</span>` : ''}
+          </div>
+          ${result.variableName && result.variableName !== 'Unknown' ? `
+          <div class="property-info">
+            <span class="property-label">Variable:</span>
+            <span class="variable-name">${escapeHtml(result.variableName)}</span>
+          </div>
+          ` : ''}
+        </div>
+      `).join('');
+
+      // Add click handlers for navigation (on entire row)
+      resultsList.querySelectorAll('.result-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const nodeId = item.dataset.nodeId;
+          parent.postMessage({ pluginMessage: { type: 'navigate-to-node', nodeId } }, '*');
+        });
+      });
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Button handlers
+    scanCurrentBtn.addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'scan-current' } }, '*');
+    });
+
+    scanSelectionBtn.addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'scan-selection' } }, '*');
+    });
+
+    scanAllBtn.addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'scan-all' } }, '*');
+    });
+
+    // Handle messages from plugin
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+
+      switch (msg.type) {
+        case 'scan-started':
+          setButtonsEnabled(false);
+          hideStatus();
+          showProgress(`Scanning ${msg.pageName}...`);
+          initialState.style.display = 'none';
+          emptyState.style.display = 'none';
+          resultsContainer.style.display = 'none';
+          break;
+
+        case 'scan-progress':
+          showProgress(`Scanning... ${msg.processed}/${msg.total} nodes`);
+          break;
+
+        case 'page-progress':
+          showProgress(`Scanning page ${msg.progress}/${msg.total}: ${msg.currentPage}`);
+          break;
+
+        case 'scan-complete':
+          setButtonsEnabled(true);
+          hideProgress();
+
+          if (msg.results.length === 0) {
+            showStatus(`No unbound variables found in ${msg.pageName}`, 'success');
+          } else {
+            showStatus(`Found ${msg.results.length} unbound variable${msg.results.length !== 1 ? 's' : ''} in ${msg.pageName}`, 'warning');
+          }
+
+          renderResults(msg.results);
+          break;
+
+        case 'scan-cancelled':
+          setButtonsEnabled(true);
+          hideProgress();
+          showStatus('Scan cancelled', 'info');
+          break;
+
+        case 'scan-error':
+          setButtonsEnabled(true);
+          hideProgress();
+          showStatus(msg.message, 'error');
+          break;
+
+        case 'navigate-success':
+          // Could show a brief feedback, but navigation itself is the feedback
+          break;
+
+        case 'navigate-error':
+          showStatus(msg.message, 'error');
+          break;
+      }
+    };
+  </script>
+</body>
+</html>
