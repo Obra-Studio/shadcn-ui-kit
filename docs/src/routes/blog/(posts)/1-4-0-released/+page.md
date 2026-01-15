@@ -20,7 +20,7 @@ With [Obra Studio](http://obra.studio/) we've helped clients across the world cu
 
 *Check out our [Obra shadcn/ui CSS export plugin](https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export) to automatically export your variable theme to a shadcn/ui theme!*
 
-We've released the 1.4.0 version of the Obra shadcn/ui kit. This release comes with a lot of improvements and bug fixes. Check out the [changelog](/changelog) for all details.
+We've released the 1.4.0 version of the Obra shadcn/ui kit. As always, grab the kit [on the Figma community page](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui). This release comes with a lot of improvements and bug fixes. Check out the [changelog](/changelog) for all details.
 
 ### Main features
 
