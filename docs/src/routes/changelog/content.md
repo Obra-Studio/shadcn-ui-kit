@@ -333,7 +333,7 @@ June 16, 2025
 * Correction on Typography: we ended up using Geist, not inter. Thanks Jorre Vandenbusche for the report.
 * Added more context to hover card accessibility issue by linking to Github issue
 
-### 0.1.0 (Public beta)
+## 0.1.0 (Public beta)
 
 June 11, 2025
 
