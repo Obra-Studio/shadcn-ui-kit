@@ -1,89 +1,87 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 :root {
-    --radius: 0.625rem;  /* 10px */
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+	--radius: 0.625rem; /* 10px */
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.145 0 0);
+	--primary: oklch(0.205 0 0);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.97 0 0);
+	--secondary-foreground: oklch(0.205 0 0);
+	--muted: oklch(0.97 0 0);
+	--muted-foreground: oklch(0.556 0 0);
+	--accent: oklch(0.97 0 0);
+	--accent-foreground: oklch(0.205 0 0);
+	--destructive: oklch(0.577 0.245 27.325);
+	--border: oklch(0.922 0 0);
+	--input: oklch(0.922 0 0);
+	--ring: oklch(0.708 0 0);
 }
 
 @theme inline {
-    /* Radii */
-    --radius-sm: calc(var(--radius) - 4px); /* 6px */
-    --radius-md: calc(var(--radius) - 2px); /* 8px */
-    --radius-lg: var(--radius); /* 10px */
-    --radius-xl: calc(var(--radius) + 4px); /* 12px */
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-accent: var(--accent);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-destructive: var(--destructive);
-    --color-border: var(--border);
-    --color-input: var(--input);
-    --color-ring: var(--ring);
+	/* Radii */
+	--radius-sm: calc(var(--radius) - 4px); /* 6px */
+	--radius-md: calc(var(--radius) - 2px); /* 8px */
+	--radius-lg: var(--radius); /* 10px */
+	--radius-xl: calc(var(--radius) + 4px); /* 12px */
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
 }
 
 @layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
+	* {
+		@apply border-border outline-ring/50;
+	}
 
-    body {
-        @apply bg-background text-foreground;
-    }
+	body {
+		@apply bg-background text-foreground;
+	}
 }
 
 html,
 body {
-    height: 100%;
-    background: var(--color-gray-50);
+	height: 100%;
+	background: var(--color-gray-50);
 }
 
 /* Svelte thing to have an extra div */
-body>div {
-    height: 100%;
+body > div {
+	height: 100%;
 }
 
-body> div > .main-flex-container {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    max-width: 1280px;
-    margin: 0 auto;
+body > div > .main-flex-container {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	max-width: 1280px;
+	margin: 0 auto;
 }
 
-
-
- .container {
-     max-width: 1000px;
- }
+.container {
+	max-width: 1000px;
+}
 
 .container--small {
-    max-width: 700px;
+	max-width: 700px;
 }
 
 .container--centered {
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .intro {
-    font-size: 120%;
+	font-size: 120%;
 }
