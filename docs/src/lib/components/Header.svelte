@@ -45,7 +45,7 @@
 		</a>
 
 		<!-- Desktop Navigation -->
-		<nav class="hidden lg:flex items-center pl-8 gap-0 text-base">
+		<nav class="hidden min-[960px]:flex items-center pl-8 gap-0 text-base">
 			<a
 				href="/"
 				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {$page.url.pathname === '/' ? 'bg-accent dark:text-white' : ''}"
@@ -112,7 +112,7 @@
 		<Button
 			variant="ghost"
 			size="icon"
-			class="lg:hidden"
+			class="min-[960px]:hidden"
 			onclick={toggleMobileMenu}
 			aria-label="Toggle menu"
 		>
@@ -129,7 +129,7 @@
 <!-- Mobile Menu Overlay -->
 {#if mobileMenuOpen}
 	<button
-		class="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 lg:hidden"
+		class="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 min-[960px]:hidden"
 		onclick={closeMobileMenu}
 		aria-label="Close menu"
 	></button>
@@ -137,7 +137,7 @@
 
 <!-- Mobile Menu -->
 <div
-	class="fixed top-0 right-0 h-full w-72 bg-background border-l border-border z-50 transform transition-transform duration-300 ease-in-out lg:hidden {mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}"
+	class="fixed top-0 right-0 h-full w-72 bg-background border-l border-border z-50 transform transition-transform duration-300 ease-in-out min-[960px]:hidden {mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}"
 >
 	<div class="flex items-center justify-between p-4 border-b border-border">
 		<span class="font-semibold">Menu</span>
