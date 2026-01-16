@@ -254,7 +254,7 @@
 
 	/* Section base styles */
 	.section {
-		@apply flex flex-col items-center gap-10 md:px-10;
+		@apply flex flex-col items-center gap-10 py-12 md:px-10 md:py-20;
 	}
 
 	/* Heading styles */
