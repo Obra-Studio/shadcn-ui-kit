@@ -1,42 +1,11 @@
-<script>
-	import '../app.css';
-	import Header from '$lib/components/Header.svelte';
-	import Footer from '$lib/components/Footer.svelte';
+<script lang="ts">
+	import './layout.css';
+	import favicon from '$lib/assets/favicon.svg';
+	import { ModeWatcher } from 'mode-watcher';
 
 	let { children } = $props();
 </script>
 
-<div class="main-flex-container">
-	<Header />
-	<div class="container">
-		<main>
-			{@render children()}
-		</main>
-	</div>
-	<Footer />
-</div>
-
-<style>
-	.container {
-		max-width: 1280px;
-		margin: 0 auto;
-		width: 100%;
-		flex-grow: 1;
-	}
-
-	@media (min-width: 960px) {
-		.container {
-			display: flex;
-		}
-	}
-
-	main {
-		padding: 1.5rem;
-	}
-
-	@media (min-width: 960px) {
-		main {
-			flex-grow: 1;
-		}
-	}
-</style>
+<svelte:head><link rel="icon" href={favicon} /></svelte:head>
+<ModeWatcher />
+{@render children()}
