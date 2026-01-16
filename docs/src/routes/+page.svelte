@@ -58,9 +58,9 @@
 			text: "Hey team Obra, just wanted to say thank you for creating this file. It's an awesome foundation and It brings me hope seeing more open source projects surface to the top! ",
 		},
 		{
-			name: 'Sarah Wilson',
+			name: 'Alexandre Shyjada',
 			role: '@username',
-			text: 'As a lead designer, Obra has streamlined our workflow. Its comprehensive component library and intuitive design make it an indispensable tool.',
+			text: 'Very helpfull, thank you for help me in my Figma Make projects!',
 		},
 	];
 
@@ -161,11 +161,17 @@
 		<div
 			class="flex flex-col md:flex-row gap-6 items-center [&>*]:w-full md:[&>*]:w-auto w-[240px] items-center justify-center"
 		>
-			<Button variant="default">
+			<Button
+				variant="default"
+				href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui"
+			>
 				<Figma />
 				Get design file
 			</Button>
-			<Button variant="secondary">
+			<Button
+				variant="secondary"
+				href="https://github.com/obra-studio/shadcn-ui-kit"
+			>
 				<Github />
 				Discuss on GitHub
 			</Button>
@@ -512,7 +518,11 @@
 				Install
 			</p>
 			<h2 class="heading-2 text-center">Get started today</h2>
-			<Button variant="default"><Figma /> Get design file</Button>
+			<Button
+				variant="default"
+				href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui"
+				><Figma /> Get design file</Button
+			>
 		</div>
 	</section>
 </div>

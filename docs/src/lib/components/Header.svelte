@@ -54,10 +54,14 @@
 	  />
 	  <span class="sr-only">Toggle theme</span>
 	</Button> -->
-		<Button size="sm" variant="secondary" class="hidden sm:flex">
+		<Button
+			size="sm"
+			variant="secondary"
+			href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui"
+			class="hidden sm:flex"
+		>
 			<Figma />
 			Get design file
 		</Button>
 	</div>
 </header>
-
