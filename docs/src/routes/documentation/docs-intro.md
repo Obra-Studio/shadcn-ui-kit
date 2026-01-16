@@ -16,4 +16,4 @@ Next to the library itself, we provide a plugin called [Obra shadcn/ui tools](ht
 
 ### Business model
 
-We follow another model than other kits, where we provide the kit for free, but provide [customization services with our design team](https://obra.studio/shadcn-ui-kit-customization).
+We follow another model than other kits, where we provide the kit for free, but provide [customization services with our design team](/customization-services).

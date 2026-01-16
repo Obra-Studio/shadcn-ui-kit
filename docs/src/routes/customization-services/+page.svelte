@@ -45,7 +45,7 @@
 	</div>
 	<div class="mx-auto max-w-4xl text-center relative z-10">
 		<div class="mb-8 inline-flex items-center gap-2 rounded-full border border-border/50 bg-card/50 px-4 py-1.5 text-sm backdrop-blur-sm">
-			<span class="h-2 w-2 rounded-full bg-foreground animate-pulse"></span>
+			<span class="h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
 			<span class="text-muted-foreground">Now accepting {acceptingQuarter} projects</span>
 		</div>
 
@@ -107,9 +107,7 @@
 
 	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-				<Palette class="h-6 w-6 text-primary-foreground" />
-			</div>
+			<Palette class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Customized shadcn design system</h3>
 			<p class="text-muted-foreground">
 				We don't just theme shadcn — we transform it into your unique brand identity with custom colors, variants, and components that your team can use.
@@ -117,9 +115,7 @@
 		</div>
 
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-				<Zap class="h-6 w-6 text-primary-foreground" />
-			</div>
+			<Zap class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Rapid redesign</h3>
 			<p class="text-muted-foreground">
 				Skip months of design system work. Get a production-ready kit customized to your brand in weeks.
@@ -127,9 +123,7 @@
 		</div>
 
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-				<Code class="h-6 w-6 text-primary-foreground" />
-			</div>
+			<Code class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Design → development workflow that actually matches shadcn</h3>
 			<p class="text-muted-foreground">
 				Figma components that map 1:1 with shadcn/ui code. No translation layer needed. Check out our <a href="https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export" target="_blank" rel="noopener noreferrer" class="underline hover:text-foreground transition-colors">CSS export plugin</a>.
@@ -151,9 +145,7 @@
 
 	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-				<Paintbrush class="h-6 w-6 text-primary-foreground" />
-			</div>
+			<Paintbrush class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Kit customization</h3>
 			<p class="text-muted-foreground">
 				We apply best-in-class design system practices to adapt the kit to your brand. For a fixed price, we customize colors, typography and icons.
@@ -161,9 +153,7 @@
 		</div>
 
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-				<Link class="h-6 w-6 text-primary-foreground" />
-			</div>
+			<Link class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Link to development</h3>
 			<p class="text-muted-foreground">
 				Automate design token flows and customize our code export plugin to your needs.
@@ -171,9 +161,7 @@
 		</div>
 
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary">
-				<RefreshCw class="h-6 w-6 text-primary-foreground" />
-			</div>
+			<RefreshCw class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Upgrading your kit</h3>
 			<p class="text-muted-foreground">
 				If you're using an older version of our kit, we can help you modernize it so you can enjoy the latest and greatest changes.
@@ -190,23 +178,23 @@
 			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">What makes us different?</h2>
 			<p class="mt-4 text-lg text-muted-foreground">We're not a traditional design agency. We're a product-focused team that happens to be obsessed with shadcn/ui.</p>
 		</div>
-		<div class="space-y-6">
-			<div class="relative flex gap-4 rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-				<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-sm font-semibold text-foreground">01</div>
+		<div class="space-y-10">
+			<div class="relative flex gap-6">
+				<div class="shrink-0 text-5xl font-bold tracking-tighter text-muted-foreground/30">01</div>
 				<div>
 					<h3 class="text-lg font-semibold">We think like a product team, not an agency</h3>
 					<p class="mt-2 text-muted-foreground leading-relaxed">You get a partner who cares about outcomes. We optimize for shipping speed, technical sustainability, and long-term quality. Flashy one-off deliverables don't move products forward; reliable systems do.</p>
 				</div>
 			</div>
-			<div class="relative flex gap-4 rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-				<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-sm font-semibold text-foreground">02</div>
+			<div class="relative flex gap-6">
+				<div class="shrink-0 text-5xl font-bold tracking-tighter text-muted-foreground/30">02</div>
 				<div>
 					<h3 class="text-lg font-semibold">We've shipped this before</h3>
 					<p class="mt-2 text-muted-foreground leading-relaxed">This isn't theoretical. We've built and scaled shadcn-based design systems for multiple product teams, including full redesigns, migrations, and steady iteration at scale.</p>
 				</div>
 			</div>
-			<div class="relative flex gap-4 rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-				<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted text-sm font-semibold text-foreground">03</div>
+			<div class="relative flex gap-6">
+				<div class="shrink-0 text-5xl font-bold tracking-tighter text-muted-foreground/30">03</div>
 				<div>
 					<h3 class="text-lg font-semibold">Scale up or down when you need to</h3>
 					<p class="mt-2 text-muted-foreground leading-relaxed">Our bi-weekly sprint model gives you flexibility. Increase scope when priorities shift. Pull back when things stabilize. No long-term contracts. No surprise costs.</p>
@@ -237,7 +225,7 @@
 			<p class="text-muted-foreground mb-6">
 				We customize the entire shadcn/ui kit to match your brand identity. This becomes your team's foundation for all future design work.
 			</p>
-			<ul class="space-y-3 text-sm">
+			<ul class="space-y-3">
 				<li class="flex items-center gap-2">
 					<span class="text-foreground">•</span>
 					<span class="text-muted-foreground">Colors, typography, and icons adapted to your brand guide</span>
@@ -262,7 +250,7 @@
 			<p class="text-muted-foreground mb-6">
 				Each sprint delivers 10–20 engineering-ready screens, including all underlying UI states and custom components needed.
 			</p>
-			<ul class="space-y-3 text-sm">
+			<ul class="space-y-3">
 				<li class="flex items-center gap-2">
 					<span class="text-foreground">•</span>
 					<span class="text-muted-foreground">Components with properties that map to React/code</span>
@@ -286,7 +274,7 @@
 				<div class="flex-grow">
 					<h3 class="text-xl font-semibold mb-2">Need more screens?</h3>
 					<p class="text-muted-foreground">
-						Purchase multiple sprints to cover your entire product. Most teams start with kit customization + 1 sprint, then add more as needed. No long-term commitment required.
+						Purchase multiple screen sprints to cover your entire product. Most teams start with kit customization + 1 sprint, then add more as needed. No long-term commitment required.
 					</p>
 				</div>
 				<div class="shrink-0">

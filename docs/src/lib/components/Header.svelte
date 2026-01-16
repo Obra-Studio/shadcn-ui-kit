@@ -32,8 +32,9 @@
 </script>
 
 <header
-	class="border-b border-border flex items-center justify-between px-4 md:px-7 py-2 md:py-4 w-full"
+	class="border-b border-border w-full px-4 md:px-7"
 >
+	<div class="flex items-center justify-between py-2 md:py-4 w-full max-w-[1440px] mx-auto">
 	<div class="flex items-center gap-3">
 		<a href="/">
 			<img
@@ -121,6 +122,7 @@
 				<Menu class="h-5 w-5" />
 			{/if}
 		</Button>
+	</div>
 	</div>
 </header>
 
