@@ -124,9 +124,13 @@
     filter: invert(1);
   }
 
+  .page-container {
+	@apply w-full max-w-[1440px] mx-auto;
+  }
+
   /* Section base styles */
   .section {
-    @apply flex flex-col gap-10 items-center  px-4 py-12 md:px-10 lg:py-20 w-full max-w-[1440px] mx-auto;
+    @apply flex flex-col gap-10 items-center  px-4 py-12 md:px-10 lg:py-20;
   }
 
   /* Heading styles */

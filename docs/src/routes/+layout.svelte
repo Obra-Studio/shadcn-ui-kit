@@ -13,6 +13,8 @@
 
 <div class="bg-background flex flex-col items-start w-full min-h-screen">
 	<Header />
-	{@render children()}
+	<div class="page-container">
+		{@render children()}
+	</div>
 	<Footer />
 </div>
