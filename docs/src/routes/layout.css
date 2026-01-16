@@ -254,12 +254,12 @@
 
 	/* Section base styles */
 	.section {
-		@apply flex flex-col items-center gap-10 px-4 py-12 md:px-10 lg:py-20;
+		@apply flex flex-col items-center gap-10 md:px-10;
 	}
 
 	/* Heading styles */
 	.heading-1 {
-		@apply text-foreground text-3xl leading-[40px] font-semibold tracking-[-1.5px] sm:text-6xl sm:leading-[48px] md:text-[48px] md:leading-[64px];
+		@apply text-foreground text-3xl/10 font-semibold tracking-[-1.5px] md:text-[48px]/15;
 	}
 
 	.heading-2 {

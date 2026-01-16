@@ -178,8 +178,12 @@
 		</div>
 		<div class="pt-4 w-full">
 			<div
-				class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[946px] mx-auto"
-			></div>
+				class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[946px] mx-auto flex justify-center items-center"
+			>
+				<p class="text-center text-muted-foreground">
+					Screenshot placeholder
+				</p>
+			</div>
 			<p class="text-center text-sm text-muted-foreground pt-4">
 				Recreation of the October '25 drop. All new components available
 				in Figma.
@@ -359,8 +363,12 @@
 			class="flex flex-col gap-8 items-center justify-center pt-4 w-full"
 		>
 			<div
-				class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[1200px] mx-auto"
-			></div>
+				class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[1200px] mx-auto flex justify-center items-center"
+			>
+				<p class="text-center text-muted-foreground">
+					Video placeholder
+				</p>
+			</div>
 		</div>
 	</section>
 
