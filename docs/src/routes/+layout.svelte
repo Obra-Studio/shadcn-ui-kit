@@ -8,29 +8,32 @@
 	import { derived } from 'svelte/store';
 
 	let { children } = $props();
-	
+
 	// Determine container width based on route
 	// To add more container widths:
 	// 1. Add a new variant in layout.css (e.g., .page-container--custom { --container-width: 800px; })
 	// 2. Add a condition here to return the class name for that route
 	const containerClass = derived(page, ($page) => {
 		const pathname = $page.url.pathname;
-		
+
 		// Blog routes use narrow container (700px)
 		if (pathname.startsWith('/blog')) {
 			return 'page-container--narrow';
 		}
-		
+
 		// Changelog and authors also use narrow container
-		if (pathname.startsWith('/changelog') || pathname.startsWith('/authors')) {
+		if (
+			pathname.startsWith('/changelog') ||
+			pathname.startsWith('/authors')
+		) {
 			return 'page-container--narrow';
 		}
-		
+
 		// Add more route-specific container widths here as needed:
 		// if (pathname.startsWith('/some-route')) {
 		//   return 'page-container--medium';  // 1000px
 		// }
-		
+
 		// Default to wide container (1440px)
 		return '';
 	});
