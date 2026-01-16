@@ -124,10 +124,6 @@
 		max-width: 100%;
 	}
 
-	main {
-		background: var(--color-white);
-	}
-
 	main img {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 		border: 1px solid var(--color-gray-200);
@@ -235,7 +231,7 @@
 	}
 
 	.container {
-		@apply mx-auto w-full p-4 md:p-6 lg:p-8;
+		@apply mx-auto w-full grow-1 p-4 md:p-6 lg:p-8;
 		max-width: var(--container-width, 1440px);
 	}
 

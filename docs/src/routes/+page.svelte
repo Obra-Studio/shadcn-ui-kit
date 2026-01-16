@@ -144,320 +144,303 @@
 	<title>Home - Obra shadcn/ui Figma kit</title>
 </svelte:head>
 
-<div class="page-container">
-	<!-- Hero Section -->
-	<section class="section">
-		<div
-			class="flex flex-col gap-8 items-center justify-center text-center"
+<!-- Hero Section -->
+<section class="section">
+	<div class="flex flex-col gap-8 items-center justify-center text-center">
+		<p class="font-normal leading-6 text-md text-muted-foreground">
+			Duplicated over 25,000 times on Figma Community
+		</p>
+		<h1 class="heading-1">
+			A free, high quality Figma library<br class="hidden md:block" />
+			to design and theme shadcn/ui projects
+		</h1>
+	</div>
+	<div
+		class="flex flex-col md:flex-row gap-6 items-center [&>*]:w-full md:[&>*]:w-auto w-[240px] items-center justify-center"
+	>
+		<Button
+			variant="default"
+			href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui"
 		>
-			<p class="font-normal leading-6 text-md text-muted-foreground">
-				Duplicated over 25,000 times on Figma Community
-			</p>
-			<h1 class="heading-1">
-				A free, high quality Figma library<br class="hidden md:block" />
-				to design and theme shadcn/ui projects
-			</h1>
-		</div>
-		<div
-			class="flex flex-col md:flex-row gap-6 items-center [&>*]:w-full md:[&>*]:w-auto w-[240px] items-center justify-center"
+			<Figma />
+			Get design file
+		</Button>
+		<Button
+			variant="secondary"
+			href="https://github.com/obra-studio/shadcn-ui-kit"
 		>
-			<Button
-				variant="default"
-				href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui"
-			>
-				<Figma />
-				Get design file
-			</Button>
-			<Button
-				variant="secondary"
-				href="https://github.com/obra-studio/shadcn-ui-kit"
-			>
-				<Github />
-				Discuss on GitHub
-			</Button>
-		</div>
-		<div class="pt-4 w-full">
-			<div
-				class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[946px] mx-auto flex justify-center items-center"
-			>
-				<p class="text-center text-muted-foreground">
-					Screenshot placeholder
-				</p>
-			</div>
-			<p class="text-center text-sm text-muted-foreground pt-4">
-				Recreation of the October '25 drop. All new components available
-				in Figma.
+			<Github />
+			Discuss on GitHub
+		</Button>
+	</div>
+	<div class="pt-4 w-full">
+		<div
+			class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[946px] mx-auto flex justify-center items-center"
+		>
+			<p class="text-center text-muted-foreground">
+				Screenshot placeholder
 			</p>
 		</div>
-		<div class="pt-4 w-full max-w-[946px]">
-			<Card>
-				<CardContent class="p-8">
-					<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
-						<li class="flex gap-3 items-center">
-							<Check class="w-5 h-5 text-primary shrink-0" />
-							<span
-								class="font-normal leading-6 text-base text-foreground"
-							>
-								Open-source and free to use
-							</span>
-						</li>
-						<li class="flex gap-3 items-center">
-							<Check class="w-5 h-5 text-primary shrink-0" />
-							<span
-								class="font-normal leading-6 text-base text-foreground"
-							>
-								Recreates all 56 shadcn/ui components accurately
-							</span>
-						</li>
-						<li class="flex gap-3 items-center">
-							<Check class="w-5 h-5 text-primary shrink-0" />
-							<span
-								class="font-normal leading-6 text-base text-foreground"
-							>
-								Meticulously crafted by Figma experts
-							</span>
-						</li>
-						<li class="flex gap-3 items-center">
-							<Check class="w-5 h-5 text-primary shrink-0" />
-							<span
-								class="font-normal leading-6 text-base text-foreground"
-							>
-								All Tailwind 4 colors and 1500+ Lucide Icons
-							</span>
-						</li>
-						<li class="flex gap-3 items-center">
-							<Check class="w-5 h-5 text-primary shrink-0" />
-							<span
-								class="font-normal leading-6 text-base text-foreground"
-							>
-								Light & dark mode with theming support
-							</span>
-						</li>
-						<li class="flex gap-3 items-center">
-							<Check class="w-5 h-5 text-primary shrink-0" />
-							<span
-								class="font-normal leading-6 text-base text-foreground"
-							>
-								No complex licensing: MIT Licensed
-							</span>
-						</li>
-					</ul>
-				</CardContent>
-			</Card>
-		</div>
-	</section>
-
-	<!-- Testimonials Section -->
-	<section class="section">
-		<div
-			class="flex flex-col gap-6 items-center justify-center text-center"
-		>
-			<p
-				class="font-medium leading-6 text-sm text-muted-foreground tracking-[1px] uppercase"
-			>
-				Testimonials
-			</p>
-			<h2 class="heading-2">What the community is saying</h2>
-		</div>
-		<div class="flex flex-col gap-8 items-start justify-center pt-4 w-full">
-			<div
-				class="flex flex-col md:flex-row gap-8 items-center w-full
-  "
-			>
-				{#each testimonials.slice(0, 3) as testimonial}
-					<Card class="basis-1/2">
-						<CardContent class="p-6">
-							<div class="flex flex-col gap-4 items-start py-2">
-								<p
-									class="font-normal leading-6 text-lg text-muted-foreground w-full"
-								>
-									{testimonial.text}
-								</p>
-								<div class="flex gap-3 items-center">
-									<!-- <div
-										class="relative rounded-full w-[46px] h-[46px]"
-									>
-										<img
-											src={testimonialAvatar}
-											alt={testimonial.name}
-											class="rounded-full w-full h-full object-cover"
-										/>
-									</div> -->
-									<div
-										class="flex flex-col items-start leading-6 text-lg text-foreground"
-									>
-										<p class="font-bold">
-											&mdash; {testimonial.name}
-										</p>
-										<!-- <p class="font-normal">
-											{testimonial.role}
-										</p> -->
-									</div>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-				{/each}
-			</div>
-			<div
-				class="flex flex-col md:flex-row gap-[33px] items-center w-full"
-			>
-				{#each testimonials.slice(3, 6) as testimonial}
-					<Card class="basis-1/3">
-						<CardContent class="p-6">
-							<div class="flex flex-col gap-4 items-start py-2">
-								<p
-									class="font-normal leading-6 text-lg text-muted-foreground w-full"
-								>
-									{testimonial.text}
-								</p>
-								<div class="flex gap-3 items-center">
-									<!-- <div
-										class="relative rounded-full w-[46px] h-[46px]"
-									>
-										<img
-											src={testimonialAvatar}
-											alt={testimonial.name}
-											class="rounded-full w-full h-full object-cover"
-										/>
-									</div> -->
-									<div
-										class="flex flex-col items-start leading-6 text-lg text-foreground"
-									>
-										<p class="font-bold">
-											&mdash; {testimonial.name}
-										</p>
-										<!-- <p class="font-normal">
-											{testimonial.role}
-										</p> -->
-									</div>
-								</div>
-							</div>
-						</CardContent>
-					</Card>
-				{/each}
-			</div>
-		</div>
-	</section>
-
-	<!-- Plugins Section -->
-	<section class="section">
-		<div
-			class="flex flex-col gap-6 items-center justify-center text-center"
-		>
-			<p
-				class="font-medium leading-6 text-sm text-muted-foreground tracking-[1px] uppercase"
-			>
-				Build
-			</p>
-			<h2 class="heading-2">Design to dev</h2>
-			<p
-				class="font-normal leading-6 text-lg text-muted-foreground max-w-[660px]"
-			>
-				Export CSS directly from Figma and skip the handoff. Our plugin
-				transforms your shadcn/ui designs into ready-to-use code,
-				eliminating the gap between design and development.
-			</p>
-		</div>
-		<div
-			class="flex flex-col gap-8 items-center justify-center pt-4 w-full"
-		>
-			<div
-				class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[1200px] mx-auto flex justify-center items-center"
-			>
-				<p class="text-center text-muted-foreground">
-					Video placeholder
-				</p>
-			</div>
-		</div>
-	</section>
-
-	<!-- Customization & Newsletter Section -->
-	<section class="section">
-		<div
-			class="flex flex-col gap-6 items-center justify-center text-center"
-		>
-			<p
-				class="font-medium leading-6 text-sm text-muted-foreground tracking-[1px] uppercase"
-			>
-				Services
-			</p>
-			<h2 class="heading-2">Work with us</h2>
-		</div>
-		<div
-			class="flex flex-col md:flex-row gap-8 justify-center items-center pt-4 w-full"
-		>
-			<!-- Kit Customization Card -->
-			<Card class="w-full md:flex-1 md:max-w-md">
-				<CardContent class="p-6">
-					<div class="flex flex-col gap-6 items-start h-full">
-						<div class="flex flex-col gap-4 items-start w-full">
-							<div
-								class="bg-primary flex items-center justify-center rounded-full w-14 h-14"
-							>
-								<Palette class="w-7 h-7 text-secondary" />
-							</div>
-							<h3 class="heading-3">Let's work together</h3>
-						</div>
-						<div class="flex flex-col gap-4 items-start flex-grow">
-							<p
-								class="font-normal leading-7 text-lg text-muted-foreground"
-							>
-								Reach out for questions, partnerships, or
-								collaborations. Whether you need help
-								customizing your kit, want to explore working
-								together, or have ideas to share, we'd love to
-								hear from you.
-							</p>
-						</div>
-						<a
-							href="https://obra.studio/shadcn-ui-kit-customization/"
-							target="_blank"
-							rel="noopener noreferrer"
+		<p class="text-center text-sm text-muted-foreground pt-4">
+			Recreation of the October '25 drop. All new components available in
+			Figma.
+		</p>
+	</div>
+	<div class="pt-4 w-full max-w-[946px]">
+		<Card>
+			<CardContent class="p-8">
+				<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<li class="flex gap-3 items-center">
+						<Check class="w-5 h-5 text-primary shrink-0" />
+						<span
+							class="font-normal leading-6 text-base text-foreground"
 						>
-							<Button variant="outline" size="sm"
-								>Get in touch</Button
-							>
-						</a>
-					</div>
-				</CardContent>
-			</Card>
+							Open-source and free to use
+						</span>
+					</li>
+					<li class="flex gap-3 items-center">
+						<Check class="w-5 h-5 text-primary shrink-0" />
+						<span
+							class="font-normal leading-6 text-base text-foreground"
+						>
+							Recreates all 56 shadcn/ui components accurately
+						</span>
+					</li>
+					<li class="flex gap-3 items-center">
+						<Check class="w-5 h-5 text-primary shrink-0" />
+						<span
+							class="font-normal leading-6 text-base text-foreground"
+						>
+							Meticulously crafted by Figma experts
+						</span>
+					</li>
+					<li class="flex gap-3 items-center">
+						<Check class="w-5 h-5 text-primary shrink-0" />
+						<span
+							class="font-normal leading-6 text-base text-foreground"
+						>
+							All Tailwind 4 colors and 1500+ Lucide Icons
+						</span>
+					</li>
+					<li class="flex gap-3 items-center">
+						<Check class="w-5 h-5 text-primary shrink-0" />
+						<span
+							class="font-normal leading-6 text-base text-foreground"
+						>
+							Light & dark mode with theming support
+						</span>
+					</li>
+					<li class="flex gap-3 items-center">
+						<Check class="w-5 h-5 text-primary shrink-0" />
+						<span
+							class="font-normal leading-6 text-base text-foreground"
+						>
+							No complex licensing: MIT Licensed
+						</span>
+					</li>
+				</ul>
+			</CardContent>
+		</Card>
+	</div>
+</section>
 
-			<!-- Newsletter Card -->
-			<Card class="w-full md:flex-1 md:max-w-md">
-				<CardContent class="p-6">
-					<div class="flex flex-col gap-6 items-start h-full">
-						<div class="flex flex-col gap-4 items-start w-full">
-							<div
-								class="bg-primary flex items-center justify-center rounded-full w-14 h-14"
-							>
-								<Sparkles class="w-7 h-7 text-secondary" />
-							</div>
-							<h3 class="heading-3">Stay updated</h3>
-						</div>
-						<div class="flex flex-col gap-4 items-start flex-grow">
+<!-- Testimonials Section -->
+<section class="section">
+	<div class="flex flex-col gap-6 items-center justify-center text-center">
+		<p
+			class="font-medium leading-6 text-sm text-muted-foreground tracking-[1px] uppercase"
+		>
+			Testimonials
+		</p>
+		<h2 class="heading-2">What the community is saying</h2>
+	</div>
+	<div class="flex flex-col gap-8 items-start justify-center pt-4 w-full">
+		<div
+			class="flex flex-col md:flex-row gap-8 items-center w-full
+  "
+		>
+			{#each testimonials.slice(0, 3) as testimonial}
+				<Card class="basis-1/2">
+					<CardContent class="p-6">
+						<div class="flex flex-col gap-4 items-start py-2">
 							<p
-								class="font-normal leading-7 text-lg text-muted-foreground"
+								class="font-normal leading-6 text-lg text-muted-foreground w-full"
 							>
-								Get the latest updates, new component releases,
-								design tips, and insights delivered straight to
-								your inbox. Join our community of designers and
-								developers building with shadcn/ui.
+								{testimonial.text}
 							</p>
+							<div class="flex gap-3 items-center">
+								<!-- <div
+										class="relative rounded-full w-[46px] h-[46px]"
+									>
+										<img
+											src={testimonialAvatar}
+											alt={testimonial.name}
+											class="rounded-full w-full h-full object-cover"
+										/>
+									</div> -->
+								<div
+									class="flex flex-col items-start leading-6 text-lg text-foreground"
+								>
+									<p class="font-bold">
+										&mdash; {testimonial.name}
+									</p>
+									<!-- <p class="font-normal">
+											{testimonial.role}
+										</p> -->
+								</div>
+							</div>
 						</div>
-						<a href="/newsletter">
-							<Button variant="outline" size="sm"
-								>Subscribe to newsletter</Button
-							>
-						</a>
-					</div>
-				</CardContent>
-			</Card>
+					</CardContent>
+				</Card>
+			{/each}
 		</div>
-	</section>
+		<div class="flex flex-col md:flex-row gap-[33px] items-center w-full">
+			{#each testimonials.slice(3, 6) as testimonial}
+				<Card class="basis-1/3">
+					<CardContent class="p-6">
+						<div class="flex flex-col gap-4 items-start py-2">
+							<p
+								class="font-normal leading-6 text-lg text-muted-foreground w-full"
+							>
+								{testimonial.text}
+							</p>
+							<div class="flex gap-3 items-center">
+								<!-- <div
+										class="relative rounded-full w-[46px] h-[46px]"
+									>
+										<img
+											src={testimonialAvatar}
+											alt={testimonial.name}
+											class="rounded-full w-full h-full object-cover"
+										/>
+									</div> -->
+								<div
+									class="flex flex-col items-start leading-6 text-lg text-foreground"
+								>
+									<p class="font-bold">
+										&mdash; {testimonial.name}
+									</p>
+									<!-- <p class="font-normal">
+											{testimonial.role}
+										</p> -->
+								</div>
+							</div>
+						</div>
+					</CardContent>
+				</Card>
+			{/each}
+		</div>
+	</div>
+</section>
 
-	<!-- Case Studies Section -->
-	<!-- <section
+<!-- Plugins Section -->
+<section class="section">
+	<div class="flex flex-col gap-6 items-center justify-center text-center">
+		<p
+			class="font-medium leading-6 text-sm text-muted-foreground tracking-[1px] uppercase"
+		>
+			Build
+		</p>
+		<h2 class="heading-2">Design to dev</h2>
+		<p
+			class="font-normal leading-6 text-lg text-muted-foreground max-w-[660px]"
+		>
+			Export CSS directly from Figma and skip the handoff. Our plugin
+			transforms your shadcn/ui designs into ready-to-use code,
+			eliminating the gap between design and development.
+		</p>
+	</div>
+	<div class="flex flex-col gap-8 items-center justify-center pt-4 w-full">
+		<div
+			class="bg-muted border border-border aspect-[946/593] rounded-2xl w-full max-w-[1200px] mx-auto flex justify-center items-center"
+		>
+			<p class="text-center text-muted-foreground">Video placeholder</p>
+		</div>
+	</div>
+</section>
+
+<!-- Customization & Newsletter Section -->
+<section class="section">
+	<div class="flex flex-col gap-6 items-center justify-center text-center">
+		<p
+			class="font-medium leading-6 text-sm text-muted-foreground tracking-[1px] uppercase"
+		>
+			Services
+		</p>
+		<h2 class="heading-2">Work with us</h2>
+	</div>
+	<div
+		class="flex flex-col md:flex-row gap-8 justify-center items-center pt-4 w-full"
+	>
+		<!-- Kit Customization Card -->
+		<Card class="w-full md:flex-1 md:max-w-md">
+			<CardContent class="p-6">
+				<div class="flex flex-col gap-6 items-start h-full">
+					<div class="flex flex-col gap-4 items-start w-full">
+						<div
+							class="bg-primary flex items-center justify-center rounded-full w-14 h-14"
+						>
+							<Palette class="w-7 h-7 text-secondary" />
+						</div>
+						<h3 class="heading-3">Let's work together</h3>
+					</div>
+					<div class="flex flex-col gap-4 items-start flex-grow">
+						<p
+							class="font-normal leading-7 text-lg text-muted-foreground"
+						>
+							Reach out for questions, partnerships, or
+							collaborations. Whether you need help customizing
+							your kit, want to explore working together, or have
+							ideas to share, we'd love to hear from you.
+						</p>
+					</div>
+					<a
+						href="https://obra.studio/shadcn-ui-kit-customization/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Button variant="outline" size="sm">Get in touch</Button
+						>
+					</a>
+				</div>
+			</CardContent>
+		</Card>
+
+		<!-- Newsletter Card -->
+		<Card class="w-full md:flex-1 md:max-w-md">
+			<CardContent class="p-6">
+				<div class="flex flex-col gap-6 items-start h-full">
+					<div class="flex flex-col gap-4 items-start w-full">
+						<div
+							class="bg-primary flex items-center justify-center rounded-full w-14 h-14"
+						>
+							<Sparkles class="w-7 h-7 text-secondary" />
+						</div>
+						<h3 class="heading-3">Stay updated</h3>
+					</div>
+					<div class="flex flex-col gap-4 items-start flex-grow">
+						<p
+							class="font-normal leading-7 text-lg text-muted-foreground"
+						>
+							Get the latest updates, new component releases,
+							design tips, and insights delivered straight to your
+							inbox. Join our community of designers and
+							developers building with shadcn/ui.
+						</p>
+					</div>
+					<a href="/newsletter">
+						<Button variant="outline" size="sm"
+							>Subscribe to newsletter</Button
+						>
+					</a>
+				</div>
+			</CardContent>
+		</Card>
+	</div>
+</section>
+
+<!-- Case Studies Section -->
+<!-- <section
 		  class="flex flex-col gap-10 items-center px-20 py-24 w-full max-w-[1440px] mx-auto"
 	  >
 		  <div
@@ -476,61 +459,58 @@
 		  </div>
 	  </section> -->
 
-	<!-- Get in Touch Section -->
+<!-- Get in Touch Section -->
 
-	<!-- FAQ Section -->
-	<section class="section gap-[58px]">
-		<h2 class="heading-2 text-center w-full">FAQ</h2>
-		<div
-			class="flex flex-col gap-5 items-start self-center max-w-[660px] w-full"
-		>
-			<Accordion type="single" class="w-full">
-				{#each faqItems as item, index}
-					<AccordionItem
-						value={`item-${index}`}
-						class="border border-border rounded-lg hover:bg-secondary/50"
-					>
-						<AccordionTrigger class="px-6 py-6 [&>svg]:hidden">
+<!-- FAQ Section -->
+<section class="section gap-[58px]">
+	<h2 class="heading-2 text-center w-full">FAQ</h2>
+	<div
+		class="flex flex-col gap-5 items-start self-center max-w-[660px] w-full"
+	>
+		<Accordion type="single" class="w-full">
+			{#each faqItems as item, index}
+				<AccordionItem
+					value={`item-${index}`}
+					class="border border-border rounded-lg hover:bg-secondary/50"
+				>
+					<AccordionTrigger class="px-6 py-6 [&>svg]:hidden">
+						<div class="flex gap-4 items-center min-w-0 max-w-full">
 							<div
-								class="flex gap-4 items-center min-w-0 max-w-full"
+								class="bg-primary flex items-center justify-center rounded-full w-8 h-8 shrink-0"
 							>
-								<div
-									class="bg-primary flex items-center justify-center rounded-full w-8 h-8 shrink-0"
-								>
-									<Plus
-										class="w-6 h-6 text-secondary transition-transform duration-200 [button[data-state=open]_&]:rotate-45"
-									/>
-								</div>
-								<p class="heading-faq min-w-0">
-									{item.title}
-								</p>
+								<Plus
+									class="w-6 h-6 text-secondary transition-transform duration-200 [button[data-state=open]_&]:rotate-45"
+								/>
 							</div>
-						</AccordionTrigger>
-						<AccordionContent class="px-6 pb-6">
-							<p class="text-muted-foreground break-words">
-								{item.content}
+							<p class="heading-faq min-w-0">
+								{item.title}
 							</p>
-						</AccordionContent>
-					</AccordionItem>
-				{/each}
-			</Accordion>
-		</div>
-	</section>
+						</div>
+					</AccordionTrigger>
+					<AccordionContent class="px-6 pb-6">
+						<p class="text-muted-foreground break-words">
+							{item.content}
+						</p>
+					</AccordionContent>
+				</AccordionItem>
+			{/each}
+		</Accordion>
+	</div>
+</section>
 
-	<!-- Install/CTA Section -->
-	<section class="section bg-background">
-		<div class="flex flex-col gap-6 items-center justify-center">
-			<p
-				class="font-medium leading-6 text-sm text-muted-foreground text-center tracking-[1px] uppercase"
-			>
-				Install
-			</p>
-			<h2 class="heading-2 text-center">Get started today</h2>
-			<Button
-				variant="default"
-				href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui"
-				><Figma /> Get design file</Button
-			>
-		</div>
-	</section>
-</div>
+<!-- Install/CTA Section -->
+<section class="section bg-background">
+	<div class="flex flex-col gap-6 items-center justify-center">
+		<p
+			class="font-medium leading-6 text-sm text-muted-foreground text-center tracking-[1px] uppercase"
+		>
+			Install
+		</p>
+		<h2 class="heading-2 text-center">Get started today</h2>
+		<Button
+			variant="default"
+			href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui"
+			><Figma /> Get design file</Button
+		>
+	</div>
+</section>

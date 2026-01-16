@@ -44,8 +44,8 @@
 
 <div class="bg-background flex flex-col items-start w-full min-h-screen">
 	<Header />
-	<div class="container {$containerClass}">
+	<main class="container {$containerClass}">
 		{@render children()}
-	</div>
+	</main>
 	<Footer />
 </div>
