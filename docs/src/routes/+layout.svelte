@@ -11,14 +11,14 @@
 
 	// Determine container width based on route
 	// To add more container widths:
-	// 1. Add a new variant in layout.css (e.g., .page-container--custom { --container-width: 800px; })
+	// 1. Add a new variant in layout.css (e.g., .container--custom { --container-width: 800px; })
 	// 2. Add a condition here to return the class name for that route
 	const containerClass = derived(page, ($page) => {
 		const pathname = $page.url.pathname;
 
 		// Blog routes use narrow container (700px)
 		if (pathname.startsWith('/blog')) {
-			return 'page-container--narrow';
+			return 'container--narrow';
 		}
 
 		// Changelog and authors also use narrow container
@@ -26,12 +26,12 @@
 			pathname.startsWith('/changelog') ||
 			pathname.startsWith('/authors')
 		) {
-			return 'page-container--narrow';
+			return 'container--narrow';
 		}
 
 		// Add more route-specific container widths here as needed:
 		// if (pathname.startsWith('/some-route')) {
-		//   return 'page-container--medium';  // 1000px
+		//   return 'container--medium';  // 1000px
 		// }
 
 		// Default to wide container (1440px)
@@ -44,7 +44,7 @@
 
 <div class="bg-background flex flex-col items-start w-full min-h-screen">
 	<Header />
-	<div class="page-container {$containerClass}">
+	<div class="container {$containerClass}">
 		{@render children()}
 	</div>
 	<Footer />

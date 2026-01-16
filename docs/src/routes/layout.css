@@ -234,21 +234,21 @@
 		filter: invert(1);
 	}
 
-	.page-container {
+	.container {
 		@apply mx-auto w-full p-4 md:p-6 lg:p-8;
 		max-width: var(--container-width, 1440px);
 	}
 
 	/* Container width variants */
-	.page-container--narrow {
+	.container--narrow {
 		--container-width: 700px;
 	}
 
-	.page-container--medium {
+	.container--medium {
 		--container-width: 1000px;
 	}
 
-	.page-container--wide {
+	.container--wide {
 		--container-width: 1440px;
 	}
 
