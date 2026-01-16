@@ -7,9 +7,7 @@
 </svelte:head>
 
 <div class="prose">
-    <div class="container container--small container--centered">
-        <Content />
-    </div>
+    <Content />
 </div>
 
 <style>

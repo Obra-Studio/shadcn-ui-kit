@@ -125,7 +125,21 @@
   }
 
   .page-container {
-	@apply w-full max-w-[1440px] mx-auto;
+	@apply w-full mx-auto px-4 md:px-6 lg:px-8;
+	max-width: var(--container-width, 1440px);
+  }
+
+  /* Container width variants */
+  .page-container--narrow {
+	--container-width: 700px;
+  }
+
+  .page-container--medium {
+	--container-width: 1000px;
+  }
+
+  .page-container--wide {
+	--container-width: 1440px;
   }
 
   /* Section base styles */
