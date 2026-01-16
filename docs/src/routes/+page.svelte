@@ -264,8 +264,13 @@
 					<Card class="basis-1/2">
 						<CardContent class="p-6">
 							<div class="flex flex-col gap-4 items-start py-2">
+								<p
+									class="font-normal leading-6 text-lg text-muted-foreground w-full"
+								>
+									{testimonial.text}
+								</p>
 								<div class="flex gap-3 items-center">
-									<div
+									<!-- <div
 										class="relative rounded-full w-[46px] h-[46px]"
 									>
 										<img
@@ -273,23 +278,18 @@
 											alt={testimonial.name}
 											class="rounded-full w-full h-full object-cover"
 										/>
-									</div>
+									</div> -->
 									<div
 										class="flex flex-col items-start leading-6 text-lg text-foreground"
 									>
 										<p class="font-bold">
-											{testimonial.name}
+											&mdash; {testimonial.name}
 										</p>
-										<p class="font-normal">
+										<!-- <p class="font-normal">
 											{testimonial.role}
-										</p>
+										</p> -->
 									</div>
 								</div>
-								<p
-									class="font-normal leading-6 text-lg text-muted-foreground w-full"
-								>
-									{testimonial.text}
-								</p>
 							</div>
 						</CardContent>
 					</Card>
@@ -302,8 +302,13 @@
 					<Card class="basis-1/3">
 						<CardContent class="p-6">
 							<div class="flex flex-col gap-4 items-start py-2">
+								<p
+									class="font-normal leading-6 text-lg text-muted-foreground w-full"
+								>
+									{testimonial.text}
+								</p>
 								<div class="flex gap-3 items-center">
-									<div
+									<!-- <div
 										class="relative rounded-full w-[46px] h-[46px]"
 									>
 										<img
@@ -311,23 +316,18 @@
 											alt={testimonial.name}
 											class="rounded-full w-full h-full object-cover"
 										/>
-									</div>
+									</div> -->
 									<div
 										class="flex flex-col items-start leading-6 text-lg text-foreground"
 									>
 										<p class="font-bold">
-											{testimonial.name}
+											&mdash; {testimonial.name}
 										</p>
-										<p class="font-normal">
+										<!-- <p class="font-normal">
 											{testimonial.role}
-										</p>
+										</p> -->
 									</div>
 								</div>
-								<p
-									class="font-normal leading-6 text-lg text-muted-foreground w-full"
-								>
-									{testimonial.text}
-								</p>
 							</div>
 						</CardContent>
 					</Card>
