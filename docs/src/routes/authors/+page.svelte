@@ -1,33 +1,59 @@
 <script>
+	import { Card, CardContent } from '$lib/components/ui/card';
+
+	const authors = [
+		{
+			name: 'Johan Ronsse',
+			role: 'Creator and maintainer of the Obra shadcn/ui Figma kit.',
+			link: '/authors/johan-ronsse'
+		},
+		{
+			name: 'Marina Rizo Digon',
+			role: 'Visual advice & pixel perfection'
+		},
+		{
+			name: 'Robert Winters',
+			role: 'Business advisor & startup lover'
+		},
+		{
+			name: 'Jorre Vandenbussche',
+			role: 'Resident tester & helps with component perfection'
+		},
+		{
+			name: 'Jovi Verheyen',
+			role: 'Component perfectionist'
+		}
+	];
 </script>
 
 <svelte:head>
 	<title>Authors - Obra shadcn/ui Figma kit</title>
 </svelte:head>
 
-<div class="prose">
-	<h1>Authors</h1>
-	<p>Learn more about the people behind the Obra shadcn/ui Figma kit.</p>
+<div class="container py-8">
+	<div class="flex flex-col gap-6 mb-8">
+		<h1 class="heading-2">Authors</h1>
+		<p class="text-lg text-muted-foreground">Learn more about the people behind the Obra shadcn/ui Figma kit.</p>
+	</div>
 
-	<ul class="list-none p-0">
-		<li class="border-b border-gray-300 pb-8 mb-8 last:border-b-0 last:pb-0 last:mb-0">
-			<h2><a href="/authors/johan-ronsse">Johan Ronsse</a></h2>
-			<p>Creator and maintainer of the Obra shadcn/ui Figma kit.</p>
-		</li>
-		<li class="border-b border-gray-300 pb-8 mb-8 last:border-b-0 last:pb-0 last:mb-0">
-			<h2>Marina Rizo Digon</h2>
-			<p>Visual advice & pixel perfection</p>
-		</li>
-		<li class="border-b border-gray-300 pb-8 mb-8 last:border-b-0 last:pb-0 last:mb-0">
-			<h2>Robert Winters</h2>
-			<p>Business advisor & startup lover</p>
-		</li>
-		<li class="border-b border-gray-300 pb-8 mb-8 last:border-b-0 last:pb-0 last:mb-0">
-			<h2>Jorre Vandenbussche</h2>
-			<p>Resident tester & helps with component perfection</p>
-		</li>
-	</ul>
+	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+		{#each authors as author}
+			<Card>
+				<CardContent class="p-6">
+					<div class="flex flex-col gap-2">
+						{#if author.link}
+							<h2 class="text-lg font-bold"><a href={author.link} class="hover:underline">{author.name}</a></h2>
+						{:else}
+							<h2 class="text-lg font-bold">{author.name}</h2>
+						{/if}
+						<p class="text-muted-foreground">{author.role}</p>
+					</div>
+				</CardContent>
+			</Card>
+		{/each}
+	</div>
 
-	<p>Find out more about Obra on our website at <a href="http://obra.studio/">obra.studio</a>.</p>
-
+	<p class="text-lg text-muted-foreground mt-8">
+		Find out more about Obra on our website at <a href="https://obra.studio/" class="underline">obra.studio</a>.
+	</p>
 </div>

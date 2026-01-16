@@ -4,7 +4,7 @@
 
 ## What is the Obra shadcn/ui kit?
 
-The Obra shadcn/ui kit is a design library file that recreates the 56 components of shadcn/ui inside of Figma.
+The Obra shadcn/ui kit is a design library file that recreates all components of shadcn/ui inside of Figma.
 
 It features 1500+ Lucide Icons, as well as all Tailwind v4 colors.
 

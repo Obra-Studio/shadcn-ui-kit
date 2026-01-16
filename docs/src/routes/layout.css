@@ -20,7 +20,7 @@
 	--accent: oklch(0.97 0 0);
 	--accent-foreground: oklch(0.205 0 0);
 	--destructive: oklch(0.577 0.245 27.325);
-	--border: oklch(0.922 0 0);
+	--border: oklch(0.85 0 0);
 	--input: oklch(0.922 0 0);
 	--ring: oklch(0.708 0 0);
 	--chart-1: oklch(0.646 0.222 41.116);
@@ -39,22 +39,22 @@
 }
 
 .dark {
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
+	--background: oklch(0.18 0 0);
+	--foreground: oklch(0.85 0 0);
 	--card: oklch(0.205 0 0);
-	--card-foreground: oklch(0.985 0 0);
+	--card-foreground: oklch(0.93 0 0);
 	--popover: oklch(0.269 0 0);
-	--popover-foreground: oklch(0.985 0 0);
+	--popover-foreground: oklch(0.93 0 0);
 	--primary: oklch(0.922 0 0);
 	--primary-foreground: oklch(0.205 0 0);
 	--secondary: oklch(0.269 0 0);
-	--secondary-foreground: oklch(0.985 0 0);
+	--secondary-foreground: oklch(0.93 0 0);
 	--muted: oklch(0.269 0 0);
 	--muted-foreground: oklch(0.708 0 0);
 	--accent: oklch(0.371 0 0);
-	--accent-foreground: oklch(0.985 0 0);
+	--accent-foreground: oklch(0.93 0 0);
 	--destructive: oklch(0.704 0.191 22.216);
-	--border: oklch(1 0 0 / 10%);
+	--border: oklch(1 0 0 / 20%);
 	--input: oklch(1 0 0 / 15%);
 	--ring: oklch(0.556 0 0);
 	--chart-1: oklch(0.488 0.243 264.376);
@@ -63,11 +63,11 @@
 	--chart-4: oklch(0.627 0.265 303.9);
 	--chart-5: oklch(0.645 0.246 16.439);
 	--sidebar: oklch(0.205 0 0);
-	--sidebar-foreground: oklch(0.985 0 0);
+	--sidebar-foreground: oklch(0.93 0 0);
 	--sidebar-primary: oklch(0.488 0.243 264.376);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
+	--sidebar-primary-foreground: oklch(0.93 0 0);
 	--sidebar-accent: oklch(0.269 0 0);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
+	--sidebar-accent-foreground: oklch(0.93 0 0);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.439 0 0);
 }
@@ -119,6 +119,18 @@
 		@apply bg-background text-foreground;
 	}
 
+	/* Keep headings and bold text bright white in dark mode */
+	.dark h1,
+	.dark h2,
+	.dark h3,
+	.dark h4,
+	.dark h5,
+	.dark h6,
+	.dark strong,
+	.dark b {
+		color: oklch(0.98 0 0);
+	}
+
 	img,
 	video {
 		max-width: 100%;
@@ -126,7 +138,7 @@
 
 	main img {
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-		border: 1px solid var(--color-gray-200);
+		border: 1px solid var(--color-border);
 		margin-bottom: 0.5rem;
 	}
 
@@ -135,7 +147,15 @@
 	}
 
 	.prose a {
+		color: var(--color-foreground);
 		text-decoration: underline;
+		text-decoration-color: var(--color-muted-foreground);
+		text-underline-offset: 3px;
+		transition: text-decoration-color 0.15s ease;
+	}
+
+	.prose a:hover {
+		text-decoration-color: var(--color-foreground);
 	}
 
 	.prose h1 {
@@ -160,7 +180,7 @@
 	}
 
 	.prose .box {
-		background: #eee;
+		background: var(--color-muted);
 		padding: 0.5rem 1rem;
 	}
 
@@ -186,7 +206,7 @@
 	.prose blockquote {
 		margin: 1.5rem 0;
 		padding: 0 1.5rem;
-		border-left: 4px solid var(--color-gray-200);
+		border-left: 4px solid var(--color-border);
 		font-style: italic;
 		color: var(--color-muted-foreground);
 	}
@@ -210,12 +230,12 @@
 	.prose table th {
 		text-align: left;
 		padding: 0.5rem;
-		border-bottom: 1px solid var(--color-gray-200);
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	.prose table td {
 		padding: 0.5rem;
-		border-bottom: 1px solid var(--color-gray-200);
+		border-bottom: 1px solid var(--color-border);
 	}
 
 	iframe {
@@ -228,29 +248,6 @@
 	/* Invert logo colors in dark mode */
 	.dark img[alt='Obra logo'] {
 		filter: invert(1);
-	}
-
-	.container {
-		@apply mx-auto w-full grow-1 p-4 md:p-6 lg:p-8;
-		max-width: var(--container-width, 1440px);
-	}
-
-	/* Container width variants */
-	.container--narrow {
-		--container-width: 700px;
-	}
-
-	.container--medium {
-		--container-width: 1000px;
-	}
-
-	.container--wide {
-		--container-width: 1440px;
-	}
-
-	/* Section base styles */
-	.section {
-		@apply flex flex-col items-center gap-10 py-12 md:px-10 md:py-20;
 	}
 
 	/* Heading styles */
@@ -267,6 +264,139 @@
 	}
 
 	.heading-faq {
-		@apply text-foreground text-lg leading-8 font-normal tracking-[-0.48px] sm:text-xl;
+		@apply text-foreground text-lg leading-8 font-normal tracking-normal sm:text-xl;
+	}
+}
+
+/* Layout utilities - outside @layer for higher specificity */
+.container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	max-width: 1280px;
+}
+
+@media (min-width: 768px) {
+	.container {
+		padding-left: 1.5rem;
+		padding-right: 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.container {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+}
+
+.container--narrow {
+	max-width: 760px;
+}
+
+.main-content {
+	flex-grow: 1;
+	width: 100%;
+}
+
+.section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.5rem;
+	padding: 3rem 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	max-width: 1280px;
+}
+
+/* Orbit ring effect */
+@keyframes orbit-rotate {
+	0% {
+		transform: translate(-50%, -50%) rotate(0deg);
+	}
+	100% {
+		transform: translate(-50%, -50%) rotate(360deg);
+	}
+}
+
+.orbit-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+}
+
+.orbit-ring {
+	position: absolute;
+	border-radius: 50%;
+	border: 1px solid color-mix(in srgb, var(--color-foreground) 8%, transparent);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.orbit-ring::before,
+.orbit-ring::after {
+	content: "";
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	background: var(--color-foreground);
+	opacity: 0.25;
+	border-radius: 50%;
+	box-shadow: 0 0 8px color-mix(in srgb, var(--color-foreground) 20%, transparent);
+}
+
+.orbit-ring::before {
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.orbit-ring::after {
+	bottom: 0;
+	left: 50%;
+	transform: translate(-50%, 50%);
+}
+
+.orbit-ring-1 {
+	width: 300px;
+	height: 300px;
+	animation: orbit-rotate 25s linear infinite;
+}
+
+.orbit-ring-2 {
+	width: 500px;
+	height: 500px;
+	animation: orbit-rotate 35s linear infinite reverse;
+}
+
+.orbit-ring-3 {
+	width: 700px;
+	height: 700px;
+	animation: orbit-rotate 45s linear infinite;
+}
+
+.orbit-ring-4 {
+	width: 900px;
+	height: 900px;
+	animation: orbit-rotate 55s linear infinite reverse;
+}
+
+@media (min-width: 768px) {
+	.section {
+		padding: 5rem 1.5rem;
+	}
+}
+
+@media (min-width: 1024px) {
+	.section {
+		padding-left: 2rem;
+		padding-right: 2rem;
 	}
 }

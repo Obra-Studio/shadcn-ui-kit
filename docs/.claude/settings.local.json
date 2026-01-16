@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx shadcn-svelte@latest add dialog:*)",
+      "Bash(xxd:*)",
+      "Bash(python3:*)",
+      "Bash(npm run check:*)",
+      "Bash(pnpm run dev:*)",
+      "WebFetch(domain:obrashadcn.lovable.app)"
+    ]
+  }
+}

@@ -220,7 +220,7 @@
 						<h3
 							class="font-semibold leading-7 text-xl text-foreground tracking-[-0.4px]"
 						>
-							All 56 components recreated
+							All components recreated
 						</h3>
 						<p
 							class="font-normal leading-6 text-base text-muted-foreground"

@@ -9,7 +9,7 @@ export async function load() {
 		: posts.filter(isPostPublished);
 	
 	const recentPosts = filteredPosts.slice(0, 3);
-	const recentVideos = videos.slice(0, 2);
+	const recentVideos = videos.slice(0, 3);
 	
 	return {
 		recentPosts,
