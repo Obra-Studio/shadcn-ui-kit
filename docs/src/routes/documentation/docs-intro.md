@@ -12,7 +12,7 @@ The kit provides an ideal starting point to start creating a design system based
 
 ### Plugin
 
-Next to the library itself, we provide a plugin called [Obra shadcn/ui tools](https://www.figma.com/community/plugin/1544866255228781486/obra-shadcn-ui-tools) that helps to efficiently work with the kit. Using it is optional, but you might find it very usful when documenting components.
+Next to the library itself, we provide a plugin called [Obra shadcn/ui tools](https://www.figma.com/community/plugin/1544866255228781486/obra-shadcn-ui-tools) that helps to efficiently work with the kit. Using it is optional, but you might find it very useful when documenting components.
 
 ### Business model
 

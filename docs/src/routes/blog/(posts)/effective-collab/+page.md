@@ -18,10 +18,10 @@ Gradually we also got feedback from different people - thank you Robert, Jovi, G
 
 Jorre specifically copied the kit, added some missing calendar-related features, and then linked to a public file with his improvements. This posed me with a problem: how to get his improvements into the original file?
 
-We idenfitied some different solutions:
+We identified some different solutions:
 
 1. Use the Figma swap libraries function - which I've been playing with today
-2. Invite everyone who wants to contribute to the the project as a classic Figma Editor and pay for their seat, then work non-destructively
+2. Invite everyone who wants to contribute to the project as a classic Figma Editor and pay for their seat, then work non-destructively
 3. Use a custom script (see this [comment](https://github.com/Obra-Studio/shadcn-ui-kit/issues/29#issuecomment-3007875565)) 
 
 There were some side ideas as well:

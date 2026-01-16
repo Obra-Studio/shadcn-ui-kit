@@ -80,7 +80,7 @@ November 22, 2025
   * Added version number to title
 * General marketing
   * Adjusted thumbnail - renamed project Obra shadcn/ui kit
-  * Adjusted description to “A meticously crafted Figma component library based on shadcn/ui to provide the start of your design system.”
+  * Adjusted description to "A meticulously crafted Figma component library based on shadcn/ui to provide the start of your design system."
   * Added an example thumbnail and instructions to customize
 * Documentation
   * Remove guideline to “remove the blue frames” as it’s less relevant because of the new pages organisation

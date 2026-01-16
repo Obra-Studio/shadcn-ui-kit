@@ -67,12 +67,12 @@
 		{
 			name: 'Soumajit Ghosh',
 			role: '@username',
-			text: 'Very helpfull! Thanks for making it free.',
+			text: 'Very helpful! Thanks for making it free.',
 		},
 		{
 			name: 'Alexandre Shyjada',
 			role: '@username',
-			text: 'Very helpfull, thank you for help me in my Figma Make projects!',
+			text: 'Very helpful, thank you for help me in my Figma Make projects!',
 		},
 	];
 
