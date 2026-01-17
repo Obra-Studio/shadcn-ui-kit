@@ -11,5 +11,9 @@
       "WebSearch",
       "Bash(curl:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "svelte"
+  ],
+  "enableAllProjectMcpServers": true
 }

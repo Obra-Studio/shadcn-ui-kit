@@ -70,10 +70,10 @@
 
 		<div class="mt-16 flex flex-col items-center justify-center gap-4 text-sm text-muted-foreground sm:flex-row sm:gap-6">
 			<div class="flex -space-x-2">
-				<img src="/avatars/1.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
-				<img src="/avatars/2.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
-				<img src="/avatars/3.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
-				<img src="/avatars/4.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
+				<img src="/team/johan.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
+				<img src="/team/marina.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
+				<img src="/team/nele.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
+				<img src="/team/robert.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
 			</div>
 			<div class="flex flex-col items-center gap-0.5 sm:items-start">
 				<span>30,000+ designers rely on our kit worldwide.</span>

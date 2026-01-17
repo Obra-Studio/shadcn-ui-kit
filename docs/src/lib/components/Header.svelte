@@ -2,14 +2,10 @@
 	import { Button } from '$lib/components/ui/button';
 	import GetDesignFileDialog from '$lib/components/GetDesignFileDialog.svelte';
 	import Logo from '$lib/components/Logo.svelte';
+	import NavItem from '$lib/components/NavItem.svelte';
 	import { Figma, Menu, X } from '@lucide/svelte';
-	import { page } from '$app/stores';
 
 	let mobileMenuOpen = $state(false);
-
-	function isActive(path: string): boolean {
-		return $page.url.pathname.startsWith(path);
-	}
 
 	function toggleMobileMenu() {
 		mobileMenuOpen = !mobileMenuOpen;
@@ -26,47 +22,17 @@
 	<div class="flex items-center justify-between py-2 md:py-4 w-full max-w-[1440px] mx-auto">
 	<div class="flex items-center gap-3">
 		<a href="/" aria-label="Obra home">
-			<Logo class="min-w-[40px] h-[40px]" />
+			<Logo />
 		</a>
 
-		<!-- Desktop Navigation -->
+
 		<nav class="hidden min-[960px]:flex items-center pl-8 gap-0 text-base">
-			<a
-				href="/"
-				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {$page.url.pathname === '/' ? 'bg-accent dark:text-white' : ''}"
-			>
-				Home
-			</a>
-			<a
-				href="/documentation"
-				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/documentation') ? 'bg-accent dark:text-white' : ''}"
-			>
-				Docs
-			</a>
-			<a
-				href="/blog"
-				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/blog') ? 'bg-accent dark:text-white' : ''}"
-			>
-				Blog
-			</a>
-			<a
-				href="/videos"
-				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/videos') ? 'bg-accent dark:text-white' : ''}"
-			>
-				Videos
-			</a>
-			<a
-				href="/changelog"
-				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/changelog') ? 'bg-accent dark:text-white' : ''}"
-			>
-				Changelog
-			</a>
-			<a
-				href="/customization-services"
-				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/customization-services') ? 'bg-accent dark:text-white' : ''}"
-			>
-				Customization services
-			</a>
+			<NavItem href="/" exact>Home</NavItem>
+			<NavItem href="/documentation">Docs</NavItem>
+			<NavItem href="/blog">Blog</NavItem>
+			<NavItem href="/videos">Videos</NavItem>
+			<NavItem href="/changelog">Changelog</NavItem>
+			<NavItem href="/customization-services">Customization services</NavItem>
 		</nav>
 	</div>
 
@@ -124,48 +90,12 @@
 	</div>
 
 	<nav class="flex flex-col p-4 gap-1">
-		<a
-			href="/"
-			onclick={closeMobileMenu}
-			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {$page.url.pathname === '/' ? 'bg-accent dark:text-white' : ''}"
-		>
-			Home
-		</a>
-		<a
-			href="/documentation"
-			onclick={closeMobileMenu}
-			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/documentation') ? 'bg-accent dark:text-white' : ''}"
-		>
-			Docs
-		</a>
-		<a
-			href="/blog"
-			onclick={closeMobileMenu}
-			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/blog') ? 'bg-accent dark:text-white' : ''}"
-		>
-			Blog
-		</a>
-		<a
-			href="/videos"
-			onclick={closeMobileMenu}
-			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/videos') ? 'bg-accent dark:text-white' : ''}"
-		>
-			Videos
-		</a>
-		<a
-			href="/changelog"
-			onclick={closeMobileMenu}
-			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/changelog') ? 'bg-accent dark:text-white' : ''}"
-		>
-			Changelog
-		</a>
-		<a
-			href="/customization-services"
-			onclick={closeMobileMenu}
-			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/customization-services') ? 'bg-accent dark:text-white' : ''}"
-		>
-			Customization services
-		</a>
+		<NavItem href="/" exact variant="mobile" onclick={closeMobileMenu}>Home</NavItem>
+		<NavItem href="/documentation" variant="mobile" onclick={closeMobileMenu}>Docs</NavItem>
+		<NavItem href="/blog" variant="mobile" onclick={closeMobileMenu}>Blog</NavItem>
+		<NavItem href="/videos" variant="mobile" onclick={closeMobileMenu}>Videos</NavItem>
+		<NavItem href="/changelog" variant="mobile" onclick={closeMobileMenu}>Changelog</NavItem>
+		<NavItem href="/customization-services" variant="mobile" onclick={closeMobileMenu}>Customization services</NavItem>
 	</nav>
 
 	<div class="p-4 border-t border-border mt-auto">
