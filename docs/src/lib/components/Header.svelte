@@ -1,20 +1,9 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
-	import {
-		Dialog,
-		DialogContent,
-		DialogDescription,
-		DialogFooter,
-		DialogHeader,
-		DialogTitle,
-		DialogTrigger,
-	} from '$lib/components/ui/dialog';
+	import GetDesignFileDialog from '$lib/components/GetDesignFileDialog.svelte';
 	import { Figma, Menu, X } from '@lucide/svelte';
 	import logoFrame from '$lib/assets/logo.svg';
 	import { page } from '$app/stores';
-
-	const figmaUrl = 'https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui';
-	const servicesUrl = 'https://obra.studio/shadcn-ui-kit-customization/';
 
 	let mobileMenuOpen = $state(false);
 
@@ -86,33 +75,14 @@
 	</div>
 
 	<div class="flex items-center gap-2">
-		<Dialog>
-			<DialogTrigger>
-				{#snippet child({ props })}
-					<Button size="sm" variant="secondary" class="hidden sm:flex" {...props}>
-						<Figma />
-						Get design file
-					</Button>
-				{/snippet}
-			</DialogTrigger>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>Before you duplicate...</DialogTitle>
-					<DialogDescription>
-						Check out Obra's design services for custom theming, component development, and design system consultation.
-					</DialogDescription>
-				</DialogHeader>
-				<DialogFooter class="flex-col sm:flex-row gap-2">
-					<Button variant="outline" href={servicesUrl} target="_blank">
-						View design services
-					</Button>
-					<Button href={figmaUrl} target="_blank">
-						<Figma />
-						Continue to Figma
-					</Button>
-				</DialogFooter>
-			</DialogContent>
-		</Dialog>
+		<GetDesignFileDialog>
+			{#snippet children({ props })}
+				<Button size="sm" variant="secondary" class="hidden sm:flex" {...props}>
+					<Figma />
+					Get design file
+				</Button>
+			{/snippet}
+		</GetDesignFileDialog>
 
 		<!-- Mobile Menu Button -->
 		<Button
@@ -123,9 +93,9 @@
 			aria-label="Toggle menu"
 		>
 			{#if mobileMenuOpen}
-				<X class="h-5 w-5" />
+				<X class="h-6 w-6" />
 			{:else}
-				<Menu class="h-5 w-5" />
+				<Menu class="h-6 w-6" />
 			{/if}
 		</Button>
 	</div>
@@ -203,9 +173,13 @@
 	</nav>
 
 	<div class="p-4 border-t border-border mt-auto">
-		<Button href={figmaUrl} target="_blank" class="w-full">
-			<Figma />
-			Get design file
-		</Button>
+		<GetDesignFileDialog onNavigate={closeMobileMenu}>
+			{#snippet children({ props })}
+				<Button class="w-full" {...props}>
+					<Figma />
+					Get design file
+				</Button>
+			{/snippet}
+		</GetDesignFileDialog>
 	</div>
 </div>
