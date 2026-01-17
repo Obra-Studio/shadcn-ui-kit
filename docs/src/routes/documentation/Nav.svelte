@@ -1,5 +1,4 @@
 <script>
-	import { page } from '$app/stores';
 	import NavItem from '$lib/components/NavItem.svelte';
 
 	const navItems = [
@@ -18,11 +17,13 @@
 </script>
 
 <nav id="nav" class="pb-8 md:pb-0 lg:w-auto lg:flex-shrink-0 lg:basis-64">
-	<ul class="p-0 m-0 flex md:block overflow-x-auto">
-		{#each navItems as { href, label }}
-			<NavItem {href} selected={$page.url.pathname === href}>
-				{label}
-			</NavItem>
+	<ul class="p-0 m-0 flex md:block overflow-x-auto list-none gap-1">
+		{#each navItems as { href, label } (href)}
+			<li>
+				<NavItem {href} exact={href === '/documentation'}>
+					{label}
+				</NavItem>
+			</li>
 		{/each}
 	</ul>
 </nav>

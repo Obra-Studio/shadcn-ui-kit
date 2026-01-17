@@ -9,11 +9,12 @@
       "WebFetch(domain:obrashadcn.lovable.app)",
       "WebFetch(domain:www.figma.com)",
       "WebSearch",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "mcp__svelte__svelte-autofixer"
     ]
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "svelte"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

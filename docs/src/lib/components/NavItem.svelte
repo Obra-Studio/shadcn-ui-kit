@@ -17,7 +17,7 @@
 <a
 	{href}
 	{onclick}
-	class="font-medium text-foreground hover:bg-accent transition-colors {isActive ? 'bg-accent dark:text-white' : ''}"
+	class="block whitespace-nowrap font-medium text-foreground hover:bg-accent transition-colors {isActive ? 'bg-accent dark:text-white' : ''}"
 	class:rounded-full={variant === 'desktop'}
 	class:px-3={variant === 'desktop'}
 	class:py-2={variant === 'desktop'}
