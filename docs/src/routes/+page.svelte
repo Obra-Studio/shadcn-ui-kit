@@ -227,15 +227,13 @@
 		</figcaption>
 	</figure>
 	<div class="pt-4 w-full max-w-[946px]">
-		<Card>
-			<CardContent class="p-8">
-				<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<ul class="grid grid-cols-1 md:grid-cols-2 gap-2">
 					<li class="flex gap-3 items-center">
 						<Check class="w-5 h-5 text-green-600 shrink-0" />
 						<span
 							class="font-normal leading-6 text-base text-foreground"
 						>
-							Open-source and free to use
+							Open-source & free to use
 						</span>
 					</li>
 					<li class="flex gap-3 items-center">
@@ -279,8 +277,6 @@
 						</span>
 					</li>
 				</ul>
-			</CardContent>
-		</Card>
 	</div>
 </section>
 
@@ -312,8 +308,8 @@
 								<div
 									class="flex flex-col items-start leading-6 text-lg text-foreground"
 								>
-									<p class="font-bold">
-										&mdash; {testimonial.name}
+									<p class="font-medium">
+										&mdash;{testimonial.name}
 									</p>
 								</div>
 							</div>
@@ -336,8 +332,8 @@
 								<div
 									class="flex flex-col items-start leading-6 text-lg text-foreground"
 								>
-									<p class="font-bold">
-										&mdash; {testimonial.name}
+									<p class="font-medium">
+										&mdash;{testimonial.name}
 									</p>
 								</div>
 							</div>
@@ -384,14 +380,7 @@
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-4 w-full">
 		<!-- Latest Blog Posts -->
 		<div class="flex flex-col gap-4">
-			<div class="flex items-center gap-3">
-				<div
-					class="bg-primary flex items-center justify-center rounded-full w-10 h-10"
-				>
-					<Newspaper class="w-5 h-5 text-secondary" />
-				</div>
-				<h3 class="text-lg font-semibold">Latest blog posts</h3>
-			</div>
+			<h3 class="text-xl font-semibold">Latest blog posts</h3>
 			<ul class="flex flex-col">
 				{#each data.recentPosts as post, i}
 					<li class="py-3 {i !== data.recentPosts.length - 1 ? 'border-b border-border' : ''}">
@@ -407,14 +396,7 @@
 
 		<!-- Latest Videos -->
 		<div class="flex flex-col gap-4">
-			<div class="flex items-center gap-3">
-				<div
-					class="bg-primary flex items-center justify-center rounded-full w-10 h-10"
-				>
-					<Video class="w-5 h-5 text-secondary" />
-				</div>
-				<h3 class="text-lg font-semibold">Latest videos</h3>
-			</div>
+			<h3 class="text-xl font-semibold">Latest videos</h3>
 			<ul class="flex flex-col">
 				{#each data.recentVideos as video, i}
 					<li class="py-3 {i !== data.recentVideos.length - 1 ? 'border-b border-border' : ''}">
@@ -425,25 +407,16 @@
 					</li>
 				{/each}
 			</ul>
-			<a href="/documentation/videos" class="text-sm font-medium hover:underline mt-2">View all videos &rarr;</a>
+			<a href="/videos" class="text-sm font-medium hover:underline mt-2">View all videos &rarr;</a>
 		</div>
 
 		<!-- Newsletter -->
 		<div class="flex flex-col gap-4">
-			<div class="flex items-center gap-3">
-				<div
-					class="bg-primary flex items-center justify-center rounded-full w-10 h-10"
-				>
-					<Mail class="w-5 h-5 text-secondary" />
-				</div>
-				<h3 class="text-lg font-semibold">Newsletter</h3>
-			</div>
-			<p class="text-muted-foreground">
+			<h3 class="text-xl font-semibold">Newsletter</h3>
+			<p class="text-foreground">
 				Subscribe to receive new blog posts directly in your inbox when they're published.
 			</p>
-			<a href="https://buttondown.com/obra-shadcn" target="_blank">
-				<Button variant="outline" size="sm">Subscribe</Button>
-			</a>
+			<Button variant="outline" size="sm" href="https://buttondown.com/obra-shadcn" target="_blank">Subscribe now</Button>
 		</div>
 	</div>
 </section>
@@ -466,12 +439,8 @@
 						Our roadmap is community-driven. Join the conversation, ask questions, suggest features, or report issues.
 					</p>
 					<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-						<a href="https://github.com/Obra-Studio/shadcn-ui-kit/discussions" target="_blank" rel="noopener noreferrer">
-							<Button variant="outline" size="sm" class="w-full"><Github class="w-4 h-4" />Discussions</Button>
-						</a>
-						<a href="https://github.com/Obra-Studio/shadcn-ui-kit/issues" target="_blank" rel="noopener noreferrer">
-							<Button variant="outline" size="sm" class="w-full"><Github class="w-4 h-4" />Report an issue</Button>
-						</a>
+						<Button variant="outline" size="sm" class="w-full" href="https://github.com/Obra-Studio/shadcn-ui-kit/discussions" target="_blank" rel="noopener noreferrer"><Github class="w-4 h-4" />Discussions</Button>
+						<Button variant="outline" size="sm" class="w-full" href="https://github.com/Obra-Studio/shadcn-ui-kit/issues" target="_blank" rel="noopener noreferrer"><Github class="w-4 h-4" />Report an issue</Button>
 					</div>
 				</div>
 			</CardContent>
@@ -493,9 +462,7 @@
 				Kickstart your design system with help from <a href="https://obra.studio" target="_blank" rel="noopener noreferrer" class="underline">Obra Studio</a>, a design agency specialized in shadcn/ui. We can craft a fully customized version of the Obra shadcn/ui kit that matches your brand.
 			</p>
 			<div class="pt-2">
-				<a href="/customization-services">
-					<Button>Learn more</Button>
-				</a>
+				<Button href="/customization-services">Learn more</Button>
 			</div>
 		</div>
 		<div class="hidden md:flex flex-1 items-center justify-center">

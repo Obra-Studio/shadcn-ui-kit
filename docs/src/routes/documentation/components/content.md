@@ -30,8 +30,9 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Field
 * Hover Card
 * Input
-* Input Group (as part of Input, WIP)
+* Input Group
 * Input OTP
+* Item
 * Kbd
 * Label
 * Menubar
@@ -49,6 +50,7 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Skeleton
 * Slider
 * Sonner
+* Spinner
 * Switch
 * Table
 * Tabs
@@ -58,6 +60,8 @@ The following [shadcn/ui components](https://ui.shadcn.com/docs/components) are 
 * Tooltip
 
 </div>
+
+Native Select is not included because its styling depends on the OS.
 
 ## Not available
 
@@ -70,6 +74,7 @@ The following components are not available in the kit since they are purely code
 
 The following components are not available, since they are deprecated.
 
+* Form
 * Toast
 
 ## Styles

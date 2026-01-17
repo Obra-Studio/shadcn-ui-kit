@@ -8,7 +8,6 @@
 		{ href: '/documentation/colors', label: 'Colors' },
 		{ href: '/documentation/typography', label: 'Typography' },
 		{ href: '/documentation/icons', label: 'Icons' },
-		{ href: '/documentation/videos', label: 'Videos' },
 		{ href: '/documentation/components', label: 'Components' },
 		{
 			href: '/documentation/technical-comments',

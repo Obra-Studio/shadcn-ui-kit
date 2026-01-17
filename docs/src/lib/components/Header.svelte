@@ -56,13 +56,19 @@
 				href="/documentation"
 				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/documentation') ? 'bg-accent dark:text-white' : ''}"
 			>
-				Documentation
+				Docs
 			</a>
 			<a
 				href="/blog"
 				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/blog') ? 'bg-accent dark:text-white' : ''}"
 			>
 				Blog
+			</a>
+			<a
+				href="/videos"
+				class="rounded-full px-3 py-2 font-medium text-foreground tracking-normal hover:bg-accent transition-colors {isActive('/videos') ? 'bg-accent dark:text-white' : ''}"
+			>
+				Videos
 			</a>
 			<a
 				href="/changelog"
@@ -164,7 +170,7 @@
 			onclick={closeMobileMenu}
 			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/documentation') ? 'bg-accent dark:text-white' : ''}"
 		>
-			Documentation
+			Docs
 		</a>
 		<a
 			href="/blog"
@@ -172,6 +178,13 @@
 			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/blog') ? 'bg-accent dark:text-white' : ''}"
 		>
 			Blog
+		</a>
+		<a
+			href="/videos"
+			onclick={closeMobileMenu}
+			class="rounded-lg px-4 py-3 font-medium text-foreground hover:bg-accent transition-colors {isActive('/videos') ? 'bg-accent dark:text-white' : ''}"
+		>
+			Videos
 		</a>
 		<a
 			href="/changelog"

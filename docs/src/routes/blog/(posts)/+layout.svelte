@@ -60,9 +60,7 @@
 					<h3 class="text-lg font-semibold">Enjoyed this post?</h3>
 					<p class="text-muted-foreground">Subscribe to receive new blog posts directly in your inbox when they're published.</p>
 				</div>
-				<a href="https://buttondown.com/obra-shadcn" target="_blank" class="shrink-0 w-full sm:w-auto">
-					<Button variant="default" class="w-full sm:w-auto">Subscribe</Button>
-				</a>
+				<Button variant="default" class="w-full sm:w-auto shrink-0" href="https://buttondown.com/obra-shadcn" target="_blank">Subscribe</Button>
 			</div>
 		</CardContent>
 	</Card>

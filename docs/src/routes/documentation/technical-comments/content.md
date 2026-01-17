@@ -1,5 +1,7 @@
 ## Guidelines on components
 
+These are guidelines for designers creating new components that might be useful for your team as well.
+
 * Prefer composability.
 * Prefer not to use the “text override” feature in variant properties as not to make the variant properties panel overcomplicated; people can override via the text itself.
 * Use generic text like “Label” or “Value” in components for text.
@@ -14,7 +16,9 @@
 
 Wrapper components such as cards, dialogs, sheets etc. present an interesting problem: we want to be consistent in our styling, but we also want to customise the content.
 
-We are not a big fan of slot components, but also not a big fan of detaching. We’re hoping Figma takes note and finds some form of solution for this in the future, some kind of “native” slots?
+We are not a big fan of slot components, but also not a big fan of detaching. We're hoping Figma takes note and finds some form of solution for this in the future, some kind of "native" slots?
+
+*Update January 2026: We are eagerly awaiting for Figma to release slot components.*
 
 To promote consistency, we went for slot components but this might take some time to wrap your head around. [This video](https://www.youtube.com/watch?v=XMqUKlFUETc&ab_channel=Figma) can help you to understand the concept.
 

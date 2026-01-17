@@ -58,22 +58,14 @@
 		</p>
 
 		<div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-			<a
-				href="https://cal.com/team/obra-studio/shadcn"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<Button class="h-12 px-6 text-base font-medium group">
+			<Button class="h-12 px-6 text-base font-medium group" href="https://cal.com/team/obra-studio/shadcn" target="_blank" rel="noopener noreferrer">
 					<Calendar class="mr-2 h-4 w-4" />
 					Book a 30-minute call
 					<ArrowRight class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
 				</Button>
-			</a>
-			<a href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui" target="_blank" rel="noopener noreferrer">
-				<Button variant="outline" class="h-12 px-6 text-base font-medium border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50">
+			<Button variant="outline" class="h-12 px-6 text-base font-medium border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50" href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui" target="_blank" rel="noopener noreferrer">
 					Explore our kit
 				</Button>
-			</a>
 		</div>
 
 		<div class="mt-16 flex flex-col items-center justify-center gap-4 text-sm text-muted-foreground sm:flex-row sm:gap-6">
