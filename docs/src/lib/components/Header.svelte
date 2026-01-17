@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import GetDesignFileDialog from '$lib/components/GetDesignFileDialog.svelte';
+	import Logo from '$lib/components/Logo.svelte';
 	import { Figma, Menu, X } from '@lucide/svelte';
-	import logoFrame from '$lib/assets/logo.svg';
 	import { page } from '$app/stores';
 
 	let mobileMenuOpen = $state(false);
@@ -25,12 +25,8 @@
 >
 	<div class="flex items-center justify-between py-2 md:py-4 w-full max-w-[1440px] mx-auto">
 	<div class="flex items-center gap-3">
-		<a href="/">
-			<img
-				src={logoFrame}
-				alt="Obra logo"
-				class="min-w-[40px] h-[40px]"
-			/>
+		<a href="/" aria-label="Obra home">
+			<Logo class="min-w-[40px] h-[40px]" />
 		</a>
 
 		<!-- Desktop Navigation -->
