@@ -4,5 +4,5 @@
     export let title;
 </script>
 
-<a href="/documentation/" class="hidden md:block">&larr; Back</a>
+<a href="/documentation/" class="block md:hidden">&larr; Back</a>
 <H1>{title}</H1>

@@ -196,9 +196,12 @@
 						Check out Obra's design services for custom theming, component development, and design system consultation.
 					</DialogDescription>
 				</DialogHeader>
-				<DialogFooter class="flex-col sm:flex-row gap-2">
+				<DialogFooter class="flex-col sm:flex-row gap-2 sm:justify-start">
 					<Button variant="outline" href={servicesUrl} target="_blank">
 						View design services
+					</Button>
+					<Button variant="outline" href="https://ui.shadcn.com/docs/theming" target="_blank">
+						Customize on shadcn/ui
 					</Button>
 					<Button href={figmaUrl} target="_blank">
 						<Figma />
@@ -375,6 +378,11 @@
 <!-- Stay Updated Section -->
 <section class="section">
 	<div class="flex flex-col gap-2 items-center justify-center text-center">
+		<p
+			class="font-medium leading-6 text-sm text-muted-foreground tracking-[1px] uppercase"
+		>
+			News
+		</p>
 		<h2 class="heading-2">Stay up to date</h2>
 	</div>
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-4 w-full">
@@ -383,15 +391,15 @@
 			<h3 class="text-xl font-semibold">Latest blog posts</h3>
 			<ul class="flex flex-col">
 				{#each data.recentPosts as post, i}
-					<li class="py-3 {i !== data.recentPosts.length - 1 ? 'border-b border-border' : ''}">
-						<a href="/blog/{post.slug}" class="group">
+					<li class="{i !== data.recentPosts.length - 1 ? 'border-b border-border' : ''}">
+						<a href="/blog/{post.slug}" class="group block py-3">
 							<p class="font-medium group-hover:underline">{post.title}</p>
 							<p class="text-sm text-muted-foreground">{formatDate(post.date)}</p>
 						</a>
 					</li>
 				{/each}
 			</ul>
-			<a href="/blog" class="text-sm font-medium hover:underline mt-2">View all posts &rarr;</a>
+			<Button variant="ghost" size="sm" href="/blog" class="mt-2">View all posts &rarr;</Button>
 		</div>
 
 		<!-- Latest Videos -->
@@ -399,20 +407,20 @@
 			<h3 class="text-xl font-semibold">Latest videos</h3>
 			<ul class="flex flex-col">
 				{#each data.recentVideos as video, i}
-					<li class="py-3 {i !== data.recentVideos.length - 1 ? 'border-b border-border' : ''}">
-						<a href="https://www.youtube.com/watch?v={video.id}" target="_blank" rel="noopener noreferrer" class="group">
+					<li class="{i !== data.recentVideos.length - 1 ? 'border-b border-border' : ''}">
+						<a href="https://www.youtube.com/watch?v={video.id}" target="_blank" rel="noopener noreferrer" class="group block py-3">
 							<p class="font-medium group-hover:underline line-clamp-2">{video.title}</p>
 							<p class="text-sm text-muted-foreground">{video.date}</p>
 						</a>
 					</li>
 				{/each}
 			</ul>
-			<a href="/videos" class="text-sm font-medium hover:underline mt-2">View all videos &rarr;</a>
+			<Button variant="ghost" size="sm" href="/videos" class="mt-2">View all videos &rarr;</Button>
 		</div>
 
 		<!-- Newsletter -->
 		<div class="flex flex-col gap-4">
-			<h3 class="text-xl font-semibold">Newsletter</h3>
+			<h3 class="text-xl font-semibold flex items-center gap-2"><Mail class="w-5 h-5" />Newsletter</h3>
 			<p class="text-foreground">
 				Subscribe to receive new blog posts directly in your inbox when they're published.
 			</p>
@@ -538,9 +546,12 @@
 												Check out Obra's design services for custom theming, component development, and design system consultation.
 											</DialogDescription>
 										</DialogHeader>
-										<DialogFooter class="flex-col sm:flex-row gap-2">
+										<DialogFooter class="flex-col sm:flex-row gap-2 sm:justify-start">
 											<Button variant="outline" href={servicesUrl} target="_blank">
 												View design services
+											</Button>
+											<Button variant="outline" href="https://ui.shadcn.com/docs/theming" target="_blank">
+												Customize on shadcn/ui
 											</Button>
 											<Button href={figmaUrl} target="_blank">
 												<Figma />
@@ -652,9 +663,12 @@
 						Check out Obra's design services for custom theming, component development, and design system consultation.
 					</DialogDescription>
 				</DialogHeader>
-				<DialogFooter class="flex-col sm:flex-row gap-2">
+				<DialogFooter class="flex-col sm:flex-row gap-2 sm:justify-start">
 					<Button variant="outline" href={servicesUrl} target="_blank">
 						View design services
+					</Button>
+					<Button variant="outline" href="https://ui.shadcn.com/docs/theming" target="_blank">
+						Customize on shadcn/ui
 					</Button>
 					<Button href={figmaUrl} target="_blank">
 						<Figma />

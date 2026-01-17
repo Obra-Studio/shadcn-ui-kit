@@ -6,7 +6,10 @@
       "Bash(python3:*)",
       "Bash(npm run check:*)",
       "Bash(pnpm run dev:*)",
-      "WebFetch(domain:obrashadcn.lovable.app)"
+      "WebFetch(domain:obrashadcn.lovable.app)",
+      "WebFetch(domain:www.figma.com)",
+      "WebSearch",
+      "Bash(curl:*)"
     ]
   }
 }

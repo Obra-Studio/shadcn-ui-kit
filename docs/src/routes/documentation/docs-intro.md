@@ -1,6 +1,8 @@
-# Documentation
-
 <p class="intro">Welcome to the Obra shadcn/ui kit documentation. Here you can find out how to use this kit, and how to customize it.</p>
+
+## Duplicate the kit
+
+You can find the design file on [Figma community here](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui).
 
 ## What is the Obra shadcn/ui kit?
 

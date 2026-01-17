@@ -9,6 +9,7 @@
 		{ href: '/documentation/typography', label: 'Typography' },
 		{ href: '/documentation/icons', label: 'Icons' },
 		{ href: '/documentation/components', label: 'Components' },
+		{ href: '/documentation/productivity-plugins', label: 'Productivity plugins' },
 		{
 			href: '/documentation/technical-comments',
 			label: 'Technical comments',

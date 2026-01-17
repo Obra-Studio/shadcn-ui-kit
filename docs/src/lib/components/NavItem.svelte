@@ -6,7 +6,7 @@
 <li class="list-none flex md:block">
 	<a
 		{href}
-		class="block whitespace-nowrap p-2.5 text-foreground rounded-xl no-underline transition-colors"
+		class="block whitespace-nowrap px-4 py-2.5 text-foreground rounded-xl no-underline transition-colors"
 		class:hover:bg-accent={!selected}
 		class:hover:text-accent-foreground={!selected}
 		class:focus:bg-accent={!selected}
