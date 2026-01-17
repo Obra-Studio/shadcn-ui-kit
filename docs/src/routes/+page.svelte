@@ -7,15 +7,7 @@
 		AccordionItem,
 		AccordionTrigger,
 	} from '$lib/components/ui/accordion';
-	import {
-		Dialog,
-		DialogContent,
-		DialogDescription,
-		DialogFooter,
-		DialogHeader,
-		DialogTitle,
-		DialogTrigger,
-	} from '$lib/components/ui/dialog';
+	import GetDesignFileDialog from '$lib/components/GetDesignFileDialog.svelte';
 	import {
 		Github,
 		Plus,
@@ -33,9 +25,6 @@
 	import { formatDate } from '$lib/blog/utils';
 
 	let { data } = $props();
-
-	const figmaUrl = 'https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui';
-	const servicesUrl = 'https://obra.studio/shadcn-ui-kit-customization/';
 
 	// Note: These image URLs are from Figma's localhost server
 	// In production, these should be replaced with actual asset paths
@@ -180,36 +169,14 @@
 	<div
 		class="flex flex-col md:flex-row gap-6 items-center [&>*]:w-full md:[&>*]:w-auto w-[240px] items-center justify-center"
 	>
-		<Dialog>
-			<DialogTrigger>
-				{#snippet child({ props })}
-					<Button variant="default" {...props}>
-						<Figma />
-						Get design file
-					</Button>
-				{/snippet}
-			</DialogTrigger>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>Before you duplicate...</DialogTitle>
-					<DialogDescription>
-						Check out Obra's design services for custom theming, component development, and design system consultation.
-					</DialogDescription>
-				</DialogHeader>
-				<DialogFooter class="flex-col sm:flex-row gap-2 sm:justify-start">
-					<Button variant="outline" href={servicesUrl} target="_blank">
-						View design services
-					</Button>
-					<Button variant="outline" href="https://ui.shadcn.com/docs/theming" target="_blank">
-						Customize on shadcn/ui
-					</Button>
-					<Button href={figmaUrl} target="_blank">
-						<Figma />
-						Continue to Figma
-					</Button>
-				</DialogFooter>
-			</DialogContent>
-		</Dialog>
+		<GetDesignFileDialog>
+			{#snippet children({ props })}
+				<Button variant="default" {...props}>
+					<Figma />
+					Get design file
+				</Button>
+			{/snippet}
+		</GetDesignFileDialog>
 		<Button
 			variant="secondary"
 			href="https://github.com/obra-studio/shadcn-ui-kit"
@@ -533,33 +500,11 @@
 								This kit is intended to be published as a library, after which the tokens and components would be used in another file. It can be used to create a UI design that is based on shadcn/ui.
 							</p>
 							<p class="text-foreground break-words mt-4">
-								<Dialog>
-									<DialogTrigger>
-										{#snippet child({ props })}
-											<button class="underline text-foreground" {...props}>Get the design file on Figma Community</button>
-										{/snippet}
-									</DialogTrigger>
-									<DialogContent>
-										<DialogHeader>
-											<DialogTitle>Before you duplicate...</DialogTitle>
-											<DialogDescription>
-												Check out Obra's design services for custom theming, component development, and design system consultation.
-											</DialogDescription>
-										</DialogHeader>
-										<DialogFooter class="flex-col sm:flex-row gap-2 sm:justify-start">
-											<Button variant="outline" href={servicesUrl} target="_blank">
-												View design services
-											</Button>
-											<Button variant="outline" href="https://ui.shadcn.com/docs/theming" target="_blank">
-												Customize on shadcn/ui
-											</Button>
-											<Button href={figmaUrl} target="_blank">
-												<Figma />
-												Continue to Figma
-											</Button>
-										</DialogFooter>
-									</DialogContent>
-								</Dialog>
+								<GetDesignFileDialog>
+									{#snippet children({ props })}
+										<button class="underline text-foreground" {...props}>Get the design file on Figma Community</button>
+									{/snippet}
+								</GetDesignFileDialog>
 							</p>
 						{:else if index === 1}
 							<p class="text-foreground break-words">
@@ -647,35 +592,13 @@
 			Get the kit
 		</p>
 		<h2 class="heading-2 text-center">Start designing with shadcn/ui today</h2>
-		<Dialog>
-			<DialogTrigger>
-				{#snippet child({ props })}
-					<Button variant="default" {...props}>
-						<Figma />
-						Get design file
-					</Button>
-				{/snippet}
-			</DialogTrigger>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>Before you duplicate...</DialogTitle>
-					<DialogDescription>
-						Check out Obra's design services for custom theming, component development, and design system consultation.
-					</DialogDescription>
-				</DialogHeader>
-				<DialogFooter class="flex-col sm:flex-row gap-2 sm:justify-start">
-					<Button variant="outline" href={servicesUrl} target="_blank">
-						View design services
-					</Button>
-					<Button variant="outline" href="https://ui.shadcn.com/docs/theming" target="_blank">
-						Customize on shadcn/ui
-					</Button>
-					<Button href={figmaUrl} target="_blank">
-						<Figma />
-						Continue to Figma
-					</Button>
-				</DialogFooter>
-			</DialogContent>
-		</Dialog>
+		<GetDesignFileDialog>
+			{#snippet children({ props })}
+				<Button variant="default" {...props}>
+					<Figma />
+					Get design file
+				</Button>
+			{/snippet}
+		</GetDesignFileDialog>
 	</div>
 </section>
