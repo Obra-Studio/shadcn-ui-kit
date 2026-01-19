@@ -197,7 +197,9 @@
 	}
 
 	.prose ul ul,
-	.prose ol ul {
+	.prose ul ol,
+	.prose ol ul,
+	.prose ol ol {
 		margin-bottom: 0;
 	}
 

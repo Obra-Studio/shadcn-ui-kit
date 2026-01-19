@@ -13,6 +13,7 @@
 			href: '/documentation/technical-comments',
 			label: 'Technical comments',
 		},
+		{ href: '/documentation/upgrading', label: 'Upgrading' },
 	];
 </script>
 
