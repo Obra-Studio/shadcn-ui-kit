@@ -39,7 +39,7 @@ Many software companies are focused on speed and can't afford to have month-long
 
 <div class="box">
 
-If you're curious about this offering, check out our page about the [shadcn/ui customization services](https://shadcn.obra.studio/customization-services) on our shadcn/ui kit documentation website.
+If you're curious about this offering, check out our page about the [shadcn/ui customization services](/customization-services).
 
 And if you're convinced, we'll [see you in our inbox](https://obra.studio/contact/)!
 
