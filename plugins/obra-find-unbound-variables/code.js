@@ -1,4 +1,4 @@
-figma.showUI(__html__, { width: 400, height: 540 });
+figma.showUI(__html__, { width: 400, height: 640 });
 
 let unboundVariables = [];
 let scanCancelled = false;
@@ -7,33 +7,31 @@ let scanCancelled = false;
 const BATCH_SIZE = 50;
 const BATCH_DELAY = 10;
 
-// Properties that can have bound variables
+// Properties that can have bound variables, categorized by type
+const COLOR_PROPERTIES = ['fills', 'strokes', 'effects'];
+const RADIUS_PROPERTIES = ['cornerRadius', 'topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius'];
+const SPACING_PROPERTIES = ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom', 'itemSpacing', 'counterAxisSpacing'];
+const OTHER_PROPERTIES = ['strokeWeight', 'width', 'height', 'minWidth', 'maxWidth', 'minHeight', 'maxHeight', 'opacity', 'layoutSizingHorizontal', 'layoutSizingVertical'];
+
+// All properties combined
 const VARIABLE_PROPERTIES = [
-  'fills',
-  'strokes',
-  'effects',
-  'strokeWeight',
-  'cornerRadius',
-  'topLeftRadius',
-  'topRightRadius',
-  'bottomLeftRadius',
-  'bottomRightRadius',
-  'paddingLeft',
-  'paddingRight',
-  'paddingTop',
-  'paddingBottom',
-  'itemSpacing',
-  'counterAxisSpacing',
-  'width',
-  'height',
-  'minWidth',
-  'maxWidth',
-  'minHeight',
-  'maxHeight',
-  'opacity',
-  'layoutSizingHorizontal',
-  'layoutSizingVertical'
+  ...COLOR_PROPERTIES,
+  ...RADIUS_PROPERTIES,
+  ...SPACING_PROPERTIES,
+  ...OTHER_PROPERTIES
 ];
+
+// Get property category
+function getPropertyCategory(property) {
+  const baseProperty = property.replace(/\[\d+\]$/, '');
+  if (COLOR_PROPERTIES.includes(baseProperty)) return 'color';
+  if (RADIUS_PROPERTIES.includes(baseProperty)) return 'radius';
+  if (SPACING_PROPERTIES.includes(baseProperty)) return 'spacing';
+  return 'other';
+}
+
+// Current filter settings
+let currentFilters = { color: true, radius: true, spacing: true, other: true };
 
 // Check if a variable binding is unbound/broken (missing reference)
 // In Figma, an "unbound" variable shows as a grey raw value instead of the variable name
@@ -142,6 +140,12 @@ async function scanNodeForUnboundVariables(node) {
     console.log(`Node "${node.name}" (${node.type}) has boundVariables:`, JSON.stringify(node.boundVariables, null, 2));
 
     for (const [property, binding] of Object.entries(node.boundVariables)) {
+      // Check if this property type is enabled in filters
+      const category = getPropertyCategory(property);
+      if (!currentFilters[category]) {
+        continue;
+      }
+
       const variableIds = extractVariableIds(binding);
       console.log(`  Property "${property}": found ${variableIds.length} variable IDs`, variableIds);
 
@@ -185,7 +189,7 @@ function collectAllNodes(rootNode) {
 }
 
 // Scan with batching for performance
-async function scanWithBatching(rootNode) {
+async function scanWithBatching(rootNode, pageContext = null) {
   const allNodes = collectAllNodes(rootNode);
   const issues = [];
 
@@ -205,7 +209,8 @@ async function scanWithBatching(rootNode) {
       figma.ui.postMessage({
         type: 'scan-progress',
         processed: Math.min(i + BATCH_SIZE, allNodes.length),
-        total: allNodes.length
+        total: allNodes.length,
+        pageContext: pageContext
       });
     }
 
@@ -263,29 +268,41 @@ async function scanAllPages() {
     figma.ui.postMessage({
       type: 'scan-started',
       scanType: 'all',
-      pageName: `All Pages (${allPages.length})`
+      pageName: `All Pages (${allPages.length})`,
+      totalPages: allPages.length
     });
+
+    const pageResults = {};
 
     for (let i = 0; i < allPages.length; i++) {
       if (scanCancelled) {
         figma.ui.postMessage({
           type: 'scan-cancelled',
-          message: 'Scan was cancelled'
+          message: 'Scan was cancelled',
+          pageResults: pageResults
         });
         return;
       }
 
       const page = allPages[i];
+      const pageContext = {
+        pageName: page.name,
+        pageId: page.id,
+        pageIndex: i + 1,
+        totalPages: allPages.length
+      };
 
       figma.ui.postMessage({
         type: 'page-progress',
         currentPage: page.name,
+        pageId: page.id,
         progress: i + 1,
         total: allPages.length
       });
 
-      const pageIssues = await scanWithBatching(page);
+      const pageIssues = await scanWithBatching(page, pageContext);
       unboundVariables.push(...pageIssues);
+      pageResults[page.id] = pageIssues.length;
     }
 
     if (!scanCancelled) {
@@ -293,7 +310,88 @@ async function scanAllPages() {
         type: 'scan-complete',
         results: unboundVariables,
         scanType: 'all',
-        pageName: `All Pages (${allPages.length})`
+        pageName: `All Pages (${allPages.length})`,
+        pageResults: pageResults
+      });
+    }
+  } catch (error) {
+    console.error('Error during scan:', error);
+    figma.ui.postMessage({
+      type: 'scan-error',
+      message: 'Error occurred during scan: ' + error.message
+    });
+  }
+}
+
+// Scan selected pages only
+async function scanSelectedPages(pageIds, stopOnFirstResult = false) {
+  unboundVariables = [];
+  scanCancelled = false;
+
+  try {
+    await figma.loadAllPagesAsync();
+    const allPages = figma.root.children.filter(node => node.type === 'PAGE');
+    const selectedPages = allPages.filter(page => pageIds.includes(page.id));
+
+    figma.ui.postMessage({
+      type: 'scan-started',
+      scanType: 'selected',
+      pageName: `${selectedPages.length} Page${selectedPages.length !== 1 ? 's' : ''}`,
+      totalPages: selectedPages.length
+    });
+
+    const pageResults = {};
+
+    for (let i = 0; i < selectedPages.length; i++) {
+      if (scanCancelled) {
+        figma.ui.postMessage({
+          type: 'scan-cancelled',
+          message: 'Scan was cancelled',
+          pageResults: pageResults
+        });
+        return;
+      }
+
+      const page = selectedPages[i];
+      const pageContext = {
+        pageName: page.name,
+        pageId: page.id,
+        pageIndex: i + 1,
+        totalPages: selectedPages.length
+      };
+
+      figma.ui.postMessage({
+        type: 'page-progress',
+        currentPage: page.name,
+        pageId: page.id,
+        progress: i + 1,
+        total: selectedPages.length
+      });
+
+      const pageIssues = await scanWithBatching(page, pageContext);
+      unboundVariables.push(...pageIssues);
+      pageResults[page.id] = pageIssues.length;
+
+      // Stop on first page with results if option is enabled
+      if (stopOnFirstResult && pageIssues.length > 0) {
+        figma.ui.postMessage({
+          type: 'scan-complete',
+          results: unboundVariables,
+          scanType: 'selected',
+          pageName: `Stopped at "${page.name}" (found ${pageIssues.length} issue${pageIssues.length !== 1 ? 's' : ''})`,
+          pageResults: pageResults
+        });
+        return;
+      }
+    }
+
+    if (!scanCancelled) {
+      figma.ui.postMessage({
+        type: 'scan-complete',
+        results: unboundVariables,
+        scanType: 'selected',
+        pageName: `${selectedPages.length} Page${selectedPages.length !== 1 ? 's' : ''}`,
+        pageResults: pageResults
       });
     }
   } catch (error) {
@@ -352,6 +450,524 @@ async function scanSelection() {
   }
 }
 
+// Row/Column Selection Functions
+// Tolerance for matching positions (in pixels)
+const TOLERANCE = 5;
+
+// Move selection to adjacent sibling in a direction
+function moveUp() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  const yPositions = [...new Set(selection.map(n => n.y))];
+  const isRow = yPositions.length === 1 && selection.length > 1;
+  const minY = Math.min(...selection.map(n => n.y));
+
+  const aboveYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && child.y < minY - TOLERANCE)
+      .map(child => child.y)
+  )].sort((a, b) => b - a);
+
+  if (aboveYPositions.length === 0) {
+    figma.notify('No elements above');
+    return;
+  }
+
+  const nextY = aboveYPositions[0];
+
+  if (isRow) {
+    const nextRowNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.y - nextY) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextRowNodes;
+    figma.notify(`Selected ${nextRowNodes.length} items in row above`);
+  } else {
+    const targetX = selection[0].x;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.y - nextY) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs(candidates[0].x - targetX);
+    for (const c of candidates) {
+      const dist = Math.abs(c.x - targetX);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function moveDown() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  const yPositions = [...new Set(selection.map(n => n.y))];
+  const isRow = yPositions.length === 1 && selection.length > 1;
+  const maxY = Math.max(...selection.map(n => n.y));
+
+  const belowYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && child.y > maxY + TOLERANCE)
+      .map(child => child.y)
+  )].sort((a, b) => a - b);
+
+  if (belowYPositions.length === 0) {
+    figma.notify('No elements below');
+    return;
+  }
+
+  const nextY = belowYPositions[0];
+
+  if (isRow) {
+    const nextRowNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.y - nextY) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextRowNodes;
+    figma.notify(`Selected ${nextRowNodes.length} items in row below`);
+  } else {
+    const targetX = selection[0].x;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.y - nextY) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs(candidates[0].x - targetX);
+    for (const c of candidates) {
+      const dist = Math.abs(c.x - targetX);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function moveLeft() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  const xPositions = [...new Set(selection.map(n => n.x))];
+  const isColumn = xPositions.length === 1 && selection.length > 1;
+  const minX = Math.min(...selection.map(n => n.x));
+
+  const leftXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && child.x < minX - TOLERANCE)
+      .map(child => child.x)
+  )].sort((a, b) => b - a);
+
+  if (leftXPositions.length === 0) {
+    figma.notify('No elements to the left');
+    return;
+  }
+
+  const nextX = leftXPositions[0];
+
+  if (isColumn) {
+    const nextColNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.x - nextX) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextColNodes;
+    figma.notify(`Selected ${nextColNodes.length} items in column to the left`);
+  } else {
+    const targetY = selection[0].y;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.x - nextX) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs(candidates[0].y - targetY);
+    for (const c of candidates) {
+      const dist = Math.abs(c.y - targetY);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function moveRight() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  const xPositions = [...new Set(selection.map(n => n.x))];
+  const isColumn = xPositions.length === 1 && selection.length > 1;
+  const maxX = Math.max(...selection.map(n => n.x));
+
+  const rightXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT' && child.x > maxX + TOLERANCE)
+      .map(child => child.x)
+  )].sort((a, b) => a - b);
+
+  if (rightXPositions.length === 0) {
+    figma.notify('No elements to the right');
+    return;
+  }
+
+  const nextX = rightXPositions[0];
+
+  if (isColumn) {
+    const nextColNodes = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.x - nextX) <= TOLERANCE;
+    });
+    figma.currentPage.selection = nextColNodes;
+    figma.notify(`Selected ${nextColNodes.length} items in column to the right`);
+  } else {
+    const targetY = selection[0].y;
+    const candidates = parent.children.filter(child => {
+      if (child.type === 'TEXT') return false;
+      return Math.abs(child.x - nextX) <= TOLERANCE;
+    });
+
+    let bestMatch = candidates[0];
+    let bestDist = Math.abs(candidates[0].y - targetY);
+    for (const c of candidates) {
+      const dist = Math.abs(c.y - targetY);
+      if (dist < bestDist) {
+        bestDist = dist;
+        bestMatch = c;
+      }
+    }
+
+    figma.currentPage.selection = [bestMatch];
+    figma.notify(`Moved to ${bestMatch.name}`);
+  }
+}
+
+function selectRow() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const selected = selection[0];
+  const parent = selected.parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  const targetY = selected.y;
+  const rowNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    return Math.abs(child.y - targetY) <= TOLERANCE;
+  });
+
+  figma.currentPage.selection = rowNodes;
+  figma.notify(`Selected ${rowNodes.length} items in row`);
+}
+
+function selectColumn() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select an element first');
+    return;
+  }
+
+  const selected = selection[0];
+  const parent = selected.parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Selected element has no siblings');
+    return;
+  }
+
+  const targetX = selected.x;
+  const columnNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    return Math.abs(child.x - targetX) <= TOLERANCE;
+  });
+
+  figma.currentPage.selection = columnNodes;
+  figma.notify(`Selected ${columnNodes.length} items in column`);
+}
+
+function addNextRow() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  const currentYPositions = [...new Set(selection.map(node => node.y))];
+  const maxY = Math.max(...currentYPositions);
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  const allYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.y)
+  )].sort((a, b) => a - b);
+
+  const nextY = allYPositions.find(y => y > maxY + TOLERANCE);
+
+  if (nextY === undefined) {
+    figma.notify('No more rows below');
+    return;
+  }
+
+  const nextRowNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    return Math.abs(child.y - nextY) <= TOLERANCE;
+  });
+
+  const newSelection = [...selection, ...nextRowNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${nextRowNodes.length} items from next row`);
+}
+
+function addNextColumn() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  const currentXPositions = [...new Set(selection.map(node => node.x))];
+  const maxX = Math.max(...currentXPositions);
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  const allXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.x)
+  )].sort((a, b) => a - b);
+
+  const nextX = allXPositions.find(x => x > maxX + TOLERANCE);
+
+  if (nextX === undefined) {
+    figma.notify('No more columns to the right');
+    return;
+  }
+
+  const nextColumnNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    return Math.abs(child.x - nextX) <= TOLERANCE;
+  });
+
+  const newSelection = [...selection, ...nextColumnNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${nextColumnNodes.length} items from next column`);
+}
+
+function addPrevRow() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  const currentYPositions = [...new Set(selection.map(node => node.y))];
+  const minY = Math.min(...currentYPositions);
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  const allYPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.y)
+  )].sort((a, b) => b - a);
+
+  const prevY = allYPositions.find(y => y < minY - TOLERANCE);
+
+  if (prevY === undefined) {
+    figma.notify('No more rows above');
+    return;
+  }
+
+  const prevRowNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    return Math.abs(child.y - prevY) <= TOLERANCE;
+  });
+
+  const newSelection = [...selection, ...prevRowNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${prevRowNodes.length} items from previous row`);
+}
+
+function addPrevColumn() {
+  const selection = figma.currentPage.selection;
+
+  if (selection.length === 0) {
+    figma.notify('Please select elements first');
+    return;
+  }
+
+  const currentXPositions = [...new Set(selection.map(node => node.x))];
+  const minX = Math.min(...currentXPositions);
+  const parent = selection[0].parent;
+
+  if (!parent || !('children' in parent)) {
+    figma.notify('Cannot find parent container');
+    return;
+  }
+
+  const allXPositions = [...new Set(
+    parent.children
+      .filter(child => child.type !== 'TEXT')
+      .map(child => child.x)
+  )].sort((a, b) => b - a);
+
+  const prevX = allXPositions.find(x => x < minX - TOLERANCE);
+
+  if (prevX === undefined) {
+    figma.notify('No more columns to the left');
+    return;
+  }
+
+  const prevColumnNodes = parent.children.filter(child => {
+    if (child.type === 'TEXT') return false;
+    return Math.abs(child.x - prevX) <= TOLERANCE;
+  });
+
+  const newSelection = [...selection, ...prevColumnNodes];
+  figma.currentPage.selection = newSelection;
+  figma.notify(`Added ${prevColumnNodes.length} items from previous column`);
+}
+
+// Get the base property name (without array index)
+function getBaseProperty(property) {
+  const match = property.match(/^([a-zA-Z]+)/);
+  return match ? match[1] : property;
+}
+
+// Remove a variable binding from a node
+async function removeVariableBinding(nodeId, property) {
+  try {
+    const node = await figma.getNodeByIdAsync(nodeId);
+    if (!node) {
+      return { success: false, message: 'Node not found' };
+    }
+
+    const baseProperty = getBaseProperty(property);
+    const indexMatch = property.match(/\[(\d+)\]$/);
+    const index = indexMatch ? parseInt(indexMatch[1]) : null;
+
+    // Handle fills/strokes - these need special handling as you can't use setBoundVariable
+    if (baseProperty === 'fills' || baseProperty === 'strokes') {
+      if (baseProperty in node && Array.isArray(node[baseProperty])) {
+        // Clone the paints array
+        const paints = JSON.parse(JSON.stringify(node[baseProperty]));
+
+        if (index !== null && paints[index]) {
+          // The paint keeps its current color value, we just remove the variable binding
+          // by setting the paints array (which doesn't include boundVariables in the clone)
+          node[baseProperty] = paints;
+        } else {
+          // Remove all bindings by re-setting the array
+          node[baseProperty] = paints;
+        }
+      }
+      return { success: true, message: `Removed binding from ${property}` };
+    }
+
+    // Handle effects similarly
+    if (baseProperty === 'effects') {
+      if ('effects' in node && Array.isArray(node.effects)) {
+        const effects = JSON.parse(JSON.stringify(node.effects));
+        node.effects = effects;
+      }
+      return { success: true, message: `Removed binding from ${property}` };
+    }
+
+    // For other properties, use setBoundVariable
+    if ('setBoundVariable' in node) {
+      node.setBoundVariable(baseProperty, null);
+    }
+
+    return { success: true, message: `Removed binding from ${property}` };
+  } catch (error) {
+    console.error('Error removing binding:', error);
+    return { success: false, message: error.message };
+  }
+}
+
 // Navigate to and select a node
 async function navigateToNode(nodeId) {
   try {
@@ -395,535 +1011,34 @@ async function navigateToNode(nodeId) {
   }
 }
 
-// Row/Column Selection Functions
-// Tolerance for matching positions (in pixels)
-const TOLERANCE = 5;
-
-// Move selection to adjacent sibling in a direction
-// If multiple items are selected in a row, move the entire row selection up/down
-// If multiple items are selected in a column, move the entire column selection left/right
-function moveUp() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select an element first');
-    return;
-  }
-
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Selected element has no siblings');
-    return;
-  }
-
-  // Check if selection is a row (all same Y) or column (all same X)
-  const yPositions = [...new Set(selection.map(n => n.y))];
-  const isRow = yPositions.length === 1 && selection.length > 1;
-
-  const minY = Math.min(...selection.map(n => n.y));
-
-  // Find the next row above
-  const aboveYPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT' && child.y < minY - TOLERANCE)
-      .map(child => child.y)
-  )].sort((a, b) => b - a);
-
-  if (aboveYPositions.length === 0) {
-    figma.notify('No elements above');
-    return;
-  }
-
-  const nextY = aboveYPositions[0];
-
-  if (isRow) {
-    // Select entire row above
-    const nextRowNodes = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.y - nextY) <= TOLERANCE;
-    });
-    figma.currentPage.selection = nextRowNodes;
-    figma.notify(`Selected ${nextRowNodes.length} items in row above`);
-  } else {
-    // Single item or column - find closest X match
-    const targetX = selection[0].x;
-    const candidates = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.y - nextY) <= TOLERANCE;
-    });
-
-    let bestMatch = candidates[0];
-    let bestDist = Math.abs(candidates[0].x - targetX);
-    for (const c of candidates) {
-      const dist = Math.abs(c.x - targetX);
-      if (dist < bestDist) {
-        bestDist = dist;
-        bestMatch = c;
-      }
-    }
-
-    figma.currentPage.selection = [bestMatch];
-    figma.notify(`Moved to ${bestMatch.name}`);
-  }
-}
-
-function moveDown() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select an element first');
-    return;
-  }
-
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Selected element has no siblings');
-    return;
-  }
-
-  // Check if selection is a row (all same Y)
-  const yPositions = [...new Set(selection.map(n => n.y))];
-  const isRow = yPositions.length === 1 && selection.length > 1;
-
-  const maxY = Math.max(...selection.map(n => n.y));
-
-  // Find the next row below
-  const belowYPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT' && child.y > maxY + TOLERANCE)
-      .map(child => child.y)
-  )].sort((a, b) => a - b);
-
-  if (belowYPositions.length === 0) {
-    figma.notify('No elements below');
-    return;
-  }
-
-  const nextY = belowYPositions[0];
-
-  if (isRow) {
-    // Select entire row below
-    const nextRowNodes = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.y - nextY) <= TOLERANCE;
-    });
-    figma.currentPage.selection = nextRowNodes;
-    figma.notify(`Selected ${nextRowNodes.length} items in row below`);
-  } else {
-    // Single item or column - find closest X match
-    const targetX = selection[0].x;
-    const candidates = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.y - nextY) <= TOLERANCE;
-    });
-
-    let bestMatch = candidates[0];
-    let bestDist = Math.abs(candidates[0].x - targetX);
-    for (const c of candidates) {
-      const dist = Math.abs(c.x - targetX);
-      if (dist < bestDist) {
-        bestDist = dist;
-        bestMatch = c;
-      }
-    }
-
-    figma.currentPage.selection = [bestMatch];
-    figma.notify(`Moved to ${bestMatch.name}`);
-  }
-}
-
-function moveLeft() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select an element first');
-    return;
-  }
-
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Selected element has no siblings');
-    return;
-  }
-
-  // Check if selection is a column (all same X)
-  const xPositions = [...new Set(selection.map(n => n.x))];
-  const isColumn = xPositions.length === 1 && selection.length > 1;
-
-  const minX = Math.min(...selection.map(n => n.x));
-
-  // Find the next column to the left
-  const leftXPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT' && child.x < minX - TOLERANCE)
-      .map(child => child.x)
-  )].sort((a, b) => b - a);
-
-  if (leftXPositions.length === 0) {
-    figma.notify('No elements to the left');
-    return;
-  }
-
-  const nextX = leftXPositions[0];
-
-  if (isColumn) {
-    // Select entire column to the left
-    const nextColNodes = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.x - nextX) <= TOLERANCE;
-    });
-    figma.currentPage.selection = nextColNodes;
-    figma.notify(`Selected ${nextColNodes.length} items in column to the left`);
-  } else {
-    // Single item or row - find closest Y match
-    const targetY = selection[0].y;
-    const candidates = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.x - nextX) <= TOLERANCE;
-    });
-
-    let bestMatch = candidates[0];
-    let bestDist = Math.abs(candidates[0].y - targetY);
-    for (const c of candidates) {
-      const dist = Math.abs(c.y - targetY);
-      if (dist < bestDist) {
-        bestDist = dist;
-        bestMatch = c;
-      }
-    }
-
-    figma.currentPage.selection = [bestMatch];
-    figma.notify(`Moved to ${bestMatch.name}`);
-  }
-}
-
-function moveRight() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select an element first');
-    return;
-  }
-
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Selected element has no siblings');
-    return;
-  }
-
-  // Check if selection is a column (all same X)
-  const xPositions = [...new Set(selection.map(n => n.x))];
-  const isColumn = xPositions.length === 1 && selection.length > 1;
-
-  const maxX = Math.max(...selection.map(n => n.x));
-
-  // Find the next column to the right
-  const rightXPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT' && child.x > maxX + TOLERANCE)
-      .map(child => child.x)
-  )].sort((a, b) => a - b);
-
-  if (rightXPositions.length === 0) {
-    figma.notify('No elements to the right');
-    return;
-  }
-
-  const nextX = rightXPositions[0];
-
-  if (isColumn) {
-    // Select entire column to the right
-    const nextColNodes = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.x - nextX) <= TOLERANCE;
-    });
-    figma.currentPage.selection = nextColNodes;
-    figma.notify(`Selected ${nextColNodes.length} items in column to the right`);
-  } else {
-    // Single item or row - find closest Y match
-    const targetY = selection[0].y;
-    const candidates = parent.children.filter(child => {
-      if (child.type === 'TEXT') return false;
-      return Math.abs(child.x - nextX) <= TOLERANCE;
-    });
-
-    let bestMatch = candidates[0];
-    let bestDist = Math.abs(candidates[0].y - targetY);
-    for (const c of candidates) {
-      const dist = Math.abs(c.y - targetY);
-      if (dist < bestDist) {
-        bestDist = dist;
-        bestMatch = c;
-      }
-    }
-
-    figma.currentPage.selection = [bestMatch];
-    figma.notify(`Moved to ${bestMatch.name}`);
-  }
-}
-
-function selectRow() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select an element first');
-    return;
-  }
-
-  const selected = selection[0];
-  const parent = selected.parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Selected element has no siblings');
-    return;
-  }
-
-  // Get the Y position of the selected element
-  const targetY = selected.y;
-
-  // Find all siblings at the same Y position (same row)
-  const rowNodes = parent.children.filter(child => {
-    if (child.type === 'TEXT') return false;
-    return Math.abs(child.y - targetY) <= TOLERANCE;
-  });
-
-  figma.currentPage.selection = rowNodes;
-  figma.notify(`Selected ${rowNodes.length} items in row`);
-}
-
-function selectColumn() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select an element first');
-    return;
-  }
-
-  const selected = selection[0];
-  const parent = selected.parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Selected element has no siblings');
-    return;
-  }
-
-  // Get the X position of the selected element
-  const targetX = selected.x;
-
-  // Find all siblings at the same X position (same column)
-  const columnNodes = parent.children.filter(child => {
-    if (child.type === 'TEXT') return false;
-    return Math.abs(child.x - targetX) <= TOLERANCE;
-  });
-
-  figma.currentPage.selection = columnNodes;
-  figma.notify(`Selected ${columnNodes.length} items in column`);
-}
-
-function addNextRow() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select elements first');
-    return;
-  }
-
-  // Get all unique Y positions in current selection
-  const currentYPositions = [...new Set(selection.map(node => node.y))];
-  const maxY = Math.max(...currentYPositions);
-
-  // Find the parent (assume all selected items share a parent)
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Cannot find parent container');
-    return;
-  }
-
-  // Find all unique Y positions in the parent
-  const allYPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT')
-      .map(child => child.y)
-  )].sort((a, b) => a - b);
-
-  // Find the next Y position after the current max
-  const nextY = allYPositions.find(y => y > maxY + TOLERANCE);
-
-  if (nextY === undefined) {
-    figma.notify('No more rows below');
-    return;
-  }
-
-  // Get all nodes at the next Y position
-  const nextRowNodes = parent.children.filter(child => {
-    if (child.type === 'TEXT') return false;
-    return Math.abs(child.y - nextY) <= TOLERANCE;
-  });
-
-  // Combine current selection with next row
-  const newSelection = [...selection, ...nextRowNodes];
-  figma.currentPage.selection = newSelection;
-  figma.notify(`Added ${nextRowNodes.length} items from next row`);
-}
-
-function addNextColumn() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select elements first');
-    return;
-  }
-
-  // Get all unique X positions in current selection
-  const currentXPositions = [...new Set(selection.map(node => node.x))];
-  const maxX = Math.max(...currentXPositions);
-
-  // Find the parent (assume all selected items share a parent)
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Cannot find parent container');
-    return;
-  }
-
-  // Find all unique X positions in the parent
-  const allXPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT')
-      .map(child => child.x)
-  )].sort((a, b) => a - b);
-
-  // Find the next X position after the current max
-  const nextX = allXPositions.find(x => x > maxX + TOLERANCE);
-
-  if (nextX === undefined) {
-    figma.notify('No more columns to the right');
-    return;
-  }
-
-  // Get all nodes at the next X position
-  const nextColumnNodes = parent.children.filter(child => {
-    if (child.type === 'TEXT') return false;
-    return Math.abs(child.x - nextX) <= TOLERANCE;
-  });
-
-  // Combine current selection with next column
-  const newSelection = [...selection, ...nextColumnNodes];
-  figma.currentPage.selection = newSelection;
-  figma.notify(`Added ${nextColumnNodes.length} items from next column`);
-}
-
-function addPrevRow() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select elements first');
-    return;
-  }
-
-  // Get all unique Y positions in current selection
-  const currentYPositions = [...new Set(selection.map(node => node.y))];
-  const minY = Math.min(...currentYPositions);
-
-  // Find the parent (assume all selected items share a parent)
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Cannot find parent container');
-    return;
-  }
-
-  // Find all unique Y positions in the parent
-  const allYPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT')
-      .map(child => child.y)
-  )].sort((a, b) => b - a); // Sort descending to find previous
-
-  // Find the previous Y position before the current min
-  const prevY = allYPositions.find(y => y < minY - TOLERANCE);
-
-  if (prevY === undefined) {
-    figma.notify('No more rows above');
-    return;
-  }
-
-  // Get all nodes at the previous Y position
-  const prevRowNodes = parent.children.filter(child => {
-    if (child.type === 'TEXT') return false;
-    return Math.abs(child.y - prevY) <= TOLERANCE;
-  });
-
-  // Combine current selection with previous row
-  const newSelection = [...selection, ...prevRowNodes];
-  figma.currentPage.selection = newSelection;
-  figma.notify(`Added ${prevRowNodes.length} items from previous row`);
-}
-
-function addPrevColumn() {
-  const selection = figma.currentPage.selection;
-
-  if (selection.length === 0) {
-    figma.notify('Please select elements first');
-    return;
-  }
-
-  // Get all unique X positions in current selection
-  const currentXPositions = [...new Set(selection.map(node => node.x))];
-  const minX = Math.min(...currentXPositions);
-
-  // Find the parent (assume all selected items share a parent)
-  const parent = selection[0].parent;
-
-  if (!parent || !('children' in parent)) {
-    figma.notify('Cannot find parent container');
-    return;
-  }
-
-  // Find all unique X positions in the parent
-  const allXPositions = [...new Set(
-    parent.children
-      .filter(child => child.type !== 'TEXT')
-      .map(child => child.x)
-  )].sort((a, b) => b - a); // Sort descending to find previous
-
-  // Find the previous X position before the current min
-  const prevX = allXPositions.find(x => x < minX - TOLERANCE);
-
-  if (prevX === undefined) {
-    figma.notify('No more columns to the left');
-    return;
-  }
-
-  // Get all nodes at the previous X position
-  const prevColumnNodes = parent.children.filter(child => {
-    if (child.type === 'TEXT') return false;
-    return Math.abs(child.x - prevX) <= TOLERANCE;
-  });
-
-  // Combine current selection with previous column
-  const newSelection = [...selection, ...prevColumnNodes];
-  figma.currentPage.selection = newSelection;
-  figma.notify(`Added ${prevColumnNodes.length} items from previous column`);
-}
-
 // Handle messages from UI
 figma.ui.onmessage = async (msg) => {
   switch (msg.type) {
     case 'scan-current':
+      if (msg.filters) currentFilters = msg.filters;
       await scanCurrentPage();
       break;
 
     case 'scan-all':
+      if (msg.filters) currentFilters = msg.filters;
       await scanAllPages();
       break;
 
+    case 'get-pages':
+      const allPages = figma.root.children.filter(node => node.type === 'PAGE');
+      figma.ui.postMessage({
+        type: 'pages-list',
+        pages: allPages.map(page => ({ id: page.id, name: page.name }))
+      });
+      break;
+
+    case 'scan-pages':
+      if (msg.filters) currentFilters = msg.filters;
+      await scanSelectedPages(msg.pageIds, msg.stopOnFirst || false);
+      break;
+
     case 'scan-selection':
+      if (msg.filters) currentFilters = msg.filters;
       await scanSelection();
       break;
 
@@ -975,6 +1090,55 @@ figma.ui.onmessage = async (msg) => {
 
     case 'add-prev-column':
       addPrevColumn();
+      break;
+
+    case 'remove-binding':
+      const removeResult = await removeVariableBinding(msg.nodeId, msg.property);
+      figma.ui.postMessage({
+        type: 'fix-result',
+        success: removeResult.success,
+        message: removeResult.message,
+        issueIndex: msg.issueIndex,
+        action: 'remove'
+      });
+      if (removeResult.success) {
+        figma.notify('Binding removed');
+      }
+      break;
+
+    case 'batch-unlink':
+      const issues = msg.issues;
+      let successCount = 0;
+      let failCount = 0;
+
+      for (let i = 0; i < issues.length; i++) {
+        const issue = issues[i];
+        const result = await removeVariableBinding(issue.nodeId, issue.property);
+        if (result.success) {
+          successCount++;
+        } else {
+          failCount++;
+        }
+
+        // Send progress update
+        figma.ui.postMessage({
+          type: 'batch-unlink-progress',
+          current: i + 1,
+          total: issues.length
+        });
+      }
+
+      figma.ui.postMessage({
+        type: 'batch-unlink-complete',
+        successCount,
+        failCount
+      });
+
+      if (failCount === 0) {
+        figma.notify(`Unlinked ${successCount} variable binding${successCount !== 1 ? 's' : ''}`);
+      } else {
+        figma.notify(`Unlinked ${successCount}, failed ${failCount}`);
+      }
       break;
 
     case 'close':

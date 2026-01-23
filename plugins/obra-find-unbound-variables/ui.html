@@ -273,6 +273,274 @@
       color: #999;
     }
 
+    .fix-controls {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #e0e0e0;
+    }
+
+    .fix-buttons {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .fix-btn {
+      padding: 4px 8px;
+      font-size: 10px;
+      border-radius: 4px;
+      border: 1px solid #d0d0d0;
+      background: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .fix-btn:hover {
+      background: #f0f0f0;
+      border-color: #bbb;
+    }
+
+    .fix-btn.remove {
+      color: #c5221f;
+      border-color: #f5c6c4;
+      background: #fef7f6;
+    }
+
+    .fix-btn.remove:hover {
+      background: #fce8e6;
+      border-color: #c5221f;
+    }
+
+    .fix-btn.loading {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .fix-label {
+      font-size: 10px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+
+    .result-item.fixed {
+      opacity: 0.5;
+      background: #e6f4ea;
+    }
+
+    .result-item.fixed .fix-controls {
+      display: none;
+    }
+
+    .fixed-badge {
+      font-size: 9px;
+      color: #1e7e34;
+      background: #e6f4ea;
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid #b7e1c4;
+    }
+
+    .batch-unlink-btn {
+      padding: 4px 10px;
+      font-size: 10px;
+      background: #c5221f;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .batch-unlink-btn:hover {
+      background: #a31c1a;
+    }
+
+    .batch-unlink-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .workflow-tip {
+      font-size: 11px;
+      color: #666;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-top: 16px;
+      line-height: 1.4;
+    }
+
+    .workflow-tip strong {
+      color: #333;
+    }
+
+    .workflow-tip em {
+      color: #0b5394;
+      font-style: normal;
+    }
+
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding: 8px 12px;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .filter-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+
+    .filter-options {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .filter-checkbox input {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .page-selector {
+      margin-bottom: 16px;
+      padding: 12px;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .page-selector.visible {
+      display: block;
+    }
+
+    .page-selector-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .page-selector-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .page-selector-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .page-selector-actions button {
+      padding: 3px 8px;
+      font-size: 10px;
+      background: #fff;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .page-selector-actions button:hover {
+      background: #f0f0f0;
+    }
+
+    .page-list {
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: #fff;
+    }
+
+    .page-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .page-item:last-child {
+      border-bottom: none;
+    }
+
+    .page-item:hover {
+      background: #f8f9fa;
+    }
+
+    .page-item input {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .page-item-name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .page-selector-option {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .page-selector-footer {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .page-selector-footer button {
+      padding: 6px 12px;
+      font-size: 11px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .page-selector-footer .cancel-btn {
+      background: #fff;
+      border: 1px solid #d0d0d0;
+      color: #333;
+    }
+
+    .page-selector-footer .scan-btn {
+      background: #0d99ff;
+      border: none;
+      color: white;
+    }
+
+    .page-selector-footer .scan-btn:hover {
+      background: #0b85e0;
+    }
+
     .selection-tools {
       background: #f8f9fa;
       border: 1px solid #e0e0e0;
@@ -398,45 +666,317 @@
       background: #0b85e0;
       border-color: #0b85e0;
     }
+
+    /* Tabs - Figma style */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+      padding: 4px;
+      background: #f5f5f5;
+      border-radius: 6px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 500;
+      color: #666;
+      background: transparent;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .tab:hover {
+      color: #333;
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .tab.active {
+      color: #333;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Pages tab */
+    .pages-tab-content {
+      padding: 0;
+    }
+
+    .pages-list {
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      background: #fff;
+      margin-bottom: 12px;
+    }
+
+    .page-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 11px;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    .page-row:last-child {
+      border-bottom: none;
+    }
+
+    .page-row:hover {
+      background: #f8f9fa;
+    }
+
+    .page-row input {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    .page-row-name {
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .page-row-issues {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .page-row-issues.has-issues {
+      background: #fef7e0;
+      color: #9a6700;
+    }
+
+    .page-row-issues.no-issues {
+      background: #e6f4ea;
+      color: #1e7e34;
+    }
+
+    .page-row-issues.unknown {
+      background: #f5f5f5;
+      color: #999;
+    }
+
+    .pages-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .pages-actions-left {
+      display: flex;
+      gap: 8px;
+    }
+
+    .pages-scan-btn {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      background: #0d99ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .pages-scan-btn:hover {
+      background: #0b85e0;
+    }
+
+    .pages-scan-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .small-btn {
+      padding: 4px 8px;
+      font-size: 10px;
+      background: #fff;
+      border: 1px solid #d0d0d0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .small-btn:hover {
+      background: #f0f0f0;
+    }
+
+    /* Stop scan button */
+    .stop-scan-btn {
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      background: #c5221f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: none;
+    }
+
+    .stop-scan-btn.visible {
+      display: inline-block;
+    }
+
+    .stop-scan-btn:hover {
+      background: #a31c1a;
+    }
+
+    /* Progress with dual info */
+    .progress-dual {
+      font-size: 11px;
+      color: #666;
+      margin-bottom: 12px;
+      display: none;
+      padding: 10px 12px;
+      background: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+    }
+
+    .progress-dual.visible {
+      display: block;
+    }
+
+    .progress-page {
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .progress-nodes {
+      color: #666;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: #e0e0e0;
+      border-radius: 2px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: #0d99ff;
+      transition: width 0.2s ease;
+    }
+
   </style>
 </head>
 <body>
   <h1>Find Unbound Variables</h1>
 
-  <div class="button-group">
-    <button class="primary" id="scan-current">Scan Current Page</button>
-    <button class="secondary" id="scan-selection">Scan Selection</button>
-    <button class="secondary" id="scan-all">Scan All Pages</button>
+  <div class="tabs">
+    <button class="tab active" data-tab="scan">Scan</button>
+    <button class="tab" data-tab="pages">Pages</button>
+    <button class="tab" data-tab="settings">Settings</button>
   </div>
 
-  <div class="selection-tools">
-    <div class="selection-label">Selection Tools</div>
-    <div class="selection-tools-content">
-      <div class="dpad-container">
-        <div class="dpad">
-          <button class="dpad-btn dpad-up" id="move-up" title="Move selection up">&#9650;</button>
-          <button class="dpad-btn dpad-left" id="move-left" title="Move selection left">&#9664;</button>
-          <div class="dpad-center"></div>
-          <button class="dpad-btn dpad-right" id="move-right" title="Move selection right">&#9654;</button>
-          <button class="dpad-btn dpad-down" id="move-down" title="Move selection down">&#9660;</button>
-        </div>
-        <span class="dpad-label">Move</span>
+  <!-- Scan Tab -->
+  <div class="tab-content active" id="tab-scan">
+    <div class="button-group">
+      <button class="primary" id="scan-current">Scan Current Page</button>
+      <button class="secondary" id="scan-selection">Scan Selection</button>
+      <button class="stop-scan-btn" id="stop-scan">Stop Scan</button>
+    </div>
+
+    <div class="filter-group">
+      <span class="filter-label">Filter by type:</span>
+      <div class="filter-options">
+        <label class="filter-checkbox">
+          <input type="checkbox" id="filter-color" checked>
+          <span>Color</span>
+        </label>
+        <label class="filter-checkbox">
+          <input type="checkbox" id="filter-radius" checked>
+          <span>Border Radius</span>
+        </label>
+        <label class="filter-checkbox">
+          <input type="checkbox" id="filter-spacing" checked>
+          <span>Spacing</span>
+        </label>
+        <label class="filter-checkbox">
+          <input type="checkbox" id="filter-other" checked>
+          <span>Other</span>
+        </label>
       </div>
-      <div class="expand-controls">
-        <div class="selection-group">
-          <span class="group-label">Expand Rows</span>
-          <div class="selection-buttons">
-            <button class="tool-btn" id="add-prev-row" title="Add previous row">+ Up</button>
-            <button class="tool-btn primary-tool" id="select-row" title="Select entire row">All</button>
-            <button class="tool-btn" id="add-next-row" title="Add next row">+ Down</button>
+    </div>
+  </div>
+
+  <!-- Pages Tab -->
+  <div class="tab-content" id="tab-pages">
+    <div class="pages-actions">
+      <div class="pages-actions-left">
+        <button class="small-btn" id="select-all-pages">Select All</button>
+        <button class="small-btn" id="deselect-all-pages">Deselect All</button>
+      </div>
+      <button class="pages-scan-btn" id="scan-selected-pages">Scan Selected Pages</button>
+    </div>
+    <div class="pages-list" id="pages-list">
+      <!-- Pages will be populated here -->
+    </div>
+    <div class="page-selector-option">
+      <label class="filter-checkbox">
+        <input type="checkbox" id="stop-on-first">
+        <span>Stop scanning when issues are found on a page</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Settings Tab -->
+  <div class="tab-content" id="tab-settings">
+    <div class="selection-tools">
+      <div class="selection-label">Selection Tools</div>
+      <div class="selection-tools-content">
+        <div class="dpad-container">
+          <div class="dpad">
+            <button class="dpad-btn dpad-up" id="move-up" title="Move selection up">&#9650;</button>
+            <button class="dpad-btn dpad-left" id="move-left" title="Move selection left">&#9664;</button>
+            <div class="dpad-center"></div>
+            <button class="dpad-btn dpad-right" id="move-right" title="Move selection right">&#9654;</button>
+            <button class="dpad-btn dpad-down" id="move-down" title="Move selection down">&#9660;</button>
           </div>
+          <span class="dpad-label">Move</span>
         </div>
-        <div class="selection-group">
-          <span class="group-label">Expand Columns</span>
-          <div class="selection-buttons">
-            <button class="tool-btn" id="add-prev-column" title="Add previous column">+ Left</button>
-            <button class="tool-btn primary-tool" id="select-column" title="Select entire column">All</button>
-            <button class="tool-btn" id="add-next-column" title="Add next column">+ Right</button>
+        <div class="expand-controls">
+          <div class="selection-group">
+            <span class="group-label">Expand Rows</span>
+            <div class="selection-buttons">
+              <button class="tool-btn" id="add-prev-row" title="Add previous row">+ Up</button>
+              <button class="tool-btn primary-tool" id="select-row" title="Select entire row">All</button>
+              <button class="tool-btn" id="add-next-row" title="Add next row">+ Down</button>
+            </div>
+          </div>
+          <div class="selection-group">
+            <span class="group-label">Expand Columns</span>
+            <div class="selection-buttons">
+              <button class="tool-btn" id="add-prev-column" title="Add previous column">+ Left</button>
+              <button class="tool-btn primary-tool" id="select-column" title="Select entire column">All</button>
+              <button class="tool-btn" id="add-next-column" title="Add next column">+ Right</button>
+            </div>
           </div>
         </div>
       </div>
@@ -444,12 +984,25 @@
   </div>
 
   <div class="status" id="status"></div>
+
+  <!-- Dual progress for multi-page scans -->
+  <div class="progress-dual" id="progress-dual">
+    <div class="progress-page" id="progress-page">Scanning page 1/5: Home</div>
+    <div class="progress-nodes" id="progress-nodes">Processing nodes: 150/1200</div>
+    <div class="progress-bar">
+      <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%"></div>
+    </div>
+  </div>
+
   <div class="progress" id="progress"></div>
 
   <div id="results-container" style="display: none;">
     <div class="results-header">
       <h2>Unbound Variables</h2>
-      <span class="results-count" id="results-count">0</span>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="batch-unlink-btn" id="batch-unlink-btn">Unlink All</button>
+        <span class="results-count" id="results-count">0</span>
+      </div>
     </div>
     <div class="results-list" id="results-list"></div>
   </div>
@@ -466,31 +1019,121 @@
     <p class="hint">Variables with missing references will be listed here</p>
   </div>
 
+  <div class="workflow-tip">
+    <strong>Workflow tip:</strong> After unlinking, run <em>Obra Spacing Variable Fixer</em> and <em>Obra Border Radius Variable Fixer</em> to rebind variables.
+  </div>
+
   <div class="footer">
     <span class="footer-info">Click a result to zoom to the layer</span>
   </div>
 
   <script>
+    const STORAGE_KEY = 'unbound-variables-plugin';
+
     const scanCurrentBtn = document.getElementById('scan-current');
     const scanSelectionBtn = document.getElementById('scan-selection');
-    const scanAllBtn = document.getElementById('scan-all');
+    const stopScanBtn = document.getElementById('stop-scan');
+    const scanSelectedPagesBtn = document.getElementById('scan-selected-pages');
+    const batchUnlinkBtn = document.getElementById('batch-unlink-btn');
     const statusEl = document.getElementById('status');
     const progressEl = document.getElementById('progress');
+    const progressDualEl = document.getElementById('progress-dual');
+    const progressPageEl = document.getElementById('progress-page');
+    const progressNodesEl = document.getElementById('progress-nodes');
+    const progressBarFillEl = document.getElementById('progress-bar-fill');
     const resultsContainer = document.getElementById('results-container');
     const resultsList = document.getElementById('results-list');
     const resultsCount = document.getElementById('results-count');
     const emptyState = document.getElementById('empty-state');
     const initialState = document.getElementById('initial-state');
+    const pagesList = document.getElementById('pages-list');
 
     let isScanning = false;
+    let isMultiPageScan = false;
+    let isBatchUnlinking = false;
     let currentResults = [];
+    let availablePages = [];
+    let savedPageSelections = {};
+    let savedPageIssues = {};
+
+    // Load saved data from localStorage
+    function loadSavedData() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const data = JSON.parse(saved);
+          savedPageSelections = data.selectedPages || {};
+          savedPageIssues = data.pageIssues || {};
+        }
+      } catch (e) {
+        console.error('Error loading saved data:', e);
+      }
+    }
+
+    // Save data to localStorage
+    function saveData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          selectedPages: savedPageSelections,
+          pageIssues: savedPageIssues
+        }));
+      } catch (e) {
+        console.error('Error saving data:', e);
+      }
+    }
+
+    // Initialize
+    loadSavedData();
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tabId = tab.dataset.tab;
+
+        // Update tab buttons
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        // Update tab content
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById('tab-' + tabId).classList.add('active');
+
+        // Load pages list when switching to pages tab
+        if (tabId === 'pages') {
+          parent.postMessage({ pluginMessage: { type: 'get-pages' } }, '*');
+        }
+      });
+    });
+
+    function getFilters() {
+      return {
+        color: document.getElementById('filter-color').checked,
+        radius: document.getElementById('filter-radius').checked,
+        spacing: document.getElementById('filter-spacing').checked,
+        other: document.getElementById('filter-other').checked
+      };
+    }
 
     function setButtonsEnabled(enabled) {
       scanCurrentBtn.disabled = !enabled;
       scanSelectionBtn.disabled = !enabled;
-      scanAllBtn.disabled = !enabled;
+      scanSelectedPagesBtn.disabled = !enabled;
+      batchUnlinkBtn.disabled = !enabled;
       isScanning = !enabled;
+
+      // Show/hide stop button
+      if (!enabled && isMultiPageScan) {
+        stopScanBtn.classList.add('visible');
+      } else {
+        stopScanBtn.classList.remove('visible');
+      }
     }
+
+    // Stop scan handler
+    stopScanBtn.addEventListener('click', () => {
+      parent.postMessage({ pluginMessage: { type: 'cancel-scan' } }, '*');
+      stopScanBtn.classList.remove('visible');
+    });
 
     // D-pad move handlers
     document.getElementById('move-up').onclick = () => {
@@ -550,6 +1193,14 @@
 
     function hideProgress() {
       progressEl.className = 'progress';
+      progressDualEl.className = 'progress-dual';
+    }
+
+    function showDualProgress(pageInfo, nodeInfo, progressPercent) {
+      progressDualEl.className = 'progress-dual visible';
+      progressPageEl.textContent = pageInfo;
+      progressNodesEl.textContent = nodeInfo;
+      progressBarFillEl.style.width = progressPercent + '%';
     }
 
     function renderResults(results) {
@@ -567,7 +1218,7 @@
       resultsCount.textContent = results.length;
 
       resultsList.innerHTML = results.map((result, index) => `
-        <div class="result-item" data-index="${index}" data-node-id="${result.nodeId}">
+        <div class="result-item" data-index="${index}" data-node-id="${result.nodeId}" data-property="${escapeHtml(result.property)}">
           <div class="result-item-header">
             <span class="node-name">${escapeHtml(result.nodeName)}</span>
             <span class="node-type">${result.nodeType}</span>
@@ -583,16 +1234,62 @@
             <span class="variable-name">${escapeHtml(result.variableName)}</span>
           </div>
           ` : ''}
+          <div class="fix-controls">
+            <div class="fix-label">Fix:</div>
+            <div class="fix-buttons">
+              <button class="fix-btn remove" data-action="remove" data-index="${index}">Remove binding</button>
+            </div>
+          </div>
         </div>
       `).join('');
 
-      // Add click handlers for navigation (on entire row)
-      resultsList.querySelectorAll('.result-item').forEach(item => {
-        item.addEventListener('click', () => {
+      // Add click handlers for navigation (on header area only)
+      resultsList.querySelectorAll('.result-item-header').forEach(header => {
+        header.style.cursor = 'pointer';
+        header.addEventListener('click', (e) => {
+          const item = header.closest('.result-item');
           const nodeId = item.dataset.nodeId;
           parent.postMessage({ pluginMessage: { type: 'navigate-to-node', nodeId } }, '*');
         });
       });
+
+      // Add click handlers for remove buttons
+      resultsList.querySelectorAll('.fix-btn.remove').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const index = parseInt(btn.dataset.index);
+          const result = currentResults[index];
+          btn.classList.add('loading');
+          btn.textContent = 'Removing...';
+          parent.postMessage({
+            pluginMessage: {
+              type: 'remove-binding',
+              nodeId: result.nodeId,
+              property: result.property,
+              issueIndex: index
+            }
+          }, '*');
+        });
+      });
+    }
+
+    function markAsFixed(index) {
+      const item = resultsList.querySelector(`.result-item[data-index="${index}"]`);
+      if (item) {
+        item.classList.add('fixed');
+        const header = item.querySelector('.result-item-header');
+        if (header) {
+          const badge = document.createElement('span');
+          badge.className = 'fixed-badge';
+          badge.textContent = 'Fixed';
+          header.appendChild(badge);
+        }
+      }
+
+      // Update count
+      const fixedCount = resultsList.querySelectorAll('.result-item.fixed').length;
+      const remaining = currentResults.length - fixedCount;
+      resultsCount.textContent = remaining > 0 ? remaining : '0';
     }
 
     function escapeHtml(text) {
@@ -603,15 +1300,137 @@
 
     // Button handlers
     scanCurrentBtn.addEventListener('click', () => {
-      parent.postMessage({ pluginMessage: { type: 'scan-current' } }, '*');
+      isMultiPageScan = false;
+      parent.postMessage({ pluginMessage: { type: 'scan-current', filters: getFilters() } }, '*');
     });
 
     scanSelectionBtn.addEventListener('click', () => {
-      parent.postMessage({ pluginMessage: { type: 'scan-selection' } }, '*');
+      isMultiPageScan = false;
+      parent.postMessage({ pluginMessage: { type: 'scan-selection', filters: getFilters() } }, '*');
     });
 
-    scanAllBtn.addEventListener('click', () => {
-      parent.postMessage({ pluginMessage: { type: 'scan-all' } }, '*');
+    // Page selector handlers
+    document.getElementById('select-all-pages').addEventListener('click', () => {
+      pagesList.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = true;
+        savedPageSelections[cb.dataset.pageId] = true;
+      });
+      saveData();
+    });
+
+    document.getElementById('deselect-all-pages').addEventListener('click', () => {
+      pagesList.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.checked = false;
+        savedPageSelections[cb.dataset.pageId] = false;
+      });
+      saveData();
+    });
+
+    scanSelectedPagesBtn.addEventListener('click', () => {
+      const selectedPageIds = [];
+      pagesList.querySelectorAll('input[type="checkbox"]:checked').forEach(cb => {
+        selectedPageIds.push(cb.dataset.pageId);
+      });
+
+      if (selectedPageIds.length === 0) {
+        showStatus('Please select at least one page', 'warning');
+        return;
+      }
+
+      isMultiPageScan = true;
+      const stopOnFirst = document.getElementById('stop-on-first').checked;
+
+      parent.postMessage({
+        pluginMessage: {
+          type: 'scan-pages',
+          pageIds: selectedPageIds,
+          filters: getFilters(),
+          stopOnFirst: stopOnFirst
+        }
+      }, '*');
+    });
+
+    function renderPageList(pages) {
+      availablePages = pages;
+      pagesList.innerHTML = pages.map(page => {
+        const isSelected = savedPageSelections[page.id] !== false; // Default to selected
+        const issueCount = savedPageIssues[page.id];
+        let issuesBadge = '';
+
+        if (issueCount !== undefined) {
+          if (issueCount === 0) {
+            issuesBadge = `<span class="page-row-issues no-issues">0 issues</span>`;
+          } else {
+            issuesBadge = `<span class="page-row-issues has-issues">${issueCount} issue${issueCount !== 1 ? 's' : ''}</span>`;
+          }
+        } else {
+          issuesBadge = `<span class="page-row-issues unknown">Not scanned</span>`;
+        }
+
+        return `
+          <label class="page-row">
+            <input type="checkbox" data-page-id="${page.id}" ${isSelected ? 'checked' : ''}>
+            <span class="page-row-name">${escapeHtml(page.name)}</span>
+            ${issuesBadge}
+          </label>
+        `;
+      }).join('');
+
+      // Add change handlers for checkboxes to save state
+      pagesList.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', () => {
+          savedPageSelections[cb.dataset.pageId] = cb.checked;
+          saveData();
+        });
+      });
+    }
+
+    // Update page issues in the list after scan
+    function updatePageIssuesDisplay() {
+      pagesList.querySelectorAll('.page-row').forEach(row => {
+        const checkbox = row.querySelector('input[type="checkbox"]');
+        const pageId = checkbox.dataset.pageId;
+        const issueCount = savedPageIssues[pageId];
+
+        let existingBadge = row.querySelector('.page-row-issues');
+        if (existingBadge) {
+          if (issueCount !== undefined) {
+            if (issueCount === 0) {
+              existingBadge.className = 'page-row-issues no-issues';
+              existingBadge.textContent = '0 issues';
+            } else {
+              existingBadge.className = 'page-row-issues has-issues';
+              existingBadge.textContent = `${issueCount} issue${issueCount !== 1 ? 's' : ''}`;
+            }
+          }
+        }
+      });
+    }
+
+    batchUnlinkBtn.addEventListener('click', () => {
+      // Get unfixed results only
+      const unfixedResults = currentResults.filter((_, index) => {
+        const item = resultsList.querySelector(`.result-item[data-index="${index}"]`);
+        return item && !item.classList.contains('fixed');
+      });
+
+      if (unfixedResults.length === 0) {
+        showStatus('No unbound variables to unlink', 'info');
+        return;
+      }
+
+      isBatchUnlinking = true;
+      batchUnlinkBtn.disabled = true;
+      batchUnlinkBtn.textContent = 'Unlinking...';
+      setButtonsEnabled(false);
+      showProgress(`Unlinking 0/${unfixedResults.length}...`);
+
+      parent.postMessage({
+        pluginMessage: {
+          type: 'batch-unlink',
+          issues: unfixedResults
+        }
+      }, '*');
     });
 
     // Handle messages from plugin
@@ -623,23 +1442,53 @@
         case 'scan-started':
           setButtonsEnabled(false);
           hideStatus();
-          showProgress(`Scanning ${msg.pageName}...`);
+          if (msg.totalPages && msg.totalPages > 1) {
+            showDualProgress(`Starting scan of ${msg.totalPages} pages...`, '', 0);
+          } else {
+            showProgress(`Scanning ${msg.pageName}...`);
+          }
           initialState.style.display = 'none';
           emptyState.style.display = 'none';
           resultsContainer.style.display = 'none';
           break;
 
         case 'scan-progress':
-          showProgress(`Scanning... ${msg.processed}/${msg.total} nodes`);
+          if (msg.pageContext) {
+            // Multi-page scan with node progress
+            const pagePercent = ((msg.pageContext.pageIndex - 1) / msg.pageContext.totalPages) * 100;
+            const nodePercent = (msg.processed / msg.total) * (100 / msg.pageContext.totalPages);
+            const totalPercent = Math.round(pagePercent + nodePercent);
+
+            showDualProgress(
+              `Page ${msg.pageContext.pageIndex}/${msg.pageContext.totalPages}: ${msg.pageContext.pageName}`,
+              `Nodes: ${msg.processed}/${msg.total}`,
+              totalPercent
+            );
+          } else {
+            showProgress(`Scanning... ${msg.processed}/${msg.total} nodes`);
+          }
           break;
 
         case 'page-progress':
-          showProgress(`Scanning page ${msg.progress}/${msg.total}: ${msg.currentPage}`);
+          const pagePercent = ((msg.progress - 1) / msg.total) * 100;
+          showDualProgress(
+            `Page ${msg.progress}/${msg.total}: ${msg.currentPage}`,
+            'Starting page scan...',
+            Math.round(pagePercent)
+          );
           break;
 
         case 'scan-complete':
           setButtonsEnabled(true);
+          isMultiPageScan = false;
           hideProgress();
+
+          // Save page results
+          if (msg.pageResults) {
+            Object.assign(savedPageIssues, msg.pageResults);
+            saveData();
+            updatePageIssuesDisplay();
+          }
 
           if (msg.results.length === 0) {
             showStatus(`No unbound variables found in ${msg.pageName}`, 'success');
@@ -652,12 +1501,22 @@
 
         case 'scan-cancelled':
           setButtonsEnabled(true);
+          isMultiPageScan = false;
           hideProgress();
+
+          // Save partial page results if available
+          if (msg.pageResults) {
+            Object.assign(savedPageIssues, msg.pageResults);
+            saveData();
+            updatePageIssuesDisplay();
+          }
+
           showStatus('Scan cancelled', 'info');
           break;
 
         case 'scan-error':
           setButtonsEnabled(true);
+          isMultiPageScan = false;
           hideProgress();
           showStatus(msg.message, 'error');
           break;
@@ -669,8 +1528,52 @@
         case 'navigate-error':
           showStatus(msg.message, 'error');
           break;
+
+        case 'pages-list':
+          renderPageList(msg.pages);
+          break;
+
+        case 'fix-result':
+          if (msg.success) {
+            markAsFixed(msg.issueIndex);
+            showStatus(msg.message, 'success');
+          } else {
+            showStatus('Fix failed: ' + msg.message, 'error');
+            // Reset button state
+            const btn = document.querySelector(`.fix-btn.remove[data-index="${msg.issueIndex}"]`);
+            if (btn) {
+              btn.classList.remove('loading');
+              btn.textContent = 'Remove binding';
+            }
+          }
+          break;
+
+        case 'batch-unlink-progress':
+          showProgress(`Unlinking ${msg.current}/${msg.total}...`);
+          break;
+
+        case 'batch-unlink-complete':
+          isBatchUnlinking = false;
+          setButtonsEnabled(true);
+          batchUnlinkBtn.disabled = false;
+          batchUnlinkBtn.textContent = 'Unlink All';
+          hideProgress();
+
+          if (msg.failCount === 0) {
+            showStatus(`Successfully unlinked ${msg.successCount} variable binding${msg.successCount !== 1 ? 's' : ''}`, 'success');
+            // Mark all items as fixed
+            resultsList.querySelectorAll('.result-item:not(.fixed)').forEach((item, i) => {
+              markAsFixed(parseInt(item.dataset.index));
+            });
+          } else {
+            showStatus(`Unlinked ${msg.successCount}, failed ${msg.failCount}`, 'warning');
+          }
+          break;
       }
     };
+
+    // Request pages on load so they're ready when user switches to Pages tab
+    parent.postMessage({ pluginMessage: { type: 'get-pages' } }, '*');
   </script>
 </body>
 </html>
