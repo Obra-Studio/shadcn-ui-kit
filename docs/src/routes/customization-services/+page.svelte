@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
-	import { Calendar, ArrowRight, Palette, Zap, Code, Link, RefreshCw, Paintbrush } from '@lucide/svelte';
+	import { Calendar, ArrowRight, Palette, Zap, Code, Link, RefreshCw, Paintbrush, Sparkles } from '@lucide/svelte';
 
 	function getAcceptingQuarter(): string {
 		const now = new Date();
@@ -97,28 +97,36 @@
 		</p>
 	</div>
 
-	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<Palette class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
-			<h3 class="mb-2 text-lg font-semibold">Customized shadcn design system</h3>
-			<p class="text-muted-foreground">
-				We don't just theme shadcn — we transform it into your unique brand identity with custom colors, variants, and components that your team can use.
-			</p>
-		</div>
-
+	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-5xl mx-auto">
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
 			<Zap class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
-			<h3 class="mb-2 text-lg font-semibold">Rapid redesign</h3>
+			<h3 class="mb-2 text-lg font-semibold">From prototype to production-ready</h3>
 			<p class="text-muted-foreground">
-				Skip months of design system work. Get a production-ready kit customized to your brand in weeks.
+				You've rapidly built a working prototype with AI tools like Claude, Lovable, or Figma Make. Now you need a consistent, scalable shadcn/ui-based design system that can grow with your product.
 			</p>
 		</div>
 
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<Code class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
-			<h3 class="mb-2 text-lg font-semibold">Design → development workflow that actually matches shadcn</h3>
+			<Palette class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
+			<h3 class="mb-2 text-lg font-semibold">Post-rebrand acceleration</h3>
 			<p class="text-muted-foreground">
-				Figma components that map 1:1 with shadcn/ui code. No translation layer needed. Check out our <a href="https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export" target="_blank" rel="noopener noreferrer" class="underline hover:text-foreground transition-colors">CSS export plugin</a>.
+				Your company or product just rebranded. Rather than rebuilding everything from scratch, we deliver an on-brand shadcn/ui kit that gets both design and development moving immediately.
+			</p>
+		</div>
+
+		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+			<RefreshCw class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
+			<h3 class="mb-2 text-lg font-semibold">Design-to-dev handoff that actually works</h3>
+			<p class="text-muted-foreground">
+				Your designers work in Figma. Your developers work in shadcn. We build the bridge: deliverables both teams can use directly, eliminating translation delays and speeding up your development cycle. <a href="https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export" target="_blank" rel="noopener noreferrer" class="underline hover:text-foreground transition-colors">Check out our CSS plugin →</a>
+			</p>
+		</div>
+
+		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+			<Sparkles class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
+			<h3 class="mb-2 text-lg font-semibold">Foundation for AI-powered development</h3>
+			<p class="text-muted-foreground">
+				You're iterating fast with AI coding tools but need a solid design system as your foundation. We provide an expansive component library that keeps your AI-generated output consistent and on-brand.
 			</p>
 		</div>
 	</div>
