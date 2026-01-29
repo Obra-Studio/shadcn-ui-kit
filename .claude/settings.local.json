@@ -3,7 +3,8 @@
     "allow": [
       "mcp__figma-desktop__get_design_context",
       "Bash(jq:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "WebFetch(domain:shadcn.obra.studio)"
     ]
   }
 }

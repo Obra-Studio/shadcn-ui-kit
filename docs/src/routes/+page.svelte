@@ -112,11 +112,6 @@
 				'Go to the assets panel and click the book icon to open the Manage Libraries dialog. From there, select Publish to make the file available to add as a library in other files. In the consuming file, go to Manage Libraries as well, but now visit the Teams section. Find the published library and click add to file.',
 		},
 		{
-			title: 'Does the Obra shadcn/ui kit work with Figma Make?',
-			content:
-				'Figma allows you to publish libraries for use in Figma Make. If you customize your library and then publish it to work with Make, Make can read your shadcn/ui customizations. Since Make uses shadcn/ui under the hood for most UI generation logic, you can use a customization of the Obra shadcn/ui kit to feed your custom design logic to Make.',
-		},
-		{
 			title: 'How often is the Obra shadcn/ui kit updated?',
 			content:
 				'Obra shadcn/ui is made by Obra Studio. We are a small design and development studio with roots in Belgium and Mexico. We have a team of maintainers and freelancers helping to keep the kit in good shape and watch the shadcn/ui world. Because we use this kit ourselves in commercial projects, any relevant updates that are applicable to the general public get added to the public version.',
@@ -145,6 +140,11 @@
 			title: 'Can I use Obra shadcn/ui in commercial projects?',
 			content:
 				"Yes, absolutely. Our MIT license puts no restrictions on what you can do with the kit. We're just never responsible for anything. There is no warranty or liability. On Figma Community, all files are distributed via a CCBY 4.0 license. This is similar to MIT but adds a crediting layer. You don't need to credit us when you use the kit, but if you're going to be nitpicky about licensing, be aware that parts of the Lucide Icons are derived from Feather Icons which was initially released under an ISC license - which requires people to credit the original creators, in this case Cole Bemis. Thanks Cole.",
+		},
+		{
+			title: 'Does the Obra shadcn/ui kit work with Figma Make?',
+			content:
+				'Figma allows you to publish libraries for use in Figma Make. If you customize your library and then publish it to work with Make, Make can read your shadcn/ui customizations. Since Make uses shadcn/ui under the hood for most UI generation logic, you can use a customization of the Obra shadcn/ui kit to feed your custom design logic to Make.',
 		},
 	];
 
@@ -515,26 +515,22 @@
 							</p>
 						{:else if index === 2}
 							<p class="text-foreground break-words">
-								Figma allows you to publish libraries for use in Figma Make. If you customize your library and then publish it to work with Make, Make can read your shadcn/ui customizations.
+								We update the kit frequently, as we use it to work on our own projects.
 							</p>
 							<p class="text-foreground break-words mt-4">
-								Since Make uses shadcn/ui under the hood for most UI generation logic, you can use a customization of the Obra shadcn/ui kit to feed your custom design logic to Make.
-							</p>
-						{:else if index === 3}
-							<p class="text-foreground break-words">
 								Obra shadcn/ui is made by Obra Studio. We are a small design and development studio with roots in Belgium and Mexico.
 							</p>
 							<p class="text-foreground break-words mt-4">
 								We have a team of maintainers and freelancers helping to keep the kit in good shape and watch the shadcn/ui world.
 							</p>
-						{:else if index === 4}
+						{:else if index === 3}
 							<p class="text-foreground break-words">
-								This is an open source (not open contribution) project with no guarantee of updates. However, you can see our current track record from June 2025 up until now in the changelog.
+								This is an open source (not open contribution) project with no guarantee of updates. However, you can see our current track record from June 2025 up until now in the <a href="/changelog" class="underline">changelog</a>.
 							</p>
 							<p class="text-foreground break-words mt-4">
 								That being said, the kit is used in commercial work, and lessons from that commercial work (or bugs found!) are backported to the public work. We use the kit in commercial projects. Just like coding projects, fixes we make in general for our clients land in the "upstream" version for everyone to enjoy.
 							</p>
-						{:else if index === 5}
+						{:else if index === 4}
 							<p class="text-foreground break-words">
 								Because the kit is fragile and people depend on it, we only have the kit edited by skilled design system designers.
 							</p>
@@ -544,7 +540,7 @@
 							<p class="text-foreground break-words mt-4">
 								But the actual releasing is only done by someone who truly controls the kit.
 							</p>
-						{:else if index === 6}
+						{:else if index === 5}
 							<p class="text-foreground break-words">
 								We provide this kit for free because it helps people find our design and development agency <a href="https://obra.studio/" class="underline">Obra</a>.
 							</p>
@@ -555,21 +551,31 @@
 								So far the kit has brought in a sizable amount of project revenue and has been an excellent lead magnet for Obra Studio.
 							</p>
 							<p class="text-foreground break-words mt-4">
+								We are also looking for collaborations with companies creating design tools or working in that space.
+							</p>
+							<p class="text-foreground break-words mt-4">
 								For any commercial questions, please reach out via our <a href="https://obra.studio/contact/" class="underline">contact form</a>.
 							</p>
-						{:else if index === 7}
+						{:else if index === 6}
 							<p class="text-foreground break-words">
 								If you're new to Figma, the shadcn/ui kit is a great example of a well-structured kit that you can use to learn from.
 							</p>
 							<p class="text-foreground break-words mt-4">
 								Since it's completely free, you can just duplicate the file and start poking around!
 							</p>
-						{:else if index === 8}
+						{:else if index === 7}
 							<p class="text-foreground break-words">
-								Yes, absolutely. Our MIT license puts no restrictions on what you can do with the kit. We're just never responsible for anything. There is no warranty or liability.
+								Yes, absolutely. Our <a href="https://github.com/Obra-Studio/shadcn-ui-kit/blob/main/LICENSE.md" class="underline">MIT license</a> puts no restrictions on what you can do with the kit. We're just never responsible for anything. There is no warranty or liability.
 							</p>
 							<p class="text-foreground break-words mt-4">
 								On Figma Community, all files are distributed via a CCBY 4.0 license. This is similar to MIT but adds a crediting layer. You don't need to credit us when you use the kit, but if you're going to be nitpicky about licensing, be aware that parts of the Lucide Icons are derived from Feather Icons which was initially released under an ISC license - which requires people to credit the original creators, in this case Cole Bemis. Thanks Cole.
+							</p>
+						{:else if index === 8}
+							<p class="text-foreground break-words">
+								Figma allows you to publish libraries for use in Figma Make. If you customize your library and then publish it to work with Make, Make can read your shadcn/ui customizations.
+							</p>
+							<p class="text-foreground break-words mt-4">
+								Since Make uses shadcn/ui under the hood for most UI generation logic, you can use a customization of the Obra shadcn/ui kit to feed your custom design logic to Make.
 							</p>
 						{:else}
 							<p class="text-foreground break-words">

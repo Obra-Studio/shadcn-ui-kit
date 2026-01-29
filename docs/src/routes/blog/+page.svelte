@@ -4,6 +4,7 @@
 	import { IconRss } from 'obra-icons-svelte'
 	import H1 from "$lib/components/H1.svelte";
 	import H2 from "$lib/components/H2.svelte";
+	import NewsletterCTA from "$lib/components/NewsletterCTA.svelte";
 	let { data } = $props();
 </script>
 
@@ -26,7 +27,12 @@
 		</a>
 	</div>
 
-	<ul>
+	<NewsletterCTA
+		title="Want to be kept up to date whenever there is a new blog post?"
+		description="Subscribe to our newsletter."
+	/>
+
+	<ul class="mt-12">
 		{#each data.posts as post (post.slug)}
 			<li class="mb-8 pb-8 border-b-border last:mb-0 last:pb-0 last:border-0 border-b-1">
 				<article>
