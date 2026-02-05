@@ -22,24 +22,6 @@
 </div>
 
 <Plugin
-    name="Obra shadcn/ui kit CSS export"
-    icon="/plugin-icons/obra-shadcn-ui-kit-css-export.png"
-    url="https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export"
->
-    {#snippet children()}
-        exports Obra shadcn/ui kit variables to Tailwind CSS code to power the look of your shadcn/ui components. Copy or download the generated source code.
-        <ul class="mt-3 ml-6 list-disc">
-            <li><strong>Inline preview</strong>: Designers can use the plugin to preview your theme inline and hand off the right version to your developer.</li>
-            <li><strong>Dark mode support</strong>: Supports themes with both light and dark colors.</li>
-            <li><strong>Export customizations</strong>: Modify the code exported: reorder collections or only export partial themes/theme code.</li>
-            <li><strong>Customize the code</strong>: We provide the plugin source on Github with a permissive MIT license: fork away to cover your own needs. Or hire us for your custom version.</li>
-        </ul>
-        <p class="mt-4">This plugin is available as open source.</p>
-        <Button variant="outline" size="sm" href="https://github.com/Obra-Studio/shadcn-ui-kit/tree/main/plugins/obra-shadcn-ui-kit-tailwind-css-export" class="mt-3">View on GitHub</Button>
-    {/snippet}
-</Plugin>
-
-<Plugin
     name="Obra shadcn/ui tools"
     icon="/plugin-icons/obra-shadcn-ui-tools.png"
     url="https://www.figma.com/community/plugin/1544866255228781486/obra-shadcn-ui-tools"
