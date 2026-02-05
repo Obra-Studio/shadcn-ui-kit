@@ -33,7 +33,6 @@ Difficulty level: easy
 
 * Theme collection was renamed to Semantic colors
     * To fix this: rename the relevant collection
-    * Why you might want this: the [CSS export plugin](https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export?comment=1595050166988170962) relies on exact collection names for its output
 
 Difficulty level: very easy
 

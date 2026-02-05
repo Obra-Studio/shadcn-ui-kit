@@ -79,9 +79,11 @@ When exporting variables via Figma's native export, first of all there is no aut
 
 This output now requires further processing. It might be OK for some teams to build a whole dev pipeline around that when they can pull in the changes via the Enterprise API, but this doesn't work for most teams.
 
-What we did instead to solve design to development is build a plugin that takes your variables and directly translates it to a shadcn theme, as well as Tailwind theme code. You can find our [Obra shadcn/ui kit CSS export plugin on Figma community](https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export).
+~~What we did instead to solve design to development is build a plugin that takes your variables and directly translates it to a shadcn theme, as well as Tailwind theme code. You can find our [Obra shadcn/ui kit CSS export plugin on Figma community](https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export).~~
 
-This plugin is fully open source to teams can customize it to their needs. Do you have a specific set of variables that need to land in code? Fork away! The plugin, just like our shadcn/ui kit, is released under a very permissive MIT license. [You can find the code in our shadcn/ui-kit repository here](https://github.com/Obra-Studio/shadcn-ui-kit/tree/main/plugins/obra-shadcn-ui-kit-tailwind-css-export).    
+~~This plugin is fully open source to teams can customize it to their needs. Do you have a specific set of variables that need to land in code? Fork away! The plugin, just like our shadcn/ui kit, is released under a very permissive MIT license. [You can find the code in our shadcn/ui-kit repository here](https://github.com/Obra-Studio/shadcn-ui-kit/tree/main/plugins/obra-shadcn-ui-kit-tailwind-css-export).~~
+
+Update: we decided to remove (free) support for this plugin as it ties into our commercial offering. 
 
 **Watch the demo video for this feature:**
 
