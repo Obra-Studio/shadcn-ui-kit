@@ -22,10 +22,10 @@
 	</p>
 
 	<article>
-		<header class="mb-4">
-			<H1>
+		<header class="mb-8">
+			<h1 class="text-4xl font-semibold mb-0">
 				{data.title}
-			</H1>
+			</h1>
 			<ul class="flex gap-2 pt-4">
 				<li class="text-muted-foreground">{formatDate(data.date)} by <a href="/authors/johan-ronsse">{data.author}</a></li>
 				{#if data.tags.length}
