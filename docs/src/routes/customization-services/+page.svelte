@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import { Calendar, ArrowRight, Palette, Zap, Code, Link, RefreshCw, Paintbrush, Sparkles } from '@lucide/svelte';
+	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 
 	function getAcceptingQuarter(): string {
 		const now = new Date();
@@ -88,7 +89,7 @@
 <!-- Why Hire Us Section -->
 <section class="section border-t border-border/50">
 	<div class="mx-auto max-w-4xl text-center">
-		<h2 class="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+		<h2 class="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
 			Why hire us?
 		</h2>
 		<p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
@@ -97,7 +98,7 @@
 		</p>
 	</div>
 
-	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-2 max-w-5xl mx-auto">
+	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
 			<Zap class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">From prototype to production-ready</h3>
@@ -115,14 +116,6 @@
 		</div>
 
 		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<RefreshCw class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
-			<h3 class="mb-2 text-lg font-semibold">Design-to-dev handoff that actually works</h3>
-			<p class="text-muted-foreground">
-				Your designers work in Figma. Your developers work in shadcn. We build the bridge: deliverables both teams can use directly, eliminating translation delays and speeding up your development cycle. <a href="https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export" target="_blank" rel="noopener noreferrer" class="underline hover:text-foreground transition-colors">Check out our CSS plugin →</a>
-			</p>
-		</div>
-
-		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
 			<Sparkles class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Foundation for AI-powered development</h3>
 			<p class="text-muted-foreground">
@@ -135,7 +128,7 @@
 <!-- Services Section -->
 <section class="section border-t border-border/50">
 	<div class="mx-auto max-w-4xl text-center">
-		<h2 class="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+		<h2 class="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
 			Our services
 		</h2>
 		<p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
@@ -143,8 +136,8 @@
 		</p>
 	</div>
 
-	<div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+	<div class="mt-12 flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
+		<div class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
 			<Paintbrush class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Kit customization</h3>
 			<p class="text-muted-foreground">
@@ -152,15 +145,39 @@
 			</p>
 		</div>
 
-		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
-			<Link class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
-			<h3 class="mb-2 text-lg font-semibold">Link to development</h3>
+		<div class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+			<Palette class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
+			<h3 class="mb-2 text-lg font-semibold">Screen design</h3>
 			<p class="text-muted-foreground">
-				Automate design token flows and customize our code export plugin to your needs.
+				We design production-ready screens using your customized kit. Every screen is built with real components, proper states, and responsive layouts — ready for engineering handoff.
 			</p>
 		</div>
 
-		<div class="rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+		<div class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+			<Sparkles class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
+			<h3 class="mb-2 text-lg font-semibold">Custom components</h3>
+			<p class="text-muted-foreground">
+				We extend shadcn/ui with custom components tailored to your project needs. From complex data tables to specialized inputs — designed and built to feel native to the system.
+			</p>
+		</div>
+
+		<div class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+			<Link class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
+			<h3 class="mb-2 text-lg font-semibold">Link to development</h3>
+			<p class="text-muted-foreground">
+				Automate design token flows to efficiently bring design tokens to development.
+			</p>
+		</div>
+
+		<div class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
+			<Code class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
+			<h3 class="mb-2 text-lg font-semibold">Front-end templates</h3>
+			<p class="text-muted-foreground">
+				We deliver coded page templates built with shadcn/ui components, matching your customized kit pixel-for-pixel. Ready to drop into your codebase and start building on.
+			</p>
+		</div>
+
+		<div class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] rounded-xl border border-border/50 bg-card/30 p-6 backdrop-blur-sm">
 			<RefreshCw class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Upgrading your kit</h3>
 			<p class="text-muted-foreground">
@@ -175,7 +192,7 @@
 <section id="different" class="section border-t border-border/50">
 	<div class="grid gap-12 lg:grid-cols-2 lg:gap-16 max-w-5xl mx-auto w-full">
 		<div class="lg:sticky lg:top-32 lg:self-start">
-			<h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">What makes us different?</h2>
+			<h2 class="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">What makes us different?</h2>
 			<p class="mt-4 text-lg text-muted-foreground">We're not a traditional design agency. We're a product-focused team that happens to be obsessed with shadcn/ui.</p>
 		</div>
 		<div class="space-y-10">
@@ -189,8 +206,8 @@
 			<div class="relative flex gap-6">
 				<div class="shrink-0 text-5xl font-bold tracking-tighter text-muted-foreground/30">02</div>
 				<div>
-					<h3 class="text-lg font-semibold">We've shipped this before</h3>
-					<p class="mt-2 text-muted-foreground leading-relaxed">This isn't theoretical. We've built and scaled shadcn-based design systems for multiple product teams, including full redesigns, migrations, and steady iteration at scale.</p>
+					<h3 class="text-lg font-semibold">Senior designers, every time</h3>
+					<p class="mt-2 text-muted-foreground leading-relaxed">Every project is executed by senior designers who've built and scaled shadcn-based design systems for multiple product teams. No juniors, no handoffs between people — you work directly with the experts.</p>
 				</div>
 			</div>
 			<div class="relative flex gap-6">
@@ -207,7 +224,7 @@
 <!-- Pricing Section -->
 <section class="section border-t border-border/50">
 	<div class="mx-auto max-w-4xl text-center">
-		<h2 class="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+		<h2 class="text-3xl font-semibold tracking-tight sm:text-4xl md:text-5xl">
 			How it works
 		</h2>
 		<p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
@@ -215,90 +232,206 @@
 		</p>
 	</div>
 
-	<div class="mt-12 grid gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
-		<!-- Kit Customization -->
-		<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
-			<div class="mb-6">
-				<h3 class="text-xl font-semibold">Kit customization</h3>
-				<span class="text-sm text-muted-foreground">~1 week with solid brand guide in place</span>
-			</div>
-			<p class="text-muted-foreground mb-6">
-				We customize the entire shadcn/ui kit to match your brand identity. This becomes your team's foundation for all future design work.
-			</p>
-			<ul class="space-y-3">
-				<li class="flex items-center gap-2">
-					<span class="text-foreground">•</span>
-					<span class="text-muted-foreground">Colors, typography, and icons adapted to your brand guide</span>
-				</li>
-					<li class="flex items-center gap-2">
-					<span class="text-foreground">•</span>
-					<span class="text-muted-foreground">Figma variables that translate directly to code</span>
-				</li>
-				<li class="flex items-center gap-2">
-					<span class="text-foreground">•</span>
-					<span class="text-muted-foreground">Published as a Figma library your team can use</span>
-				</li>
-			</ul>
+	<Tabs value="design" class="mt-12 max-w-5xl mx-auto">
+		<div class="flex justify-center">
+			<TabsList class="bg-transparent h-auto gap-0 rounded-full border border-border/50 p-1">
+				<TabsTrigger value="design" class="rounded-full border-0 bg-transparent px-5 py-2 data-[state=active]:bg-foreground data-[state=active]:text-background">Design</TabsTrigger>
+				<TabsTrigger value="design-frontend" class="rounded-full border-0 bg-transparent px-5 py-2 data-[state=active]:bg-foreground data-[state=active]:text-background">Design + Front-end</TabsTrigger>
+			</TabsList>
 		</div>
 
-		<!-- Screen Sprint -->
-		<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
-			<div class="mb-6">
-				<h3 class="text-xl font-semibold">Screen sprint</h3>
-				<span class="text-sm text-muted-foreground">2 weeks per sprint</span>
-			</div>
-			<p class="text-muted-foreground mb-6">
-				Each sprint delivers 10–20 engineering-ready screens, including all underlying UI states and custom components needed.
-			</p>
-			<ul class="space-y-3">
-				<li class="flex items-center gap-2">
-					<span class="text-foreground">•</span>
-					<span class="text-muted-foreground">Components with properties that map to React/code</span>
-				</li>
-					<li class="flex items-center gap-2">
-					<span class="text-foreground">•</span>
-					<span class="text-muted-foreground">Responsive layouts (desktop & tablet)</span>
-				</li>
-				<li class="flex items-center gap-2">
-					<span class="text-foreground">•</span>
-					<span class="text-muted-foreground">UX audit included — we flag friction as we design</span>
-				</li>
-			</ul>
-		</div>
-	</div>
-
-	<!-- Multiple Sprints -->
-	<div class="mt-8 max-w-5xl mx-auto">
-		<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
-			<div class="flex flex-col md:flex-row md:items-center gap-6">
-				<div class="flex-grow">
-					<h3 class="text-xl font-semibold mb-2">Need more screens?</h3>
-					<p class="text-muted-foreground">
-						Purchase multiple screen sprints to cover your entire product. Most teams start with kit customization + 1 sprint, then add more as needed. No long-term commitment required.
+		<TabsContent value="design">
+			<div class="mt-8 grid gap-8 lg:grid-cols-2">
+				<!-- Kit Customization -->
+				<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold">Kit customization</h3>
+						<span class="text-sm text-muted-foreground">~1 week with solid brand guide in place</span>
+					</div>
+					<p class="text-muted-foreground mb-6">
+						We customize the entire shadcn/ui kit to match your brand identity. This becomes your team's foundation for all future design work.
 					</p>
+					<ul class="space-y-3">
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Colors, typography, and icons adapted to your brand guide</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Figma variables that translate directly to code</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Published as a Figma library your team can use</span>
+						</li>
+					</ul>
 				</div>
-				<div class="shrink-0">
-					<a
-						href="https://cal.com/team/obra-studio/shadcn"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Button variant="outline" class="whitespace-nowrap">
-							Get a quote
-							<ArrowRight class="ml-2 h-4 w-4" />
-						</Button>
-					</a>
+
+				<!-- Screen Sprint -->
+				<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold">Screen sprint</h3>
+						<span class="text-sm text-muted-foreground">2 weeks per sprint</span>
+					</div>
+					<p class="text-muted-foreground mb-6">
+						Each sprint delivers 10–20 engineering-ready screens, including all underlying UI states and custom components needed.
+					</p>
+					<ul class="space-y-3">
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Components with properties that map to React/code</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Responsive layouts (desktop & tablet)</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">UX audit included — we flag friction as we design</span>
+						</li>
+					</ul>
 				</div>
 			</div>
-		</div>
-	</div>
+
+			<!-- Multiple Sprints -->
+			<div class="mt-8">
+				<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
+					<div class="flex flex-col md:flex-row md:items-center gap-6">
+						<div class="flex-grow">
+							<h3 class="text-xl font-semibold mb-2">Need more screens?</h3>
+							<p class="text-muted-foreground">
+								Purchase multiple screen sprints to cover your entire product. Most teams start with kit customization + 1 sprint, then add more as needed. No long-term commitment required.
+							</p>
+						</div>
+						<div class="shrink-0">
+							<a
+								href="https://cal.com/team/obra-studio/shadcn"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Button variant="outline" class="whitespace-nowrap">
+									Get a quote
+									<ArrowRight class="ml-2 h-4 w-4" />
+								</Button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</TabsContent>
+
+		<TabsContent value="design-frontend">
+			<div class="mt-8 grid gap-8 lg:grid-cols-3">
+				<!-- Kit Customization -->
+				<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold">Kit customization</h3>
+						<span class="text-sm text-muted-foreground">~1 week</span>
+					</div>
+					<p class="text-muted-foreground mb-6">
+						We customize the shadcn/ui kit to your brand — colors, typography, icons — and deliver both Figma and coded components in sync.
+					</p>
+					<ul class="space-y-3">
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Branded Figma library + coded theme config</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Design tokens synced between Figma and code</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Ready-to-use shadcn/ui component library</span>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Screen Sprint -->
+				<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold">Screen sprint</h3>
+						<span class="text-sm text-muted-foreground">2 weeks per sprint</span>
+					</div>
+					<p class="text-muted-foreground mb-6">
+						Each sprint delivers 10–20 screens designed in Figma, plus coded page templates that match pixel-for-pixel.
+					</p>
+					<ul class="space-y-3">
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Figma screens + coded page templates</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Responsive layouts (desktop & tablet)</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">UX audit included — we flag friction as we design</span>
+						</li>
+					</ul>
+				</div>
+
+				<!-- Front-end Delivery -->
+				<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
+					<div class="mb-6">
+						<h3 class="text-xl font-semibold">Front-end delivery</h3>
+						<span class="text-sm text-muted-foreground">Included with each sprint</span>
+					</div>
+					<p class="text-muted-foreground mb-6">
+						Every screen we design is also delivered as a coded template, built with shadcn/ui and ready to integrate into your codebase.
+					</p>
+					<ul class="space-y-3">
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Clean, production-ready React/Next.js code</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">shadcn/ui components with your custom theme</span>
+						</li>
+						<li class="flex items-start gap-2">
+							<span class="text-foreground">•</span>
+							<span class="text-muted-foreground">Drop into your project and start building</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Multiple Sprints -->
+			<div class="mt-8">
+				<div class="rounded-xl border border-border/50 bg-card/30 p-8 backdrop-blur-sm">
+					<div class="flex flex-col md:flex-row md:items-center gap-6">
+						<div class="flex-grow">
+							<h3 class="text-xl font-semibold mb-2">Need more screens?</h3>
+							<p class="text-muted-foreground">
+								Purchase multiple screen sprints to cover your entire product. Each sprint includes both Figma designs and coded templates. No long-term commitment required.
+							</p>
+						</div>
+						<div class="shrink-0">
+							<a
+								href="https://cal.com/team/obra-studio/shadcn"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Button variant="outline" class="whitespace-nowrap">
+									Get a quote
+									<ArrowRight class="ml-2 h-4 w-4" />
+								</Button>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</TabsContent>
+	</Tabs>
 
 </section>
 
 <!-- CTA Section -->
-<section class="section border-t border-border/50">
+<section class="section bg-muted">
 	<div class="mx-auto max-w-3xl text-center">
-		<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Let us take your design system to the next level</h2>
+		<h2 class="text-3xl font-semibold tracking-tight sm:text-4xl">Let us take your design system to the next level</h2>
 		<p class="mt-4 text-lg text-muted-foreground">Book a free 45-minute shadcn audit and discover how we can help your team ship faster.</p>
 		<a
 			href="https://cal.com/team/obra-studio/shadcn"

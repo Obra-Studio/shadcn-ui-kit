@@ -589,22 +589,3 @@
 	</div>
 </section>
 
-<!-- CTA Section -->
-<section class="section bg-background">
-	<div class="flex flex-col gap-6 items-center justify-center">
-		<p
-			class="font-medium leading-6 text-sm text-muted-foreground text-center tracking-[1px] uppercase"
-		>
-			Get the kit
-		</p>
-		<h2 class="heading-2 text-center">Start designing with shadcn/ui today</h2>
-		<GetDesignFileDialog>
-			{#snippet children({ props })}
-				<Button variant="default" {...props}>
-					<Figma />
-					Get design file
-				</Button>
-			{/snippet}
-		</GetDesignFileDialog>
-	</div>
-</section>

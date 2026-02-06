@@ -16,7 +16,7 @@
 	<title>{data.title} - Blog - Obra shadcn/ui Figma kit</title>
 </svelte:head>
 
-<div class="container container--narrow py-8">
+<div class="container container--narrow pt-16 pb-24">
 	<p class="mb-4">
 		<a href="/blog">&larr; Back to overview</a>
 	</p>
