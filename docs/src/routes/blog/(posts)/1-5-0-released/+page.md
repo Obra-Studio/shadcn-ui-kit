@@ -8,7 +8,9 @@
     }
 </script>
 
-Today, we released the 1.5.0 version of the kit.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/CsieuuU50Qc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+Today, we released the 1.5.0 version of the kit. Watch the above video for the full explanation about what changed.
 
 This version continues improving our [Obra shadcn/ui kit](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui) with several improvements. As always you can [find the latest version of our kit on Figma Community](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui).  
 

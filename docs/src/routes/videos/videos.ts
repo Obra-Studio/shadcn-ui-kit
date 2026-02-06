@@ -8,6 +8,12 @@ export interface Video {
 
 const videoData = [
     {
+        id: "CsieuuU50Qc",
+        title: "Obra shadcn/ui for Figma - 1.5.0 release",
+        date: "February 6, 2026",
+        description: "In this video, Obra studio founder Johan walks through the changes in the Obra shadcn/ui 1.5.0 kit. We explain the new variable logic for brand variables, as well as changes to the shadcn/ui tools."
+    },
+    {
         id: "VS3eoq4gcz8",
         title: "Obra shadcn/ui for Figma - 1.4.0 release - kit to tailwind/shadcn/ui code plugin demo",
         date: "January 14, 2026",
