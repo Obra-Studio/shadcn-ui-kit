@@ -6,7 +6,7 @@ We include all [Tailwind 4 colors](https://tailwindcss.com/docs/colors) as Figma
 
 _Tailwind colors_
 
-We tagged the colors in use visually.
+We tagged the colors in use visually on the colors page.
 
 If you don't need them, you can safely delete the colors not in use. All neutral values are used, as well as 5 red values.
 
@@ -26,10 +26,48 @@ Need help creating your own theme? We offer design services around this. [Check 
 
 We added several variables on top of shadcn/ui’s theming to allow designers to have more control in Figma.
 
-* Within shadcn’s code, the color mix CSS function is often used to mix a variable (or rather CSS custom property) with a color. This is not possible to replicate in Figma.
+* Within shadcn’s code, the color mix CSS function is often used to mix a variable (or rather CSS custom property) with a color, often white or black with a specific opacity percentage. To replicate this, use the alpha variables.
 * Within other parts of the code, color variables are hardcoded instead of using a theming layer. This forced us to come up with new variables for these cases. You will see many more border and background variants than exist in the official CSS, because of combinations made in shadcn docs code that need to be translated to Figma’s variable modes.
 
 The variables that are unofficial are marked as “unofficial”.
+
+## Custom color palettes (Applies since 1.5.0)
+
+If you inspect the kit's variable system with a kit version from 1.5.0 on, you will see that we introduced a "brand colors" collection that includes "brand-neutrals" and "brand-shades".
+
+* The "brand-neutrals" collection is tied to the "semantic colors" collection automatically.
+* The "brand-shades" collection is unused on purpose, in order to make a conscious choice on which elements would be branded
+
+We recommend, when making custom color palettes, to first add your custom palette to "raw colors" as a group with a name (e.g. "brand-turquoise"). You can decided to keep the Tailwind colors around in that group or remove the ones you don't need.
+
+Now reference the custom color palette in the brand colors collection.
+
+Tip: You can use a tool like [Supa Pallete](https://www.supa-palette.com/) to generate a color based on your brand.
+
+## Blessed way to create component colors (Applies since 1.3.0)
+
+If you go into the kit and customize the "primary" shadcn/ui variable, you'll see that your color choice propagates across a number of components. If you make your primary button red, you will also see that primary badges, checkboxes and radio buttons become red.
+
+Depending on your brand's color and design aesthetic, you might want to customize the colors on the component level. For example, you'd maybe prefer to have a dark primary button with the 800 shade of your bramd while having a slightly lighter badge with the 700 shade.
+
+Maybe you have a red or orange main brand color and you'd like to not propagate that choice to form controls.
+
+In all of these cases, it's a good idea to start a component layer where you customize the components' colors on a case-by-case basis.
+
+In this section, we'd like to document the "blessed" way to customize component colors. 
+
+Add a collection called "components". Then create a group for each component. You can use subgroups for the component states. 
+
+Generally the structure would look like something like this:
+
+* components
+  * alert
+    * success
+      * background
+      * foreground
+    * error
+      * background
+      * foreground
 
 ## Variable tips
 
