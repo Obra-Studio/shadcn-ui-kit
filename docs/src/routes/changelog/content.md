@@ -7,11 +7,13 @@ Find the latest changes in our kit here. This changelog is repeated [inside of t
 February 6, 2026
 
 * New: Popover component. Somehow we skipped over documenting the Popover component - likely this was because it’s a composition of the Card and Button components. An example of this component and positioning a popover (using absolute positioning in a Figma autolayout) has been added to the file. Thanks @alishouman for spotting this.
-* New: Introduce branded neutrals and branded shades collection.
-  * If you wish to use another neutral color than “neutral”, such as tailwind’s slate (or a custom color), you can go here to quickly remap the neutral to your brand.
-  * For the branded shades, the idea behind this collection, which is by default unused, is that there is a fixed place to put branded shades. This is used when making a custom color palette out of a brand color. In general, you would then use that color to map to for example Primary and Primary Hover.
+* New: accordion component now has a bordered version.
+* New: Introduce branded neutrals, branded shades and brand-combinations collection.
+  * Neutral: if you wish to use another neutral color than “neutral”, such as Tailwind’s slate (or a custom color), you can go here to quickly remap the neutral shades to your brand.
+  * Branded shades: the idea behind this collection is that there is a fixed place to put branded shades. This is used when making a custom color palette out of a brand color. In general, you would then use that color to map to, for example Primary and Primary Hover to kick off customizing colors in the kit
+  * Brand combinations: this group is meant for those brand combinations that do not fit into a shades pallete. A brand often has a distinct color combination. Use the 3 background/foreground combinations here to document this brand aspect.
 * New: Introduce alpha color collection, consisting of variables for various opacities of black and white. These can be used to layer different fills on top of each other to simulate opacity. They can also be used to brand all shadows to a specific color.
-* Typography
+* Typography - Add styles to make it easier to create marketing websites
   * New: Added large paragraph style and corresponding variables
   * New: Added caption style and corresponding variables
 * Component improvements

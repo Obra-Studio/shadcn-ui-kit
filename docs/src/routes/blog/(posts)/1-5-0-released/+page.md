@@ -14,7 +14,7 @@ This version continues improving our [Obra shadcn/ui kit](https://www.figma.com/
 
 In general, improvements are related to two topics
 
-1. Improving the process of implementing your brand in shadcn/ui kit.  When we customize the kit for our clients — see [customization services](https://shadcn.obra.studio/customization-services) — we are using a workflow that necesitates having the right variables. Please see the updated [color docs](/documentation/colors)  to find out about how to use the changes.
+1. Improving the process of implementing your brand in shadcn/ui kit.  When we customize the kit for our clients — see [customization services](https://shadcn.obra.studio/customization-services) — we are using a workflow that necesitates having the right variables. Please see the updated [color docs](/documentation/colors)  to find out about how to use the new changes.
 2. More available styles to use the shadcn/ui kit for marketing / landing page purposes. You will find that there is now a larger button as well as a larger paragraph and a “caption” style available by default. While we didn't originally intend to use shadcn/ui for marketing-style pages, and thought of shadcn/ui as the app layer, there are some definite marketing use cases.
 
 On Wednesday, we explained [what happened to the CSS export plugin](/blog/what-happened-to-the-css-export-plugin). We are currently preparing a commercial offering to move the kit to a freemium model. The core of the kit will always remain free, but specific layers on top will become part of a paid offering.

@@ -71,31 +71,23 @@ Generally the structure would look like something like this:
       * background
       * foreground
 
-## Blessed way to deal with non-palette brand color (Experimental)
+## Band combinations (Applies since 1.5.0)
 
 Not every brand color has a palette. Sometimes a brand color is distinct, and it doesn't necessarily have a full palette with 11 Tailwind-like shades.
 
-In this case, create a new group inside of brand colors called "brand-combinations". Now create the following color variables:
+In this case, use the "brand-combinations" group of variables inside of the "brand colors" collection.
 
-* brand 1
-* brand 1 foreground
-* brand 2
-* brand 2 foreground
-* brand 3
-* brand 3 foreground
-* brand 4
-* brand 4 foreground
-* brand 5
-* brand 5 foreground
+In this collection, you can find 3 default combinations of foreground and background colors.
 
-Use this place to store specific color combinations. Consider "brand 1" to be a background color.
+Use this place to store specific color combinations.
 
-For Starbucks as a brand, you'd add Starbucks green in "brand 1" and the white foreground color in brand 1 foreground.
+For Starbucks as a brand, you'd add Starbucks green in "1/brand" and the common white foreground color in "1/ brand foreground".
+
+But maybe you'd also like to document other color combinations: use slot 2, 3, or extend to more combinations.
 
 As a convention, shadcn/ui omits the word background from variable names.
 
 The reason we don't use specifically named variables (e.g. name the variable "Starbucks green") is to be able to programatically access the variants, specifically in a multi-brand context. What we recommend when working with named colors is to first add these to a collection that sits "below the line" (below the `---` separator). The collections below the line are not meant to be published or used programatically.
-
 
 ## Variable tips
 
