@@ -289,23 +289,24 @@ function handlePropStarCleanup(isDirectCommand = false) {
   const componentsToSelect = [];
   const framesToProcess = [];
 
+  // Helper: check if a frame has any Prop Star elements (old or new format)
+  function hasPropStarElements(frame) {
+    return frame.name.startsWith('❖') || frame.children.some(child =>
+      (child.type === 'GROUP' && child.name.toLowerCase() === 'labels') ||
+      (child.type === 'FRAME' && child.name.toLowerCase() === 'instances') ||
+      child.name.startsWith('❖')
+    );
+  }
+
   selection.forEach(node => {
     if (node.type === 'FRAME') {
-      // Direct frame selection - use as-is
+      // Both ❖-prefixed frames and regular wrapper frames go through processing
       framesToProcess.push(node);
     } else if (node.type === 'COMPONENT' || node.type === 'COMPONENT_SET') {
       // Component selected - find its parent frame
       const parent = node.parent;
       if (parent && parent.type === 'FRAME') {
-        // Check if parent contains Prop Star elements
-        const hasLabels = parent.children.some(child => 
-          child.type === 'GROUP' && child.name.toLowerCase() === 'labels'
-        );
-        const hasInstances = parent.children.some(child => 
-          child.type === 'FRAME' && child.name.toLowerCase() === 'instances'
-        );
-        
-        if (hasLabels || hasInstances) {
+        if (hasPropStarElements(parent)) {
           framesToProcess.push(parent);
         } else {
           if (!isDirectCommand) {
@@ -348,24 +349,35 @@ function handlePropStarCleanup(isDirectCommand = false) {
   framesToProcess.forEach(node => {
 
     const children = [...node.children];
-    let labelsFound = false;
-    let instancesFound = false;
+    let propStarFound = false;
     let component = null;
-    
-    // Find and remove Labels group and Instances frame, identify the component
+    const isNewPropStarFrame = node.name.startsWith('❖');
+
+    // Find and remove Prop Star elements, identify the component
     children.forEach(child => {
-      if (child.type === 'GROUP' && child.name.toLowerCase() === 'labels') {
-        child.remove();
-        labelsFound = true;
-      } else if (child.type === 'FRAME' && child.name.toLowerCase() === 'instances') {
-        child.remove();
-        instancesFound = true;
-      } else if (child.type === 'COMPONENT' || child.type === 'COMPONENT_SET') {
+      if (child.type === 'COMPONENT' || child.type === 'COMPONENT_SET') {
+        // Always preserve components
         component = child;
+      } else if (isNewPropStarFrame) {
+        // Inside a ❖ frame: everything non-component is propstar documentation
+        child.remove();
+        propStarFound = true;
+      } else if (child.type === 'GROUP' && child.name.toLowerCase() === 'labels') {
+        // Old format: labels group
+        child.remove();
+        propStarFound = true;
+      } else if (child.type === 'FRAME' && child.name.toLowerCase() === 'instances') {
+        // Old format: instances frame
+        child.remove();
+        propStarFound = true;
+      } else if (child.name.startsWith('❖')) {
+        // New format: ❖-prefixed propstar grid child inside a wrapper
+        child.remove();
+        propStarFound = true;
       }
     });
 
-    if (!labelsFound && !instancesFound) {
+    if (!propStarFound) {
       if (!isDirectCommand) {
         figma.ui.postMessage({
           type: 'status',
@@ -384,15 +396,21 @@ function handlePropStarCleanup(isDirectCommand = false) {
       const nodeIndex = parent.children.indexOf(node);
       const nodeX = node.x;
       const nodeY = node.y;
-      
+
       // Move component to parent at frame's position
       parent.insertChild(nodeIndex, component);
       component.x = nodeX;
       component.y = nodeY;
-      
+
+      // New format (Feb 2026+): component is absolutely positioned inside ❖ frame,
+      // reset to auto layout positioning after extraction
+      if (isNewPropStarFrame && component.layoutPositioning === 'ABSOLUTE') {
+        component.layoutPositioning = 'AUTO';
+      }
+
       // Add component to selection list
       componentsToSelect.push(component);
-      
+
       // Remove the now-empty frame
       node.remove();
     }
