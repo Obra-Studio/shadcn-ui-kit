@@ -211,7 +211,7 @@
 						<span
 							class="font-normal leading-6 text-base text-foreground"
 						>
-							Recreates all shadcn/ui components accurately
+							Recreates all shadcn/ui components accurately (Vega styled)
 						</span>
 					</li>
 					<li class="flex gap-3 items-center">
