@@ -31,7 +31,8 @@ February 6, 2026
   * Fix many unbound variables (leftover from previous iterations of the kit)
   * Scope spacing values of “hacks (to fit scale)” correctly to Gap / Width & height
   * Fix visual bugs in destructive menu item
-
+* All component docs were regenerated using the newest version of [Propstar](https://www.figma.com/community/plugin/1116018586739867857/propstar), which uses the newest version of Figma grid to generate component variant documentation. We updated our [shadcn/ui tools plugin](https://www.figma.com/community/plugin/1544866255228781486/obra-shadcn-ui-tools) to work with this new version and to keep the “Depropstar” command working. Also, find a new feature in this plugin to easily navigate Propstar grids.
+  
 ## 1.4.0
 
 January 16, 2025
