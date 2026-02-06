@@ -5,7 +5,7 @@ if (figma.command === 'post-propstar-treatment') {
   handlePostPropstarTreatment(true);
   figma.closePlugin();
 } else if (figma.command === 'prop-star-cleanup') {
-  handlePropStarCleanup(true);
+  handlePropstarCleanup(true);
   figma.closePlugin();
 } else if (figma.command === 'reset-component-set-style') {
   handleResetComponentSetStyle(true);
@@ -21,7 +21,7 @@ figma.ui.onmessage = msg => {
  if (msg.type === 'post-propstar-treatment') {
     handlePostPropstarTreatment();
   } else if (msg.type === 'prop-star-cleanup') {
-    handlePropStarCleanup();
+    handlePropstarCleanup();
   } else if (msg.type === 'reset-component-set-style') {
     handleResetComponentSetStyle();
   } else if (msg.type === 'move-up') {
@@ -153,11 +153,11 @@ function handlePostPropstarTreatment(isDirectCommand = false) {
     if (!isDirectCommand) {
       figma.ui.postMessage({
         type: 'status',
-        message: 'Please select a component to apply Post-Prop Star treatment',
+        message: 'Please select a component to apply Post-Propstar treatment',
         success: false
       });
     } else {
-      figma.notify('Please select a component to apply Post-Prop Star treatment');
+      figma.notify('Please select a component to apply Post-Propstar treatment');
     }
     return;
   }
@@ -192,7 +192,7 @@ function handlePostPropstarTreatment(isDirectCommand = false) {
       return;
     }
 
-    // Find sibling frame with empty name (Prop Star documentation frame)
+    // Find sibling frame with empty name (Propstar documentation frame)
     const siblings = parent.children;
     const componentIndex = siblings.indexOf(component);
     
@@ -260,27 +260,27 @@ function handlePostPropstarTreatment(isDirectCommand = false) {
     if (!isDirectCommand) {
       figma.ui.postMessage({
         type: 'status',
-        message: `Applied Post-Prop Star treatment to ${treatedCount} ${componentText}`,
+        message: `Applied Post-Propstar treatment to ${treatedCount} ${componentText}`,
         success: true
       });
     } else {
-      figma.notify(`Applied Post-Prop Star treatment to ${treatedCount} ${componentText}`);
+      figma.notify(`Applied Post-Propstar treatment to ${treatedCount} ${componentText}`);
     }
   }
 }
 
-function handlePropStarCleanup(isDirectCommand = false) {
+function handlePropstarCleanup(isDirectCommand = false) {
   const selection = figma.currentPage.selection;
 
   if (selection.length === 0) {
     if (!isDirectCommand) {
       figma.ui.postMessage({
         type: 'status',
-        message: 'Please select a frame to clean up Prop Star elements',
+        message: 'Please select a frame to clean up Propstar elements',
         success: false
       });
     } else {
-      figma.notify('Please select a frame to clean up Prop Star elements');
+      figma.notify('Please select a frame to clean up Propstar elements');
     }
     return;
   }
@@ -289,8 +289,8 @@ function handlePropStarCleanup(isDirectCommand = false) {
   const componentsToSelect = [];
   const framesToProcess = [];
 
-  // Helper: check if a frame has any Prop Star elements (old or new format)
-  function hasPropStarElements(frame) {
+  // Helper: check if a frame has any Propstar elements (old or new format)
+  function hasPropstarElements(frame) {
     return frame.name.startsWith('❖') || frame.children.some(child =>
       (child.type === 'GROUP' && child.name.toLowerCase() === 'labels') ||
       (child.type === 'FRAME' && child.name.toLowerCase() === 'instances') ||
@@ -306,17 +306,17 @@ function handlePropStarCleanup(isDirectCommand = false) {
       // Component selected - find its parent frame
       const parent = node.parent;
       if (parent && parent.type === 'FRAME') {
-        if (hasPropStarElements(parent)) {
+        if (hasPropstarElements(parent)) {
           framesToProcess.push(parent);
         } else {
           if (!isDirectCommand) {
             figma.ui.postMessage({
               type: 'status',
-              message: `No Prop Star elements found in parent frame of "${node.name}"`,
+              message: `No Propstar elements found in parent frame of "${node.name}"`,
               success: false
             });
           } else {
-            figma.notify(`No Prop Star elements found in parent frame of "${node.name}"`);
+            figma.notify(`No Propstar elements found in parent frame of "${node.name}"`);
           }
           return;
         }
@@ -324,11 +324,11 @@ function handlePropStarCleanup(isDirectCommand = false) {
         if (!isDirectCommand) {
           figma.ui.postMessage({
             type: 'status',
-            message: `"${node.name}" must have a parent frame with Prop Star elements`,
+            message: `"${node.name}" must have a parent frame with Propstar elements`,
             success: false
           });
         } else {
-          figma.notify(`"${node.name}" must have a parent frame with Prop Star elements`);
+          figma.notify(`"${node.name}" must have a parent frame with Propstar elements`);
         }
         return;
       }
@@ -336,11 +336,11 @@ function handlePropStarCleanup(isDirectCommand = false) {
       if (!isDirectCommand) {
         figma.ui.postMessage({
           type: 'status',
-          message: 'Please select frames or components to clean up Prop Star elements',
+          message: 'Please select frames or components to clean up Propstar elements',
           success: false
         });
       } else {
-        figma.notify('Please select frames or components to clean up Prop Star elements');
+        figma.notify('Please select frames or components to clean up Propstar elements');
       }
       return;
     }
@@ -351,14 +351,14 @@ function handlePropStarCleanup(isDirectCommand = false) {
     const children = [...node.children];
     let propStarFound = false;
     let component = null;
-    const isNewPropStarFrame = node.name.startsWith('❖');
+    const isNewPropstarFrame = node.name.startsWith('❖');
 
-    // Find and remove Prop Star elements, identify the component
+    // Find and remove Propstar elements, identify the component
     children.forEach(child => {
       if (child.type === 'COMPONENT' || child.type === 'COMPONENT_SET') {
         // Always preserve components
         component = child;
-      } else if (isNewPropStarFrame) {
+      } else if (isNewPropstarFrame) {
         // Inside a ❖ frame: everything non-component is propstar documentation
         child.remove();
         propStarFound = true;
@@ -381,11 +381,11 @@ function handlePropStarCleanup(isDirectCommand = false) {
       if (!isDirectCommand) {
         figma.ui.postMessage({
           type: 'status',
-          message: `No Prop Star elements found in "${node.name}"`,
+          message: `No Propstar elements found in "${node.name}"`,
           success: false
         });
       } else {
-        figma.notify(`No Prop Star elements found in "${node.name}"`);
+        figma.notify(`No Propstar elements found in "${node.name}"`);
       }
       return;
     }
@@ -404,7 +404,7 @@ function handlePropStarCleanup(isDirectCommand = false) {
 
       // New format (Feb 2026+): component is absolutely positioned inside ❖ frame,
       // reset to auto layout positioning after extraction
-      if (isNewPropStarFrame && component.layoutPositioning === 'ABSOLUTE') {
+      if (isNewPropstarFrame && component.layoutPositioning === 'ABSOLUTE') {
         component.layoutPositioning = 'AUTO';
       }
 

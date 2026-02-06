@@ -180,19 +180,17 @@
 <button id="toggle-guidelines" class="toggle-guidelines">Show Guidelines</button>
 
 <div class="section">
-  <h2>PropStar documentation tools</h2>
-  <p class="small muted">Tools for working with <a href="https://www.figma.com/community/plugin/1116018586739867857/propstar">PropStar</a> component documentation.</p>
+  <h2>Propstar documentation tools</h2>
+  <p class="small muted">Tools for working with <a href="https://www.figma.com/community/plugin/1116018586739867857/propstar">Propstar</a> component documentation.</p>
   <div class="button-group">
-    <button id="post-propstar-treatment">Post-PropStar Treatment</button>
-    <p class="guidelines small muted">Guideline: After running PropStar, this organizes the documentation frame and positions the component in the top-right.</p>
-    <button id="prop-star-cleanup">De-PropStar</button>
-    <p class="guidelines small muted">Guideline: Remove PropStar generated elements (labels group and instances frame) from selected frames.</p>
+    <button id="prop-star-cleanup">De-Propstar</button>
+    <p class="guidelines small muted">Guideline: Remove Propstar generated elements (labels group and instances frame) from selected frames.</p>
   </div>
 </div>
 
 <div class="section">
-  <h2>PropStar grid navigation</h2>
-  <p class="small muted">Navigate and select components in PropStar documentation grids.</p>
+  <h2>Propstar grid navigation</h2>
+  <p class="small muted">Navigate and select components in Propstar documentation grids.</p>
   <div class="selection-tools-content">
     <div class="dpad-container">
       <div class="dpad">
@@ -247,12 +245,7 @@
   }
 
 
-  // Post-Prop Star treatment button
-  document.getElementById('post-propstar-treatment').onclick = () => {
-    parent.postMessage({ pluginMessage: { type: 'post-propstar-treatment' } }, '*');
-  };
-
-  // Prop Star cleanup button
+  // Propstar cleanup button
   document.getElementById('prop-star-cleanup').onclick = () => {
     parent.postMessage({ pluginMessage: { type: 'prop-star-cleanup' } }, '*');
   };
