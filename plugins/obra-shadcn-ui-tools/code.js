@@ -12,7 +12,7 @@ if (figma.command === 'post-propstar-treatment') {
   figma.closePlugin();
 } else {
   // Default: show UI if no specific command
-  figma.showUI(__html__, { width: 280, height: 420 });
+  figma.showUI(__html__, { width: 280, height: 420, themeColors: true });
 }
 
 // Handle messages from the UI
