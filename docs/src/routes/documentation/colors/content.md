@@ -35,14 +35,16 @@ The variables that are unofficial are marked as “unofficial”.
 
 If you inspect the kit's variable system with a kit version from 1.5.0 on, you will see that we introduced a "brand colors" collection that includes "brand-neutrals" and "brand-shades".
 
-* The "brand-neutrals" collection is tied to the "semantic colors" collection automatically.
-* The "brand-shades" collection is unused on purpose, in order to make a conscious choice on which elements would be branded
+* The "brand-neutrals" collection is tied to the "semantic colors" collection automatically. You can use this to quickly chgange the kit to use a default Tailwind shade like slate or stone; or use it to tint your UI to your own brand's "shades". 
+* The variables in the "brand-shades" collection are unused by default on purpose, in order to make a conscious choice on which elements you would like to appear branded
 
-We recommend, when making custom color palettes, to first add your custom palette to "raw colors" as a group with a name (e.g. "brand-turquoise"). You can decided to keep the Tailwind colors around in that group or remove the ones you don't need.
+We recommend, when creating custom color palettes, to first add your custom palette to "raw colors" as a group with a name (e.g. "brand-turquoise").
 
-Now reference the custom color palette in the brand colors collection.
+You can decide to keep the Tailwind colors around in that group or remove the ones you don't need.
 
-Tip: You can use a tool like [Supa Pallete](https://www.supa-palette.com/) to generate a color based on your brand.
+Now reference the custom color palette in the brand colors collection in the "brand-neutrals" or "brand-shades" collection.
+
+Tip: You can use a tool like [Supa Pallete](https://www.supa-palette.com/) to generate a color palette based on your brand.
 
 ## Blessed way to create component colors (Applies since 1.3.0)
 
@@ -68,6 +70,32 @@ Generally the structure would look like something like this:
     * error
       * background
       * foreground
+
+## Blessed way to deal with non-palette brand color (Experimental)
+
+Not every brand color has a palette. Sometimes a brand color is distinct, and it doesn't necessarily have a full palette with 11 Tailwind-like shades.
+
+In this case, create a new group inside of brand colors called "brand-combinations". Now create the following color variables:
+
+* brand 1
+* brand 1 foreground
+* brand 2
+* brand 2 foreground
+* brand 3
+* brand 3 foreground
+* brand 4
+* brand 4 foreground
+* brand 5
+* brand 5 foreground
+
+Use this place to store specific color combinations. Consider "brand 1" to be a background color.
+
+For Starbucks as a brand, you'd add Starbucks green in "brand 1" and the white foreground color in brand 1 foreground.
+
+As a convention, shadcn/ui omits the word background from variable names.
+
+The reason we don't use specifically named variables (e.g. name the variable "Starbucks green") is to be able to programatically access the variants, specifically in a multi-brand context. What we recommend when working with named colors is to first add these to a collection that sits "below the line" (below the `---` separator). The collections below the line are not meant to be published or used programatically.
+
 
 ## Variable tips
 
