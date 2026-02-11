@@ -423,16 +423,26 @@ function handlePropstarCleanup(isDirectCommand = false) {
     figma.currentPage.selection = componentsToSelect;
   }
 
+  // Automatically reset component set style on any extracted component sets
+  let resetCount = 0;
+  componentsToSelect.forEach(comp => {
+    if (comp.type === 'COMPONENT_SET') {
+      applyDefaultComponentSetStyle(comp);
+      resetCount++;
+    }
+  });
+
   if (cleanedCount > 0) {
     const frameText = cleanedCount === 1 ? 'frame' : 'frames';
+    const resetSuffix = resetCount > 0 ? ` and reset ${resetCount} component set style${resetCount > 1 ? 's' : ''}` : '';
     if (!isDirectCommand) {
       figma.ui.postMessage({
         type: 'status',
-        message: `De-Propstarred ${cleanedCount} ${frameText}`,
+        message: `De-Propstarred ${cleanedCount} ${frameText}${resetSuffix}`,
         success: true
       });
     } else {
-      figma.notify(`De-Propstarred ${cleanedCount} ${frameText}`);
+      figma.notify(`De-Propstarred ${cleanedCount} ${frameText}${resetSuffix}`);
     }
   }
 }
@@ -972,6 +982,19 @@ function addPrevColumn() {
   figma.notify(`Added ${prevColumnNodes.length} items from previous column`);
 }
 
+// Apply default Figma component set style to a single node
+function applyDefaultComponentSetStyle(node) {
+  node.fills = [];
+  node.strokes = [{
+    type: 'SOLID',
+    color: { r: 0.592, g: 0.278, b: 1 } // #9747FF
+  }];
+  node.strokeWeight = 1;
+  node.strokeAlign = 'INSIDE';
+  node.dashPattern = [10, 5]; // 10px dash, 5px gap
+  node.cornerRadius = 5;
+}
+
 function handleResetComponentSetStyle(isDirectCommand = false) {
   const selection = figma.currentPage.selection;
 
@@ -992,21 +1015,7 @@ function handleResetComponentSetStyle(isDirectCommand = false) {
 
   selection.forEach(node => {
     if (node.type === 'COMPONENT_SET') {
-      // Remove fills (transparent background)
-      node.fills = [];
-      
-      // Reset stroke to default component set style: #9747FF, inside, 1px, dashed 10-5
-      node.strokes = [{
-        type: 'SOLID',
-        color: { r: 0.592, g: 0.278, b: 1 } // #9747FF
-      }];
-      node.strokeWeight = 1;
-      node.strokeAlign = 'INSIDE';
-      node.dashPattern = [10, 5]; // 10px dash, 5px gap
-      
-      // Reset corner radius to 5px
-      node.cornerRadius = 5;
-      
+      applyDefaultComponentSetStyle(node);
       resetCount++;
     } else {
       if (!isDirectCommand) {
