@@ -77,7 +77,7 @@
 				<img src="/team/robert.webp" alt="" class="h-8 w-8 rounded-full border-2 border-background object-cover" />
 			</div>
 			<div class="flex flex-col items-center gap-0.5 sm:items-start">
-				<span>30,000+ designers rely on our kit worldwide.</span>
+				<span>35,000+ designers rely on our kit worldwide.</span>
 				<span>
 					<a href="https://obra.studio/about/" target="_blank" rel="noopener noreferrer" class="underline hover:text-foreground transition-colors">Our experts</a> are ready to support you.
 				</span>

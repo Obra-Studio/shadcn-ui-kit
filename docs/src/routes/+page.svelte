@@ -159,7 +159,7 @@
 <section class="section">
 	<div class="flex flex-col gap-8 items-center justify-center text-center">
 		<p class="font-normal leading-6 text-md text-muted-foreground">
-			Duplicated over 30,000 times on Figma Community · Open source (MIT)
+			Duplicated over 35,000 times on Figma Community · Open source (MIT)
 		</p>
 		<h1 class="heading-1">
 			A free, high quality Figma library<br class="hidden md:block" />

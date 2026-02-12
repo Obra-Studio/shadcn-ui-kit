@@ -16,7 +16,7 @@ Lately we find that clients have similar needs:
 - **Design system - Without the politics**: The client needs a solid design system but wants to avoid a big project, since they are moving fast
 - **AI-ready**: The client is heavily using AI tools to generate interfaces and help speed up software development projects
 
-Since June last year, we have been maintaining the [Obra shadcn/ui kit](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui), which by now has been duplicated over 30,000 times on Figma Community.
+Since June last year, we have been maintaining the [Obra shadcn/ui kit](https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui), which by now has been duplicated over 35,000 times on Figma Community.
 
 Last week we released [version 1.4.0](https://shadcn.obra.studio/blog/1-4-0-released), with extended theming options and a [CSS export plugin](https://www.figma.com/community/plugin/1577756373687684979/obra-shadcn-ui-kit-css-export).
 

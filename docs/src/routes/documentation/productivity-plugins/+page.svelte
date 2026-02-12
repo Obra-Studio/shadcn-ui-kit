@@ -22,24 +22,6 @@
 </div>
 
 <Plugin
-    name="Obra shadcn/ui tools"
-    icon="/plugin-icons/obra-shadcn-ui-tools.png"
-    url="https://www.figma.com/community/plugin/1544866255228781486/obra-shadcn-ui-tools"
->
-    {#snippet children()}
-        helps you work with the Obra shadcn/ui kit more efficiently.
-        <ul class="mt-3 ml-6 list-disc">
-            <li>Efficiently remove Propstar docs with a command</li>
-            <li>Efficiently move component into Propstar docs after generation</li>
-            <li>Reset Component Set Style</li>
-            <li>Efficiently move through Propstar documentation with a specific navigation pad (to be released)</li>
-        </ul>
-        <p class="mt-4">This plugin is available as open source.</p>
-        <Button variant="outline" size="sm" href="https://github.com/Obra-Studio/shadcn-ui-kit/tree/main/plugins/obra-shadcn-ui-tools" class="mt-3">View on GitHub</Button>
-    {/snippet}
-</Plugin>
-
-<Plugin
     name="Obra Remote Library Scanner"
     icon="/plugin-icons/obra-remote-library-scanner.png"
     url="https://www.figma.com/community/plugin/1578201349063449764/obra-remote-library-scanner"

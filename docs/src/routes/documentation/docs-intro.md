@@ -12,13 +12,9 @@ The kit features 1500+ Lucide Icons, as well as all Tailwind v4 colors. You can 
 
 The kit provides an ideal starting point to start creating a design system based on shadcn/ui.
 
-### Plugins
+### Plugin: Autodocs
 
-Next to the library itself, we provide a plugin called [Obra shadcn/ui tools](https://www.figma.com/community/plugin/1544866255228781486/obra-shadcn-ui-tools) that helps to efficiently work with the kit.
-
-Specifically it helps to be faster with creating (and recreating) [Propstar](https://www.figma.com/community/plugin/1116018586739867857/propstar)-based documentation. Whenever you see a component in the kit, we used Propstar to document its variants.0
-
-Using it is optional, but you might find it very useful when documenting and customizing components.
+We use a plugin called [Obra Autodocs](https://www.figma.com/@obrastudio) to document the component variants.
 
 ### Business model
 
