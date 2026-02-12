@@ -33,6 +33,7 @@
 
 <svelte:head>
 	<title>Customization services - Obra shadcn/ui Figma kit</title>
+	<script async data-show-button="true" src="https://www.ballpark.ing/api/widget-script-v2?widgetId=9868ca08-6a4d-4dfe-aa05-99ffb2309b8d"></script>
 </svelte:head>
 
 <!-- Hero Section -->
