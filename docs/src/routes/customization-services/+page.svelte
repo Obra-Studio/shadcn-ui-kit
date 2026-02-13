@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button';
-	import { Calendar, ArrowRight, Palette, Zap, Code, Link, RefreshCw, Paintbrush, Sparkles } from '@lucide/svelte';
+	import { Calendar, ArrowRight, Palette, Zap, Code, Link, RefreshCw, Paintbrush, Sparkles, DollarSign } from '@lucide/svelte';
 	import { Tabs, TabsContent, TabsList, TabsTrigger } from '$lib/components/ui/tabs';
 
 	function getAcceptingQuarter(): string {
@@ -29,11 +29,17 @@
 	}
 
 	const acceptingQuarter = getAcceptingQuarter();
+
+	function openEstimate() {
+		if (typeof window !== 'undefined' && (window as any).showBallParkWidget) {
+			(window as any).showBallParkWidget();
+		}
+	}
 </script>
 
 <svelte:head>
 	<title>Customization services - Obra shadcn/ui Figma kit</title>
-	<script async data-show-button="true" src="https://www.ballpark.ing/api/widget-script-v2?widgetId=9868ca08-6a4d-4dfe-aa05-99ffb2309b8d"></script>
+	<script async data-show-button="false" src="https://www.ballpark.ing/api/widget-script-v2?widgetId=9868ca08-6a4d-4dfe-aa05-99ffb2309b8d"></script>
 </svelte:head>
 
 <!-- Hero Section -->
@@ -65,6 +71,10 @@
 					Book an intro call
 					<ArrowRight class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
 				</Button>
+			<Button variant="outline" class="h-12 px-6 text-base font-medium border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50" onclick={openEstimate}>
+					<DollarSign class="mr-2 h-4 w-4" />
+					Get an estimate
+				</Button>
 			<Button variant="outline" class="h-12 px-6 text-base font-medium border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50" href="https://www.figma.com/community/file/1514746685758799870/obra-shadcn-ui" target="_blank" rel="noopener noreferrer">
 					Explore our kit
 				</Button>
@@ -94,7 +104,7 @@
 			Why hire us?
 		</h2>
 		<p class="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-			Many teams wish to use shadcn as a starting point.<br />
+			Many teams want to use shadcn/ui as a starting point.<br />
 			We turn it into a scalable product foundation.
 		</p>
 	</div>
@@ -112,7 +122,7 @@
 			<Palette class="h-6 w-6 text-foreground mb-4" strokeWidth={1.5} />
 			<h3 class="mb-2 text-lg font-semibold">Post-rebrand acceleration</h3>
 			<p class="text-muted-foreground">
-				Your company or product just rebranded. Rather than rebuilding everything from scratch, we deliver an on-brand shadcn/ui kit that gets both design and development moving immediately.
+				Your company or product just rebranded. Rather than rebuilding everything yourself from scratch, we deliver an on-brand shadcn/ui kit that gets both design and development moving immediately.
 			</p>
 		</div>
 
@@ -305,16 +315,10 @@
 							</p>
 						</div>
 						<div class="shrink-0">
-							<a
-								href="https://cal.com/team/obra-studio/shadcn"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<Button variant="outline" class="whitespace-nowrap">
-									Get a quote
-									<ArrowRight class="ml-2 h-4 w-4" />
-								</Button>
-							</a>
+							<Button variant="outline" class="whitespace-nowrap" onclick={openEstimate}>
+								Get a quote
+								<ArrowRight class="ml-2 h-4 w-4" />
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -410,16 +414,10 @@
 							</p>
 						</div>
 						<div class="shrink-0">
-							<a
-								href="https://cal.com/team/obra-studio/shadcn"
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<Button variant="outline" class="whitespace-nowrap">
-									Get a quote
-									<ArrowRight class="ml-2 h-4 w-4" />
-								</Button>
-							</a>
+							<Button variant="outline" class="whitespace-nowrap" onclick={openEstimate}>
+								Get a quote
+								<ArrowRight class="ml-2 h-4 w-4" />
+							</Button>
 						</div>
 					</div>
 				</div>
